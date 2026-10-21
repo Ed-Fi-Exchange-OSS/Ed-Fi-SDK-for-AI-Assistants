@@ -69,7 +69,7 @@ reference rules by ID instead of repeating them.
   [`.markdownlint-cli2.jsonc`](../../.markdownlint-cli2.jsonc). Run it locally before opening a pull request:
 
   ```bash
-  npx markdownlint-cli2
+  npx markdownlint-cli2@0.20.0
   ```
 
 - Wrap prose at 110 characters (`.editorconfig`). Tables and code blocks are exempt.

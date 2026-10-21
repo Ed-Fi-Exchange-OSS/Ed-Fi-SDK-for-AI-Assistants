@@ -1,5 +1,5 @@
 // Markdown lint configuration (markdownlint-cli2). Run locally with:
-//   npx markdownlint-cli2
+//   npx markdownlint-cli2@0.20.0
 {
   "config": {
     "default": true,
