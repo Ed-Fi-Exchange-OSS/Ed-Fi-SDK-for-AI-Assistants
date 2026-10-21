@@ -55,7 +55,10 @@ A typical lookup reads the index plus one or two resource files, about **8–10 
 Spot checks on the generated content:
 
 - **Natural keys** are derived from the spec's `x-Ed-Fi-isIdentity` fields plus required references. For
-  example, `studentSchoolAssociations` → `entryDate`, `schoolReference`, `studentReference`.
+  example, `studentSchoolAssociations` → `entryDate`, `schoolReference`, `studentReference`. This is the
+  OpenAPI (API payload) view; from the Data Standard's view, the same key is `entryDate`, `schoolId`,
+  `studentUniqueId`. Each resource file lists the key fields inside every reference
+  (e.g. `schoolReference: schoolId`), so both views are available.
 - **Cascading key updates** are read from `x-Ed-Fi-isUpdatable` on PUT. The prototype flags exactly the 8
   resources that the Ed-Fi documentation lists (Class Period, Grade, GradebookEntry, Location, Section,
   Session, Student School Association, Student Section Association).
@@ -100,8 +103,9 @@ Not built, per FR-SPEC-2. Common to all three:
 - **Query-time embedding.** Every lookup must embed the developer's question with the same model, so the
   developer's machine needs the model (tens of MB) and a runtime (Node.js or Python). A3 removes
   document-side embedding, but not this.
-- **An entry point the assistant can call.** This could be a script bundled with a skill (Agent Skills can
-  ship scripts) or an MCP server. Either way, the harness must be allowed to run it, unlike B's static files.
+- **An entry point the assistant can call.** The preferred option is a script bundled with the skill (Agent
+  Skills can ship scripts), so that no infrastructure has to be hosted; an MCP server is the alternative.
+  Either way, the harness must be allowed to run it, unlike B's static files.
 - **Identifier word-splitting** before embedding (`studentSchoolAssociation` → "student school
   association"), as the ADR notes.
 - **A build step per spec version**, and per host to include extensions.
@@ -132,10 +136,12 @@ Differences between them:
 **Risks for B to validate in the experiment:**
 
 - **Index size:** ~7.8 K tokens is fine for one lookup but adds up in long sessions. If needed, the index
-  can be split by domain.
-- **Wording mismatch:** a developer's term may not appear in any description (e.g. "parent" vs. `contacts`
-  in Data Standard 5). Mitigations: word-split names and synonyms in the index. Only the experiment shows
-  how often this matters.
+  can be split by domain; feedback from real users will show whether that is needed.
+- **Wording mismatch:** a developer's term may not appear in any description. Measured example:
+  "enrollment" misses `studentSchoolAssociations`, whose description says "enrolled" (Appendix A).
+  Mitigations: word-split names and a small set of common synonyms in the index, such as parent → contacts,
+  enrollment → `studentSchoolAssociations`, and address → Directory when Data Standard 6 arrives. Only the
+  experiment shows how often this matters.
 - **Derived natural keys:** inferred from the OpenAPI metadata; spot-check them against the Ed-Fi data model
   before release.
 
@@ -147,8 +153,9 @@ Differences between them:
    service, harness-neutral, reviewable) with no runtime dependency, and the prototype already resolves the
    lookups that failed with keyword search.
 2. **If the experiment shows a natural-language gap, move to C with A2:** add an optional embedding search
-   to B, using brute-force similarity (A2) rather than `sqlite-vec` (A), since the corpus is small. Consider
-   A3 (shipped vectors) only if setup time becomes an issue.
+   to B, using brute-force similarity (A2) rather than `sqlite-vec` (A), since the corpus is small, delivered
+   as a script bundled with the skill rather than an MCP server. Consider A3 (shipped vectors) only if setup
+   time becomes an issue.
 3. **Do not build A** (`sqlite-vec`) for this release: at this corpus size it adds a native dependency
    without an expected benefit over A2. This is based on the corpus size (section 3.3), not on a
    measured comparison; neither A nor A2 has been built.
@@ -222,7 +229,8 @@ language, field mapping, descriptor, reference).
 ## 7. Next steps
 
 1. Review this analysis and agree on the recommendation (Q-1) and the experiment design (Q-2).
-2. Add the converter to the repo (e.g. `tools/`) and generate the knowledge graph as a skill (issue #45).
+2. Add the converter under `eng/`, so it can also generate a knowledge graph from a host's extensions, and
+   generate the knowledge graph as a skill with a small set of common synonyms in the index (issue #45).
 3. Run the experiment (issue #47) and publish the results here and in ADR 0001.
 
 ## Appendix A: lookup comparison method and results
