@@ -1,6 +1,6 @@
 # Spec lookup analysis: options for similarity search over the Ed-Fi API specifications
 
-- **Status:** Draft v0.2, for review
+- **Status:** v1.0, recommendation approved in review (PR #53)
 - **Author:** Rafael Ceballos (Simpat Tech)
 - **Addresses:** PRD FR-SPEC-2 and Q-1 (issue #43, DEVOPS-144); FR-SPEC-3 and Q-2 (issue #44, DEVOPS-145)
 - **Feeds:** [ADR 0001](adr/0001-api-spec-similarity-search.md) (similarity search over the Ed-Fi API specs)
@@ -146,8 +146,6 @@ Differences between them:
   before release.
 
 ## 5. Recommendation (Q-1)
-
-> _Draft, to be confirmed after review._
 
 1. **Build B first**, as part of the Agent Skills release. It meets the PRD constraints (local, no hosted
    service, harness-neutral, reviewable) with no runtime dependency, and the prototype already resolves the
