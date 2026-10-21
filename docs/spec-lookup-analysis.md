@@ -63,22 +63,35 @@ Spot checks on the generated content:
 
 ### 3.2 Lookups that failed with keyword search
 
-Queries that returned nothing, or the wrong results, with the FTS5 baseline or the earlier substring search,
-run as a plain text search (grep) over the B index:
+The same queries run with four methods over the same data (full method and results in
+[Appendix A](#appendix-a-lookup-comparison-method-and-results)). Counts are the distinct resources matched;
+✓ means the expected resource is among them.
 
-| Query | FTS5 (PR #30) | Substring search | B: `index.md` (grep) |
-|---|---|---|---|
-| attendance | 0 | 40 | 5 attendance event resources |
-| enroll (student in school) | 0 | 0 | `studentSchoolAssociations` ("…the school in which a student is enrolled") |
-| school association | 0 | 0 | `studentSchoolAssociations`, `staffSchoolAssociations`, `feederSchoolAssociations` |
-| graduation plan | 0 | 0 | `graduationPlans` |
-| staff assignment | 0 | 0 | `staffEducationOrganizationAssignmentAssociations` |
-| grade level descriptor | 0 | 0 | `gradeLevelDescriptors` (in `descriptors.md`) |
+| Query | Expected resource | FTS5 (PR #30) | Substring (original MCP) | B: exact phrase | B: all words |
+|---|---|---|---|---|---|
+| attendance | `studentSchoolAttendanceEvents` | 0 | 5 ✓ | 9 ✓ | 9 ✓ |
+| enroll | `studentSchoolAssociations` | 0 | 0 | 6 ✓ | 6 ✓ |
+| enrollment | `studentSchoolAssociations` | 0 | 0 | 4 | 4 |
+| school association | `studentSchoolAssociations` | 0 | 0 | 0 | 5 ✓ |
+| graduation plan | `graduationPlans` | 0 | 0 | 1 | 2 ✓ |
+| staff assignment | `staffEducationOrganizationAssignmentAssociations` | 0 | 0 | 0 | 1 ✓ |
+| grade level descriptor | `gradeLevelDescriptors` | 0 | 0 | 0 | 2 ✓ |
+| parent | `studentContactAssociations` | 0 | 0 | 3 ✓ | 3 ✓ |
 
-The index works because it holds the **human-readable descriptions**, and because an assistant can try
-several wordings and read the results. B delegates similarity to the assistant's own language
-understanding, as the ADR describes. These results are from a single text search per query, not yet from an
-assistant navigating the index; the experiment (section 6) measures the real behavior.
+What this shows:
+
+- **Yes, zero hits are real** for the keyword methods on all of these except "attendance" with the substring
+  search. Neither method searches the resource descriptions: the original MCP search matches paths,
+  operation summaries (generic text such as "Retrieves specific resources…") and tag names, and FTS5 matches
+  whole tokens and prefixes, while Ed-Fi paths are single camelCase tokens (`sectionAttendanceTakenEvents`).
+- **B finds the expected resource in 7 of these 8 queries** when every word of the query must appear in an
+  index line, because the index carries each resource's **human-readable description** (e.g. "…the school
+  in which a student is enrolled").
+- **"enrollment" is a miss for B:** the descriptions say "enrolled", not "enrollment". This is the wording
+  risk in section 4, and the reason to add common synonyms to the index.
+
+These are single text searches, not an assistant navigating the index, which can also try other wordings.
+The experiment (section 6) measures the real behavior.
 
 ### 3.3 What the embedding options (A, A2, A3) would require
 
@@ -211,3 +224,37 @@ language, field mapping, descriptor, reference).
 1. Review this analysis and agree on the recommendation (Q-1) and the experiment design (Q-2).
 2. Add the converter to the repo (e.g. `tools/`) and generate the knowledge graph as a skill (issue #45).
 3. Run the experiment (issue #47) and publish the results here and in ADR 0001.
+
+## Appendix A: lookup comparison method and results
+
+Run on 2026-10-21 against the ODS/API 7.3 sandbox Resources spec (Data Standard 5.2) downloaded on
+2026-10-20, and the B prototype generated from it.
+
+| Method | What it searches | How |
+|---|---|---|
+| FTS5 (PR #30) | Paths, methods, summaries, descriptions, tags of each operation | `SearchIndex.searchEndpoints(query)` from the PR #30 branch (commit `c9c748e`), uncapped |
+| Substring (original MCP) | Path, summary, description and tags of each operation | Lowercase substring of the whole query, as in the original MCP server's `search_endpoints` |
+| B: exact phrase | One line per resource in `index.md` and per descriptor type in `descriptors.md` | Case-insensitive substring of the whole query |
+| B: all words | Same lines | Every word of the query appears in the line, in any order |
+
+Full results, including queries not shown in section 3.2:
+
+| Query | Expected resource | FTS5 (PR #30) | Substring (original MCP) | B: exact phrase | B: all words |
+|---|---|---|---|---|---|
+| attendance | `studentSchoolAttendanceEvents` | 0 | 5 ✓ | 9 ✓ | 9 ✓ |
+| enroll | `studentSchoolAssociations` | 0 | 0 | 6 ✓ | 6 ✓ |
+| enrolled | `studentSchoolAssociations` | 0 | 0 | 2 ✓ | 2 ✓ |
+| enrollment | `studentSchoolAssociations` | 0 | 0 | 4 | 4 |
+| enroll student in school | `studentSchoolAssociations` | 0 | 0 | 0 | 1 ✓ |
+| school association | `studentSchoolAssociations` | 0 | 0 | 0 | 5 ✓ |
+| graduation plan | `graduationPlans` | 0 | 0 | 1 | 2 ✓ |
+| staff assignment | `staffEducationOrganizationAssignmentAssociations` | 0 | 0 | 0 | 1 ✓ |
+| grade level descriptor | `gradeLevelDescriptors` | 0 | 0 | 0 | 2 ✓ |
+| parent | `studentContactAssociations` | 0 | 0 | 3 ✓ | 3 ✓ |
+
+Notes:
+
+- The original MCP server loads the Resources spec only, so descriptor types (e.g. `gradeLevelDescriptors`)
+  are not searchable with the two keyword methods at all.
+- An earlier draft of this document reported 40 substring hits for "attendance". That counted operations
+  (GET, POST, PUT, DELETE on each path); the table above counts distinct resources.
