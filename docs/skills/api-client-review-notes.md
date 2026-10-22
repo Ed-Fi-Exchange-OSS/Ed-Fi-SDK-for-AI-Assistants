@@ -89,18 +89,24 @@ Not covered on purpose: Profiles and bulk loading tools (not in the guide; the s
 points to bulk tools), and "Using the Sandbox Administration Portal" (sandbox-specific). "Basics" and "Using the
 Online Documentation" are covered only partially; review them before the release.
 
-## To confirm on Ed-Fi API 8 (pilot test kit)
+## Confirmed on Ed-Fi API 8 (pilot test kit, 2026-10-22)
 
-1. Is cursor paging (`pageToken`/`pageSize`, `/partitions`) supported? The v8 change-queries page does not mention paging.
-2. Which resources allow natural-key changes (cascading key updates)?
-3. `/deletes` and `/keyChanges` response fields (the v8 page only says deletes come from tombstone tables).
-4. Discovery API `urls` keys (`changeQueries`, `dependencies`).
-5. 409 / 403 / 412 `type` values match the ODS/API ones (the knowledge base says it covers the Data Management Service).
-6. Route segments (tenant, context) and metadata document URLs (`?sdk=true`, `data/v3/swagger.json`); the guide pages are v7.3.
-7. Breaking changes documented in [What's new in v8](https://docs.ed-fi.org/reference/ed-fi-api/8/whats-new/whats-new-in-this-release),
-   now in `SKILL.md` "Ed-Fi API 8 differences": no `v3` segment in resource URLs, case-sensitive property names,
-   token endpoint moved to `/connect/token` (with an `/oauth/token` proxy). Confirm the exact v8 URL shape and the
-   Discovery API response; check the release notes' "Breaking Changes" section for anything else.
+Checked against the Ed-Fi API v8 pilot test kit (Discovery reports `8.1.0-beta1`, Data Standard 5.2); details in
+[api-client-test-results.md](api-client-test-results.md#ed-fi-api-8-verification--pilot-test-kit--2026-10-22).
+
+1. **Cursor paging:** supported, but every request needs a `pageToken`; `pageSize` alone gets `400`. `/partitions`
+   works. Fixed in `pull.md` and PULL-2.
+2. **Cascading key updates:** work (StudentSchoolAssociation `entryDate`); Student returns `400`
+   `key-change-not-supported`. Fixed in `push.md` and `SKILL.md`.
+3. **`/deletes` and `/keyChanges`:** same fields as ODS/API 7.x; offset paging only; need `ReadChanges`. Added to `pull.md`.
+4. **Discovery `urls`:** `dependencies`, `openApiMetadata`, `oauth`, `tokenInfo`, `dataManagementApi`, `changeQueries`,
+   `xsdMetadata`; no `v3` segment. Confirmed.
+5. **Error `type` values:** 409 `unresolved-reference` / `dependent-item-exists`, 403 `access-denied:action` and
+   relationship `security:authorization`, 412 `optimistic-lock-failed` match. Confirmed.
+6. **Not verified:** tenant and context segments (the kit runs single-tenant) and the `?sdk=true` metadata listing.
+7. **Found during the check:** body credentials are rejected (`400` "Malformed Authorization header"), and
+   wrong-case or unknown properties are silently ignored rather than rejected. Both added to `SKILL.md`,
+   `authentication.md` and AUTH-1.
 
 > Note: Stephen said client guidance is "the same for ODS/API 7 and Ed-Fi API 8"; the v8 release notes say
 > "client migration is required". The resource behavior is the same, but URLs, casing and token endpoint differ.

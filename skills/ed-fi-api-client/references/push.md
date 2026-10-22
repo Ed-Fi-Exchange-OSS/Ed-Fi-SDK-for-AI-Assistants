@@ -98,7 +98,8 @@ On most resources the natural key cannot be changed. To change it, delete the re
 new one, after deleting or re-pointing the records that reference it.
 
 A few resources allow a PUT that changes the natural key. The API then cascades the new key to
-every record that references it ("cascading key updates"). As shipped in ODS/API 7.x these are:
+every record that references it ("cascading key updates"). This works on ODS/API 7.x and Ed-Fi API 8.
+As shipped in ODS/API 7.x these are:
 
 - Class Period
 - Grade
@@ -110,8 +111,10 @@ every record that references it ("cascading key updates"). As shipped in ODS/API
 - Student Section Association
 
 A host can enable this on other resources, so a PUT that changes a key may work on one host and
-not on another. If the new key values already belong to another record, the API returns `409`
-with type `urn:ed-fi:api:data-conflict:non-unique-identity`.
+not on another. On a resource that does not allow it, Ed-Fi API 8 returns `400` with type
+`urn:ed-fi:api:bad-request:data-validation-failed:key-change-not-supported` ("Delete and recreate the
+resource item instead"). If the new key values already belong to another record, the API returns
+`409` with type `urn:ed-fi:api:data-conflict:non-unique-identity`.
 
 Pull integrations see these changes through the `/keyChanges` endpoint; see
 [pull.md](pull.md#deletes-and-key-changes).
@@ -176,8 +179,8 @@ Rule: [PUSH-6](rules/push.md).
 
 Rule: [PUSH-7](rules/push.md).
 
-When the host has the ETag feature enabled, responses include an `ETag` header (and `_etag` in GET
-bodies). To avoid overwriting someone else's change, send it back in `If-Match`:
+When ETags are on (optional on ODS/API 7.x, always on in Ed-Fi API 8), responses include an `ETag`
+header (and `_etag` in GET bodies). To avoid overwriting someone else's change, send it back in `If-Match`:
 
 ```http
 PUT {dataManagementApi}ed-fi/students/{id}

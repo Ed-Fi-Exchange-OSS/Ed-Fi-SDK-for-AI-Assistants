@@ -18,8 +18,10 @@ building and reviewing code.
 - **Why:** offset paging slows down as `offset` grows; cursor paging keeps deep pages fast.
 - **Detect:** large extracts using deep `offset` values; parallel workers splitting work by offset
   ranges.
-- **Versions:** cursor paging requires ODS/API 7.3 or later; not yet documented for Ed-Fi API 8.0, so
-  fall back to offset paging if the API rejects `pageToken`/`pageSize`.
+- **Detect (API 8):** `pageSize` sent without a `pageToken` on the first request; Ed-Fi API 8 answers
+  `400`. Get the first token from `/partitions`.
+- **Versions:** cursor paging requires ODS/API 7.3 or later and works on Ed-Fi API 8; fall back to offset
+  paging if the API rejects `pageToken`/`pageSize` as unknown parameters.
 - **Details:** [pull.md](../pull.md#cursor-paging-odsapi-73-and-later)
 
 ## PULL-3: Sync incrementally with change queries, processing key changes, changes and deletes

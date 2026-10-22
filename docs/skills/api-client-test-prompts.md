@@ -161,11 +161,15 @@ caching and expiration, delete and repost instead of updating).
 **Expected outcomes:**
 
 1. **(key)** Resource URLs lose the `v3` segment; build URLs from the Discovery API.
-2. **(key)** Property names are case-sensitive.
+2. **(key)** Property names are case-sensitive (wrong-case properties are silently ignored).
 3. **(key)** The token endpoint moved to `/connect/token` (with an `/oauth/token` compatibility proxy); take it
    from the Discovery API.
-4. No snapshot support in 8.0.
-5. Does not claim other breaking changes that aren't documented.
+4. Credentials must go in the Basic header; body credentials are rejected.
+5. No snapshot support.
+6. Cursor paging needs a `pageToken` from the first request (from `/partitions`).
+7. Does not claim other breaking changes that aren't documented or verified.
+
+Outcomes 4 and 6 were added on 2026-10-22 after the [Ed-Fi API 8 verification](api-client-test-results.md#ed-fi-api-8-verification--pilot-test-kit--2026-10-22).
 
 ## T9 · Push: descriptors
 

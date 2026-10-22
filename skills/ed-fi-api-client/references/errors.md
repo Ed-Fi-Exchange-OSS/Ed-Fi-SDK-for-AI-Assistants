@@ -108,7 +108,8 @@ loaded returns 409 `unresolved-reference`. Load the student, then retry the asso
 
 ## 412 Precondition Failed
 
-Type `urn:ed-fi:api:optimistic-lock-failed`; only possible when the host has the ETag feature on.
+Type `urn:ed-fi:api:optimistic-lock-failed`; only possible when ETags are on (optional on ODS/API 7.x,
+always on in Ed-Fi API 8).
 The `If-Match` header held an ETag that no longer matches the stored record: someone changed it
 since you read it. GET the record again, reapply your change to the fresh copy, and PUT again with
 the new ETag. See [push.md](push.md#7-optimistic-concurrency-with-etags).

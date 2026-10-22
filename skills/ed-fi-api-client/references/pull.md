@@ -33,20 +33,28 @@ Cursor paging seeks directly to the next page, so deep pages stay fast. Use it f
 resources and full extracts.
 
 ```http
-GET {dataManagementApi}ed-fi/studentSectionAttendanceEvents?pageSize=500
+GET {dataManagementApi}ed-fi/studentSectionAttendanceEvents/partitions?number=1
+GET {dataManagementApi}ed-fi/studentSectionAttendanceEvents?pageToken={token}&pageSize=500
 ```
 
-1. Send `pageSize` (and no `limit`/`offset`). A default page size applies if omitted.
-2. Read the `Next-Page-Token` response header.
-3. Send it back as `pageToken` on the next request, with the same `pageSize` and filters.
-4. Stop when a page returns no records.
+1. Get the first page token from `/partitions` (one token covers the whole resource; see below for
+   more). Ed-Fi API 8 requires a `pageToken` whenever `pageSize` is sent: `pageSize` alone gets `400`
+   "PageToken is required when pageSize is specified".
+2. Send `pageToken` and `pageSize` (and no `limit`/`offset`). The maximum `pageSize` is 500; a default
+   applies if omitted.
+3. Read the `Next-Page-Token` response header and send it back as `pageToken` on the next request,
+   with the same `pageSize` and filters.
+4. Stop when a page returns no records or the response has no `Next-Page-Token`. The last page with
+   data usually still carries a token; the request after it returns an empty array.
 
 Rules:
 
 - `pageToken`/`pageSize` cannot be combined with `limit`/`offset`.
 - `totalCount` is not supported with cursor paging. To get a count, make a separate request with
   `limit=0&totalCount=true`.
-- If the API rejects `pageToken`/`pageSize`, the host runs an older version: fall back to offset paging.
+- `/deletes` and `/keyChanges` do not accept `pageToken`/`pageSize`; page them with `limit`/`offset`.
+- If the API rejects `pageToken`/`pageSize` as unknown parameters, the host runs an older version: fall
+  back to offset paging.
 
 ### Parallel extraction with `/partitions`
 
@@ -125,6 +133,9 @@ cover what a normal GET cannot show:
 | `GET …/ed-fi/students/deletes?minChangeVersion=…&maxChangeVersion=…` | `id`, `changeVersion`, `keyValues` (the natural key of the deleted record) |
 | `GET …/ed-fi/students/keyChanges?minChangeVersion=…&maxChangeVersion=…` | `id`, `changeVersion`, `oldKeyValues`, `newKeyValues` |
 
+- Page both endpoints with `limit`/`offset`; they reject cursor paging parameters.
+- Both need the `ReadChanges` permission in the client's claim set; without it they return `403`
+  `urn:ed-fi:api:security:authorization:access-denied:action`.
 - `/keyChanges` always returns an empty array for resources whose natural key cannot change. See
   [push.md](push.md#3-put-and-delete-use-the-resource-id-never-the-natural-key) for which
   resources allow key changes.
@@ -141,7 +152,7 @@ the host can provide so a run reads consistent data.
 | Platform | Snapshot support |
 |---|---|
 | ODS/API 7.x | Optional, configured by the host. Send `Use-Snapshot: true` on **every** request of the run. A `404` with "Snapshot Not Found" means the host has not set up snapshots |
-| Ed-Fi API 8.0 | Not available (planned for a future release) |
+| Ed-Fi API 8 | Not available (planned for a future release). `Use-Snapshot: true` returns the same `404` "Snapshot not found", so the same detection works on both platforms |
 
 Without snapshots, records can change between pages of the same run. Bound every request with
 `maxChangeVersion` as above, make the target writes idempotent, and plan a periodic full

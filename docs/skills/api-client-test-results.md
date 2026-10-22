@@ -71,8 +71,31 @@ kept the descriptor mapping in code.
 Observation: in T5, one read failed because Copilot built a path with a stray space (`\ .github\`); it
 recovered from the files it had already read. This is a harness quirk, not a skill issue.
 
+## Ed-Fi API 8 verification · pilot test kit · 2026-10-22
+
+- **Environment:** [Ed-Fi API v8 pilot test kit](https://github.com/Ed-Fi-Exchange-OSS/Ed-Fi-API-v8-pilot-testing-kit),
+  populated template. Discovery reports `version 8.0.0`, `informationalVersion 8.1.0-beta1`, Data Standard 5.2.0.
+  The kit's smoke test passed 13/13.
+- **Method:** direct HTTP checks of the skill's API 8 claims with a SIS-vendor credential and a data-warehouse
+  credential created by the kit.
+
+| Check | Result on API 8 | Skill change |
+|---|---|---|
+| Token with credentials in the form body | `400` "Malformed Authorization header" | Body credentials marked ODS/API 7.x only (AUTH-1, `authentication.md`, `SKILL.md`) |
+| `pageSize` without `pageToken` | `400` "PageToken is required when pageSize is specified" | First token from `/partitions` (`pull.md`, PULL-2, `SKILL.md`) |
+| `/partitions` | `pageTokens`; 13,015 records split into 4 even partitions; small resources return 1 token | None |
+| Cursor end | Last data page still has a token; the next returns `[]` with no token | Stop rule clarified |
+| `/deletes`, `/keyChanges` | Same fields as 7.x; reject `pageToken`/`pageSize`; need `ReadChanges` | Added to `pull.md` |
+| Key change by PUT | StudentSchoolAssociation: `204` and a `/keyChanges` entry; Student: `400` `key-change-not-supported` | "Detect at runtime" removed; `400` type added |
+| Wrong-case or unknown property in a POST | Ignored silently (`200`); wrong case on a required property gives `400` "is required" | `SKILL.md` warns about silent data loss |
+| `Use-Snapshot: true` | `404` "Snapshot not found" (same as an unconfigured 7.x host) | Noted in `pull.md` |
+| ETag / stale `If-Match` | Always on; `412` `optimistic-lock-failed` | Noted in `push.md` and `errors.md` |
+| Discovery, `limit` max 500, change queries, 409 / 403 / 400 types | As described in the skill | None |
+
+Not verified: tenant and context route segments (the kit is single-tenant) and generated client code end to end.
+
 ## Not yet done
 
 - **GitHub Copilot:** the remaining seven prompts, and a run without the skill for comparison.
 - **Codex** (optional, NFR-PORT-1).
-- Running generated code against a live Ed-Fi API 8 instance (pilot test kit).
+- Running assistant-generated client code end to end against the pilot test kit.
