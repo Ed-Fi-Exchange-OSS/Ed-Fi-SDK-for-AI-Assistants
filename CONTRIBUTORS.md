@@ -10,4 +10,3 @@ contributors
 graph](https://github.com/Ed-Fi-Exchange-OSS/Ed-Fi-SDK-for-AI-Assistant/network/dependencies).
 New contributors should add their name and e-mail address or link to GitHub
 profile to this file with their first pull request.
-

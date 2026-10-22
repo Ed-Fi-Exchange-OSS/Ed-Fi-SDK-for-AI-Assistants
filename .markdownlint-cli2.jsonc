@@ -1,0 +1,17 @@
+// Markdown lint configuration (markdownlint-cli2, pinned in package-lock.json). Run locally with:
+//   npm ci && npm run lint:md
+{
+  "config": {
+    "default": true,
+    // Line length matches .editorconfig (max_line_length = 110). Tables and code blocks are exempt.
+    "MD013": { "line_length": 110, "tables": false, "code_blocks": false },
+    // Repeated headings are fine in different sections (e.g. "Pasos", "Notes").
+    "MD024": { "siblings_only": true },
+    // Skill files use YAML front matter instead of a first-level heading as the title.
+    "MD041": false,
+    // Table pipe alignment is cosmetic; compact "|---|" tables are used throughout.
+    "MD060": false
+  },
+  "globs": ["**/*.md"],
+  "ignores": ["node_modules/**", "sdk-as-mcp/**"]
+}
