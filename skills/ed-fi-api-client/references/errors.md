@@ -123,7 +123,7 @@ Retry only failures that can succeed unchanged:
 | Failure | Action |
 |---|---|
 | Network error, timeout, `500`, `502`, `503`, `504` | Retry with exponential backoff and jitter (e.g. 0.5 s, 1 s, 2 s, 4 s…), up to a limit (e.g. 5 attempts) |
-| `429` | Retry after the `Retry-After` header value if present, otherwise with backoff |
+| `429` | Retry after the `Retry-After` header value if present (seconds or an HTTP date), otherwise with backoff |
 | `401` | Re-authenticate once and retry once; see [authentication.md](authentication.md#designing-the-client) |
 | `412` | Re-read the record, reapply the change, then retry |
 | Any other 4xx | Do not retry. Log it and fix the data or configuration |

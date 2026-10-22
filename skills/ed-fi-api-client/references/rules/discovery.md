@@ -9,7 +9,9 @@ building and reviewing code.
 - **Why:** hosts add tenant and context segments, and Ed-Fi API 8 removed the `v3` segment from resource
   URLs. URLs built by hand break when the host or version changes.
 - **Detect:** hard-coded `/oauth/token`, `/connect/token`, `/data/v3/`, `/metadata/` or
-  `/changeQueries/` paths; more than one configured base URL; no GET on the root URL.
+  `/changeQueries/` paths; more than one configured base URL; no GET on the root URL; resource paths
+  joined to `dataManagementApi` without first making sure it ends in `/`.
 - **Versions:** ODS/API 7.x uses `.../data/v3/{schema}/{resource}`; Ed-Fi API 8 uses
-  `.../data/{schema}/{resource}` and its token endpoint moved to `/connect/token`.
+  `.../data/{schema}/{resource}` and its token endpoint moved to `/connect/token`. Ed-Fi API 8 returns
+  `dataManagementApi` without a trailing slash.
 - **Details:** [SKILL.md](../../SKILL.md#step-1-start-every-integration-from-the-discovery-api)

@@ -119,7 +119,9 @@ Every write gets a `changeVersion`, an increasing number. The workflow:
    ```
 
    where `minChangeVersion` is the last saved value + 1 and `maxChangeVersion` is the current
-   `newestChangeVersion`. Save the new `maxChangeVersion` only after the run succeeds.
+   `newestChangeVersion`. Save the new `maxChangeVersion` only after the run succeeds. If the last
+   saved value equals `newestChangeVersion`, nothing changed: skip the run (Ed-Fi API 8 rejects
+   `minChangeVersion > maxChangeVersion` with `400`).
 4. Always pass **both** bounds, so writes landing during the run are picked up next time instead
    of half-read now.
 
@@ -164,8 +166,8 @@ This follows the Ed-Fi Client Developers' Guide:
 
 ```text
 order    = GET urls.dependencies                       # resource processing order
-range    = GET availableChangeVersions
 snapshot = try GET with "Use-Snapshot: true"; use it on every call if available (ODS/API 7.x only)
+range    = GET availableChangeVersions                 # with the same Use-Snapshot header as the reads
 
 if no saved version:                                   # initial load (one time)
     v = range.newestChangeVersion
@@ -173,12 +175,18 @@ if no saved version:                                   # initial load (one time)
     save v (only after everything succeeded)
 else:                                                  # scheduled change processing
     min = saved + 1; max = range.newestChangeVersion
+    if min > max: stop; nothing changed (keep the saved version)
     for each resource in order:          page through GET resource/keyChanges?min..max -> update keys
     for each resource in order:          page through GET resource?min..max            -> upsert by id
     for each resource in reverse order:  page through GET resource/deletes?min..max    -> delete by id
     save max (only after every step succeeded)
 ```
 
+- Decide on the snapshot **before** reading `availableChangeVersions`, and read the range with the same
+  `Use-Snapshot` header. A snapshot can lag behind the live data; reading the range live and the
+  records from the snapshot would save a version whose changes were never read.
+- If nothing was written since the last run, `saved + 1` is greater than `newestChangeVersion`. Skip the
+  run and keep the saved version: Ed-Fi API 8 rejects `minChangeVersion > maxChangeVersion` with `400`.
 - Process **key changes first**, then changes, then deletes.
 - Key target records by the Ed-Fi `id` as well as the natural key, so deletes and key changes can
   be matched.

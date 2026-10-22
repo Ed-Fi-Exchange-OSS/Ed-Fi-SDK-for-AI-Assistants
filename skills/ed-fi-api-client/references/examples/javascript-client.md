@@ -26,7 +26,8 @@ export class EdFiClient {
     if (!data?.urls?.oauth || !data?.urls?.dataManagementApi) {
       throw new Error('Discovery response is missing urls.oauth or urls.dataManagementApi');
     }
-    this.urls = data.urls;
+    // Ed-Fi API 8 returns dataManagementApi without a trailing slash; new URL() would then drop "data".
+    this.urls = { ...data.urls, dataManagementApi: data.urls.dataManagementApi.replace(/\/?$/, '/') };
     return this.urls;
   }
 
@@ -47,11 +48,21 @@ export class EdFiClient {
           },
         });
         this.accessToken = data.access_token;
-        // Renew 60 seconds early.
-        this.tokenExpiresAt = Date.now() + (data.expires_in - 60) * 1000;
+        // Renew early: 60 seconds, or a tenth of the lifetime for short-lived tokens.
+        const marginSeconds = Math.min(60, data.expires_in / 10);
+        this.tokenExpiresAt = Date.now() + (data.expires_in - marginSeconds) * 1000;
       } catch (error) {
         const reason = error.response?.data?.error_description ?? error.message;
-        throw new Error(`Authentication failed: ${reason}`);
+        const failure = new Error(`Authentication failed: ${reason}`);
+        // Keep the status and Retry-After so withRetry() does not retry a rejected credential as if it were
+        // a network error. Don't keep axios's error: its request config holds the credentials.
+        if (error.response) {
+          failure.response = {
+            status: error.response.status,
+            headers: { 'retry-after': error.response.headers?.['retry-after'] },
+          };
+        }
+        throw failure;
       } finally {
         this.pendingAuth = null;
       }
@@ -100,6 +111,15 @@ const response = await client.request('/ed-fi/schools', { params: { limit: 100, 
 ```javascript
 const RETRYABLE = new Set([429, 500, 502, 503, 504]);
 
+// Retry-After is either a number of seconds or an HTTP date.
+function retryAfterMs(value) {
+  if (value === undefined || value === null || value === '') return undefined;
+  const seconds = Number(value);
+  if (Number.isFinite(seconds)) return Math.max(0, seconds * 1000);
+  const date = Date.parse(value);
+  return Number.isNaN(date) ? undefined : Math.max(0, date - Date.now()); // a past date means "now"
+}
+
 async function withRetry(send, { maxAttempts = 5, baseDelayMs = 500 } = {}) {
   for (let attempt = 1; ; attempt++) {
     try {
@@ -109,10 +129,9 @@ async function withRetry(send, { maxAttempts = 5, baseDelayMs = 500 } = {}) {
       const retryable = status === undefined /* network error */ || RETRYABLE.has(status);
       if (!retryable || attempt >= maxAttempts) throw error;
 
-      const retryAfterSeconds = Number(error.response?.headers?.['retry-after']);
-      const delay = Number.isFinite(retryAfterSeconds)
-        ? retryAfterSeconds * 1000
-        : baseDelayMs * 2 ** (attempt - 1) * (0.5 + Math.random()); // exponential backoff with jitter
+      const delay =
+        retryAfterMs(error.response?.headers?.['retry-after']) ??
+        baseDelayMs * 2 ** (attempt - 1) * (0.5 + Math.random()); // exponential backoff with jitter
       await new Promise((resolve) => setTimeout(resolve, delay));
     }
   }

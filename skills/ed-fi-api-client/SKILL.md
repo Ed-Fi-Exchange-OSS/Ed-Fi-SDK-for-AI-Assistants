@@ -35,7 +35,10 @@ configured with. A GET on it returns the version and the URLs for everything els
 ```
 
 - Read `urls.oauth` and `urls.dataManagementApi` from this response instead of hard-coding them.
-- Resource paths such as `/ed-fi/students` are relative to `dataManagementApi`.
+- Resource paths such as `/ed-fi/students` are relative to `dataManagementApi`. **Make sure it ends in
+  `/` before joining paths to it:** ODS/API 7.x returns `.../data/v3/`, but Ed-Fi API 8 returns `.../data`
+  with no trailing slash, and URL resolvers (`new URL(path, base)`, `urljoin`) then drop the `data`
+  segment. In this skill, `{dataManagementApi}` means that URL with the trailing `/`.
 - Check `dataModels` to confirm the Data Standard version before relying on a resource's shape.
 - Rule: [DISC-1](references/rules/discovery.md).
 

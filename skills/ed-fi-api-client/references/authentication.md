@@ -71,7 +71,9 @@ Rules: [AUTH-2, AUTH-3](rules/auth.md).
 1. **Reuse the token.** Request a new one only when the current one is about to expire. Requesting a
    token per call is slow and can trip host rate limits.
 2. **Use `expires_in` from the response.** Do not assume a fixed lifetime; it is configured by the
-   host. Renew a little early (e.g. 60 seconds before expiry) to avoid in-flight expiry.
+   host. Renew a little early to avoid in-flight expiry, with a margin bounded by the lifetime
+   (e.g. 60 seconds, or a tenth of `expires_in` if that is shorter), so short-lived tokens are still
+   reused.
 3. **There is no refresh token.** "Refreshing" means repeating the client-credentials request.
 4. **On `401`, re-authenticate once and retry the request once.** If it fails again, stop: the
    credentials are wrong, revoked, or for a different API instance.
@@ -87,6 +89,7 @@ discover():
     if urls are cached: return them
     GET rootUrl
     fail clearly if urls.oauth or urls.dataManagementApi is missing
+    make urls.dataManagementApi end in "/"                           # Ed-Fi API 8 omits it
     cache urls
 
 authenticate():
@@ -96,12 +99,12 @@ authenticate():
          and form body grant_type=client_credentials
     on failure: raise an error that includes error_description from the response
     token     = access_token
-    expiresAt = now + expires_in - 60 seconds                       # renew early
+    expiresAt = now + expires_in - min(60 seconds, expires_in / 10) # renew early
 
 request(method, path, body, headers, query):
     discover()
     if no token or now >= expiresAt: authenticate()
-    send method to urls.dataManagementApi + path
+    send method to urls.dataManagementApi + path (without its leading "/")
          with Authorization: Bearer <token>, Content-Type: application/json
     if status is 401:
         authenticate()                                              # once
