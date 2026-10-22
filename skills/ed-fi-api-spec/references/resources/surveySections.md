@@ -8,7 +8,8 @@ The section of questions for the survey.
 
 `surveySectionTitle`, `surveyReference`
 
-_Derived from the OpenAPI metadata: identity fields plus required references. Reference rows below list the key fields inside each reference._
+_Derived from the OpenAPI metadata: identity fields plus required references. Reference rows below list the
+key fields inside each reference._
 
 ## Fields
 

@@ -2,13 +2,15 @@
 
 `/ed-fi/localAccounts`
 
-The set of account codes defined by an education organization for a fiscal year. It provides a formal record of the debits and credits relating to the specific account.
+The set of account codes defined by an education organization for a fiscal year. It provides a formal record
+of the debits and credits relating to the specific account.
 
 ## Natural key
 
 `accountIdentifier`, `fiscalYear`, `chartOfAccountReference`, `educationOrganizationReference`
 
-_Derived from the OpenAPI metadata: identity fields plus required references. Reference rows below list the key fields inside each reference._
+_Derived from the OpenAPI metadata: identity fields plus required references. Reference rows below list the
+key fields inside each reference._
 
 ## Fields
 

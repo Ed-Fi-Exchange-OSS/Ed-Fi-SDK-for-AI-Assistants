@@ -2,7 +2,8 @@
 
 `/ed-fi/studentAssessments`
 
-This entity represents the analysis or scoring of a student's response on an assessment. The analysis results in a value that represents a student's performance on a set of items on a test.
+This entity represents the analysis or scoring of a student's response on an assessment. The analysis results
+in a value that represents a student's performance on a set of items on a test.
 
 Also searched as: test results, test scores.
 
@@ -10,7 +11,8 @@ Also searched as: test results, test scores.
 
 `studentAssessmentIdentifier`, `assessmentReference`, `studentReference`
 
-_Derived from the OpenAPI metadata: identity fields plus required references. Reference rows below list the key fields inside each reference._
+_Derived from the OpenAPI metadata: identity fields plus required references. Reference rows below list the
+key fields inside each reference._
 
 ## Fields
 

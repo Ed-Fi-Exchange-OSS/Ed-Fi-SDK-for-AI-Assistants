@@ -2,13 +2,15 @@
 
 `/ed-fi/competencyObjectives`
 
-This entity holds additional competencies for student achievement that are not associated with specific learning objectives (e.g., paying attention in class).
+This entity holds additional competencies for student achievement that are not associated with specific
+learning objectives (e.g., paying attention in class).
 
 ## Natural key
 
 `objective`, `objectiveGradeLevelDescriptor`, `educationOrganizationReference`
 
-_Derived from the OpenAPI metadata: identity fields plus required references. Reference rows below list the key fields inside each reference._
+_Derived from the OpenAPI metadata: identity fields plus required references. Reference rows below list the
+key fields inside each reference._
 
 ## Fields
 

@@ -2,13 +2,16 @@
 
 `/ed-fi/objectDimensions`
 
-The NCES object accounting dimension representing an expenditure. Per the NCES definition, this classification is used to describe the service or commodity obtained as the result of a specific expenditure, such as salaries, benefits, tuition reimbursement, and so forth.
+The NCES object accounting dimension representing an expenditure. Per the NCES definition, this classification
+is used to describe the service or commodity obtained as the result of a specific expenditure, such as
+salaries, benefits, tuition reimbursement, and so forth.
 
 ## Natural key
 
 `code`, `fiscalYear`
 
-_Derived from the OpenAPI metadata: identity fields plus required references. Reference rows below list the key fields inside each reference._
+_Derived from the OpenAPI metadata: identity fields plus required references. Reference rows below list the
+key fields inside each reference._
 
 ## Fields
 

@@ -2,13 +2,16 @@
 
 `/tpdm/performanceEvaluations`
 
-A performance evaluation of an educator, typically regularly scheduled and uniformly applied, composed of one or more Evaluations.
+A performance evaluation of an educator, typically regularly scheduled and uniformly applied, composed of one
+or more Evaluations.
 
 ## Natural key
 
-`evaluationPeriodDescriptor`, `performanceEvaluationTitle`, `performanceEvaluationTypeDescriptor`, `termDescriptor`, `educationOrganizationReference`, `schoolYearTypeReference`
+`evaluationPeriodDescriptor`, `performanceEvaluationTitle`, `performanceEvaluationTypeDescriptor`,
+`termDescriptor`, `educationOrganizationReference`, `schoolYearTypeReference`
 
-_Derived from the OpenAPI metadata: identity fields plus required references. Reference rows below list the key fields inside each reference._
+_Derived from the OpenAPI metadata: identity fields plus required references. Reference rows below list the
+key fields inside each reference._
 
 ## Fields
 

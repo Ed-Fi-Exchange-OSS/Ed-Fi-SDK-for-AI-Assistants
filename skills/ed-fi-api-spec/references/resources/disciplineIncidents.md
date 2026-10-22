@@ -2,13 +2,18 @@
 
 `/ed-fi/disciplineIncidents`
 
-This event entity represents an occurrence of an infraction ranging from a minor behavioral problem that disrupts the orderly functioning of a school or classroom (such as tardiness) to a criminal act that results in the involvement of a law enforcement official (such as robbery). A single event (e.g., a fight) is one incident regardless of how many perpetrators or victims are involved. Discipline incidents are events classified as warranting discipline action.
+This event entity represents an occurrence of an infraction ranging from a minor behavioral problem that
+disrupts the orderly functioning of a school or classroom (such as tardiness) to a criminal act that results
+in the involvement of a law enforcement official (such as robbery). A single event (e.g., a fight) is one
+incident regardless of how many perpetrators or victims are involved. Discipline incidents are events
+classified as warranting discipline action.
 
 ## Natural key
 
 `incidentIdentifier`, `schoolReference`
 
-_Derived from the OpenAPI metadata: identity fields plus required references. Reference rows below list the key fields inside each reference._
+_Derived from the OpenAPI metadata: identity fields plus required references. Reference rows below list the
+key fields inside each reference._
 
 ## Fields
 

@@ -2,13 +2,15 @@
 
 `/ed-fi/operationalUnitDimensions`
 
-The NCES operational unit accounting dimension. This dimension is used to segregate costs by school and operational unit such as physical location, department, or other method.
+The NCES operational unit accounting dimension. This dimension is used to segregate costs by school and
+operational unit such as physical location, department, or other method.
 
 ## Natural key
 
 `code`, `fiscalYear`
 
-_Derived from the OpenAPI metadata: identity fields plus required references. Reference rows below list the key fields inside each reference._
+_Derived from the OpenAPI metadata: identity fields plus required references. Reference rows below list the
+key fields inside each reference._
 
 ## Fields
 

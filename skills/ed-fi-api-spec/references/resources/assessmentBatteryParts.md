@@ -2,13 +2,15 @@
 
 `/ed-fi/assessmentBatteryParts`
 
-The parts organized for administering an assessessment which together provide a comprehensive assessment of the students.
+The parts organized for administering an assessessment which together provide a comprehensive assessment of
+the students.
 
 ## Natural key
 
 `assessmentBatteryPartName`, `assessmentReference`
 
-_Derived from the OpenAPI metadata: identity fields plus required references. Reference rows below list the key fields inside each reference._
+_Derived from the OpenAPI metadata: identity fields plus required references. Reference rows below list the
+key fields inside each reference._
 
 ## Fields
 

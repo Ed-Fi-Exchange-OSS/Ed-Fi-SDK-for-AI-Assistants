@@ -8,7 +8,8 @@ The anticipated administration of an assessment under the purview of an educatio
 
 `administrationIdentifier`, `assessmentReference`, `assigningEducationOrganizationReference`
 
-_Derived from the OpenAPI metadata: identity fields plus required references. Reference rows below list the key fields inside each reference._
+_Derived from the OpenAPI metadata: identity fields plus required references. Reference rows below list the
+key fields inside each reference._
 
 ## Fields
 

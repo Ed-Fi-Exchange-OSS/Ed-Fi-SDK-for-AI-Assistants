@@ -1,3 +1,6 @@
+<!-- One line per entry, so a line search returns the whole entry. -->
+<!-- markdownlint-disable MD013 -->
+
 # Ed-Fi descriptor types (ODS/API 7.3, Data Standard 5.2)
 
 Every descriptor resource has the same shape: `namespace`, `codeValue`, `shortDescription`, `description` and optional effective dates. Values are data, not part of the spec: read them from the target API, e.g. `GET {dataManagementApi}ed-fi/gradeLevelDescriptors`.

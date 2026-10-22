@@ -2,13 +2,15 @@
 
 `/ed-fi/disciplineActions`
 
-This event entity represents actions taken by an education organization after a disruptive event that is recorded as a discipline incident.
+This event entity represents actions taken by an education organization after a disruptive event that is
+recorded as a discipline incident.
 
 ## Natural key
 
 `disciplineActionIdentifier`, `disciplineDate`, `responsibilitySchoolReference`, `studentReference`
 
-_Derived from the OpenAPI metadata: identity fields plus required references. Reference rows below list the key fields inside each reference._
+_Derived from the OpenAPI metadata: identity fields plus required references. Reference rows below list the
+key fields inside each reference._
 
 ## Fields
 

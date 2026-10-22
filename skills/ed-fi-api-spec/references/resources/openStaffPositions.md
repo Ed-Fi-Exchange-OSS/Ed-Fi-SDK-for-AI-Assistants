@@ -8,7 +8,8 @@ This entity represents an open staff position that the education organization is
 
 `requisitionNumber`, `educationOrganizationReference`
 
-_Derived from the OpenAPI metadata: identity fields plus required references. Reference rows below list the key fields inside each reference._
+_Derived from the OpenAPI metadata: identity fields plus required references. Reference rows below list the
+key fields inside each reference._
 
 ## Fields
 

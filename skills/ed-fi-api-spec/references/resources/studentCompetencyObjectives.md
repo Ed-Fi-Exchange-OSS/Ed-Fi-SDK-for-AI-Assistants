@@ -2,13 +2,15 @@
 
 `/ed-fi/studentCompetencyObjectives`
 
-This entity represents the competency assessed or evaluated for the student against a specific competency objective.
+This entity represents the competency assessed or evaluated for the student against a specific competency
+objective.
 
 ## Natural key
 
 `gradingPeriodReference`, `objectiveCompetencyObjectiveReference`, `studentReference`
 
-_Derived from the OpenAPI metadata: identity fields plus required references. Reference rows below list the key fields inside each reference._
+_Derived from the OpenAPI metadata: identity fields plus required references. Reference rows below list the
+key fields inside each reference._
 
 ## Fields
 

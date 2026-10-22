@@ -2,13 +2,17 @@
 
 `/ed-fi/educationContents`
 
-This entity represents materials for students or teachers that can be used for teaching, learning, research, and more. Education content includes full courses, course materials, modules, intervention descriptions, textbooks, streaming videos, tests, software, and any other tools, materials, or techniques used to support access to knowledge.
+This entity represents materials for students or teachers that can be used for teaching, learning, research,
+and more. Education content includes full courses, course materials, modules, intervention descriptions,
+textbooks, streaming videos, tests, software, and any other tools, materials, or techniques used to support
+access to knowledge.
 
 ## Natural key
 
 `contentIdentifier`
 
-_Derived from the OpenAPI metadata: identity fields plus required references. Reference rows below list the key fields inside each reference._
+_Derived from the OpenAPI metadata: identity fields plus required references. Reference rows below list the
+key fields inside each reference._
 
 ## Fields
 

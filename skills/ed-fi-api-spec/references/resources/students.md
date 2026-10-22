@@ -2,13 +2,17 @@
 
 `/ed-fi/students`
 
-This entity represents an individual for whom instruction, services, and/or care are provided in an early childhood, elementary, or secondary educational program under the jurisdiction of a school, education agency or other institution or program. A student is a person who has been enrolled in a school or other educational institution.
+This entity represents an individual for whom instruction, services, and/or care are provided in an early
+childhood, elementary, or secondary educational program under the jurisdiction of a school, education agency
+or other institution or program. A student is a person who has been enrolled in a school or other educational
+institution.
 
 ## Natural key
 
 `studentUniqueId`
 
-_Derived from the OpenAPI metadata: identity fields plus required references. Reference rows below list the key fields inside each reference._
+_Derived from the OpenAPI metadata: identity fields plus required references. Reference rows below list the
+key fields inside each reference._
 
 ## Fields
 

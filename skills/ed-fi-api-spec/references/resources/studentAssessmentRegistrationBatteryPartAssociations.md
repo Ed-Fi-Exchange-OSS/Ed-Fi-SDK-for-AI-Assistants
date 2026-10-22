@@ -2,13 +2,15 @@
 
 `/ed-fi/studentAssessmentRegistrationBatteryPartAssociations`
 
-The association to the part(s) of the assessment battery that the student is to be tested for this administration of the assessment.
+The association to the part(s) of the assessment battery that the student is to be tested for this
+administration of the assessment.
 
 ## Natural key
 
 `assessmentBatteryPartReference`, `studentAssessmentRegistrationReference`
 
-_Derived from the OpenAPI metadata: identity fields plus required references. Reference rows below list the key fields inside each reference._
+_Derived from the OpenAPI metadata: identity fields plus required references. Reference rows below list the
+key fields inside each reference._
 
 ## Fields
 

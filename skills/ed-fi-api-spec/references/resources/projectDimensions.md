@@ -2,13 +2,16 @@
 
 `/ed-fi/projectDimensions`
 
-The NCES project accounting dimension. The project dimension reporting code permits school districts to accumulate expenditures to meet a variety of specialized reporting requirements at the local, state, and federal levels.
+The NCES project accounting dimension. The project dimension reporting code permits school districts to
+accumulate expenditures to meet a variety of specialized reporting requirements at the local, state, and
+federal levels.
 
 ## Natural key
 
 `code`, `fiscalYear`
 
-_Derived from the OpenAPI metadata: identity fields plus required references. Reference rows below list the key fields inside each reference._
+_Derived from the OpenAPI metadata: identity fields plus required references. Reference rows below list the
+key fields inside each reference._
 
 ## Fields
 

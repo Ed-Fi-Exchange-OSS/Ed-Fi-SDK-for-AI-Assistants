@@ -2,13 +2,16 @@
 
 `/ed-fi/locations`
 
-This entity represents the physical space where students gather for a particular class/section. The location may be an indoor or outdoor area designated for the purpose of meeting the educational needs of students.
+This entity represents the physical space where students gather for a particular class/section. The location
+may be an indoor or outdoor area designated for the purpose of meeting the educational needs of students.
 
 ## Natural key
 
-`classroomIdentificationCode`, `schoolReference`. The natural key can be changed with PUT (cascading key updates).
+`classroomIdentificationCode`, `schoolReference`. The natural key can be changed with PUT (cascading key
+updates).
 
-_Derived from the OpenAPI metadata: identity fields plus required references. Reference rows below list the key fields inside each reference._
+_Derived from the OpenAPI metadata: identity fields plus required references. Reference rows below list the
+key fields inside each reference._
 
 ## Fields
 

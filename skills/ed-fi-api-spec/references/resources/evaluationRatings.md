@@ -8,7 +8,8 @@ The summary weighting for the Evaluation instrument for an individual educator.
 
 `evaluationDate`, `evaluationReference`, `performanceEvaluationRatingReference`
 
-_Derived from the OpenAPI metadata: identity fields plus required references. Reference rows below list the key fields inside each reference._
+_Derived from the OpenAPI metadata: identity fields plus required references. Reference rows below list the
+key fields inside each reference._
 
 ## Fields
 

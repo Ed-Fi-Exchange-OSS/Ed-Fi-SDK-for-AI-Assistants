@@ -21,15 +21,42 @@ import json
 import os
 import re
 import shutil
+import textwrap
 import urllib.request
 
 SKIP_FIELDS = {'id', '_etag', '_lastModifiedDate', 'link'}
 OPERATIONS = ('get', 'post', 'put', 'delete')
+LINE_LENGTH = 110  # .editorconfig max_line_length; tables are exempt
+# Index files keep one line per entry, so a line search returns the whole entry.
+ONE_LINE_NOTE = ('<!-- One line per entry, so a line search returns the whole entry. -->\n'
+                 '<!-- markdownlint-disable MD013 -->')
+BLOCK_START = re.compile(r'^([-+*>#|]|\d+[.)])(\s|$)')
+
+
+def wrap(text):
+    """Wrap prose and list-item lines at LINE_LENGTH; leave headings and table rows as they are."""
+    out = []
+    for line in text.split('\n'):
+        if len(line) <= LINE_LENGTH or line.startswith(('|', '#')):
+            out.append(line)
+            continue
+        indent = '  ' if line.startswith('- ') else ''
+        lines = textwrap.wrap(line, LINE_LENGTH, subsequent_indent=indent,
+                              break_long_words=False, break_on_hyphens=False)
+        # A continuation line must not start with something Markdown reads as a block marker.
+        for i in range(1, len(lines)):
+            while BLOCK_START.match(lines[i].strip()) and ' ' in lines[i - 1].strip():
+                head, last = lines[i - 1].rsplit(' ', 1)
+                lines[i - 1], lines[i] = head, indent + last + ' ' + lines[i].strip()
+        out.extend(lines)
+    return '\n'.join(out)
 
 
 def load(source):
     if re.match(r'https?://', source):
-        with urllib.request.urlopen(source) as resp:  # noqa: S310 - URL supplied by the person running it
+        # Some hosts reject Python's default User-Agent with 403.
+        request = urllib.request.Request(source, headers={'User-Agent': 'ed-fi-spec-knowledge-graph'})
+        with urllib.request.urlopen(request) as resp:  # noqa: S310 - URL supplied by the person running it
             return json.load(resp)
     with open(source, encoding='utf-8-sig') as fh:
         return json.load(fh)
@@ -110,7 +137,7 @@ def resource_file(tag, description, operations, schemas, synonyms):
         lines += field_rows(schema, schemas)
         lines.append('')
     lines += ['## Endpoints', ''] + sorted({f'- `{m} {p}`' for m, p, _ in operations})
-    return collection, '\n'.join(lines) + '\n'
+    return collection, wrap('\n'.join(lines)) + '\n'
 
 
 def main():
@@ -144,7 +171,7 @@ def main():
                 for tag in op.get('tags', []):
                     by_tag.setdefault(tag, []).append((method.upper(), path, op))
 
-    index = [f'# Ed-Fi API resources ({args.label})', '',
+    index = [ONE_LINE_NOTE, '', f'# Ed-Fi API resources ({args.label})', '',
              'One line per resource: name, collection path and description. Search this file for the '
              'term you need (try synonyms too), then open the linked file for keys, fields and endpoints. '
              'Descriptor types: [descriptors.md](descriptors.md).', '']
@@ -159,7 +186,7 @@ def main():
         fh.write('\n'.join(index) + '\n')
 
     descriptor_text = {t['name']: t.get('description', '') for t in descriptors.get('tags', [])}
-    lines = [f'# Ed-Fi descriptor types ({args.label})', '',
+    lines = [ONE_LINE_NOTE, '', f'# Ed-Fi descriptor types ({args.label})', '',
              'Every descriptor resource has the same shape: `namespace`, `codeValue`, `shortDescription`, '
              '`description` and optional effective dates. Values are data, not part of the spec: read them '
              'from the target API, e.g. `GET {dataManagementApi}ed-fi/gradeLevelDescriptors`.', '']

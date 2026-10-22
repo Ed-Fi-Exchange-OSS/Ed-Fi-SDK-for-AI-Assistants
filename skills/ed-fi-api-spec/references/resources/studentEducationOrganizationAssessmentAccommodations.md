@@ -2,13 +2,15 @@
 
 `/ed-fi/studentEducationOrganizationAssessmentAccommodations`
 
-The accommodation(s) required or expected for administering assessments as determined by the education organization.
+The accommodation(s) required or expected for administering assessments as determined by the education
+organization.
 
 ## Natural key
 
 `educationOrganizationReference`, `studentReference`
 
-_Derived from the OpenAPI metadata: identity fields plus required references. Reference rows below list the key fields inside each reference._
+_Derived from the OpenAPI metadata: identity fields plus required references. Reference rows below list the
+key fields inside each reference._
 
 ## Fields
 

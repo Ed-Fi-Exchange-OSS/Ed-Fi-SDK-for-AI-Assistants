@@ -2,15 +2,19 @@
 
 `/ed-fi/sections`
 
-This entity represents a setting in which organized instruction of course content is provided, in-person or otherwise, to one or more students for a given period of time. A course offering may be offered to more than one section.
+This entity represents a setting in which organized instruction of course content is provided, in-person or
+otherwise, to one or more students for a given period of time. A course offering may be offered to more than
+one section.
 
 Also searched as: class.
 
 ## Natural key
 
-`sectionIdentifier`, `courseOfferingReference`. The natural key can be changed with PUT (cascading key updates).
+`sectionIdentifier`, `courseOfferingReference`. The natural key can be changed with PUT (cascading key
+updates).
 
-_Derived from the OpenAPI metadata: identity fields plus required references. Reference rows below list the key fields inside each reference._
+_Derived from the OpenAPI metadata: identity fields plus required references. Reference rows below list the
+key fields inside each reference._
 
 ## Fields
 

@@ -2,13 +2,15 @@
 
 `/ed-fi/programEvaluationElements`
 
-The lowest level elements or criterion of a students's performance that is being evaluated, typically by a rubric.
+The lowest level elements or criterion of a students's performance that is being evaluated, typically by a
+rubric.
 
 ## Natural key
 
 `programEvaluationElementTitle`, `programEvaluationReference`
 
-_Derived from the OpenAPI metadata: identity fields plus required references. Reference rows below list the key fields inside each reference._
+_Derived from the OpenAPI metadata: identity fields plus required references. Reference rows below list the
+key fields inside each reference._
 
 ## Fields
 

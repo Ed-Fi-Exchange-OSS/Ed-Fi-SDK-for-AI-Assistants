@@ -8,7 +8,8 @@ This association provides the contact information of the staff associated with t
 
 `contactTitle`, `educationOrganizationReference`, `staffReference`
 
-_Derived from the OpenAPI metadata: identity fields plus required references. Reference rows below list the key fields inside each reference._
+_Derived from the OpenAPI metadata: identity fields plus required references. Reference rows below list the
+key fields inside each reference._
 
 ## Fields
 

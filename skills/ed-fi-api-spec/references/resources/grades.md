@@ -2,13 +2,16 @@
 
 `/ed-fi/grades`
 
-This educational entity represents an overall score or assessment tied to a course over a period of time (i.e., the grading period). Student grades are usually a compilation of marks and other scores.
+This educational entity represents an overall score or assessment tied to a course over a period of time
+(i.e., the grading period). Student grades are usually a compilation of marks and other scores.
 
 ## Natural key
 
-`gradeTypeDescriptor`, `gradingPeriodReference`, `studentSectionAssociationReference`. The natural key can be changed with PUT (cascading key updates).
+`gradeTypeDescriptor`, `gradingPeriodReference`, `studentSectionAssociationReference`. The natural key can be
+changed with PUT (cascading key updates).
 
-_Derived from the OpenAPI metadata: identity fields plus required references. Reference rows below list the key fields inside each reference._
+_Derived from the OpenAPI metadata: identity fields plus required references. Reference rows below list the
+key fields inside each reference._
 
 ## Fields
 

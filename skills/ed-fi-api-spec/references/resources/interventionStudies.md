@@ -8,7 +8,8 @@ An experimental or quasi-experimental study of an intervention technique.
 
 `interventionStudyIdentificationCode`, `educationOrganizationReference`, `interventionPrescriptionReference`
 
-_Derived from the OpenAPI metadata: identity fields plus required references. Reference rows below list the key fields inside each reference._
+_Derived from the OpenAPI metadata: identity fields plus required references. Reference rows below list the
+key fields inside each reference._
 
 ## Fields
 

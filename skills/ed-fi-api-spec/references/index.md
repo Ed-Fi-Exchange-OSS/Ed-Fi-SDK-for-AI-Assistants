@@ -1,3 +1,6 @@
+<!-- One line per entry, so a line search returns the whole entry. -->
+<!-- markdownlint-disable MD013 -->
+
 # Ed-Fi API resources (ODS/API 7.3, Data Standard 5.2)
 
 One line per resource: name, collection path and description. Search this file for the term you need (try synonyms too), then open the linked file for keys, fields and endpoints. Descriptor types: [descriptors.md](descriptors.md).

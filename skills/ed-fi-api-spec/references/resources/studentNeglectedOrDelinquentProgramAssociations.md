@@ -2,13 +2,16 @@
 
 `/ed-fi/studentNeglectedOrDelinquentProgramAssociations`
 
-This association represents the Title I Part D Neglected or Delinquent program(s) that a student participates in or from which the student receives services. The association is a subclass of the GeneralStudentProgramAssociation specifically designed for Title I Part D Neglected or Delinquent programs.
+This association represents the Title I Part D Neglected or Delinquent program(s) that a student participates
+in or from which the student receives services. The association is a subclass of the
+GeneralStudentProgramAssociation specifically designed for Title I Part D Neglected or Delinquent programs.
 
 ## Natural key
 
 `beginDate`, `educationOrganizationReference`, `programReference`, `studentReference`
 
-_Derived from the OpenAPI metadata: identity fields plus required references. Reference rows below list the key fields inside each reference._
+_Derived from the OpenAPI metadata: identity fields plus required references. Reference rows below list the
+key fields inside each reference._
 
 ## Fields
 

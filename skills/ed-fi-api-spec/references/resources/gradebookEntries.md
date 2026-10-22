@@ -8,7 +8,8 @@ This entity represents an assignment, homework, or classroom assessment to be re
 
 `gradebookEntryIdentifier`, `namespace`. The natural key can be changed with PUT (cascading key updates).
 
-_Derived from the OpenAPI metadata: identity fields plus required references. Reference rows below list the key fields inside each reference._
+_Derived from the OpenAPI metadata: identity fields plus required references. Reference rows below list the
+key fields inside each reference._
 
 ## Fields
 

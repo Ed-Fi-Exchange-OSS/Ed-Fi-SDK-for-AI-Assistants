@@ -8,7 +8,8 @@ This event entity represents the recording of whether a student is in attendance
 
 `attendanceEventCategoryDescriptor`, `eventDate`, `interventionReference`, `studentReference`
 
-_Derived from the OpenAPI metadata: identity fields plus required references. Reference rows below list the key fields inside each reference._
+_Derived from the OpenAPI metadata: identity fields plus required references. Reference rows below list the
+key fields inside each reference._
 
 ## Fields
 

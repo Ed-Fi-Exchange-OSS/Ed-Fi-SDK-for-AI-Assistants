@@ -2,13 +2,15 @@
 
 `/ed-fi/studentSpecialEducationProgramEligibilityAssociations`
 
-Captures details regarding the evaluation process for eligibility of students for special education services under IDEA Part C or Part B.
+Captures details regarding the evaluation process for eligibility of students for special education services
+under IDEA Part C or Part B.
 
 ## Natural key
 
 `consentToEvaluationReceivedDate`, `educationOrganizationReference`, `programReference`, `studentReference`
 
-_Derived from the OpenAPI metadata: identity fields plus required references. Reference rows below list the key fields inside each reference._
+_Derived from the OpenAPI metadata: identity fields plus required references. Reference rows below list the
+key fields inside each reference._
 
 ## Fields
 

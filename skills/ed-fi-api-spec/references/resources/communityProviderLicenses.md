@@ -2,13 +2,15 @@
 
 `/ed-fi/communityProviderLicenses`
 
-The legal document held by the community provider that authorizes the holder to perform certain functions and or services.
+The legal document held by the community provider that authorizes the holder to perform certain functions and
+or services.
 
 ## Natural key
 
 `licenseIdentifier`, `licensingOrganization`, `communityProviderReference`
 
-_Derived from the OpenAPI metadata: identity fields plus required references. Reference rows below list the key fields inside each reference._
+_Derived from the OpenAPI metadata: identity fields plus required references. Reference rows below list the
+key fields inside each reference._
 
 ## Fields
 

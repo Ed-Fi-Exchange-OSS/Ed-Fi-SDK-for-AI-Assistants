@@ -8,7 +8,8 @@ This association indicates the staff associated with a cohort of students.
 
 `beginDate`, `cohortReference`, `staffReference`
 
-_Derived from the OpenAPI metadata: identity fields plus required references. Reference rows below list the key fields inside each reference._
+_Derived from the OpenAPI metadata: identity fields plus required references. Reference rows below list the
+key fields inside each reference._
 
 ## Fields
 

@@ -8,7 +8,8 @@ A candidate is both a person enrolled in a educator preparation program and a ca
 
 `candidateIdentifier`
 
-_Derived from the OpenAPI metadata: identity fields plus required references. Reference rows below list the key fields inside each reference._
+_Derived from the OpenAPI metadata: identity fields plus required references. Reference rows below list the
+key fields inside each reference._
 
 ## Fields
 

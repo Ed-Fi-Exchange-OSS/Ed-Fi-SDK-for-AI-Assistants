@@ -2,13 +2,16 @@
 
 `/ed-fi/studentAssessmentRegistrations`
 
-Identifies an assessment registration that a student is expected to participate in including the testing organization, reporting organization and assessment delivery details.
+Identifies an assessment registration that a student is expected to participate in including the testing
+organization, reporting organization and assessment delivery details.
 
 ## Natural key
 
-`assessmentAdministrationReference`, `studentEducationOrganizationAssociationReference`, `studentSchoolAssociationReference`
+`assessmentAdministrationReference`, `studentEducationOrganizationAssociationReference`,
+`studentSchoolAssociationReference`
 
-_Derived from the OpenAPI metadata: identity fields plus required references. Reference rows below list the key fields inside each reference._
+_Derived from the OpenAPI metadata: identity fields plus required references. Reference rows below list the
+key fields inside each reference._
 
 ## Fields
 

@@ -2,13 +2,15 @@
 
 `/ed-fi/staffDisciplineIncidentAssociations`
 
-This association indicates those staff who were victims, perpetrators, witnesses, and reporters for a discipline incident.
+This association indicates those staff who were victims, perpetrators, witnesses, and reporters for a
+discipline incident.
 
 ## Natural key
 
 `disciplineIncidentReference`, `staffReference`
 
-_Derived from the OpenAPI metadata: identity fields plus required references. Reference rows below list the key fields inside each reference._
+_Derived from the OpenAPI metadata: identity fields plus required references. Reference rows below list the
+key fields inside each reference._
 
 ## Fields
 

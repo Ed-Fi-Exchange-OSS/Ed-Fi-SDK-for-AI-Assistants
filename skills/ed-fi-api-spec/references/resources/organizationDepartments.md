@@ -2,13 +2,15 @@
 
 `/ed-fi/organizationDepartments`
 
-An organizational unit of another education organization, often devoted to a particular academic discipline, area of study, or organization function.
+An organizational unit of another education organization, often devoted to a particular academic discipline,
+area of study, or organization function.
 
 ## Natural key
 
 `organizationDepartmentId`
 
-_Derived from the OpenAPI metadata: identity fields plus required references. Reference rows below list the key fields inside each reference._
+_Derived from the OpenAPI metadata: identity fields plus required references. Reference rows below list the
+key fields inside each reference._
 
 ## Fields
 

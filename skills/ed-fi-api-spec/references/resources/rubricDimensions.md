@@ -2,13 +2,15 @@
 
 `/tpdm/rubricDimensions`
 
-The cells of a rubric, consisting of a qualitative decription, definition, or exemplar with the associated rubric rating and rating level.
+The cells of a rubric, consisting of a qualitative decription, definition, or exemplar with the associated
+rubric rating and rating level.
 
 ## Natural key
 
 `rubricRating`, `evaluationElementReference`
 
-_Derived from the OpenAPI metadata: identity fields plus required references. Reference rows below list the key fields inside each reference._
+_Derived from the OpenAPI metadata: identity fields plus required references. Reference rows below list the
+key fields inside each reference._
 
 ## Fields
 

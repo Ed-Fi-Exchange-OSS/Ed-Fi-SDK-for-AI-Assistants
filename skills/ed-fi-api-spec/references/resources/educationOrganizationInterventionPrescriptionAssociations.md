@@ -2,13 +2,16 @@
 
 `/ed-fi/educationOrganizationInterventionPrescriptionAssociations`
 
-This association indicates interventions made available by an education organization. Often, a district-level education organization purchases a set of intervention prescriptions and makes them available to its schools for use on demand.
+This association indicates interventions made available by an education organization. Often, a district-level
+education organization purchases a set of intervention prescriptions and makes them available to its schools
+for use on demand.
 
 ## Natural key
 
 `educationOrganizationReference`, `interventionPrescriptionReference`
 
-_Derived from the OpenAPI metadata: identity fields plus required references. Reference rows below list the key fields inside each reference._
+_Derived from the OpenAPI metadata: identity fields plus required references. Reference rows below list the
+key fields inside each reference._
 
 ## Fields
 

@@ -2,13 +2,18 @@
 
 `/ed-fi/fundDimensions`
 
-The NCES fund accounting dimension. A fund is a fiscal and accounting entity with a self-balancing set of accounts recording cash and other financial resources, together with all related liabilities and residual equities or balances, and changes therein, which are segregated for the purpose of carrying on specific activities or attaining certain objectives in accordance with special regulations, restrictions, or limitations.
+The NCES fund accounting dimension. A fund is a fiscal and accounting entity with a self-balancing set of
+accounts recording cash and other financial resources, together with all related liabilities and residual
+equities or balances, and changes therein, which are segregated for the purpose of carrying on specific
+activities or attaining certain objectives in accordance with special regulations, restrictions, or
+limitations.
 
 ## Natural key
 
 `code`, `fiscalYear`
 
-_Derived from the OpenAPI metadata: identity fields plus required references. Reference rows below list the key fields inside each reference._
+_Derived from the OpenAPI metadata: identity fields plus required references. Reference rows below list the
+key fields inside each reference._
 
 ## Fields
 

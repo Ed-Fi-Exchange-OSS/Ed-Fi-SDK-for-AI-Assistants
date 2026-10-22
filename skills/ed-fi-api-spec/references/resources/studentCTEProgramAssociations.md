@@ -2,13 +2,15 @@
 
 `/ed-fi/studentCTEProgramAssociations`
 
-This association represents the career and technical education (CTE) program that a student participates in. The association is a subclass of the GeneralStudentProgramAssociation specifically designed for CTE programs.
+This association represents the career and technical education (CTE) program that a student participates in.
+The association is a subclass of the GeneralStudentProgramAssociation specifically designed for CTE programs.
 
 ## Natural key
 
 `beginDate`, `educationOrganizationReference`, `programReference`, `studentReference`
 
-_Derived from the OpenAPI metadata: identity fields plus required references. Reference rows below list the key fields inside each reference._
+_Derived from the OpenAPI metadata: identity fields plus required references. Reference rows below list the
+key fields inside each reference._
 
 ## Fields
 

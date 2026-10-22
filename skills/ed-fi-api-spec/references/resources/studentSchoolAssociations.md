@@ -2,15 +2,19 @@
 
 `/ed-fi/studentSchoolAssociations`
 
-This association represents the school in which a student is enrolled. The semantics of enrollment may differ slightly by state. Non-enrollment relationships between a student and an education organization may be described using the StudentEducationOrganizationAssociation.
+This association represents the school in which a student is enrolled. The semantics of enrollment may differ
+slightly by state. Non-enrollment relationships between a student and an education organization may be
+described using the StudentEducationOrganizationAssociation.
 
 Also searched as: enrollment.
 
 ## Natural key
 
-`entryDate`, `schoolReference`, `studentReference`. The natural key can be changed with PUT (cascading key updates).
+`entryDate`, `schoolReference`, `studentReference`. The natural key can be changed with PUT (cascading key
+updates).
 
-_Derived from the OpenAPI metadata: identity fields plus required references. Reference rows below list the key fields inside each reference._
+_Derived from the OpenAPI metadata: identity fields plus required references. Reference rows below list the
+key fields inside each reference._
 
 ## Fields
 

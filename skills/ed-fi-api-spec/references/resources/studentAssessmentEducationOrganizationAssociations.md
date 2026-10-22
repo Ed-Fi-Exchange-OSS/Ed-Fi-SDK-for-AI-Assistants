@@ -2,13 +2,16 @@
 
 `/ed-fi/studentAssessmentEducationOrganizationAssociations`
 
-The association of individual StudentAssessments with EducationOrganizations indicating administration, enrollment, or attribution.
+The association of individual StudentAssessments with EducationOrganizations indicating administration,
+enrollment, or attribution.
 
 ## Natural key
 
-`educationOrganizationAssociationTypeDescriptor`, `educationOrganizationReference`, `studentAssessmentReference`
+`educationOrganizationAssociationTypeDescriptor`, `educationOrganizationReference`,
+`studentAssessmentReference`
 
-_Derived from the OpenAPI metadata: identity fields plus required references. Reference rows below list the key fields inside each reference._
+_Derived from the OpenAPI metadata: identity fields plus required references. Reference rows below list the
+key fields inside each reference._
 
 ## Fields
 

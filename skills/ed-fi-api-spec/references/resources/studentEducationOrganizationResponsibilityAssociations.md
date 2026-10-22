@@ -2,13 +2,16 @@
 
 `/ed-fi/studentEducationOrganizationResponsibilityAssociations`
 
-This association indicates a relationship between a student and an education organization other than an enrollment relationship, and generally indicating some kind of responsibility of the education organization for the student. Enrollment relationship semantics are covered by StudentSchoolAssociation.
+This association indicates a relationship between a student and an education organization other than an
+enrollment relationship, and generally indicating some kind of responsibility of the education organization
+for the student. Enrollment relationship semantics are covered by StudentSchoolAssociation.
 
 ## Natural key
 
 `beginDate`, `responsibilityDescriptor`, `educationOrganizationReference`, `studentReference`
 
-_Derived from the OpenAPI metadata: identity fields plus required references. Reference rows below list the key fields inside each reference._
+_Derived from the OpenAPI metadata: identity fields plus required references. Reference rows below list the
+key fields inside each reference._
 
 ## Fields
 

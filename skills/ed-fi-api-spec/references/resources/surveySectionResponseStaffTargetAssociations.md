@@ -8,7 +8,8 @@ This association provides information about the survey section and the staff the
 
 `staffReference`, `surveySectionResponseReference`
 
-_Derived from the OpenAPI metadata: identity fields plus required references. Reference rows below list the key fields inside each reference._
+_Derived from the OpenAPI metadata: identity fields plus required references. Reference rows below list the
+key fields inside each reference._
 
 ## Fields
 

@@ -8,7 +8,8 @@ The Educator Preparation Program is designed to prepare students to become licen
 
 `programName`, `programTypeDescriptor`, `educationOrganizationReference`
 
-_Derived from the OpenAPI metadata: identity fields plus required references. Reference rows below list the key fields inside each reference._
+_Derived from the OpenAPI metadata: identity fields plus required references. Reference rows below list the
+key fields inside each reference._
 
 ## Fields
 

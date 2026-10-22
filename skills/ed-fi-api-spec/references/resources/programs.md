@@ -2,13 +2,16 @@
 
 `/ed-fi/programs`
 
-This entity represents any program designed to work in conjunction with, or as a supplement to, the main academic program. Programs may provide instruction, training, services, or benefits through federal, state, or local agencies. Programs may also include organized extracurricular activities for students.
+This entity represents any program designed to work in conjunction with, or as a supplement to, the main
+academic program. Programs may provide instruction, training, services, or benefits through federal, state, or
+local agencies. Programs may also include organized extracurricular activities for students.
 
 ## Natural key
 
 `programName`, `programTypeDescriptor`, `educationOrganizationReference`
 
-_Derived from the OpenAPI metadata: identity fields plus required references. Reference rows below list the key fields inside each reference._
+_Derived from the OpenAPI metadata: identity fields plus required references. Reference rows below list the
+key fields inside each reference._
 
 ## Fields
 

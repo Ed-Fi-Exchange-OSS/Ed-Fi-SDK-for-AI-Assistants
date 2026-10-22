@@ -2,13 +2,15 @@
 
 `/ed-fi/postSecondaryInstitutions`
 
-An organization that provides educational programs for individuals who have completed or otherwise left educational programs in secondary school(s).
+An organization that provides educational programs for individuals who have completed or otherwise left
+educational programs in secondary school(s).
 
 ## Natural key
 
 `postSecondaryInstitutionId`
 
-_Derived from the OpenAPI metadata: identity fields plus required references. Reference rows below list the key fields inside each reference._
+_Derived from the OpenAPI metadata: identity fields plus required references. Reference rows below list the
+key fields inside each reference._
 
 ## Fields
 

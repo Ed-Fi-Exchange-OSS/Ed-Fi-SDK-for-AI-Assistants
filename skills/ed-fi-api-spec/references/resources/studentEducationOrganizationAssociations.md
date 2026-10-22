@@ -2,13 +2,15 @@
 
 `/ed-fi/studentEducationOrganizationAssociations`
 
-This association represents student information as reported in the context of the student's relationship to the education organization. Enrollment relationship semantics are covered by StudentSchoolAssociation.
+This association represents student information as reported in the context of the student's relationship to
+the education organization. Enrollment relationship semantics are covered by StudentSchoolAssociation.
 
 ## Natural key
 
 `educationOrganizationReference`, `studentReference`
 
-_Derived from the OpenAPI metadata: identity fields plus required references. Reference rows below list the key fields inside each reference._
+_Derived from the OpenAPI metadata: identity fields plus required references. Reference rows below list the
+key fields inside each reference._
 
 ## Fields
 

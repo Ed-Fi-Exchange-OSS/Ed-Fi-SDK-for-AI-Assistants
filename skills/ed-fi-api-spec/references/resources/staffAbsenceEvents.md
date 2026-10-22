@@ -8,7 +8,8 @@ This event entity represents the recording of the dates of staff absence.
 
 `absenceEventCategoryDescriptor`, `eventDate`, `staffReference`
 
-_Derived from the OpenAPI metadata: identity fields plus required references. Reference rows below list the key fields inside each reference._
+_Derived from the OpenAPI metadata: identity fields plus required references. Reference rows below list the
+key fields inside each reference._
 
 ## Fields
 

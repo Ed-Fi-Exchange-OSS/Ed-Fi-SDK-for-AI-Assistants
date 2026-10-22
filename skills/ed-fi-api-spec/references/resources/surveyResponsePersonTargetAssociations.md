@@ -8,7 +8,8 @@ The association provides information about the survey being taken and who the su
 
 `personReference`, `surveyResponseReference`
 
-_Derived from the OpenAPI metadata: identity fields plus required references. Reference rows below list the key fields inside each reference._
+_Derived from the OpenAPI metadata: identity fields plus required references. Reference rows below list the
+key fields inside each reference._
 
 ## Fields
 

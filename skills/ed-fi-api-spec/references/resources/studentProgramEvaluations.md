@@ -8,7 +8,8 @@ The evaluation results for a student as evaluated in the context of a program.
 
 `evaluationDate`, `programEvaluationReference`, `studentReference`
 
-_Derived from the OpenAPI metadata: identity fields plus required references. Reference rows below list the key fields inside each reference._
+_Derived from the OpenAPI metadata: identity fields plus required references. Reference rows below list the
+key fields inside each reference._
 
 ## Fields
 

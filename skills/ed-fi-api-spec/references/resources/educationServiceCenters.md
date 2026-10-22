@@ -2,13 +2,16 @@
 
 `/ed-fi/educationServiceCenters`
 
-This entity represents a regional, multi-services public agency authorized by state law to develop, manage and provide services, programs, or other support options (e.g., construction, food services, and technology services) to LEAs.
+This entity represents a regional, multi-services public agency authorized by state law to develop, manage and
+provide services, programs, or other support options (e.g., construction, food services, and technology
+services) to LEAs.
 
 ## Natural key
 
 `educationServiceCenterId`
 
-_Derived from the OpenAPI metadata: identity fields plus required references. Reference rows below list the key fields inside each reference._
+_Derived from the OpenAPI metadata: identity fields plus required references. Reference rows below list the
+key fields inside each reference._
 
 ## Fields
 

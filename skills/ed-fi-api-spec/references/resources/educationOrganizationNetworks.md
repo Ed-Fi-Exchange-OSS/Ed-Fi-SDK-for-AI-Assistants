@@ -2,13 +2,15 @@
 
 `/ed-fi/educationOrganizationNetworks`
 
-This entity is a self-organized membership network of peer-level education organizations intended to provide shared services or collective procurement.
+This entity is a self-organized membership network of peer-level education organizations intended to provide
+shared services or collective procurement.
 
 ## Natural key
 
 `educationOrganizationNetworkId`
 
-_Derived from the OpenAPI metadata: identity fields plus required references. Reference rows below list the key fields inside each reference._
+_Derived from the OpenAPI metadata: identity fields plus required references. Reference rows below list the
+key fields inside each reference._
 
 ## Fields
 

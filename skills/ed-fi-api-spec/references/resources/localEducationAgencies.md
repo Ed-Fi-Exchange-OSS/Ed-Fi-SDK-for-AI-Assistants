@@ -2,7 +2,9 @@
 
 `/ed-fi/localEducationAgencies`
 
-This entity represents an administrative unit at the local level which exists primarily to operate schools or to contract for educational services. It includes school districts, charter schools, charter management organizations, or other local administrative organizations.
+This entity represents an administrative unit at the local level which exists primarily to operate schools or
+to contract for educational services. It includes school districts, charter schools, charter management
+organizations, or other local administrative organizations.
 
 Also searched as: district.
 
@@ -10,7 +12,8 @@ Also searched as: district.
 
 `localEducationAgencyId`
 
-_Derived from the OpenAPI metadata: identity fields plus required references. Reference rows below list the key fields inside each reference._
+_Derived from the OpenAPI metadata: identity fields plus required references. Reference rows below list the
+key fields inside each reference._
 
 ## Fields
 

@@ -2,13 +2,15 @@
 
 `/ed-fi/courseOfferings`
 
-This entity represents an entry in the course catalog of available courses offered by the school during a session.
+This entity represents an entry in the course catalog of available courses offered by the school during a
+session.
 
 ## Natural key
 
 `localCourseCode`, `courseReference`, `schoolReference`, `sessionReference`
 
-_Derived from the OpenAPI metadata: identity fields plus required references. Reference rows below list the key fields inside each reference._
+_Derived from the OpenAPI metadata: identity fields plus required references. Reference rows below list the
+key fields inside each reference._
 
 ## Fields
 

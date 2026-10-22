@@ -2,13 +2,16 @@
 
 `/ed-fi/interventionPrescriptions`
 
-This entity represents a formal prescription of an instructional approach focusing on the specific techniques and materials used to teach a given subject. This can be prescribed by academic research, an interventions vendor, or another entity.
+This entity represents a formal prescription of an instructional approach focusing on the specific techniques
+and materials used to teach a given subject. This can be prescribed by academic research, an interventions
+vendor, or another entity.
 
 ## Natural key
 
 `interventionPrescriptionIdentificationCode`, `educationOrganizationReference`
 
-_Derived from the OpenAPI metadata: identity fields plus required references. Reference rows below list the key fields inside each reference._
+_Derived from the OpenAPI metadata: identity fields plus required references. Reference rows below list the
+key fields inside each reference._
 
 ## Fields
 

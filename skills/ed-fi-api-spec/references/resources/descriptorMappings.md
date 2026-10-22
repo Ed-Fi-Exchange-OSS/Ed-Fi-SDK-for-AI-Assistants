@@ -2,13 +2,15 @@
 
 `/ed-fi/descriptorMappings`
 
-A mapping of a descriptor value in one namespace to a descriptor value in another namespace. This can be used to exchange known contextual mappings of enumeration values.
+A mapping of a descriptor value in one namespace to a descriptor value in another namespace. This can be used
+to exchange known contextual mappings of enumeration values.
 
 ## Natural key
 
 `mappedNamespace`, `mappedValue`, `namespace`, `value`
 
-_Derived from the OpenAPI metadata: identity fields plus required references. Reference rows below list the key fields inside each reference._
+_Derived from the OpenAPI metadata: identity fields plus required references. Reference rows below list the
+key fields inside each reference._
 
 ## Fields
 

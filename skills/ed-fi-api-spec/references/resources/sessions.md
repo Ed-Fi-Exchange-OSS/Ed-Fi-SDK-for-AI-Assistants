@@ -2,13 +2,17 @@
 
 `/ed-fi/sessions`
 
-A specific designated unit of time during which instruction is provided, grades are reported and academic credits are awarded to students (whenever applicable). Sessions serve as organized segments of the academic year and can be interrupted by vacations or other events.
+A specific designated unit of time during which instruction is provided, grades are reported and academic
+credits are awarded to students (whenever applicable). Sessions serve as organized segments of the academic
+year and can be interrupted by vacations or other events.
 
 ## Natural key
 
-`sessionName`, `schoolReference`, `schoolYearTypeReference`. The natural key can be changed with PUT (cascading key updates).
+`sessionName`, `schoolReference`, `schoolYearTypeReference`. The natural key can be changed with PUT
+(cascading key updates).
 
-_Derived from the OpenAPI metadata: identity fields plus required references. Reference rows below list the key fields inside each reference._
+_Derived from the OpenAPI metadata: identity fields plus required references. Reference rows below list the
+key fields inside each reference._
 
 ## Fields
 

@@ -2,13 +2,15 @@
 
 `/tpdm/evaluationObjectives`
 
-A subcomponent of an Evaluation, a specific educator Objective or domain of performance that is being evaluated.
+A subcomponent of an Evaluation, a specific educator Objective or domain of performance that is being
+evaluated.
 
 ## Natural key
 
 `evaluationObjectiveTitle`, `evaluationReference`
 
-_Derived from the OpenAPI metadata: identity fields plus required references. Reference rows below list the key fields inside each reference._
+_Derived from the OpenAPI metadata: identity fields plus required references. Reference rows below list the
+key fields inside each reference._
 
 ## Fields
 

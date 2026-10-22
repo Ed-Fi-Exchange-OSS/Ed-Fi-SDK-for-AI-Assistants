@@ -2,13 +2,15 @@
 
 `/ed-fi/surveyResponseEducationOrganizationTargetAssociations`
 
-This association provides information about the survey being taken and the education organization the survey is about.
+This association provides information about the survey being taken and the education organization the survey
+is about.
 
 ## Natural key
 
 `educationOrganizationReference`, `surveyResponseReference`
 
-_Derived from the OpenAPI metadata: identity fields plus required references. Reference rows below list the key fields inside each reference._
+_Derived from the OpenAPI metadata: identity fields plus required references. Reference rows below list the
+key fields inside each reference._
 
 ## Fields
 

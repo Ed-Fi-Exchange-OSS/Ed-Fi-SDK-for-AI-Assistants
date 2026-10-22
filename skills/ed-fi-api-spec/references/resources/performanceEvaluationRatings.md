@@ -8,7 +8,8 @@ The summary rating for a Performance Evaluation across all Evaluation instrument
 
 `performanceEvaluationReference`, `personReference`
 
-_Derived from the OpenAPI metadata: identity fields plus required references. Reference rows below list the key fields inside each reference._
+_Derived from the OpenAPI metadata: identity fields plus required references. Reference rows below list the
+key fields inside each reference._
 
 ## Fields
 

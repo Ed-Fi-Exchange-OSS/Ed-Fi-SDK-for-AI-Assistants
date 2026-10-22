@@ -2,13 +2,15 @@
 
 `/ed-fi/evaluationRubricDimensions`
 
-The cells of a rubric, consisting of a qualitative decription, definition, or exemplar with the associated rubric evaluation level.
+The cells of a rubric, consisting of a qualitative decription, definition, or exemplar with the associated
+rubric evaluation level.
 
 ## Natural key
 
 `evaluationRubricRating`, `programEvaluationElementReference`
 
-_Derived from the OpenAPI metadata: identity fields plus required references. Reference rows below list the key fields inside each reference._
+_Derived from the OpenAPI metadata: identity fields plus required references. Reference rows below list the
+key fields inside each reference._
 
 ## Fields
 

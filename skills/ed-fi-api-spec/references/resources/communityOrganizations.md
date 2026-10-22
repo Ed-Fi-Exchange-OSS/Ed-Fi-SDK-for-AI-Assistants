@@ -2,13 +2,15 @@
 
 `/ed-fi/communityOrganizations`
 
-This entity represents an administrative unit at the state level which exists primarily to operate local community providers.
+This entity represents an administrative unit at the state level which exists primarily to operate local
+community providers.
 
 ## Natural key
 
 `communityOrganizationId`
 
-_Derived from the OpenAPI metadata: identity fields plus required references. Reference rows below list the key fields inside each reference._
+_Derived from the OpenAPI metadata: identity fields plus required references. Reference rows below list the
+key fields inside each reference._
 
 ## Fields
 

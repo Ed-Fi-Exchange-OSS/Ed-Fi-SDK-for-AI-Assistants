@@ -2,13 +2,17 @@
 
 `/ed-fi/restraintEvents`
 
-This event entity represents the instances where a special education student was physically or mechanically restrained due to imminent serious physical harm to themselves or others, imminent serious property destruction or a combination of both imminent serious physical harm to themselves or others and imminent serious property destruction.
+This event entity represents the instances where a special education student was physically or mechanically
+restrained due to imminent serious physical harm to themselves or others, imminent serious property
+destruction or a combination of both imminent serious physical harm to themselves or others and imminent
+serious property destruction.
 
 ## Natural key
 
 `restraintEventIdentifier`, `schoolReference`, `studentReference`
 
-_Derived from the OpenAPI metadata: identity fields plus required references. Reference rows below list the key fields inside each reference._
+_Derived from the OpenAPI metadata: identity fields plus required references. Reference rows below list the
+key fields inside each reference._
 
 ## Fields
 

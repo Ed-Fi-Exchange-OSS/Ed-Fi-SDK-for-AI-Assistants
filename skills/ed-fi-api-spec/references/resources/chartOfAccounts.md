@@ -2,13 +2,16 @@
 
 `/ed-fi/chartOfAccounts`
 
-A valid combination of account dimensions under which financials are reported. This financial entity represents a funding source combined with its purpose and type of transaction. It provides a formal record of the debits and credits relating to the specific account.
+A valid combination of account dimensions under which financials are reported. This financial entity
+represents a funding source combined with its purpose and type of transaction. It provides a formal record of
+the debits and credits relating to the specific account.
 
 ## Natural key
 
 `accountIdentifier`, `fiscalYear`, `educationOrganizationReference`
 
-_Derived from the OpenAPI metadata: identity fields plus required references. Reference rows below list the key fields inside each reference._
+_Derived from the OpenAPI metadata: identity fields plus required references. Reference rows below list the
+key fields inside each reference._
 
 ## Fields
 

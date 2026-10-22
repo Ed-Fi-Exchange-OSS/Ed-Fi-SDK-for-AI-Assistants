@@ -2,7 +2,9 @@
 
 `/ed-fi/staffs`
 
-This entity represents an individual who performs specified activities for any public or private education institution or agency that provides instructional and/or support services to students or staff at the early childhood level through high school completion.
+This entity represents an individual who performs specified activities for any public or private education
+institution or agency that provides instructional and/or support services to students or staff at the early
+childhood level through high school completion.
 
 Also searched as: teacher.
 
@@ -10,7 +12,8 @@ Also searched as: teacher.
 
 `staffUniqueId`
 
-_Derived from the OpenAPI metadata: identity fields plus required references. Reference rows below list the key fields inside each reference._
+_Derived from the OpenAPI metadata: identity fields plus required references. Reference rows below list the
+key fields inside each reference._
 
 ## Fields
 

@@ -2,7 +2,9 @@
 
 `/ed-fi/stateEducationAgencies`
 
-This entity represents the agency of the state charged with the primary responsibility for coordinating and supervising public instruction, including the setting of standards for elementary and secondary instructional programs.
+This entity represents the agency of the state charged with the primary responsibility for coordinating and
+supervising public instruction, including the setting of standards for elementary and secondary instructional
+programs.
 
 Also searched as: state agency.
 
@@ -10,7 +12,8 @@ Also searched as: state agency.
 
 `stateEducationAgencyId`
 
-_Derived from the OpenAPI metadata: identity fields plus required references. Reference rows below list the key fields inside each reference._
+_Derived from the OpenAPI metadata: identity fields plus required references. Reference rows below list the
+key fields inside each reference._
 
 ## Fields
 

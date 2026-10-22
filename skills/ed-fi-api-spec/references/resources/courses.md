@@ -2,13 +2,15 @@
 
 `/ed-fi/courses`
 
-This educational entity represents the organization of subject matter and related learning experiences provided for the instruction of students on a regular or systematic basis.
+This educational entity represents the organization of subject matter and related learning experiences
+provided for the instruction of students on a regular or systematic basis.
 
 ## Natural key
 
 `courseCode`, `educationOrganizationReference`
 
-_Derived from the OpenAPI metadata: identity fields plus required references. Reference rows below list the key fields inside each reference._
+_Derived from the OpenAPI metadata: identity fields plus required references. Reference rows below list the
+key fields inside each reference._
 
 ## Fields
 

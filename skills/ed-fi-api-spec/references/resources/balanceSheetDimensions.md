@@ -2,13 +2,17 @@
 
 `/ed-fi/balanceSheetDimensions`
 
-The NCES balance sheet accounting dimension, used to track financial transactions for each fund. These financial statements only report assets, deferred outflows of resources, liabilities, deferred inflows of resources, and equity accounts. The statements are considered snapshots of how these accounts stand as of a certain point in time.
+The NCES balance sheet accounting dimension, used to track financial transactions for each fund. These
+financial statements only report assets, deferred outflows of resources, liabilities, deferred inflows of
+resources, and equity accounts. The statements are considered snapshots of how these accounts stand as of a
+certain point in time.
 
 ## Natural key
 
 `code`, `fiscalYear`
 
-_Derived from the OpenAPI metadata: identity fields plus required references. Reference rows below list the key fields inside each reference._
+_Derived from the OpenAPI metadata: identity fields plus required references. Reference rows below list the
+key fields inside each reference._
 
 ## Fields
 

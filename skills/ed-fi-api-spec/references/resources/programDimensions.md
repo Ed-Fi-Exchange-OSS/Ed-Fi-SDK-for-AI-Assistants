@@ -2,13 +2,18 @@
 
 `/ed-fi/programDimensions`
 
-The NCES program accounting dimension. A program is defined by the NCES as a plan of activities and procedures designed to accomplish a predetermined objective or set of objectives. These are often categorized into broad program areas such as regular education, special education, vocational education, other PK-12 instructional, nonpublic school, adult and continuing education, community and junior college education, community services, and co-curricular or extracurricular activities.
+The NCES program accounting dimension. A program is defined by the NCES as a plan of activities and procedures
+designed to accomplish a predetermined objective or set of objectives. These are often categorized into broad
+program areas such as regular education, special education, vocational education, other PK-12 instructional,
+nonpublic school, adult and continuing education, community and junior college education, community services,
+and co-curricular or extracurricular activities.
 
 ## Natural key
 
 `code`, `fiscalYear`
 
-_Derived from the OpenAPI metadata: identity fields plus required references. Reference rows below list the key fields inside each reference._
+_Derived from the OpenAPI metadata: identity fields plus required references. Reference rows below list the
+key fields inside each reference._
 
 ## Fields
 

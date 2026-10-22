@@ -2,13 +2,15 @@
 
 `/ed-fi/courseTranscripts`
 
-This entity is the final record of a student's performance in their courses at the end of a semester or school year.
+This entity is the final record of a student's performance in their courses at the end of a semester or school
+year.
 
 ## Natural key
 
 `courseAttemptResultDescriptor`, `courseReference`, `studentAcademicRecordReference`
 
-_Derived from the OpenAPI metadata: identity fields plus required references. Reference rows below list the key fields inside each reference._
+_Derived from the OpenAPI metadata: identity fields plus required references. Reference rows below list the
+key fields inside each reference._
 
 ## Fields
 

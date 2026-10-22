@@ -2,13 +2,17 @@
 
 `/ed-fi/functionDimensions`
 
-The NCES function accounting dimension representing an expenditure. The function describes the activity for which a service or material object is acquired. The functions of a school district are generally classified into five broad areas, including instruction, support services, operation of non-instructional services, facilities acquisition and construction, and debt service.
+The NCES function accounting dimension representing an expenditure. The function describes the activity for
+which a service or material object is acquired. The functions of a school district are generally classified
+into five broad areas, including instruction, support services, operation of non-instructional services,
+facilities acquisition and construction, and debt service.
 
 ## Natural key
 
 `code`, `fiscalYear`
 
-_Derived from the OpenAPI metadata: identity fields plus required references. Reference rows below list the key fields inside each reference._
+_Derived from the OpenAPI metadata: identity fields plus required references. Reference rows below list the
+key fields inside each reference._
 
 ## Fields
 

@@ -2,13 +2,15 @@
 
 `/ed-fi/communityProviders`
 
-This entity represents an educational organization that includes staff and students who participate in classes and educational activity groups.
+This entity represents an educational organization that includes staff and students who participate in classes
+and educational activity groups.
 
 ## Natural key
 
 `communityProviderId`
 
-_Derived from the OpenAPI metadata: identity fields plus required references. Reference rows below list the key fields inside each reference._
+_Derived from the OpenAPI metadata: identity fields plus required references. Reference rows below list the
+key fields inside each reference._
 
 ## Fields
 

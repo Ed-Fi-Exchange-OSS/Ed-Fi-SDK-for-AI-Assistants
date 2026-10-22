@@ -2,13 +2,17 @@
 
 `/ed-fi/studentLanguageInstructionProgramAssociations`
 
-This association represents the Title III Language Instruction for Limited English Proficient and Immigrant Students program(s) that a student participates in or from which the student receives services. The association is a subclass of the GeneralStudentProgramAssociation specifically designed for language instruction programs.
+This association represents the Title III Language Instruction for Limited English Proficient and Immigrant
+Students program(s) that a student participates in or from which the student receives services. The
+association is a subclass of the GeneralStudentProgramAssociation specifically designed for language
+instruction programs.
 
 ## Natural key
 
 `beginDate`, `educationOrganizationReference`, `programReference`, `studentReference`
 
-_Derived from the OpenAPI metadata: identity fields plus required references. Reference rows below list the key fields inside each reference._
+_Derived from the OpenAPI metadata: identity fields plus required references. Reference rows below list the
+key fields inside each reference._
 
 ## Fields
 

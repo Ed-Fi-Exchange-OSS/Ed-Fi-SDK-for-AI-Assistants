@@ -2,13 +2,15 @@
 
 `/ed-fi/assessmentAdministrationParticipations`
 
-Identifies the point of contact for the administration of an assessment under the purview of an education organization.
+Identifies the point of contact for the administration of an assessment under the purview of an education
+organization.
 
 ## Natural key
 
 `assessmentAdministrationReference`, `participatingEducationOrganizationReference`
 
-_Derived from the OpenAPI metadata: identity fields plus required references. Reference rows below list the key fields inside each reference._
+_Derived from the OpenAPI metadata: identity fields plus required references. Reference rows below list the
+key fields inside each reference._
 
 ## Fields
 

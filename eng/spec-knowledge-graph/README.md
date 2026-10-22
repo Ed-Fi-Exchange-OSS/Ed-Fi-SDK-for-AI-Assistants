@@ -20,6 +20,10 @@ python eng/spec-knowledge-graph/generate.py \
 `--resources` and `--descriptors` accept a URL or a local file. The output folder's `resources/` directory is
 replaced on each run.
 
+Resource files are wrapped at 110 characters, like the rest of the repository. `index.md` and `descriptors.md`
+keep one line per entry, so searching them for a term returns the whole entry; they turn off the line-length
+lint rule for that reason.
+
 ## Include a host's extensions
 
 Extensions only appear in the metadata of the host that has them. Point the generator at that host's metadata

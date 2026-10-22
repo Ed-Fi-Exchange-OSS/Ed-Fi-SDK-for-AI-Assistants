@@ -2,13 +2,16 @@
 
 `/ed-fi/graduationPlans`
 
-This entity is a plan outlining the required credits, credits by subject, credits by course, and other criteria required for graduation. A graduation plan may be one or more standard plans defined by an education organization and/or individual plans for some or all students.
+This entity is a plan outlining the required credits, credits by subject, credits by course, and other
+criteria required for graduation. A graduation plan may be one or more standard plans defined by an education
+organization and/or individual plans for some or all students.
 
 ## Natural key
 
 `graduationPlanTypeDescriptor`, `educationOrganizationReference`, `graduationSchoolYearTypeReference`
 
-_Derived from the OpenAPI metadata: identity fields plus required references. Reference rows below list the key fields inside each reference._
+_Derived from the OpenAPI metadata: identity fields plus required references. Reference rows below list the
+key fields inside each reference._
 
 ## Fields
 

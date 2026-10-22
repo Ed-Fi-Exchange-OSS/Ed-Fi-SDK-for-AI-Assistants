@@ -2,13 +2,16 @@
 
 `/ed-fi/staffEducationOrganizationEmploymentAssociations`
 
-This association indicates the education organization an employee, contractor, volunteer, or other service provider is formally associated with typically indicated by which organization the staff member has a services contract with or receives compensation from.
+This association indicates the education organization an employee, contractor, volunteer, or other service
+provider is formally associated with typically indicated by which organization the staff member has a services
+contract with or receives compensation from.
 
 ## Natural key
 
 `employmentStatusDescriptor`, `hireDate`, `educationOrganizationReference`, `staffReference`
 
-_Derived from the OpenAPI metadata: identity fields plus required references. Reference rows below list the key fields inside each reference._
+_Derived from the OpenAPI metadata: identity fields plus required references. Reference rows below list the
+key fields inside each reference._
 
 ## Fields
 

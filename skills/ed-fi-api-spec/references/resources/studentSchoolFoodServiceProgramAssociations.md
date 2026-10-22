@@ -2,13 +2,16 @@
 
 `/ed-fi/studentSchoolFoodServiceProgramAssociations`
 
-This association represents the school food services program(s), such as the Free or Reduced Lunch program, that a student participates in or from which the student receives services. The association is a subclass of the GeneralStudentProgramAssociation specifically designed for school food service programs.
+This association represents the school food services program(s), such as the Free or Reduced Lunch program,
+that a student participates in or from which the student receives services. The association is a subclass of
+the GeneralStudentProgramAssociation specifically designed for school food service programs.
 
 ## Natural key
 
 `beginDate`, `educationOrganizationReference`, `programReference`, `studentReference`
 
-_Derived from the OpenAPI metadata: identity fields plus required references. Reference rows below list the key fields inside each reference._
+_Derived from the OpenAPI metadata: identity fields plus required references. Reference rows below list the
+key fields inside each reference._
 
 ## Fields
 

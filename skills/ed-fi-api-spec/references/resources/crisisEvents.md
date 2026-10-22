@@ -2,13 +2,15 @@
 
 `/ed-fi/crisisEvents`
 
-A natural or man-made event that causes the disruption of school-level activities and the temporary or permanent displacement of students.
+A natural or man-made event that causes the disruption of school-level activities and the temporary or
+permanent displacement of students.
 
 ## Natural key
 
 `crisisEventName`
 
-_Derived from the OpenAPI metadata: identity fields plus required references. Reference rows below list the key fields inside each reference._
+_Derived from the OpenAPI metadata: identity fields plus required references. Reference rows below list the
+key fields inside each reference._
 
 ## Fields
 
