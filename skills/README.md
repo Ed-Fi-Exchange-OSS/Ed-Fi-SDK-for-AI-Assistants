@@ -4,7 +4,11 @@
 Each skill is a folder with a `SKILL.md` entry point. The assistant reads the short `SKILL.md` first and
 opens the files under `references/` only when the task needs them.
 
-_No skills have been published yet._ Skills are added through pull requests; see the
+| Skill | Use it for |
+|---|---|
+| [ed-fi-api-client](ed-fi-api-client/SKILL.md) | Building, reviewing or debugging a client of an Ed-Fi API: authentication, push and pull integrations, error diagnosis |
+
+Skills are added through pull requests; see the
 [authoring guide](../docs/skills/authoring-guide.md).
 
 ## Installing a skill
