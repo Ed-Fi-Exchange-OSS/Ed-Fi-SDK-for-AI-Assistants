@@ -10,7 +10,8 @@ Stephen moved the original MCP server to `sdk-as-mcp/` (tag `original-sdk-as-mcp
 
 ## Sources
 
-- MCP prompts in `sdk-as-mcp/src/index.ts`: `getAuthenticationGuideContent()`, `getQuickStartGuideContent()` and
+- MCP prompts in `sdk-as-mcp/src/index.ts`: `getAuthenticationGuideContent()`, `getQuickStartGuideContent()`
+  and
   `getDataValidationGuideContent()`. `getHelpAndUsageGuideContent()` is about the MCP server and was not used.
 - Ed-Fi API Client Developers' Guide (to be cross-checked during normative review).
 
@@ -55,61 +56,85 @@ failure logging.
 
 Corrections made while resolving them:
 
-- Sync algorithm now processes **key changes first**, then changes, then deletes (reverse order), per the guide.
+- Sync algorithm now processes **key changes first**, then changes, then deletes (reverse order), per the
+  guide.
 - ETag / `If-Match` / 412 described as depending on the host enabling the ETag feature.
 - 403 section rewritten around the documented `type` sub-types.
 
 ## Token request: Basic header preferred (Stephen, Slack 2026-10-20)
 
-- **Basic `Authorization` header is the only method the skill encourages.** Credentials in the body are accepted by
-  Ed-Fi API 8 (recently added for ODS/API compatibility, allowed by OAuth 2.0), but bodies are more likely to be logged.
-  Build guidance: Basic only. Review guidance: body is allowed, but flag it as a recommended change. This is the first
-  concrete case of "build" and "review" applying the same rule differently (see the rules + two interfaces design).
-- **RFC 6749 §2.3.1:** form-urlencode `client_id` and `client_secret` before joining with `:` and base64-encoding.
-  Covered for build (authentication.md), review (same section) and debugging (errors.md 401, auth troubleshooting).
+- **Basic `Authorization` header is the only method the skill encourages.** Credentials in the body are
+  accepted by
+  Ed-Fi API 8 (recently added for ODS/API compatibility, allowed by OAuth 2.0), but bodies are more likely to
+  be logged.
+  Build guidance: Basic only. Review guidance: body is allowed, but flag it as a recommended change. This is
+  the first
+  concrete case of "build" and "review" applying the same rule differently (see the rules + two interfaces
+  design).
+- **RFC 6749 §2.3.1:** form-urlencode `client_id` and `client_secret` before joining with `:` and
+  base64-encoding.
+  Covered for build (authentication.md), review (same section) and debugging (errors.md 401, auth
+  troubleshooting).
 - **Do Ed-Fi secrets contain special characters?** Checked in source code:
-  - ODS/API (`Ed-Fi-ODS`, `EdFi.Admin.DataAccess/Models/ApiClient.cs`, main and v7.3): generated secrets are 24 characters
-    of base64 with `+` and `/` rejected and no padding, so **alphanumeric only**. Encoding is a no-op for generated
+  - ODS/API (`Ed-Fi-ODS`, `EdFi.Admin.DataAccess/Models/ApiClient.cs`, main and v7.3): generated secrets are
+    24 characters
+    of base64 with `+` and `/` rejected and no padding, so **alphanumeric only**. Encoding is a no-op for
+    generated
     secrets, but secrets can also be set manually in `EdFi_Admin`.
-  - Ed-Fi API 8 / DMS Configuration Service (`ClientSecretValidation`): secrets **must** include a special character
-    from `!@#$%^&*()-_=+[]{}:;,.?`. Generated secrets exclude `+ % = & space` ("transport unsafe") but can include
+  - Ed-Fi API 8 / DMS Configuration Service (`ClientSecretValidation`): secrets **must** include a special
+    character
+    from `!@#$%^&*()-_=+[]{}:;,.?`. Generated secrets exclude `+ % = & space` ("transport unsafe") but can
+    include
     `: ; , ? [ ] { } ( ) ! @ # $ ^ *`. User-supplied secrets may include all of them.
-  - Conclusion: encoding matters for Ed-Fi API 8 and for any manually set secret, so the skill always requires it.
+  - Conclusion: encoding matters for Ed-Fi API 8 and for any manually set secret, so the skill always requires
+    it.
 
 ## Coverage against the Client Developers' Guide (2026-10-19)
 
 Scope = the Client Developers' Guide (Stephen: "bundling up the Client Developers' Guide as Agent Skills").
 Sections added after comparing with its index:
 
-- **API Routes** → `SKILL.md` "How Ed-Fi URLs are built" ([source](https://docs.ed-fi.org/reference/ed-fi-api/client-developers-guide/api-routes))
-- **Date & DateTime Elements** → `push.md` §6, `pull.md` §5, rule 6 in `SKILL.md` ([source](https://docs.ed-fi.org/reference/ed-fi-api/client-developers-guide/date-datetime-elements))
-- **Using Code Generation to Create an SDK** → `references/sdk-generation.md` ([source](https://docs.ed-fi.org/reference/ed-fi-api/client-developers-guide/using-code-generation-to-create-an-sdk))
+- **API Routes** → `SKILL.md` "How Ed-Fi URLs are built"
+  ([source](https://docs.ed-fi.org/reference/ed-fi-api/client-developers-guide/api-routes))
+- **Date & DateTime Elements** → `push.md` §6, `pull.md` §5, rule 6 in `SKILL.md`
+  ([source](https://docs.ed-fi.org/reference/ed-fi-api/client-developers-guide/date-datetime-elements))
+- **Using Code Generation to Create an SDK** → `references/sdk-generation.md`
+  ([source](https://docs.ed-fi.org/reference/ed-fi-api/client-developers-guide/using-code-generation-to-create-an-sdk))
 
-Not covered on purpose: Profiles and bulk loading tools (not in the guide; the skill only covers the Profile 403 and
-points to bulk tools), and "Using the Sandbox Administration Portal" (sandbox-specific). "Basics" and "Using the
+Not covered on purpose: Profiles and bulk loading tools (not in the guide; the skill only covers the Profile
+403 and
+points to bulk tools), and "Using the Sandbox Administration Portal" (sandbox-specific). "Basics" and "Using
+the
 Online Documentation" are covered only partially; review them before the release.
 
 ## Confirmed on Ed-Fi API 8 (pilot test kit, 2026-10-22)
 
-Checked against the Ed-Fi API v8 pilot test kit (Discovery reports `8.1.0-beta1`, Data Standard 5.2); details in
+Checked against the Ed-Fi API v8 pilot test kit (Discovery reports `8.1.0-beta1`, Data Standard 5.2); details
+in
 [api-client-test-results.md](api-client-test-results.md#ed-fi-api-8-verification--pilot-test-kit--2026-10-22).
 
-1. **Cursor paging:** supported, but every request needs a `pageToken`; `pageSize` alone gets `400`. `/partitions`
+1. **Cursor paging:** supported, but every request needs a `pageToken`; `pageSize` alone gets `400`.
+   `/partitions`
    works. Fixed in `pull.md` and PULL-2.
 2. **Cascading key updates:** work (StudentSchoolAssociation `entryDate`); Student returns `400`
    `key-change-not-supported`. Fixed in `push.md` and `SKILL.md`.
-3. **`/deletes` and `/keyChanges`:** same fields as ODS/API 7.x; offset paging only; need `ReadChanges`. Added to `pull.md`.
-4. **Discovery `urls`:** `dependencies`, `openApiMetadata`, `oauth`, `tokenInfo`, `dataManagementApi`, `changeQueries`,
+3. **`/deletes` and `/keyChanges`:** same fields as ODS/API 7.x; offset paging only; need `ReadChanges`. Added
+   to `pull.md`.
+4. **Discovery `urls`:** `dependencies`, `openApiMetadata`, `oauth`, `tokenInfo`, `dataManagementApi`,
+   `changeQueries`,
    `xsdMetadata`; no `v3` segment. Confirmed.
-5. **Error `type` values:** 409 `unresolved-reference` / `dependent-item-exists`, 403 `access-denied:action` and
+5. **Error `type` values:** 409 `unresolved-reference` / `dependent-item-exists`, 403 `access-denied:action`
+   and
    relationship `security:authorization`, 412 `optimistic-lock-failed` match. Confirmed.
-6. **Not verified:** tenant and context segments (the kit runs single-tenant) and the `?sdk=true` metadata listing.
+6. **Not verified:** tenant and context segments (the kit runs single-tenant) and the `?sdk=true` metadata
+   listing.
 7. **Found during the check:** body credentials are rejected (`400` "Malformed Authorization header"), and
    wrong-case or unknown properties are silently ignored rather than rejected. Both added to `SKILL.md`,
    `authentication.md` and AUTH-1.
 
 > Note: Stephen said client guidance is "the same for ODS/API 7 and Ed-Fi API 8"; the v8 release notes say
-> "client migration is required". The resource behavior is the same, but URLs, casing and token endpoint differ.
+> "client migration is required". The resource behavior is the same, but URLs, casing and token endpoint
+differ.
 > Worth mentioning in the PR description.
 
 ## Open questions
@@ -121,7 +146,8 @@ Checked against the Ed-Fi API v8 pilot test kit (Discovery reports `8.1.0-beta1`
   per-language examples (US005/US010 in `sdk-as-mcp/docs/requirements/user-stories.md`).
 - **Where skills live:** `skills/` at the repo root for now. Does the Alliance want a different layout or a
   plugin/marketplace manifest?
-- **Domain overlay:** performance evaluations (IIA) as the first domain-specific add-on, after the generic skill.
+- **Domain overlay:** performance evaluations (IIA) as the first domain-specific add-on, after the generic
+  skill.
 
 ## Testing plan
 
