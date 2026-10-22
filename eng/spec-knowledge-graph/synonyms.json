@@ -1,0 +1,14 @@
+{
+  "_comment": "Common developer terms that don't appear in the Ed-Fi resource names or descriptions. Each term maps to the resources (or descriptor types) it should lead to. Add an entry when a lookup test shows a miss. When Data Standard 6 arrives, add address -> the Directory resources.",
+  "synonyms": {
+    "enrollment": ["studentSchoolAssociations"],
+    "parent": ["contacts", "studentContactAssociations"],
+    "guardian": ["contacts", "studentContactAssociations"],
+    "teacher": ["staffs", "staffSectionAssociations"],
+    "class": ["sections"],
+    "district": ["localEducationAgencies"],
+    "state agency": ["stateEducationAgencies"],
+    "test results": ["studentAssessments"],
+    "test scores": ["studentAssessments"]
+  }
+}
