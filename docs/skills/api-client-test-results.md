@@ -71,6 +71,31 @@ kept the descriptor mapping in code.
 Observation: in T5, one read failed because Copilot built a path with a stray space (`\ .github\`); it
 recovered from the files it had already read. This is a harness quirk, not a skill issue.
 
+## Run 3 · GitHub Copilot, remaining prompts · 2026-10-22
+
+Same harness as Run 2, with the skill updated to include the API 8 and review fixes. With skill only. With
+Run 2, all ten prompts have now run in Copilot: **10/10 pass**.
+
+| Test | Topic | Result | Notes |
+|---|---|---|---|
+| T1 | Push script | ✅ Pass | Wrote a loader: order from `dependencies`, URLs from Discovery (trailing slash added), urlencoded Basic header, bounded token renewal margin, retries on 429/5xx with `Retry-After`, `correlationId` logged. Non-key gap: expects full descriptor URIs in the CSV instead of a mapping in configuration |
+| T2 | Updating a record | ✅ Pass | GET by `studentUniqueId` for the `id`, then PUT with the full record and `If-Match`; no delete and repost |
+| T4 | Diagnosing a 409 | ✅ Pass | Missing referenced student; load it first or fix the reference; don't retry unchanged |
+| T6 | Incremental sync | ✅ Pass | Both bounds, `/keyChanges` and `/deletes`, offset paging for those two, checkpoint saved only after success, purge check |
+| T7 | Large extract | ✅ Pass | `/partitions` and cursor paging with `Next-Page-Token`, max page size 500, no `limit`/`offset`/`totalCount` mixing |
+| T9 | Descriptors | ✅ Pass | Full descriptor URI, values read from the target API, mapping in configuration |
+| T10 | Review: documented exception | ✅ Pass | PUSH-2 as a suggestion; cascading key updates on `sections`; ambiguous `old_id` under *Not checked* (the `review.md` fix from Run 1) |
+
+Observations:
+
+- **Agent mode acts instead of answering.** In T2 ("update the last name… show me the HTTP requests") Copilot
+  first asked for the API URL and credentials so it could run the update. Told not to run anything, it wrote
+  the requests. In T1 it wrote the script to the workspace and ran a syntax check. This is harness behavior,
+  not a skill issue; prompts for answer-only tests should say "don't run anything".
+- **Workspace files were visible.** The answers were saved inside the test workspace, so in T1, T2 and T6
+  Copilot also read other answer files and the T1 script. They hold Copilot's own answers, not the expected
+  outcomes, so the results stand; future runs should keep results outside the workspace.
+
 ## Ed-Fi API 8 verification · pilot test kit · 2026-10-22
 
 - **Environment:** [Ed-Fi API v8 pilot test kit](https://github.com/Ed-Fi-Exchange-OSS/Ed-Fi-API-v8-pilot-testing-kit),
@@ -92,10 +117,30 @@ recovered from the files it had already read. This is a harness quirk, not a ski
 | ETag / stale `If-Match` | Always on; `412` `optimistic-lock-failed` | Noted in `push.md` and `errors.md` |
 | Discovery, `limit` max 500, change queries, 409 / 403 / 400 types | As described in the skill | None |
 
-Not verified: tenant and context route segments (the kit is single-tenant) and generated client code end to end.
+Not verified: tenant and context route segments (the kit is single-tenant).
+
+### Generated client, end to end
+
+Claude Code (headless, fresh session, skill installed, no shell or web access) wrote a Python CLI from one
+prompt: `load` reads students and enrollments from two CSV files (grade levels as codes such as `09`) and
+`sync` copies student school associations to a local file incrementally, including deletions. The code ran
+**unchanged** against the pilot kit, with the SIS-vendor credential for `load` and the data-warehouse
+credential for `sync`:
+
+| Scenario | Result |
+|---|---|
+| `load`, first run | ✅ 3 students and 3 enrollments created (`201`) |
+| `load` again with the same files | ✅ No duplicates: 3 + 3 replaced (`200`) |
+| `sync`, first run | ✅ Full copy (963 enrollments), change version saved |
+| `sync` with nothing new | ✅ Skipped the run (no `minChangeVersion > maxChangeVersion` request) |
+| Update, key change and delete in the API, then `sync` | ✅ "2 changed, 1 deleted, 1 key change"; the local copy matched the API |
+
+The code followed the rules the skill teaches, including today's API 8 and review fixes: urlencoded Basic
+header, bounded token renewal margin, URLs from Discovery with the trailing slash added, grade codes mapped in
+a configuration file, first cursor token from `/partitions`, offset paging for `/deletes` and `/keyChanges`,
+TLS validation off only through an explicit setting, and `Retry-After` in both formats.
 
 ## Not yet done
 
-- **GitHub Copilot:** the remaining seven prompts, and a run without the skill for comparison.
+- **GitHub Copilot:** a run without the skill for comparison.
 - **Codex** (optional, NFR-PORT-1).
-- Running assistant-generated client code end to end against the pilot test kit.
