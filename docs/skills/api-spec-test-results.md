@@ -66,7 +66,26 @@ on every turn. The skill adds the cost of reading `SKILL.md`, a search of the in
 alternative, loading the Resources specification itself (about 2.7 million tokens), does not fit in the
 context window.
 
+## Run 2 · GitHub Copilot smoke test · 2026-10-22
+
+- **Harness:** GitHub Copilot in VS Code, agent mode, `chat.useAgentSkills` enabled, skill installed in the
+  project's `.github/skills/`. The model was not recorded.
+- **Scope:** a smoke test with the three prompts that fail without the skill in Claude Code (T3, T6, T8).
+  With skill only.
+- **Skill invocation:** Copilot loaded the skill automatically in all three prompts ("Read skill
+  `ed-fi-api-spec`") and opened the matching resource files.
+
+| Test | Topic | Result | Notes |
+|---|---|---|---|
+| T3 | Synonym: parents and guardians | ✅ Pass | Read `contacts.md` and `studentContactAssociations.md`; "There isn't a separate parent resource"; correct keys |
+| T6 | Keys inside a reference | ✅ Pass | Read `grades.md` and `studentSectionAssociations.md`; all seven reference fields and `gradingPeriodName` |
+| T8 | Key changes | ✅ Pass | Read `sections.md`; key change with PUT and cascading key updates; pointed to `/keyChanges` |
+
+Observation: Copilot searched the index before opening a file in each prompt, so it did not hit the
+singular-file-name issue seen in Claude Code's first run.
+
 ## Not yet done
 
-- **GitHub Copilot** (FR-REL-1): the same prompts, with the skill installed in `.github/skills/` or
-  `.agents/skills/`.
+- **GitHub Copilot:** the remaining seven prompts (optional; the smoke test covers the prompts that fail
+  without the skill).
+- **Codex** (optional, NFR-PORT-1).
