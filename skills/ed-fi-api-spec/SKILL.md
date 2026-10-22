@@ -15,7 +15,9 @@ usually needs 8–10 thousand.
    line has the resource name, its collection path and the first sentence of its description, plus common
    synonyms ("Also: …"). If the first term finds nothing, try other wordings: singular and plural, the
    business term ("enrolled", "enrollment", "registration") and the Ed-Fi term ("association").
-2. **Open only the resource files you need**, under `references/resources/<name>.md`. Each file has:
+2. **Open only the resource files you need**, under `references/resources/<name>.md`, where `<name>` is the
+   plural collection name from the index (`students.md`, `grades.md`, `studentSchoolAssociations.md`). Each
+   file has:
    - the **natural key** (identity fields plus required references), and whether it can change with PUT;
    - every **field**, marked `key` or `yes` (required), with its type, the key fields inside each
      `...Reference`, and which fields are descriptors;
