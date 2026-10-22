@@ -1,0 +1,233 @@
+# Ed-Fi descriptor types (ODS/API 7.3, Data Standard 5.2)
+
+Every descriptor resource has the same shape: `namespace`, `codeValue`, `shortDescription`, `description` and optional effective dates. Values are data, not part of the spec: read them from the target API, e.g. `GET {dataManagementApi}ed-fi/gradeLevelDescriptors`.
+
+- `absenceEventCategoryDescriptors`: This descriptor describes the type of absence
+- `academicHonorCategoryDescriptors`: A designation of the type of academic distinctions earned by or awarded to the student.
+- `academicSubjectDescriptors`: This descriptor holds the description of the content or subject area (e.g., arts, mathematics, reading, stenography, or a foreign language).
+- `accommodationDescriptors`: This descriptor defines variations used in how an assessment is presented or taken.
+- `accountTypeDescriptors`: The type of account used in accounting such as revenue, expenditure, or balance sheet.
+- `accreditationStatusDescriptors`: Accreditation Status for a Teacher Preparation Provider.
+- `achievementCategoryDescriptors`: This descriptor defines the category of achievement attributed to the learner.
+- `additionalCreditTypeDescriptors`: The type of additional credits or units of value awarded for the completion of a course.
+- `addressTypeDescriptors`: The type of address listed for an individual or organization.
+- `administrationEnvironmentDescriptors`: The environment in which the test was administered.
+- `administrativeFundingControlDescriptors`: This descriptor holds the type of education institution as classified by its funding source (e.g., public or private).
+- `aidTypeDescriptors`: This descriptor defines the classification of financial aid awarded to a person for the academic term/year.
+- `ancestryEthnicOriginDescriptors`: The original peoples or cultures with which the individual identifies.
+- `assessmentCategoryDescriptors`: This descriptor holds the category of an assessment based on format and content.
+- `assessmentIdentificationSystemDescriptors`: This descriptor holds a coding scheme that is used for identification and record-keeping purposes by schools, social services or other agen…
+- `assessmentItemCategoryDescriptors`: Category or type of the assessment item.
+- `assessmentItemResultDescriptors`: The analyzed result of a student's response to an assessment item..
+- `assessmentPeriodDescriptors`: This descriptor holds the period of time window in which an assessment is supposed to be administered.
+- `assessmentReportingMethodDescriptors`: This descriptor defines the method that the instructor of the class uses to report the performance and achievement of all students.
+- `assignmentLateStatusDescriptors`: Status of whether the assignment was submitted after the due date and/or marked as late.
+- `attemptStatusDescriptors`: This descriptor describes a student's completion status for a section.
+- `attendanceEventCategoryDescriptors`: This descriptor holds the category of the attendance event (e.g., tardy).
+- `barrierToInternetAccessInResidenceDescriptors`: An indication of the barrier to having internet access in the student s primary place of residence.
+- `behaviorDescriptors`: This descriptor holds the categories of behavior describing a discipline incident.
+- `busRouteDescriptors`: Identifies the specific route taken by a bus for student transportation.
+- `calendarEventDescriptors`: This descriptor holds the types of scheduled or unscheduled event for the day (e.g., Instructional day, Teacher only day, Holiday, Make-up…
+- `calendarTypeDescriptors`: This descriptor defines the calendar types.
+- `careerPathwayDescriptors`: The career cluster or pathway representing the career path of the Vocational/Career Tech concentrator.
+- `certificationRouteDescriptors`: The process, program, or pathway used to obtain a certification.
+- `charterApprovalAgencyTypeDescriptors`: The type of agency that approved the establishment or continuation of a charter school.
+- `charterStatusDescriptors`: The category of charter school.
+- `citizenshipStatusDescriptors`: An indicator of whether or not the person is a U.S.
+- `classroomPositionDescriptors`: This descriptor defines the type of position the staff member holds in a specific class/section.
+- `cohortScopeDescriptors`: The scope of cohort (e.g., school, district, classroom).
+- `cohortTypeDescriptors`: The type of the cohort (e.g., academic intervention, classroom breakout).
+- `cohortYearTypeDescriptors`: The enumeration items for the set of cohort years.
+- `competencyLevelDescriptors`: This descriptor defines various levels for assessed competencies.
+- `contactTypeDescriptors`: This descriptor defines the set of contact types.
+- `contentClassDescriptors`: The predominate type or kind characterizing the learning resource.
+- `continuationOfServicesReasonDescriptors`: In the Migrant Education program, a provision allows continuation of services after a child is no longer considered migratory for certain r…
+- `costRateDescriptors`: The rate by which a cost applies (e.g.
+- `coteachingStyleObservedDescriptors`: A type of co-teaching observed as part of the performance evaluation.
+- `countryDescriptors`: This descriptor defines the name and code of the country.
+- `courseAttemptResultDescriptors`: The result from the student's attempt to take the course.
+- `courseDefinedByDescriptors`: Specifies whether the course was defined by the state education agency, local education agency, school, or national organization.
+- `courseGPAApplicabilityDescriptors`: An indicator of whether or not this course being described is included in the computation of the student's Grade Point Average, and if so,…
+- `courseIdentificationSystemDescriptors`: This descriptor defines a standard code that identifies the organization of subject matter and related learning experiences provided for th…
+- `courseLevelCharacteristicDescriptors`: The item for indication of the nature and difficulty of instruction: Remedial, Basic, Honors, Ap, IB, Dual Credit, CTE.
+- `courseRepeatCodeDescriptors`: Indicates that an academic course has been repeated by a student and how that repeat is to be computed in the student's academic grade aver…
+- `credentialFieldDescriptors`: This descriptor defines the fields of certification that the state education agency offers to teachers.
+- `credentialStatusDescriptors`: The current status of the credential.
+- `credentialTypeDescriptors`: An indication of the category of credential an individual holds.
+- `creditCategoryDescriptors`: A categorization for the course transcript credits.
+- `creditTypeDescriptors`: The type of credits or units of value awarded for the completion of a course.
+- `crisisTypeDescriptors`: The type or category of crisis.
+- `cteProgramServiceDescriptors`: This descriptor defines the services provided by an education organization to populations of students associated with a CTE program.
+- `curriculumUsedDescriptors`: The type of curriculum used in an early learning classroom or group.
+- `deliveryMethodDescriptors`: The way in which an intervention was implemented: individual, small group, whole class, or whole school.
+- `diagnosisDescriptors`: This descriptor defines diagnoses that interventions are intended to target.
+- `diplomaLevelDescriptors`: The level of diploma/credential that is awarded to a student in recognition of his/her completion of the curricular requirements.
+- `diplomaTypeDescriptors`: The type of diploma/credential that is awarded to a student in recognition of his/her completion of the curricular requirements.
+- `disabilityDescriptors`: This descriptor defines a student's impairment.
+- `disabilityDesignationDescriptors`: The type of disability designation (e.g., IDEA, Section 504).
+- `disabilityDeterminationSourceTypeDescriptors`: The source that provided the disability determination.
+- `disciplineActionLengthDifferenceReasonDescriptors`: Indicates the reason for the difference, if any, between the official and actual lengths of a student's disciplinary assignment.
+- `disciplineDescriptors`: This descriptor defines the type of action or removal from the classroom used to discipline the student involved as a perpetrator in a disc…
+- `disciplineIncidentParticipationCodeDescriptors`: The role or type of participation of a person in a discipline incident; for example: Victim, Perpetrator, Witness, Reporter.
+- `displacedStudentStatusDescriptors`: Indicates whether a student has been displaced as a result of a crisis event.
+- `dualCreditInstitutionDescriptors`: Custom descriptor of college institutions or categories of institutions participating in the dual credit program.
+- `dualCreditTypeDescriptors`: Indicates the type of the dual credit program.
+- `educationOrganizationAssociationTypeDescriptors`: The type of education organization association being represented.
+- `educationOrganizationCategoryDescriptors`: The classification of the education agency within the geographic boundaries of a state according to the level of administrative and operati…
+- `educationOrganizationIdentificationSystemDescriptors`: This descriptor defines the originating record system and code that is used for record-keeping purposes by education organizations.
+- `educationPlanDescriptors`: The type of education plan(s) the student is following, if appropriate.
+- `educationalEnvironmentDescriptors`: The setting in which a child receives education and related services.
+- `educatorRoleDescriptors`: The role authorized by the Credential or Certification (e.g., Principal, Reading Specialist), typically associated with service and adminis…
+- `electronicMailTypeDescriptors`: The type of email listed for an individual or organization.
+- `eligibilityDelayReasonDescriptors`: The reason why the eligibility determination was completed beyond the required timeframe.
+- `eligibilityEvaluationTypeDescriptors`: Indicates if this is an initial evaluation or a reevaluation.
+- `employmentStatusDescriptors`: This descriptor defines the type of employment or contract.
+- `englishLanguageExamDescriptors`: Indicates that a person passed, failed, or did not take an English Language assessment.
+- `enrollmentTypeDescriptors`: The type of enrollment reflected by the StudentSchoolAssociation.
+- `entryGradeLevelReasonDescriptors`: The primary reason as to why a staff member determined that a student should be promoted or not (or be demoted) at the end of a given schoo…
+- `entryTypeDescriptors`: This descriptor defines the process by which a student enters a school during a given academic session.
+- `eppProgramPathwayDescriptors`: The description of the program pathway, for example: Residency, Internship, Traditional
+- `evaluationDelayReasonDescriptors`: Refers to the justification as to why the evaluation report was completed beyond the state-established timeframe.
+- `evaluationElementRatingLevelDescriptors`: Rating levels for Evaluation Elements.
+- `evaluationPeriodDescriptors`: The period for the evaluation.
+- `evaluationRatingLevelDescriptors`: Rating levels for Evaluations.
+- `evaluationRatingStatusDescriptors`: Represents the status of a Evaluation Rating.
+- `evaluationTypeDescriptors`: The type of the evaluation (e.g., observation, principal, peer, student survey, student growth).
+- `eventCircumstanceDescriptors`: An unusual event occurred during the administration of the assessment.
+- `exitWithdrawTypeDescriptors`: This descriptor defines the circumstances under which the student exited from membership in an educational institution.
+- `financialCollectionDescriptors`: The accounting period or grouping for which financial information is collected.
+- `genderDescriptors`: A person's gender.
+- `gradeLevelDescriptors`: This descriptor defines the set of grade levels.
+- `gradePointAverageTypeDescriptors`: The system used for calculating the grade point average for an individual.
+- `gradeTypeDescriptors`: The type of grade in a report card or transcript (e.g., Final, Exam, Grading Period).
+- `gradebookEntryTypeDescriptors`: The type of the gradebook entry; for example, homework, assignment, quiz, unit test, oral presentation, etc.
+- `gradingPeriodDescriptors`: This descriptor defines the state's name of the period for which grades are reported.
+- `graduationPlanTypeDescriptors`: This descriptor defines the set of graduation plan types.
+- `gunFreeSchoolsActReportingStatusDescriptors`: An indication of whether the school or local education agency (LEA) submitted a Gun-Free Schools Act (GFSA) of 1994 report to the state, as…
+- `homelessPrimaryNighttimeResidenceDescriptors`: The primary nighttime residence of the student at the time the student is identified as homeless.
+- `homelessProgramServiceDescriptors`: This descriptor defines the services provided by an education organization to populations of students associated with a homeless program.
+- `ideaPartDescriptors`: Indicates if the evaluation is done under Part B IDEA or Part C IDEA.
+- `identificationDocumentUseDescriptors`: Identifies the type of use given to an identification document.
+- `immunizationTypeDescriptors`: An indication of the type of immunization that an individual has satisfactorily received.
+- `incidentLocationDescriptors`: Identifies where the incident occurred and whether or not it occurred on school property.
+- `indicatorDescriptors`: The name or code for the indicator or metric.
+- `indicatorGroupDescriptors`: The name for a group of indicators.
+- `indicatorLevelDescriptors`: The value of the indicator or metric, as a value from a controlled vocabulary.
+- `institutionTelephoneNumberTypeDescriptors`: The type of communication number listed for an organization.
+- `interactivityStyleDescriptors`: The predominate mode of learning supported by the learning resource.
+- `internetAccessDescriptors`: The type of Internet access available.
+- `internetAccessTypeInResidenceDescriptors`: The primary type of internet service used in the student s primary place of residence.
+- `internetPerformanceInResidenceDescriptors`: An indication of whether the student can complete the full range of learning activities, including video streaming and assignment upload, w…
+- `interventionClassDescriptors`: The way in which an intervention is used: curriculum, supplement, or practice.
+- `interventionEffectivenessRatingDescriptors`: An intervention demonstrates effectiveness if the research has shown that the program caused an improvement in outcomes.
+- `languageDescriptors`: This descriptor defines the language(s) that are spoken or written.
+- `languageInstructionProgramServiceDescriptors`: This descriptor defines the services provided by an education organization to populations of students associated with a language instructio…
+- `languageUseDescriptors`: The category denoting how a language is used.
+- `learningStandardCategoryDescriptors`: An additional classification of the type of a specific learning standard.
+- `learningStandardEquivalenceStrengthDescriptors`: A measure that indicates the strength or quality of the equivalence relationship.
+- `learningStandardScopeDescriptors`: Signals the scope of usage the standard.
+- `levelOfEducationDescriptors`: This descriptor defines the different levels of education achievable.
+- `licenseStatusDescriptors`: This descriptor defines the license statuses.
+- `licenseTypeDescriptors`: This descriptor defines the type of a license.
+- `limitedEnglishProficiencyDescriptors`: This descriptor defines the indications that the student has been identified as limited English proficient by the Language Proficiency Asse…
+- `localEducationAgencyCategoryDescriptors`: The category of local education agency/district.
+- `localeDescriptors`: A general geographic indicator that categorizes U.S.
+- `magnetSpecialProgramEmphasisSchoolDescriptors`: A school that has been designed to attract students of different racial/ethnic backgrounds for the purpose of reducing, preventing or elimi…
+- `mediumOfInstructionDescriptors`: The media through which teachers provide instruction to students and students and teachers communicate about instructional matters.
+- `methodCreditEarnedDescriptors`: The method the credits were earned, for example: Classroom, Examination, Transfer.
+- `migrantEducationProgramServiceDescriptors`: This descriptor defines the services provided by an education organization to populations of students associated with a migrant education p…
+- `modelEntityDescriptors`: The class of a domain entity in the Ed-Fi data model.
+- `monitoredDescriptors`: This descriptor defines monitorization statuses for students who are no longer receiving language instruction program services.
+- `neglectedOrDelinquentProgramDescriptors`: This descriptor defines the type of program under ESEA Title I, Part D, Subpart 1 (state programs) or Subpart 2 (LEA).
+- `neglectedOrDelinquentProgramServiceDescriptors`: This descriptor defines the services provided by an education organization to populations of students associated with a neglected or delinq…
+- `networkPurposeDescriptors`: The purpose(s) of the network, e.g.
+- `nonMedicalImmunizationExemptionDescriptors`: The type of nonmedical exemption from vaccination claimed by the student's parent or guardian.
+- `objectiveRatingLevelDescriptors`: Rating levels for Evaluation Objectives.
+- `operationalStatusDescriptors`: The current operational status of the education organization (e.g., active, inactive).
+- `otherNameTypeDescriptors`: The types of alternate names for a person.
+- `participationDescriptors`: This descriptor defines participation in a yearly English language assessment.
+- `participationStatusDescriptors`: The student's program participation status.
+- `performanceBaseConversionDescriptors`: Defines standard levels of competency or performance that can be used for dashboard visualizations: advanced, proficient, basic, and below…
+- `performanceEvaluationRatingLevelDescriptors`: Rating levels for Performance Evaluations.
+- `performanceEvaluationTypeDescriptors`: The type of performance evaluation conducted (e.g., walkthrough, summative).
+- `performanceLevelDescriptors`: This descriptor defines various levels or thresholds for performance on the assessment.
+- `personalInformationVerificationDescriptors`: The evidence presented to verify one's personal identity; for example: driver's license, passport, birth certificate, etc.
+- `platformTypeDescriptors`: The platforms with which an assessment may be delivered.
+- `populationServedDescriptors`: The type of students the Section is offered and tailored to.
+- `postSecondaryEventCategoryDescriptors`: A code describing the type of post-secondary event (e.g., college application or acceptance).
+- `postSecondaryInstitutionLevelDescriptors`: A classification of a postsecondary institution's highest level of offering.
+- `postingResultDescriptors`: Indication of whether the position was filled or retired without filling.
+- `primaryLearningDeviceAccessDescriptors`: An indication of whether the primary learning device is shared or not shared with another individual.
+- `primaryLearningDeviceAwayFromSchoolDescriptors`: The type of device the student uses most often to complete learning activities away from school.
+- `primaryLearningDeviceProviderDescriptors`: The provider of the primary learning device.
+- `proficiencyDescriptors`: This descriptor defines proficiency levels for a yearly English language assessment.
+- `programAssignmentDescriptors`: This descriptor defines the name of the education program for which a teacher is assigned to a school.
+- `programCharacteristicDescriptors`: This descriptor defines important characteristics of the Program, such as categories or particular indications.
+- `programEvaluationPeriodDescriptors`: The period for the evaluation.
+- `programEvaluationTypeDescriptors`: The type of the evaluation.
+- `programSponsorDescriptors`: Ultimate and intermediate providers of funds for a particular educational or service program or activity or for an individual's participati…
+- `programTypeDescriptors`: The formal name of the program of instruction, training, services, or benefits available through federal, state, or local agencies.
+- `progressDescriptors`: This descriptor defines yearly progress or growth from last year's assessment.
+- `progressLevelDescriptors`: This descriptor defines progress measured from pre- to post-test.
+- `providerCategoryDescriptors`: This descriptor holds the category of the provider.
+- `providerProfitabilityDescriptors`: This descriptor indicates the profitability status of the provider.
+- `providerStatusDescriptors`: This descriptor defines the status of the provider.
+- `publicationStatusDescriptors`: The publication status of the document (i.e., Adopted, Draft, Published, Deprecated, Unknown).
+- `questionFormDescriptors`: The form or type of question.
+- `raceDescriptors`: The enumeration items defining the racial categories which most clearly reflects the individual's recognition of his or her community or wi…
+- `ratingLevelDescriptors`: The descriptive level(s) of ratings (cut scores) for evaluation.
+- `reasonExitedDescriptors`: This descriptor defines the reason a student exited a program.
+- `reasonNotTestedDescriptors`: The primary reason student is not tested.
+- `recognitionTypeDescriptors`: The nature of recognition given to the student for accomplishments in a co-curricular, or extra-curricular activity.
+- `relationDescriptors`: The nature of an individual's relationship to a student.
+- `repeatIdentifierDescriptors`: An indication as to whether a student has previously taken a given course.
+- `reporterDescriptionDescriptors`: This descriptor defines the type of individual who reported an incident.
+- `reportingTagDescriptors`: A descriptor used at the dimension and/or chart of account levels to demote specific state needs for reporting.
+- `residencyStatusDescriptors`: This descriptor defines indications of the location of a person's legal residence relative to (within or outside of) the boundaries of the…
+- `responseIndicatorDescriptors`: Indicator of the response.
+- `responsibilityDescriptors`: This descriptor defines types of responsibility an education organization may have for a student (e.g., accountability, attendance, funding…
+- `restraintEventReasonDescriptors`: The items of categorization of the circumstances or reason for the restraint.
+- `resultDatatypeTypeDescriptors`: The results can be expressed as a number, percentile, range, level, etc.
+- `retestIndicatorDescriptors`: Indicator if the test was retaken.
+- `rubricRatingLevelDescriptors`: Rating levels for Rubric Dimensions.
+- `schoolCategoryDescriptors`: The category of school.
+- `schoolChoiceBasisDescriptors`: The legal basis for the school choice enrollment according to local, state or federal policy or regulation.
+- `schoolChoiceImplementStatusDescriptors`: An indication of whether the LEA was able to implement the provisions for public school choice under Title I, Part A, Section 1116 of ESEA,…
+- `schoolFoodServiceProgramServiceDescriptors`: This descriptor defines the services provided by an education organization to populations of students associated with a school food service…
+- `schoolTypeDescriptors`: The type of education institution as classified by its primary focus such as Alternative, Career and Technical Education, Regular, or Speci…
+- `section504DisabilityDescriptors`: This descriptor defines the reason(s) why student qualifies for Section 504 consideration.
+- `sectionCharacteristicDescriptors`: This descriptor defines characteristics of a Section, such as whether attendance is taken and the Section is graded.
+- `sectionTypeDescriptors`: Specifies whether the section is for attendance only, credit only, or both.
+- `separationDescriptors`: Type of employment separation; for example: Voluntary separation, Involuntary separation, Mutual agreement.
+- `separationReasonDescriptors`: This descriptor defines the reasons for terminating the employment.
+- `serviceDescriptors`: This descriptor defines the services provided by an education organization to populations of students associated with a program.
+- `sexDescriptors`: A person's birth sex.
+- `sourceSystemDescriptors`: This descriptor defines the originating record source system.
+- `specialEducationExitReasonDescriptors`: The reason why a person stops receiving special education services.
+- `specialEducationProgramServiceDescriptors`: This descriptor defines the services provided by an education organization to populations of students associated with a special education p…
+- `specialEducationSettingDescriptors`: This descriptor defines the major instructional setting (more than 50 percent of a student's special education program).
+- `staffClassificationDescriptors`: This descriptor defines an individual's title of employment, official status or rank.
+- `staffIdentificationSystemDescriptors`: This descriptor defines the originating record system and code that is used for record-keeping purposes of the staff.
+- `staffLeaveEventCategoryDescriptors`: A code describing the type of the leave event.
+- `stateAbbreviationDescriptors`: The abbreviation for the state (within the United States) or outlying area in which an address is located.
+- `studentCharacteristicDescriptors`: This descriptor captures important characteristics of the student's environment or situation.
+- `studentIdentificationSystemDescriptors`: This descriptor defines the originating record system and code that is used for record-keeping purposes of the student.
+- `submissionStatusDescriptors`: The status of the student's submission.
+- `supporterMilitaryConnectionDescriptors`: Military connection of the person/people whom the student is a dependent of.
+- `surveyCategoryDescriptors`: The descriptor holds the category or type of survey.
+- `surveyLevelDescriptors`: Provides information about the respondents of a survey and how they can be grouped together.
+- `teachingCredentialBasisDescriptors`: An indication of the pre-determined criteria for granting the teaching credential that an individual holds.
+- `teachingCredentialDescriptors`: This descriptor defines an indication of the category of a legal document giving authorization to perform teaching assignment services.
+- `technicalSkillsAssessmentDescriptors`: This descriptor defines the results of technical skills assessment aligned with industry recognized standards.
+- `telephoneNumberTypeDescriptors`: The type of communication number listed for an individual.
+- `termDescriptors`: A distinct period of time into which the academic year is divided.
+- `titleIPartAParticipantDescriptors`: An indication of the type of Title I program, if any, in which the student is participating and served.
+- `titleIPartAProgramServiceDescriptors`: This descriptor defines the services provided by an education organization to populations of students associated with a Title I Part A prog…
+- `titleIPartASchoolDesignationDescriptors`: Denotes the Title I Part A designation for the school.
+- `transportationPublicExpenseEligibilityTypeDescriptors`: The primary type of eligibility for transporting a student at public expense.
+- `transportationTypeDescriptors`: The mode or type of transportation utilized by a student to commute to and from school
+- `travelDayofWeekDescriptors`: Specifies the day(s) of the week on which student transportation occurs.
+- `travelDirectionDescriptors`: Indicates the direction of travel for the student transportation route (e.g., to school, from school).
+- `tribalAffiliationDescriptors`: An American Indian tribe with which an individual is affiliated.
+- `visaDescriptors`: An indicator of a non-U.S.
+- `weaponDescriptors`: This descriptor defines the types of weapon used during an incident.
