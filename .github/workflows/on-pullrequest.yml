@@ -22,5 +22,7 @@ jobs:
         uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
         with:
           node-version: 22
+      - name: Install markdownlint-cli2 (pinned by integrity hash in package-lock.json)
+        run: npm ci --ignore-scripts --no-audit --no-fund
       - name: Run markdownlint-cli2
-        run: npx --yes markdownlint-cli2@0.20.0
+        run: npm run lint:md

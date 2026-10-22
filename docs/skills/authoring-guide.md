@@ -69,10 +69,13 @@ reference rules by ID instead of repeating them.
   [`.markdownlint-cli2.jsonc`](../../.markdownlint-cli2.jsonc). Run it locally before opening a pull request:
 
   ```bash
-  npx markdownlint-cli2@0.20.0
+  npm ci
+  npm run lint:md
   ```
 
-- Wrap prose at 110 characters (`.editorconfig`). Tables and code blocks are exempt.
+  The linter version is pinned in `package-lock.json` (with its integrity hash); update both together.
+- Wrap prose at 110 characters (`.editorconfig`); the linter enforces it (MD013). Tables and code blocks
+  are exempt.
 - Use relative links between files of the same skill, so they work wherever the skill is installed.
 
 ## Testing
