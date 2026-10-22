@@ -1,11 +1,10 @@
-// Markdown lint configuration (markdownlint-cli2). Run locally with:
-//   npx markdownlint-cli2@0.20.0
+// Markdown lint configuration (markdownlint-cli2, pinned in package-lock.json). Run locally with:
+//   npm ci && npm run lint:md
 {
   "config": {
     "default": true,
-    // Line length is not enforced: existing docs (PRD, ADRs) use one line per paragraph. New skill files
-    // follow .editorconfig (max_line_length = 110) by convention; see docs/skills/authoring-guide.md.
-    "MD013": false,
+    // Line length matches .editorconfig (max_line_length = 110). Tables and code blocks are exempt.
+    "MD013": { "line_length": 110, "tables": false, "code_blocks": false },
     // Repeated headings are fine in different sections (e.g. "Pasos", "Notes").
     "MD024": { "siblings_only": true },
     // Skill files use YAML front matter instead of a first-level heading as the title.
