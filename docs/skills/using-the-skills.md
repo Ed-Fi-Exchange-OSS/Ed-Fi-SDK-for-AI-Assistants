@@ -6,7 +6,7 @@ The steps are the same for every skill; replace the skill name in the commands.
 | Skill | Use it for |
 |---|---|
 | `ed-fi-api-client` | Writing, reviewing or debugging code that calls an Ed-Fi API: authentication, push and pull integrations, error diagnosis |
-| `ed-fi-api-spec` | Finding the right Ed-Fi resource, its fields, natural key and endpoints without loading the OpenAPI specification |
+| `ed-fi-api-spec` | Finding the right Ed-Fi resource, its required fields, references and endpoints without loading the OpenAPI specification |
 
 The two skills work well together: install both, and `ed-fi-api-client` uses `ed-fi-api-spec` to look up
 resources and fields.
@@ -65,7 +65,7 @@ For example:
 - "Write a script that loads students and their school enrollments from CSV files into our Ed-Fi API."
 - "Review the API client code in `src/sync/` against the Ed-Fi guidance."
 - "We get a 409 when posting a studentSchoolAssociation. What's wrong?"
-- "Which Ed-Fi resource holds daily attendance, and what's its natural key?"
+- "Which Ed-Fi resource holds daily attendance, and which fields are required?"
 
 **Check that the skill was used.** Claude Code shows a **Skill** step for `ed-fi-api-client` before it
 answers. Copilot shows "Read skill `ed-fi-api-client`" at the top of its answer, followed by the reference
