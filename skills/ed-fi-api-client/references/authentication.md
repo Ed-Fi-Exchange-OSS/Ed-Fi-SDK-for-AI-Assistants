@@ -46,8 +46,7 @@ and documentation examples. **Prefer the Basic header in new code:**
 
 - Request bodies are more likely to be logged by proxies, gateways or debugging tools, which would
   expose the secret.
-- The Basic header works on every version. Ed-Fi API 8.0 and early 8.1 pre-releases (such as
-  `8.1.0-beta1`) reject body credentials with `400` "Malformed Authorization header".
+- The Basic header works on every version.
 
 When reviewing existing code, flag this pattern as a recommended change, not a defect.
 

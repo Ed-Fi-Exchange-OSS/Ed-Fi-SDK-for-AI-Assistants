@@ -13,9 +13,6 @@ building and reviewing code.
 - **Detect:** `client_id` / `client_secret` sent as form fields in the token request body (discouraged); a
   Basic header built with a library's built-in basic-auth helper or from the raw secret without urlencoding
   (violation).
-- **Versions:** ODS/API 7.x and Ed-Fi API 8.1 accept both. Ed-Fi API 8.0 and early 8.1 pre-releases (such as
-  `8.1.0-beta1`) accept only the Basic header and answer body credentials with `400` "Malformed
-  Authorization header".
 - **Details:** [authentication.md](../authentication.md#requesting-a-token)
 
 ## AUTH-2: Reuse the access token until it is about to expire

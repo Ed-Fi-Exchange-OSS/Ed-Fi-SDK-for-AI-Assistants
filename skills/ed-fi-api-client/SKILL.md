@@ -78,10 +78,7 @@ Ed-Fi API 8 keeps the ODS/API resource model, but the release notes say client m
 | No snapshot support | See [references/pull.md](references/pull.md#snapshots-consistent-reads) |
 | Cursor paging needs a `pageToken` on every request; `pageSize` alone gets `400` | Get the first token from `/partitions` (see [references/pull.md](references/pull.md#cursor-paging-odsapi-73-and-later)) |
 
-When in doubt, check the Discovery API response and the host's release notes. On Ed-Fi API 8, read
-`informationalVersion` too: early 8.1 pre-releases report `version` `8.0.0`. Those pre-releases (and 8.0)
-also reject credentials in the token request body; the Basic header recommended in Step 2 works on every
-version.
+When in doubt, check `version` in the Discovery API response and the host's release notes.
 
 ## Step 2: Authenticate with OAuth 2.0 client credentials
 
