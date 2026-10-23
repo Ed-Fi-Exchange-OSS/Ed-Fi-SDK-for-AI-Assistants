@@ -86,6 +86,14 @@ Use this structure:
 Order findings by level, then by file. Keep each finding to two or three lines: the rule ID, where, what is
 wrong, and the fix. Link to the rule or guide only when the fix needs more explanation.
 
+Before you send the report, check it:
+
+1. **Re-read every cited line.** Open the file at the line you cite and confirm the code says what the finding
+   claims. Drop or correct any finding you can't confirm.
+2. **Check each rule ID appears in one section only**, except when separate parts of the code meet the rule at
+   different levels. A rule with any finding is not "Passed".
+3. **Check the levels against the table in step 3**, and that "Must fix" holds only *Required* rules.
+
 ## 5. After the review
 
 If the developer asks for fixes, switch to building: apply the relevant guide ([push](push.md),
