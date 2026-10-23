@@ -161,6 +161,36 @@ The reviewer's miss did not reproduce in a clean workspace with either descripti
 depends on the session (other skills or project files competing). The new description matches the shape of
 the request without needing Ed-Fi words in it.
 
+## Code review on real client code · 2026-10-23
+
+The review interface (`references/review.md`) was run on four public Ed-Fi API clients, as test inputs: a small
+Python CLI for ODS/API 2.x–3.x (`Ed-Fi-Exchange-OSS/Python-Minimal-CLI`), a Python client library for ODS/API
+7.x (`edanalytics/edfi_api_client`), a C# parallel-read example for ODS/API 6.1
+(`Ed-Fi-Exchange-OSS/ParallelAPIConsumption`), and the paging and performance-test clients in
+`Ed-Fi-Exchange-OSS/Suite-3-Performance-Testing` (a larger repository; the request named those folders).
+
+- **Harness:** Claude Code, headless, fresh session per repository, read-only tools. Request: "Review the Ed-Fi
+  API client code in this repository." The skill loaded on its own in all four.
+- **Accuracy:** about 19 findings were checked against the code, spread across the four reports. All were real
+  except one in the first Suite-3 report, which cited a configuration line with the wrong value. Beyond the
+  rules, the reviews also found ordinary bugs (for example a swallowed exception that truncates parallel
+  reads, a method called with an argument it doesn't take, an undefined variable on an error path).
+- **Platform handling:** each report named the platform it inferred (ODS/API 2.x–3.x, 6.1, 7.x) and noted
+  where 7.x/8 rules only partly apply.
+
+Issues found in the reports, and the changes made:
+
+| Issue | Change |
+|---|---|
+| A finding reported above its rule's level (a *Preferred* rule under *Must fix*, with the text calling it a suggestion) | `review.md`: keep the level from the table; mention unusual impact in the text |
+| The same rule listed as *Passed* and as a finding | `review.md`: one place per rule; report each part once at its own level |
+| Unsure whether `requests`' `HTTPBasicAuth` counts as a "built-in basic-auth helper" (AUTH-1) | AUTH-1 **Detect** now names helpers in Python, JavaScript and .NET |
+| On the larger repository, the two rules above were not always followed, and one finding cited a line incorrectly | `review.md`: a check before sending the report (re-read every cited line, one section per rule, levels match the table) |
+
+Reruns after the changes: the library review kept every rule at its table level. The Suite-3 review, with the
+final check, had no rule both passed and reported, no unconfirmed finding, and *Must fix* only for *Required*
+rules.
+
 ## Not yet done
 
 - **GitHub Copilot:** a run without the skill for comparison.

@@ -38,6 +38,12 @@ Guidelines:
 
 - **Cite evidence.** Every finding needs a file and line (or function) and a short quote or description of
   the code.
+- **Keep the level from the table.** Report each finding in the section its rule level gives. Don't move a
+  finding up or down because of its impact; if the impact is unusually high or low, say so in the finding's
+  text.
+- **One place per rule.** Don't list a rule as passed if you report a finding for it. If different parts of
+  the code meet a rule at different levels (e.g. a hard-coded `verify=False` and a separate off-by-default
+  setting), report each part once, at its own level.
 - **Respect documented exceptions.** If the code explains a legitimate reason for a discouraged pattern (for
   example, deleting and reposting to change a natural key without cascading key updates, or disabling
   certificate validation only for local testing behind an explicit setting), report it as a suggestion at
@@ -79,6 +85,14 @@ Use this structure:
 
 Order findings by level, then by file. Keep each finding to two or three lines: the rule ID, where, what is
 wrong, and the fix. Link to the rule or guide only when the fix needs more explanation.
+
+Before you send the report, check it:
+
+1. **Re-read every cited line.** Open the file at the line you cite and confirm the code says what the finding
+   claims. Drop or correct any finding you can't confirm.
+2. **Check each rule ID appears in one section only**, except when separate parts of the code meet the rule at
+   different levels. A rule with any finding is not "Passed".
+3. **Check the levels against the table in step 3**, and that "Must fix" holds only *Required* rules.
 
 ## 5. After the review
 
