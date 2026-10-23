@@ -143,10 +143,11 @@ With skill only. Copilot loaded the skill automatically in every prompt.
 
 Observations:
 
-- **Key changes (T8):** the index no longer says anything about changing a record's identifying values, so the
-  answer comes from the model's own knowledge and varies between runs. The specification does carry
-  `x-Ed-Fi-isUpdatable` on the PUT operation, which doesn't depend on knowing which fields form the key; a
-  neutral line based on it could restore a consistent answer.
+- **Key changes (T8):** the index no longer said anything about changing a record's identifying values, so the
+  answer came from the model's own knowledge and varied between runs. Fixed: resources whose PUT carries
+  `x-Ed-Fi-isUpdatable` (eight in Data Standard 5.2) now say that `PUT` can change their identifying values,
+  without listing the fields. With that line, T8 gave the same correct answer in three Claude Code runs, citing
+  the specification, and T11 still said the specification doesn't show which fields identify a record.
 - **Harness behavior:** in T10 Copilot asked for the host URL before answering, and in T11 it tried a GitKraken
   tool (cancelled) and fetched a web page. These come from the VS Code setup, not the skill.
 
