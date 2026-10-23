@@ -42,3 +42,6 @@ the Data Standard documentation.
 - `GET /ed-fi/studentSectionAssociations/{id}`
 - `PUT /ed-fi/studentSectionAssociations/{id}`
 - `DELETE /ed-fi/studentSectionAssociations/{id}`
+
+`PUT` can change this resource's identifying values; the API cascades the change to records that reference it
+(cascading key updates, `x-Ed-Fi-isUpdatable` in the specification).

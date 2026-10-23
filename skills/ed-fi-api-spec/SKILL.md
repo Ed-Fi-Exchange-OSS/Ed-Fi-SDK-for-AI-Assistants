@@ -22,7 +22,8 @@ usually needs 8–10 thousand.
      `...Reference`, and which fields are descriptors;
    - the fields of each **nested collection** (for example `classPeriods` in `sections`), with their own
      required flags;
-   - the **endpoints**, including `/deletes`, `/keyChanges` and `/partitions` where they exist.
+   - the **endpoints**, including `/deletes`, `/keyChanges` and `/partitions` where they exist, and whether
+     `PUT` can change the resource's identifying values (cascading key updates).
 3. **For descriptor types**, search [references/descriptors.md](references/descriptors.md). Descriptor
    *values* are data, not part of the spec: read them from the target API.
 

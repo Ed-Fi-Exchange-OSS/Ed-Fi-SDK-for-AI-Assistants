@@ -29,7 +29,8 @@ RESOURCES = {
             'post': {'tags': ['sections'], 'requestBody': {'content': {'application/json': {'schema': {
                 '$ref': '#/components/schemas/edFi_section'}}}}},
         },
-        '/ed-fi/sections/{id}': {'get': {'tags': ['sections']}, 'put': {'tags': ['sections']},
+        '/ed-fi/sections/{id}': {'get': {'tags': ['sections']},
+                                 'put': {'tags': ['sections'], 'x-Ed-Fi-isUpdatable': True},
                                  'delete': {'tags': ['sections']}},
         '/ed-fi/sections/deletes': {'get': {'tags': ['sections']}},
         '/ed-fi/schools': {'get': {'tags': ['schools']}},
@@ -103,6 +104,9 @@ class GenerateTest(unittest.TestCase):
         self.assertIn('e.g. Algebra I period 2.', self.index)
         self.assertIn('Also: class.', self.index)
         self.assertIn('i.e. the grades.', self.descriptors)
+
+    def test_key_change_support_is_stated_without_listing_fields(self):
+        self.assertIn("`PUT` can change this resource's identifying values", self.section)
 
     def test_skips_server_fields(self):
         self.assertNotIn('| `id` |', self.section)

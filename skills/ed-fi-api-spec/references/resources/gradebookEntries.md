@@ -41,3 +41,6 @@ the Data Standard documentation.
 - `GET /ed-fi/gradebookEntries/{id}`
 - `PUT /ed-fi/gradebookEntries/{id}`
 - `DELETE /ed-fi/gradebookEntries/{id}`
+
+`PUT` can change this resource's identifying values; the API cascades the change to records that reference it
+(cascading key updates, `x-Ed-Fi-isUpdatable` in the specification).

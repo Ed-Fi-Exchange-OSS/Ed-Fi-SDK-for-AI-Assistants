@@ -157,6 +157,9 @@ def resource_file(tag, description, operations, schemas, synonyms):
                 lines += [f'### Items in `{name}`', ''] + table(item_rows) + ['']
     endpoints = sorted({(m, p) for m, p, _ in operations}, key=endpoint_order)
     lines += ['## Endpoints', ''] + [f'- `{m} {p}`' for m, p in endpoints]
+    if any(op.get('x-Ed-Fi-isUpdatable') for m, _, op in operations if m == 'PUT'):
+        lines += ['', '`PUT` can change this resource\'s identifying values; the API cascades the change to records '
+                  'that reference it (cascading key updates, `x-Ed-Fi-isUpdatable` in the specification).']
     return collection, wrap('\n'.join(lines)) + '\n'
 
 
