@@ -42,5 +42,5 @@ building and reviewing code.
 - **Why:** records keep changing during a long extract; a snapshot gives a consistent point in time.
 - **Detect:** long multi-page extracts on an ODS/API 7.x host with snapshots configured, without the
   `Use-Snapshot: true` header on every request.
-- **Versions:** ODS/API 7.x only; Ed-Fi API 8.0 has no snapshot support.
+- **Versions:** ODS/API 7.x only; Ed-Fi API 8.1 has no snapshot support.
 - **Details:** [pull.md](../pull.md#snapshots-consistent-reads)

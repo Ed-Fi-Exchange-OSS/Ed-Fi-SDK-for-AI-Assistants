@@ -1,6 +1,6 @@
 ---
 name: ed-fi-api-client
-description: Guidance for writing, debugging, or reviewing client code that calls an Ed-Fi API (ODS/API 7.x or Ed-Fi API 8) — authentication and token handling, the Discovery API, pushing data into Ed-Fi (POST/PUT/DELETE, dependency order, descriptors), pulling data out (paging, change queries, deletes), and diagnosing HTTP error responses such as 400, 401, 403, 409, or 412. Use when code or questions mention Ed-Fi, ODS/API, Ed-Fi resources like students or studentSchoolAssociations, or Ed-Fi descriptors.
+description: Guidance for writing, reviewing, auditing, debugging, or fixing any code that acts as an Ed-Fi API client — scripts, CLIs, SDKs, ETL and extract jobs, SIS or data-warehouse integrations. Covers authentication and token handling, the Discovery API, pushing data (POST/PUT/DELETE, dependency order, descriptors), pulling data (paging, change queries, deletes), and diagnosing HTTP errors such as 400, 401, 403, 409, or 412. Targets ODS/API 7.x and Ed-Fi API 8.1+, and also applies when reviewing or upgrading older clients (ODS/API 2.x–6.x). Use whenever a task involves code that calls an Ed-Fi or ODS/API endpoint, or mentions Ed-Fi, ODS/API, edfi, oauth/token, /data/v3, Ed-Fi resources such as students or studentSchoolAssociations, or descriptors.
 ---
 
 # Ed-Fi API Client
@@ -9,7 +9,8 @@ Ed-Fi APIs exchange K-12 education data using resources defined by the Ed-Fi Dat
 guidance here applies to ODS/API 7.x and Ed-Fi API 8: both expose the same resources and behave the same
 way for POST/PUT/DELETE, references, descriptors and errors. Ed-Fi API 8 is a new platform, though, and
 has a few breaking changes for clients; see [Ed-Fi API 8 differences](#ed-fi-api-8-differences).
-Examples use ODS/API 7.3 URLs and Data Standard 5.2.
+In this skill, **Ed-Fi API 8 means 8.1 and later**; 8.0 is not a target. Examples use ODS/API 7.3 URLs
+and Data Standard 5.2.
 
 Do not guess at Ed-Fi behavior from general REST conventions. Several Ed-Fi rules surprise developers:
 POST is an upsert, URLs use a server-generated `id` rather than natural keys, and a missing reference
@@ -78,7 +79,8 @@ Ed-Fi API 8 keeps the ODS/API resource model, but the release notes say client m
 | No snapshot support | See [references/pull.md](references/pull.md#snapshots-consistent-reads) |
 | Cursor paging needs a `pageToken` on every request; `pageSize` alone gets `400` | Get the first token from `/partitions` (see [references/pull.md](references/pull.md#cursor-paging-odsapi-73-and-later)) |
 
-When in doubt, check `version` in the Discovery API response and the host's release notes.
+When in doubt, check the Discovery API response and the host's release notes. On Ed-Fi API 8, read
+`informationalVersion` (e.g. `8.1.0`): `version` reports `8.0.0` on 8.1 as well.
 
 ## Step 2: Authenticate with OAuth 2.0 client credentials
 

@@ -117,7 +117,8 @@ Observations:
 | ETag / stale `If-Match` | Always on; `412` `optimistic-lock-failed` | Noted in `push.md` and `errors.md` |
 | Discovery, `limit` max 500, change queries, 409 / 403 / 400 types | As described in the skill | None |
 
-Not verified: tenant and context route segments (the kit is single-tenant).
+Not verified: tenant and context route segments (the kit is single-tenant). All Ed-Fi API 8 checks ran on
+8.1 (beta), the version the skill targets.
 
 ### Generated client, end to end
 
@@ -139,6 +140,24 @@ The code followed the rules the skill teaches, including today's API 8 and revie
 header, bounded token renewal margin, URLs from Discovery with the trailing slash added, grade codes mapped in
 a configuration file, first cursor token from `/partitions`, offset paging for `/deletes` and `/keyChanges`,
 TLS validation off only through an explicit setting, and `Retry-After` in both formats.
+
+## Skill description and automatic loading · 2026-10-23
+
+In review, the skill did not load on its own for a request like "Review the Ed-Fi API client code" on old ODS/API
+3.x-style Python code, in Claude Code or Copilot. The description now names the kinds of code it covers
+(scripts, CLIs, SDKs, ETL jobs, integrations), the review verbs (review, audit, fix), older clients
+(ODS/API 2.x–6.x) and path cues (`oauth/token`, `/data/v3`).
+
+Claude Code, headless, clean workspace with only the skill and one old client file, 3 runs per description:
+
+| Request | Previous description | New description |
+|---|---|---|
+| "Review the Ed-Fi API client code" (file under `edfi/`) | Loaded the skill first, 3/3 | Loaded the skill first, 3/3 |
+| "Review the API client code in tools/nightly_sync.py" (no "Ed-Fi" in the request, file name or docstring) | Read the file first, then loaded the skill, 3/3 | Loaded the skill first, 3/3 |
+
+The reviewer's miss did not reproduce in a clean workspace with either description, so the difference likely
+depends on the session (other skills or project files competing). The new description matches the shape of
+the request without needing Ed-Fi words in it.
 
 ## Not yet done
 

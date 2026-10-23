@@ -135,7 +135,7 @@ caching and expiration, delete and repost instead of updating).
 3. **(key)** Saves the new change version only after the whole run succeeds (PULL-3).
 4. Order: key changes, then changes, then deletes in reverse dependency order.
 5. Pages through every request (PULL-1).
-6. Mentions snapshots on ODS/API 7.x (`Use-Snapshot`), and that Ed-Fi API 8.0 has none (PULL-4).
+6. Mentions snapshots on ODS/API 7.x (`Use-Snapshot`), and that Ed-Fi API 8.1 has none (PULL-4).
 
 ## T7 · Pull: large extract (paging)
 
