@@ -1,4 +1,4 @@
-# Installing and using the Ed-Fi skills
+# Installing and using the Ed-Fi SDK for AI
 
 How to install the skills in this repository, check that your assistant uses them, and keep them up to date.
 The steps are the same for every skill; replace the skill name in the commands.
@@ -52,7 +52,7 @@ Copy the skill folder (for example `skills/ed-fi-api-client/`) into the folder y
 The two CLIs install Copilot skills into `.agents/skills/`, a folder Copilot shares with other assistants
 such as Codex.
 
-## Turn on skills in GitHub Copilot
+## Turn on skills in GitHub Copilot's VS Code Extension
 
 In VS Code, skills are used in Copilot Chat's **Agent** mode. Make sure the `chat.useAgentSkills` setting is
 enabled (Settings, search for "agent skills"). Claude Code needs no setup.
@@ -102,3 +102,16 @@ copy of the skill.
 - **Assistants:** verified in Claude Code and GitHub Copilot (VS Code agent mode). The skills follow the
   [Agent Skills](https://agentskills.io) format, so other assistants that support it, such as Codex, can use
   them from their own skills folder.
+
+> [!WARNING]
+> These skills are still valuable for other versions of the Ed-Fi Data Standard.
+> You may want to review the release notes for [your version](https://docs.ed-fi.org/reference/data-exchange)
+> to see details of what has changed. For example, if working on Data Standard 4.0,
+> then check the Data Standard 5.0 release note to understand what may need to be
+> modified for 4.0 compatibility.
+>
+> Regardless of which version you are developing against, there is always a chance
+> of a mistake or hallucination: please carefully test your integration, especially
+> when writing data. A typo in a field name, if that field is not required, will
+> silently fail to load data &mdash; best to test the write path, then perform `GET`
+> requests to retrieve the data and ensure that the expected resource body landed.

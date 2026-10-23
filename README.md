@@ -8,7 +8,7 @@ Tools for use with AI Assistants when developing client applications that intera
 
 The [`skills/`](skills/README.md) folder holds [Agent Skills](https://agentskills.io) that give AI coding
 assistants such as Claude Code and GitHub Copilot accurate, Ed-Fi-specific guidance. See
-[Installing and using the Ed-Fi skills](docs/skills/using-the-skills.md) to get started.
+[Installing and using the Ed-Fi SDK for AI](docs/skills/using-the-skills.md) to get started.
 
 ## License
 
