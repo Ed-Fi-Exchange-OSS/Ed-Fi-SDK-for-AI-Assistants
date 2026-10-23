@@ -10,6 +10,13 @@ This analysis evaluates the options in ADR 0001 with measured data and a working
 proposes the experiment that will settle the decision. It uses the ADR's option names and evaluation
 criteria.
 
+> **Update after implementation (PR #56):** the prototype described here derived natural keys from the
+> specification (identity fields plus required references). Review showed the specification can't support
+> that: it marks identity on scalar fields only, so a required reference may or may not be part of a record's
+> identity. The delivered `ed-fi-api-spec` skill does not state natural keys; it lists required fields, the
+> fields to supply in each reference, nested collections, and whether `PUT` can change a resource's
+> identifying values. Lookup tasks below that ask for natural keys refer to the prototype.
+
 ## 1. Problem size
 
 Loading the specifications into an assistant's context is not an option:
