@@ -6,23 +6,16 @@ A specific designated unit of time during which instruction is provided, grades 
 credits are awarded to students (whenever applicable). Sessions serve as organized segments of the academic
 year and can be interrupted by vacations or other events.
 
-## Natural key
-
-`sessionName`, `schoolReference`, `schoolYearTypeReference`. The natural key can be changed with PUT
-(cascading key updates).
-
-_Derived from the OpenAPI metadata: identity fields plus required references. Reference rows below list the
-key fields inside each reference._
-
 ## Fields
 
-`key` = part of the natural key, `yes` = required.
+`yes` = required. The OpenAPI specification does not say which fields identify a record; for natural keys, see
+the Data Standard documentation.
 
 | Field | Required | Type | Description |
 |---|---|---|---|
-| `sessionName` | key | string max 60 | The identifier for the calendar for the academic session. |
-| `schoolReference` | key | reference: `schoolId` |  |
-| `schoolYearTypeReference` | key | reference: `schoolYear` |  |
+| `sessionName` | yes | string max 60 | The identifier for the calendar for the academic session. |
+| `schoolReference` | yes | reference; supply `schoolId` | This entity represents an educational organization that includes staff and students who participate in classes and educational activity groups. |
+| `schoolYearTypeReference` | yes | reference; supply `schoolYear` | Identifier for a school year. |
 | `academicWeeks` |  | array of edFi_sessionAcademicWeek | An unordered collection of sessionAcademicWeeks. |
 | `beginDate` | yes | string (date) | Month, day, and year of the first day of the session. |
 | `endDate` | yes | string (date) | Month, day and year of the last day of the session. |
@@ -30,13 +23,25 @@ key fields inside each reference._
 | `termDescriptor` | yes | descriptor URI | A descriptor value to indicate the term that the session is associated with. |
 | `totalInstructionalDays` | yes | integer (int32) | The total number of instructional days in the school calendar. |
 
+### Items in `academicWeeks`
+
+| Field | Required | Type | Description |
+|---|---|---|---|
+| `academicWeekReference` | yes | reference; supply `schoolId`, `weekIdentifier` | This entity represents the academic weeks for a school year, optionally captured to support analyses. |
+
+### Items in `gradingPeriods`
+
+| Field | Required | Type | Description |
+|---|---|---|---|
+| `gradingPeriodReference` | yes | reference; supply `gradingPeriodDescriptor`, `gradingPeriodName`, `schoolId`, `schoolYear` | This entity represents the time span for which grades are reported. |
+
 ## Endpoints
 
-- `DELETE /ed-fi/sessions/{id}`
+- `GET /ed-fi/sessions`
+- `POST /ed-fi/sessions`
 - `GET /ed-fi/sessions/deletes`
 - `GET /ed-fi/sessions/keyChanges`
 - `GET /ed-fi/sessions/partitions`
 - `GET /ed-fi/sessions/{id}`
-- `GET /ed-fi/sessions`
-- `POST /ed-fi/sessions`
 - `PUT /ed-fi/sessions/{id}`
+- `DELETE /ed-fi/sessions/{id}`

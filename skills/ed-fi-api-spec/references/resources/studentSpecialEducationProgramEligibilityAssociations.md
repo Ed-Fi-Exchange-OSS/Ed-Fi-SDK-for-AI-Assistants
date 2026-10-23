@@ -5,23 +5,17 @@
 Captures details regarding the evaluation process for eligibility of students for special education services
 under IDEA Part C or Part B.
 
-## Natural key
-
-`consentToEvaluationReceivedDate`, `educationOrganizationReference`, `programReference`, `studentReference`
-
-_Derived from the OpenAPI metadata: identity fields plus required references. Reference rows below list the
-key fields inside each reference._
-
 ## Fields
 
-`key` = part of the natural key, `yes` = required.
+`yes` = required. The OpenAPI specification does not say which fields identify a record; for natural keys, see
+the Data Standard documentation.
 
 | Field | Required | Type | Description |
 |---|---|---|---|
-| `consentToEvaluationReceivedDate` | key | string (date) | Indicates the date on which the local education agency received written consent for the evaluation from the student's parent or guardian. |
-| `educationOrganizationReference` | key | reference: `educationOrganizationId` |  |
-| `programReference` | key | reference: `educationOrganizationId`, `programName`, `programTypeDescriptor` |  |
-| `studentReference` | key | reference: `studentUniqueId` |  |
+| `consentToEvaluationReceivedDate` | yes | string (date) | Indicates the date on which the local education agency received written consent for the evaluation from the student's parent or guardian. |
+| `educationOrganizationReference` | yes | reference; supply `educationOrganizationId` | Reference to educationOrganization. |
+| `programReference` | yes | reference; supply `educationOrganizationId`, `programName`, `programTypeDescriptor` | This entity represents any program designed to work in conjunction with, or as a supplement to, the main academic program. |
+| `studentReference` | yes | reference; supply `studentUniqueId` | This entity represents an individual for whom instruction, services, and/or care are provided in an early childhood, elementary, or secondary educational progr… |
 | `consentToEvaluationDate` |  | string (date) | The date on which the student's parent gave a consent (Parent Consent Date). |
 | `eligibilityConferenceDate` |  | string (date) | The month, day, and year when the eligibility conference is held between the parent(s)/guardian(s) and the educational organization responsible staff member(s)… |
 | `eligibilityDelayReasonDescriptor` |  | descriptor URI | The reason why the eligibility determination was completed beyond the required timeframe. |
@@ -40,11 +34,11 @@ key fields inside each reference._
 
 ## Endpoints
 
-- `DELETE /ed-fi/studentSpecialEducationProgramEligibilityAssociations/{id}`
+- `GET /ed-fi/studentSpecialEducationProgramEligibilityAssociations`
+- `POST /ed-fi/studentSpecialEducationProgramEligibilityAssociations`
 - `GET /ed-fi/studentSpecialEducationProgramEligibilityAssociations/deletes`
 - `GET /ed-fi/studentSpecialEducationProgramEligibilityAssociations/keyChanges`
 - `GET /ed-fi/studentSpecialEducationProgramEligibilityAssociations/partitions`
 - `GET /ed-fi/studentSpecialEducationProgramEligibilityAssociations/{id}`
-- `GET /ed-fi/studentSpecialEducationProgramEligibilityAssociations`
-- `POST /ed-fi/studentSpecialEducationProgramEligibilityAssociations`
 - `PUT /ed-fi/studentSpecialEducationProgramEligibilityAssociations/{id}`
+- `DELETE /ed-fi/studentSpecialEducationProgramEligibilityAssociations/{id}`

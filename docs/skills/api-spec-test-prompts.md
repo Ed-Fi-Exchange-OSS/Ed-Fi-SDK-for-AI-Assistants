@@ -8,18 +8,18 @@ prompt to pass.
 Run each prompt in a fresh session, with the skill installed and without it, and record the answer, the files
 read and the tokens used in [api-spec-test-results.md](api-spec-test-results.md).
 
-## T1 · Exact resource: natural key and required fields
+## T1 · Exact resource: required fields and references
 
 **Prompt:**
 
-> What's the natural key of an Ed-Fi studentSectionAssociation, and which fields are required to POST one?
+> Which fields are required to POST an Ed-Fi studentSectionAssociation, and what goes inside its references?
 
 **Expected outcomes:**
 
-1. **(key)** Natural key: `beginDate`, `sectionReference` and `studentReference`.
-2. **(key)** The `sectionReference` key fields: `localCourseCode`, `schoolId`, `schoolYear`, `sectionIdentifier`,
-   `sessionName`; the `studentReference` key field: `studentUniqueId`.
-3. Mentions that the natural key can be changed with PUT (cascading key updates).
+1. **(key)** Required: `beginDate`, `sectionReference` and `studentReference`.
+2. **(key)** Fields to supply in `sectionReference`: `localCourseCode`, `schoolId`, `schoolYear`,
+   `sectionIdentifier`, `sessionName`; in `studentReference`: `studentUniqueId`.
+3. Does not present the required fields as the natural key.
 
 ## T2 · Natural language: enrollment
 
@@ -45,7 +45,7 @@ read and the tokens used in [api-spec-test-results.md](api-spec-test-results.md)
 
 1. **(key)** Resources `contacts` and `studentContactAssociations` (Data Standard 5 renamed "parents" to
    "contacts"); does not use `/ed-fi/parents`.
-2. **(key)** `studentContactAssociations` is keyed by `contactReference` (`contactUniqueId`) and
+2. **(key)** `studentContactAssociations` requires `contactReference` (`contactUniqueId`) and
    `studentReference` (`studentUniqueId`).
 3. The contact is created before the association.
 
@@ -54,12 +54,12 @@ read and the tokens used in [api-spec-test-results.md](api-spec-test-results.md)
 **Prompt:**
 
 > Our SIS records whether a student was absent for the whole school day. Which Ed-Fi resource should hold that,
-> and what's its natural key?
+> and which fields are required?
 
 **Expected outcomes:**
 
 1. **(key)** `studentSchoolAttendanceEvents` (daily, school level), not `studentSectionAttendanceEvents`.
-2. **(key)** Natural key: `attendanceEventCategoryDescriptor`, `eventDate`, `schoolReference`, `sessionReference`
+2. **(key)** Required: `attendanceEventCategoryDescriptor`, `eventDate`, `schoolReference`, `sessionReference`
    and `studentReference`.
 3. Notes that the attendance category is a descriptor value.
 
@@ -76,18 +76,18 @@ read and the tokens used in [api-spec-test-results.md](api-spec-test-results.md)
 2. **(key)** The valid values come from the target API (`GET .../ed-fi/gradeLevelDescriptors`), not from the
    specification.
 
-## T6 · Keys inside a reference
+## T6 · Fields inside a reference
 
 **Prompt:**
 
 > I'm posting an Ed-Fi grade. What exactly goes inside its studentSectionAssociationReference, and what else is
-> part of the grade's key?
+> required?
 
 **Expected outcomes:**
 
 1. **(key)** `studentSectionAssociationReference` fields: `beginDate`, `localCourseCode`, `schoolId`,
    `schoolYear`, `sectionIdentifier`, `sessionName`, `studentUniqueId`.
-2. **(key)** The rest of the key: `gradeTypeDescriptor` and `gradingPeriodReference` (`gradingPeriodDescriptor`,
+2. **(key)** Also required: `gradeTypeDescriptor` and `gradingPeriodReference` (`gradingPeriodDescriptor`,
    `gradingPeriodName`, `schoolId`, `schoolYear`).
 
 ## T7 · Synonym: test scores
@@ -98,11 +98,11 @@ read and the tokens used in [api-spec-test-results.md](api-spec-test-results.md)
 
 **Expected outcomes:**
 
-1. **(key)** `studentAssessments`, keyed by `studentAssessmentIdentifier`, `assessmentReference`
+1. **(key)** `studentAssessments`, which requires `studentAssessmentIdentifier`, `assessmentReference`
    (`assessmentIdentifier`, `namespace`) and `studentReference`.
 2. The `assessments` record must exist first; scores go in the student assessment's score results.
 
-## T8 · Key changes
+## T8 · Limits: key changes
 
 **Prompt:**
 
@@ -110,8 +110,10 @@ read and the tokens used in [api-spec-test-results.md](api-spec-test-results.md)
 
 **Expected outcomes:**
 
-1. **(key)** Yes: `sections` allows changing its natural key with PUT (cascading key updates).
-2. Notes that this depends on the host configuration / platform, or points to how to confirm it.
+1. **(key)** Does not claim that the spec index shows which fields identify a section or whether they can
+   change.
+2. Any answer about key changes (for example, cascading key updates on `sections`) is presented as depending on
+   the platform and host, with a way to confirm it.
 
 ## T9 · Change-query endpoints
 
@@ -135,3 +137,26 @@ read and the tokens used in [api-spec-test-results.md](api-spec-test-results.md)
 1. **(key)** Says extensions are not in the index and does not invent fields.
 2. **(key)** Points to the host's own metadata (or regenerating the index from it with
    `eng/spec-knowledge-graph/generate.py`).
+
+## T11 · Regression: identity is not inferred from required references
+
+**Prompt:**
+
+> Which references are part of an Ed-Fi localAccount's natural key?
+
+**Expected outcomes:**
+
+1. **(key)** Does not say `chartOfAccountReference` is part of the natural key because it is required.
+2. **(key)** Says the specification does not show which references identify a record, and points to the Data
+   Standard documentation (or gives the Data Standard key with that source: `accountIdentifier`,
+   `educationOrganizationId`, `fiscalYear`).
+
+## T12 · Nested collections
+
+**Prompt:**
+
+> When I POST an Ed-Fi section, what is required in each item of its classPeriods?
+
+**Expected outcomes:**
+
+1. **(key)** Each item requires `classPeriodReference`, with `classPeriodName` and `schoolId`.

@@ -4,33 +4,39 @@
 
 This association describes the behavior of students involved in a discipline incident.
 
-## Natural key
-
-`behaviorDescriptor`, `disciplineIncidentReference`, `studentReference`
-
-_Derived from the OpenAPI metadata: identity fields plus required references. Reference rows below list the
-key fields inside each reference._
-
 ## Fields
 
-`key` = part of the natural key, `yes` = required.
+`yes` = required. The OpenAPI specification does not say which fields identify a record; for natural keys, see
+the Data Standard documentation.
 
 | Field | Required | Type | Description |
 |---|---|---|---|
-| `behaviorDescriptor` | key | descriptor URI | Describes behavior by category. |
-| `disciplineIncidentReference` | key | reference: `incidentIdentifier`, `schoolId` |  |
-| `studentReference` | key | reference: `studentUniqueId` |  |
+| `behaviorDescriptor` | yes | descriptor URI | Describes behavior by category. |
+| `disciplineIncidentReference` | yes | reference; supply `incidentIdentifier`, `schoolId` | This event entity represents an occurrence of an infraction ranging from a minor behavioral problem that disrupts the orderly functioning of a school or classr… |
+| `studentReference` | yes | reference; supply `studentUniqueId` | This entity represents an individual for whom instruction, services, and/or care are provided in an early childhood, elementary, or secondary educational progr… |
 | `behaviorDetailedDescription` |  | string max 1024 | Specifies a more granular level of detail of a behavior involved in the incident. |
 | `disciplineIncidentParticipationCodes` |  | array of edFi_studentDisciplineIncidentBehaviorAssociationDisciplineIncidentParticipationCode | An unordered collection of studentDisciplineIncidentBehaviorAssociationDisciplineIncidentParticipationCodes. |
 | `weapons` |  | array of edFi_studentDisciplineIncidentBehaviorAssociationWeapon | An unordered collection of studentDisciplineIncidentBehaviorAssociationWeapons. |
 
+### Items in `disciplineIncidentParticipationCodes`
+
+| Field | Required | Type | Description |
+|---|---|---|---|
+| `disciplineIncidentParticipationCodeDescriptor` | yes | descriptor URI | The role or type of participation of a student in a discipline incident. |
+
+### Items in `weapons`
+
+| Field | Required | Type | Description |
+|---|---|---|---|
+| `weaponDescriptor` | yes | descriptor URI | Identifies the type(s) of weapon used by the student during a discipline incident. |
+
 ## Endpoints
 
-- `DELETE /ed-fi/studentDisciplineIncidentBehaviorAssociations/{id}`
+- `GET /ed-fi/studentDisciplineIncidentBehaviorAssociations`
+- `POST /ed-fi/studentDisciplineIncidentBehaviorAssociations`
 - `GET /ed-fi/studentDisciplineIncidentBehaviorAssociations/deletes`
 - `GET /ed-fi/studentDisciplineIncidentBehaviorAssociations/keyChanges`
 - `GET /ed-fi/studentDisciplineIncidentBehaviorAssociations/partitions`
 - `GET /ed-fi/studentDisciplineIncidentBehaviorAssociations/{id}`
-- `GET /ed-fi/studentDisciplineIncidentBehaviorAssociations`
-- `POST /ed-fi/studentDisciplineIncidentBehaviorAssociations`
 - `PUT /ed-fi/studentDisciplineIncidentBehaviorAssociations/{id}`
+- `DELETE /ed-fi/studentDisciplineIncidentBehaviorAssociations/{id}`

@@ -8,21 +8,15 @@ in the involvement of a law enforcement official (such as robbery). A single eve
 incident regardless of how many perpetrators or victims are involved. Discipline incidents are events
 classified as warranting discipline action.
 
-## Natural key
-
-`incidentIdentifier`, `schoolReference`
-
-_Derived from the OpenAPI metadata: identity fields plus required references. Reference rows below list the
-key fields inside each reference._
-
 ## Fields
 
-`key` = part of the natural key, `yes` = required.
+`yes` = required. The OpenAPI specification does not say which fields identify a record; for natural keys, see
+the Data Standard documentation.
 
 | Field | Required | Type | Description |
 |---|---|---|---|
-| `incidentIdentifier` | key | string max 36 | A locally assigned unique identifier (within the school or school district) to identify each specific DisciplineIncident or occurrence. |
-| `schoolReference` | key | reference: `schoolId` |  |
+| `incidentIdentifier` | yes | string max 36 | A locally assigned unique identifier (within the school or school district) to identify each specific DisciplineIncident or occurrence. |
+| `schoolReference` | yes | reference; supply `schoolId` | This entity represents an educational organization that includes staff and students who participate in classes and educational activity groups. |
 | `behaviors` |  | array of edFi_disciplineIncidentBehavior | An unordered collection of disciplineIncidentBehaviors. |
 | `caseNumber` |  | string max 20 | The case number assigned to the DisciplineIncident by law enforcement or other organization. |
 | `externalParticipants` |  | array of edFi_disciplineIncidentExternalParticipant | An unordered collection of disciplineIncidentExternalParticipants. |
@@ -36,13 +30,34 @@ key fields inside each reference._
 | `reporterName` |  | string max 75 | Identifies the reporter of the discipline incident by name. |
 | `weapons` |  | array of edFi_disciplineIncidentWeapon | An unordered collection of disciplineIncidentWeapons. |
 
+### Items in `behaviors`
+
+| Field | Required | Type | Description |
+|---|---|---|---|
+| `behaviorDescriptor` | yes | descriptor URI | Describes behavior by category and provides a detailed description. |
+| `behaviorDetailedDescription` |  | string max 1024 | Specifies a more granular level of detail of a behavior involved in the incident. |
+
+### Items in `externalParticipants`
+
+| Field | Required | Type | Description |
+|---|---|---|---|
+| `disciplineIncidentParticipationCodeDescriptor` | yes | descriptor URI | The role or type of participation of an individual in the discipline incident. |
+| `firstName` | yes | string max 75 | A name given to an individual at birth, baptism, or during another naming ceremony, or through legal change. |
+| `lastSurname` | yes | string max 75 | The name borne in common by members of a family. |
+
+### Items in `weapons`
+
+| Field | Required | Type | Description |
+|---|---|---|---|
+| `weaponDescriptor` | yes | descriptor URI | Identifies the type of weapon used during an incident. |
+
 ## Endpoints
 
-- `DELETE /ed-fi/disciplineIncidents/{id}`
+- `GET /ed-fi/disciplineIncidents`
+- `POST /ed-fi/disciplineIncidents`
 - `GET /ed-fi/disciplineIncidents/deletes`
 - `GET /ed-fi/disciplineIncidents/keyChanges`
 - `GET /ed-fi/disciplineIncidents/partitions`
 - `GET /ed-fi/disciplineIncidents/{id}`
-- `GET /ed-fi/disciplineIncidents`
-- `POST /ed-fi/disciplineIncidents`
 - `PUT /ed-fi/disciplineIncidents/{id}`
+- `DELETE /ed-fi/disciplineIncidents/{id}`

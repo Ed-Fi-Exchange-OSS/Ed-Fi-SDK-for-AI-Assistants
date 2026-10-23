@@ -4,29 +4,23 @@
 
 The program associated with the survey.
 
-## Natural key
-
-`programReference`, `surveyReference`
-
-_Derived from the OpenAPI metadata: identity fields plus required references. Reference rows below list the
-key fields inside each reference._
-
 ## Fields
 
-`key` = part of the natural key, `yes` = required.
+`yes` = required. The OpenAPI specification does not say which fields identify a record; for natural keys, see
+the Data Standard documentation.
 
 | Field | Required | Type | Description |
 |---|---|---|---|
-| `programReference` | key | reference: `educationOrganizationId`, `programName`, `programTypeDescriptor` |  |
-| `surveyReference` | key | reference: `namespace`, `surveyIdentifier` |  |
+| `programReference` | yes | reference; supply `educationOrganizationId`, `programName`, `programTypeDescriptor` | This entity represents any program designed to work in conjunction with, or as a supplement to, the main academic program. |
+| `surveyReference` | yes | reference; supply `namespace`, `surveyIdentifier` | A survey to identified or anonymous respondents. |
 
 ## Endpoints
 
-- `DELETE /ed-fi/surveyProgramAssociations/{id}`
+- `GET /ed-fi/surveyProgramAssociations`
+- `POST /ed-fi/surveyProgramAssociations`
 - `GET /ed-fi/surveyProgramAssociations/deletes`
 - `GET /ed-fi/surveyProgramAssociations/keyChanges`
 - `GET /ed-fi/surveyProgramAssociations/partitions`
 - `GET /ed-fi/surveyProgramAssociations/{id}`
-- `GET /ed-fi/surveyProgramAssociations`
-- `POST /ed-fi/surveyProgramAssociations`
 - `PUT /ed-fi/surveyProgramAssociations/{id}`
+- `DELETE /ed-fi/surveyProgramAssociations/{id}`

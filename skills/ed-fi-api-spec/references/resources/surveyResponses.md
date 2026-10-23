@@ -4,24 +4,18 @@
 
 Responses to a Survey for named or anonymous persons.
 
-## Natural key
-
-`surveyResponseIdentifier`, `surveyReference`
-
-_Derived from the OpenAPI metadata: identity fields plus required references. Reference rows below list the
-key fields inside each reference._
-
 ## Fields
 
-`key` = part of the natural key, `yes` = required.
+`yes` = required. The OpenAPI specification does not say which fields identify a record; for natural keys, see
+the Data Standard documentation.
 
 | Field | Required | Type | Description |
 |---|---|---|---|
-| `surveyResponseIdentifier` | key | string max 60 | The identifier of the survey typically from the survey application. |
-| `contactReference` |  | reference: `contactUniqueId` |  |
-| `staffReference` |  | reference: `staffUniqueId` |  |
-| `studentReference` |  | reference: `studentUniqueId` |  |
-| `surveyReference` | key | reference: `namespace`, `surveyIdentifier` |  |
+| `surveyResponseIdentifier` | yes | string max 60 | The identifier of the survey typically from the survey application. |
+| `contactReference` |  | reference; supply `contactUniqueId` | This entity represents a contact of a student, such as a parent, guardian or caretaker. |
+| `staffReference` |  | reference; supply `staffUniqueId` | This entity represents an individual who performs specified activities for any public or private education institution or agency that provides instructional an… |
+| `studentReference` |  | reference; supply `studentUniqueId` | This entity represents an individual for whom instruction, services, and/or care are provided in an early childhood, elementary, or secondary educational progr… |
+| `surveyReference` | yes | reference; supply `namespace`, `surveyIdentifier` | A survey to identified or anonymous respondents. |
 | `electronicMailAddress` |  | string max 128 | Email address of the respondent. |
 | `fullName` |  | string max 80 | Full name of the respondent. |
 | `location` |  | string max 75 | Location of the respondent, often a city, district, or school. |
@@ -30,13 +24,19 @@ key fields inside each reference._
 | `surveyLevels` |  | array of edFi_surveyResponseSurveyLevel | An unordered collection of surveyResponseSurveyLevels. |
 | `_ext` |  | surveyResponseExtensions |  |
 
+### Items in `surveyLevels`
+
+| Field | Required | Type | Description |
+|---|---|---|---|
+| `surveyLevelDescriptor` | yes | descriptor URI | Provides information about the respondents of a survey and how they can be grouped together. |
+
 ## Endpoints
 
-- `DELETE /ed-fi/surveyResponses/{id}`
+- `GET /ed-fi/surveyResponses`
+- `POST /ed-fi/surveyResponses`
 - `GET /ed-fi/surveyResponses/deletes`
 - `GET /ed-fi/surveyResponses/keyChanges`
 - `GET /ed-fi/surveyResponses/partitions`
 - `GET /ed-fi/surveyResponses/{id}`
-- `GET /ed-fi/surveyResponses`
-- `POST /ed-fi/surveyResponses`
 - `PUT /ed-fi/surveyResponses/{id}`
+- `DELETE /ed-fi/surveyResponses/{id}`

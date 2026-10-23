@@ -6,23 +6,17 @@ This association represents the migrant education program(s) that a student part
 services from. The association is a subclass of the GeneralStudentProgramAssociation specifically designed for
 migrant education programs.
 
-## Natural key
-
-`beginDate`, `educationOrganizationReference`, `programReference`, `studentReference`
-
-_Derived from the OpenAPI metadata: identity fields plus required references. Reference rows below list the
-key fields inside each reference._
-
 ## Fields
 
-`key` = part of the natural key, `yes` = required.
+`yes` = required. The OpenAPI specification does not say which fields identify a record; for natural keys, see
+the Data Standard documentation.
 
 | Field | Required | Type | Description |
 |---|---|---|---|
-| `beginDate` | key | string (date) | The earliest date the student is involved with the program. |
-| `educationOrganizationReference` | key | reference: `educationOrganizationId` |  |
-| `programReference` | key | reference: `educationOrganizationId`, `programName`, `programTypeDescriptor` |  |
-| `studentReference` | key | reference: `studentUniqueId` |  |
+| `beginDate` | yes | string (date) | The earliest date the student is involved with the program. |
+| `educationOrganizationReference` | yes | reference; supply `educationOrganizationId` | Reference to educationOrganization. |
+| `programReference` | yes | reference; supply `educationOrganizationId`, `programName`, `programTypeDescriptor` | This entity represents any program designed to work in conjunction with, or as a supplement to, the main academic program. |
+| `studentReference` | yes | reference; supply `studentUniqueId` | This entity represents an individual for whom instruction, services, and/or care are provided in an early childhood, elementary, or secondary educational progr… |
 | `continuationOfServicesReasonDescriptor` |  | descriptor URI | The "continuation of services" provision found in Section 1304(e) of the statute provides that (1) a child who ceases to be a migratory child during a school t… |
 | `eligibilityExpirationDate` |  | string (date) | The eligibility expiration date is used to determine end of eligibility and to account for a child's eligibility expiring earlier than 36 months from the child… |
 | `endDate` |  | string (date) | The month, day, and year on which the student exited the program or stopped receiving services. |
@@ -38,13 +32,31 @@ key fields inside each reference._
 | `usInitialSchoolEntry` |  | string (date) | The month, day, and year on which the student first entered a U.S. |
 | `usMostRecentEntry` |  | string (date) | The month, day, and year of the student's most recent entry into the U.S. |
 
+### Items in `migrantEducationProgramServices`
+
+| Field | Required | Type | Description |
+|---|---|---|---|
+| `migrantEducationProgramServiceDescriptor` | yes | descriptor URI | Indicates the service being provided to the student by the migrant education program. |
+| `primaryIndicator` |  | boolean | True if service is a primary service. |
+| `serviceBeginDate` |  | string (date) | First date the student was in this option for the current school year. |
+| `serviceEndDate` |  | string (date) | Last date the student was in this option for the current school year. |
+
+### Items in `programParticipationStatuses`
+
+| Field | Required | Type | Description |
+|---|---|---|---|
+| `participationStatusDescriptor` | yes | descriptor URI | The student's program participation status. |
+| `statusBeginDate` | yes | string (date) | The date the student's program participation status began. |
+| `designatedBy` |  | string max 60 | The person, organization, or department that designated the participation status. |
+| `statusEndDate` |  | string (date) | The date the student's program participation status ended. |
+
 ## Endpoints
 
-- `DELETE /ed-fi/studentMigrantEducationProgramAssociations/{id}`
+- `GET /ed-fi/studentMigrantEducationProgramAssociations`
+- `POST /ed-fi/studentMigrantEducationProgramAssociations`
 - `GET /ed-fi/studentMigrantEducationProgramAssociations/deletes`
 - `GET /ed-fi/studentMigrantEducationProgramAssociations/keyChanges`
 - `GET /ed-fi/studentMigrantEducationProgramAssociations/partitions`
 - `GET /ed-fi/studentMigrantEducationProgramAssociations/{id}`
-- `GET /ed-fi/studentMigrantEducationProgramAssociations`
-- `POST /ed-fi/studentMigrantEducationProgramAssociations`
 - `PUT /ed-fi/studentMigrantEducationProgramAssociations/{id}`
+- `DELETE /ed-fi/studentMigrantEducationProgramAssociations/{id}`

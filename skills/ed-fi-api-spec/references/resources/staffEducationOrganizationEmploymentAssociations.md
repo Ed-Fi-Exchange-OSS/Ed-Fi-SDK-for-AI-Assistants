@@ -6,24 +6,18 @@ This association indicates the education organization an employee, contractor, v
 provider is formally associated with typically indicated by which organization the staff member has a services
 contract with or receives compensation from.
 
-## Natural key
-
-`employmentStatusDescriptor`, `hireDate`, `educationOrganizationReference`, `staffReference`
-
-_Derived from the OpenAPI metadata: identity fields plus required references. Reference rows below list the
-key fields inside each reference._
-
 ## Fields
 
-`key` = part of the natural key, `yes` = required.
+`yes` = required. The OpenAPI specification does not say which fields identify a record; for natural keys, see
+the Data Standard documentation.
 
 | Field | Required | Type | Description |
 |---|---|---|---|
-| `employmentStatusDescriptor` | key | descriptor URI | Reflects the type of employment or contract. |
-| `hireDate` | key | string (date) | The month, day, and year on which an individual was hired for a position. |
-| `credentialReference` |  | reference: `credentialIdentifier`, `stateOfIssueStateAbbreviationDescriptor` |  |
-| `educationOrganizationReference` | key | reference: `educationOrganizationId` |  |
-| `staffReference` | key | reference: `staffUniqueId` |  |
+| `employmentStatusDescriptor` | yes | descriptor URI | Reflects the type of employment or contract. |
+| `hireDate` | yes | string (date) | The month, day, and year on which an individual was hired for a position. |
+| `credentialReference` |  | reference; supply `credentialIdentifier`, `stateOfIssueStateAbbreviationDescriptor` | The legal document giving authorization to perform teaching assignment services. |
+| `educationOrganizationReference` | yes | reference; supply `educationOrganizationId` | Reference to educationOrganization. |
+| `staffReference` | yes | reference; supply `staffUniqueId` | This entity represents an individual who performs specified activities for any public or private education institution or agency that provides instructional an… |
 | `annualWage` |  | number (double) | Annual wage associated with the employment position being reported. |
 | `department` |  | string max 60 | The department or suborganization the employee/contractor is associated with in the education organization. |
 | `endDate` |  | string (date) | The month, day, and year on which a contract between an individual and a governing authority ends or is terminated under the provisions of the contract (or the… |
@@ -35,11 +29,11 @@ key fields inside each reference._
 
 ## Endpoints
 
-- `DELETE /ed-fi/staffEducationOrganizationEmploymentAssociations/{id}`
+- `GET /ed-fi/staffEducationOrganizationEmploymentAssociations`
+- `POST /ed-fi/staffEducationOrganizationEmploymentAssociations`
 - `GET /ed-fi/staffEducationOrganizationEmploymentAssociations/deletes`
 - `GET /ed-fi/staffEducationOrganizationEmploymentAssociations/keyChanges`
 - `GET /ed-fi/staffEducationOrganizationEmploymentAssociations/partitions`
 - `GET /ed-fi/staffEducationOrganizationEmploymentAssociations/{id}`
-- `GET /ed-fi/staffEducationOrganizationEmploymentAssociations`
-- `POST /ed-fi/staffEducationOrganizationEmploymentAssociations`
 - `PUT /ed-fi/staffEducationOrganizationEmploymentAssociations/{id}`
+- `DELETE /ed-fi/staffEducationOrganizationEmploymentAssociations/{id}`

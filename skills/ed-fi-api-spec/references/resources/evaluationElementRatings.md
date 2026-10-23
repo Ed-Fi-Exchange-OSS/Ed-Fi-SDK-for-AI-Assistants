@@ -4,21 +4,15 @@
 
 The lowest-level rating for an Evaluation Element for an individual educator.
 
-## Natural key
-
-`evaluationElementReference`, `evaluationObjectiveRatingReference`
-
-_Derived from the OpenAPI metadata: identity fields plus required references. Reference rows below list the
-key fields inside each reference._
-
 ## Fields
 
-`key` = part of the natural key, `yes` = required.
+`yes` = required. The OpenAPI specification does not say which fields identify a record; for natural keys, see
+the Data Standard documentation.
 
 | Field | Required | Type | Description |
 |---|---|---|---|
-| `evaluationElementReference` | key | reference: `educationOrganizationId`, `evaluationElementTitle`, `evaluationObjectiveTitle`, `evaluationPeriodDescriptor`, `evaluationTitle`, `performanceEvaluationTitle`, `performanceEvaluationTypeDescriptor`, `schoolYear`, `termDescriptor` |  |
-| `evaluationObjectiveRatingReference` | key | reference: `educationOrganizationId`, `evaluationDate`, `evaluationObjectiveTitle`, `evaluationPeriodDescriptor`, `evaluationTitle`, `performanceEvaluationTitle`, `performanceEvaluationTypeDescriptor`, `personId`, `schoolYear`, `sourceSystemDescriptor`, `termDescriptor` |  |
+| `evaluationElementReference` | yes | reference; supply `educationOrganizationId`, `evaluationElementTitle`, `evaluationObjectiveTitle`, `evaluationPeriodDescriptor`, `evaluationTitle`, `performanceEvaluationTitle`, `performanceEvaluationTypeDescriptor`, `schoolYear`, `termDescriptor` | The lowest-level Elements or criterion of performance being evaluated by rubric, quantitative measure, or aggregate survey response. |
+| `evaluationObjectiveRatingReference` | yes | reference; supply `educationOrganizationId`, `evaluationDate`, `evaluationObjectiveTitle`, `evaluationPeriodDescriptor`, `evaluationTitle`, `performanceEvaluationTitle`, `performanceEvaluationTypeDescriptor`, `personId`, `schoolYear`, `sourceSystemDescriptor`, `termDescriptor` | The rating for the component Evaluation Objective for an individual educator. |
 | `areaOfRefinement` |  | string max 1024 | Area identified for person to refine or improve as part of the evaluation. |
 | `areaOfReinforcement` |  | string max 1024 | Area identified for reinforcement or positive feedback as part of the evaluation. |
 | `comments` |  | string max 1024 | Any comments about the performance evaluation to be captured. |
@@ -26,13 +20,21 @@ key fields inside each reference._
 | `feedback` |  | string max 2048 | Feedback provided to the evaluated person. |
 | `results` |  | array of tpdm_evaluationElementRatingResult | An unordered collection of evaluationElementRatingResults. |
 
+### Items in `results`
+
+| Field | Required | Type | Description |
+|---|---|---|---|
+| `rating` | yes | number (double) | The numerical summary rating or score for the evaluation. |
+| `ratingResultTitle` | yes | string max 50 | The title of Rating Result. |
+| `resultDatatypeTypeDescriptor` | yes | descriptor URI | The datatype of the result. |
+
 ## Endpoints
 
-- `DELETE /tpdm/evaluationElementRatings/{id}`
+- `GET /tpdm/evaluationElementRatings`
+- `POST /tpdm/evaluationElementRatings`
 - `GET /tpdm/evaluationElementRatings/deletes`
 - `GET /tpdm/evaluationElementRatings/keyChanges`
 - `GET /tpdm/evaluationElementRatings/partitions`
 - `GET /tpdm/evaluationElementRatings/{id}`
-- `GET /tpdm/evaluationElementRatings`
-- `POST /tpdm/evaluationElementRatings`
 - `PUT /tpdm/evaluationElementRatings/{id}`
+- `DELETE /tpdm/evaluationElementRatings/{id}`

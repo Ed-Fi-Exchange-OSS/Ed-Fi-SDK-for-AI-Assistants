@@ -4,31 +4,25 @@
 
 The set of local education agency or charter management organization budget amounts.
 
-## Natural key
-
-`asOfDate`, `localAccountReference`
-
-_Derived from the OpenAPI metadata: identity fields plus required references. Reference rows below list the
-key fields inside each reference._
-
 ## Fields
 
-`key` = part of the natural key, `yes` = required.
+`yes` = required. The OpenAPI specification does not say which fields identify a record; for natural keys, see
+the Data Standard documentation.
 
 | Field | Required | Type | Description |
 |---|---|---|---|
-| `asOfDate` | key | string (date) | The date of the reported amount for the account. |
-| `localAccountReference` | key | reference: `accountIdentifier`, `educationOrganizationId`, `fiscalYear` |  |
+| `asOfDate` | yes | string (date) | The date of the reported amount for the account. |
+| `localAccountReference` | yes | reference; supply `accountIdentifier`, `educationOrganizationId`, `fiscalYear` | The set of account codes defined by an education organization for a fiscal year. |
 | `amount` | yes | number (double) | Current balance for the account. |
 | `financialCollectionDescriptor` |  | descriptor URI | The accounting period or grouping for which the amount is collected. |
 
 ## Endpoints
 
-- `DELETE /ed-fi/localBudgets/{id}`
+- `GET /ed-fi/localBudgets`
+- `POST /ed-fi/localBudgets`
 - `GET /ed-fi/localBudgets/deletes`
 - `GET /ed-fi/localBudgets/keyChanges`
 - `GET /ed-fi/localBudgets/partitions`
 - `GET /ed-fi/localBudgets/{id}`
-- `GET /ed-fi/localBudgets`
-- `POST /ed-fi/localBudgets`
 - `PUT /ed-fi/localBudgets/{id}`
+- `DELETE /ed-fi/localBudgets/{id}`

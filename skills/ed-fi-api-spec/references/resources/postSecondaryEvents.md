@@ -6,31 +6,25 @@ This entity captures significant postsecondary events during a student's high sc
 application or college application, acceptance, and enrollment) or during a student's enrollment at a
 post-secondary institution.
 
-## Natural key
-
-`eventDate`, `postSecondaryEventCategoryDescriptor`, `studentReference`
-
-_Derived from the OpenAPI metadata: identity fields plus required references. Reference rows below list the
-key fields inside each reference._
-
 ## Fields
 
-`key` = part of the natural key, `yes` = required.
+`yes` = required. The OpenAPI specification does not say which fields identify a record; for natural keys, see
+the Data Standard documentation.
 
 | Field | Required | Type | Description |
 |---|---|---|---|
-| `eventDate` | key | string (date) | The date the event occurred or was recorded. |
-| `postSecondaryEventCategoryDescriptor` | key | descriptor URI | The post secondary event that is logged. |
-| `postSecondaryInstitutionReference` |  | reference: `postSecondaryInstitutionId` |  |
-| `studentReference` | key | reference: `studentUniqueId` |  |
+| `eventDate` | yes | string (date) | The date the event occurred or was recorded. |
+| `postSecondaryEventCategoryDescriptor` | yes | descriptor URI | The post secondary event that is logged. |
+| `postSecondaryInstitutionReference` |  | reference; supply `postSecondaryInstitutionId` | An organization that provides educational programs for individuals who have completed or otherwise left educational programs in secondary school(s). |
+| `studentReference` | yes | reference; supply `studentUniqueId` | This entity represents an individual for whom instruction, services, and/or care are provided in an early childhood, elementary, or secondary educational progr… |
 
 ## Endpoints
 
-- `DELETE /ed-fi/postSecondaryEvents/{id}`
+- `GET /ed-fi/postSecondaryEvents`
+- `POST /ed-fi/postSecondaryEvents`
 - `GET /ed-fi/postSecondaryEvents/deletes`
 - `GET /ed-fi/postSecondaryEvents/keyChanges`
 - `GET /ed-fi/postSecondaryEvents/partitions`
 - `GET /ed-fi/postSecondaryEvents/{id}`
-- `GET /ed-fi/postSecondaryEvents`
-- `POST /ed-fi/postSecondaryEvents`
 - `PUT /ed-fi/postSecondaryEvents/{id}`
+- `DELETE /ed-fi/postSecondaryEvents/{id}`

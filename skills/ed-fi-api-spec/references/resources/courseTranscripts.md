@@ -5,24 +5,18 @@
 This entity is the final record of a student's performance in their courses at the end of a semester or school
 year.
 
-## Natural key
-
-`courseAttemptResultDescriptor`, `courseReference`, `studentAcademicRecordReference`
-
-_Derived from the OpenAPI metadata: identity fields plus required references. Reference rows below list the
-key fields inside each reference._
-
 ## Fields
 
-`key` = part of the natural key, `yes` = required.
+`yes` = required. The OpenAPI specification does not say which fields identify a record; for natural keys, see
+the Data Standard documentation.
 
 | Field | Required | Type | Description |
 |---|---|---|---|
-| `courseAttemptResultDescriptor` | key | descriptor URI | The result from the student's attempt to take the course. |
-| `courseReference` | key | reference: `courseCode`, `educationOrganizationId` |  |
-| `externalEducationOrganizationReference` |  | reference: `educationOrganizationId` |  |
-| `responsibleTeacherStaffReference` |  | reference: `staffUniqueId` |  |
-| `studentAcademicRecordReference` | key | reference: `educationOrganizationId`, `schoolYear`, `studentUniqueId`, `termDescriptor` |  |
+| `courseAttemptResultDescriptor` | yes | descriptor URI | The result from the student's attempt to take the course. |
+| `courseReference` | yes | reference; supply `courseCode`, `educationOrganizationId` | This educational entity represents the organization of subject matter and related learning experiences provided for the instruction of students on a regular or… |
+| `externalEducationOrganizationReference` |  | reference; supply `educationOrganizationId` | Reference to educationOrganization. |
+| `responsibleTeacherStaffReference` |  | reference; supply `staffUniqueId` | This entity represents an individual who performs specified activities for any public or private education institution or agency that provides instructional an… |
+| `studentAcademicRecordReference` | yes | reference; supply `educationOrganizationId`, `schoolYear`, `studentUniqueId`, `termDescriptor` | This educational entity represents the cumulative record of academic achievement for a student. |
 | `academicSubjects` |  | array of edFi_courseTranscriptAcademicSubject | An unordered collection of courseTranscriptAcademicSubjects. |
 | `alternativeCourseIdentificationCodes` |  | array of edFi_courseTranscriptAlternativeCourseIdentificationCode | An unordered collection of courseTranscriptAlternativeCourseIdentificationCodes. |
 | `alternativeCourseTitle` |  | string max 60 | The descriptive name given to a course of study offered in the school, if different from the CourseTitle. |
@@ -47,13 +41,63 @@ key fields inside each reference._
 | `sections` |  | array of edFi_courseTranscriptSection | An unordered collection of courseTranscriptSections. |
 | `whenTakenGradeLevelDescriptor` |  | descriptor URI | Student's grade level at time of course. |
 
+### Items in `academicSubjects`
+
+| Field | Required | Type | Description |
+|---|---|---|---|
+| `academicSubjectDescriptor` | yes | descriptor URI | The subject area for the course transcript credits awarded in the course transcript. |
+
+### Items in `alternativeCourseIdentificationCodes`
+
+| Field | Required | Type | Description |
+|---|---|---|---|
+| `courseIdentificationSystemDescriptor` | yes | descriptor URI | A system that is used to identify the organization of subject matter and related learning experiences provided for the instruction of students. |
+| `assigningOrganizationIdentificationCode` |  | string max 60 | The organization code or name assigning the Identification Code. |
+| `courseCatalogURL` |  | string max 255 | The URL for the course catalog that defines the course identification code. |
+| `identificationCode` | yes | string max 60 | A unique number or alphanumeric code assigned to a course by a school, school system, state, or other agency or entity. |
+
+### Items in `coursePrograms`
+
+| Field | Required | Type | Description |
+|---|---|---|---|
+| `courseProgramReference` | yes | reference; supply `educationOrganizationId`, `programName`, `programTypeDescriptor` | This entity represents any program designed to work in conjunction with, or as a supplement to, the main academic program. |
+
+### Items in `creditCategories`
+
+| Field | Required | Type | Description |
+|---|---|---|---|
+| `creditCategoryDescriptor` | yes | descriptor URI | A categorization for the course transcript credits awarded in the course transcript. |
+
+### Items in `earnedAdditionalCredits`
+
+| Field | Required | Type | Description |
+|---|---|---|---|
+| `additionalCreditTypeDescriptor` | yes | descriptor URI | The type of credits or units of value awarded for the completion of a course. |
+| `credits` | yes | number (double) | The value of credits or units of value awarded for the completion of a course |
+
+### Items in `partialCourseTranscriptAwards`
+
+| Field | Required | Type | Description |
+|---|---|---|---|
+| `awardDate` | yes | string (date) | The date the partial credits and/or grades were awarded or earned. |
+| `methodCreditEarnedDescriptor` |  | descriptor URI | The method the credits were earned. |
+| `earnedCredits` | yes | number (double) | The number of credits a student earned for completing a given course. |
+| `letterGradeEarned` |  | string max 20 | The indicator of student performance as submitted by the instructor. |
+| `numericGradeEarned` |  | string max 20 | The indicator of student performance as submitted by the instructor. |
+
+### Items in `sections`
+
+| Field | Required | Type | Description |
+|---|---|---|---|
+| `sectionReference` | yes | reference; supply `localCourseCode`, `schoolId`, `schoolYear`, `sectionIdentifier`, `sessionName` | This entity represents a setting in which organized instruction of course content is provided, in-person or otherwise, to one or more students for a given peri… |
+
 ## Endpoints
 
-- `DELETE /ed-fi/courseTranscripts/{id}`
+- `GET /ed-fi/courseTranscripts`
+- `POST /ed-fi/courseTranscripts`
 - `GET /ed-fi/courseTranscripts/deletes`
 - `GET /ed-fi/courseTranscripts/keyChanges`
 - `GET /ed-fi/courseTranscripts/partitions`
 - `GET /ed-fi/courseTranscripts/{id}`
-- `GET /ed-fi/courseTranscripts`
-- `POST /ed-fi/courseTranscripts`
 - `PUT /ed-fi/courseTranscripts/{id}`
+- `DELETE /ed-fi/courseTranscripts/{id}`

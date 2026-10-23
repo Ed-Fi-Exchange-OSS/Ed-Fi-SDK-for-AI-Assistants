@@ -4,23 +4,17 @@
 
 This association identifies student that qualifies for the Section 504 of the Rehabilitation Act of 1973.
 
-## Natural key
-
-`beginDate`, `educationOrganizationReference`, `programReference`, `studentReference`
-
-_Derived from the OpenAPI metadata: identity fields plus required references. Reference rows below list the
-key fields inside each reference._
-
 ## Fields
 
-`key` = part of the natural key, `yes` = required.
+`yes` = required. The OpenAPI specification does not say which fields identify a record; for natural keys, see
+the Data Standard documentation.
 
 | Field | Required | Type | Description |
 |---|---|---|---|
-| `beginDate` | key | string (date) | The earliest date the student is involved with the program. |
-| `educationOrganizationReference` | key | reference: `educationOrganizationId` |  |
-| `programReference` | key | reference: `educationOrganizationId`, `programName`, `programTypeDescriptor` |  |
-| `studentReference` | key | reference: `studentUniqueId` |  |
+| `beginDate` | yes | string (date) | The earliest date the student is involved with the program. |
+| `educationOrganizationReference` | yes | reference; supply `educationOrganizationId` | Reference to educationOrganization. |
+| `programReference` | yes | reference; supply `educationOrganizationId`, `programName`, `programTypeDescriptor` | This entity represents any program designed to work in conjunction with, or as a supplement to, the main academic program. |
+| `studentReference` | yes | reference; supply `studentUniqueId` | This entity represents an individual for whom instruction, services, and/or care are provided in an early childhood, elementary, or secondary educational progr… |
 | `accommodationPlan` |  | boolean | Indicates whether student has a Section 504 accommodation plan. |
 | `endDate` |  | string (date) | The month, day, and year on which the student exited the program or stopped receiving services. |
 | `programParticipationStatuses` |  | array of edFi_generalStudentProgramAssociationProgramParticipationStatus | An unordered collection of generalStudentProgramAssociationProgramParticipationStatuses. |
@@ -31,13 +25,22 @@ key fields inside each reference._
 | `section504MeetingDate` |  | string (date) | The month, day, and year on which the meeting with student's parent/guardian held to discuss the 504 eligibility of the student. |
 | `servedOutsideOfRegularSession` |  | boolean | Indicates whether the student received services during the summer session or between sessions. |
 
+### Items in `programParticipationStatuses`
+
+| Field | Required | Type | Description |
+|---|---|---|---|
+| `participationStatusDescriptor` | yes | descriptor URI | The student's program participation status. |
+| `statusBeginDate` | yes | string (date) | The date the student's program participation status began. |
+| `designatedBy` |  | string max 60 | The person, organization, or department that designated the participation status. |
+| `statusEndDate` |  | string (date) | The date the student's program participation status ended. |
+
 ## Endpoints
 
-- `DELETE /ed-fi/studentSection504ProgramAssociations/{id}`
+- `GET /ed-fi/studentSection504ProgramAssociations`
+- `POST /ed-fi/studentSection504ProgramAssociations`
 - `GET /ed-fi/studentSection504ProgramAssociations/deletes`
 - `GET /ed-fi/studentSection504ProgramAssociations/keyChanges`
 - `GET /ed-fi/studentSection504ProgramAssociations/partitions`
 - `GET /ed-fi/studentSection504ProgramAssociations/{id}`
-- `GET /ed-fi/studentSection504ProgramAssociations`
-- `POST /ed-fi/studentSection504ProgramAssociations`
 - `PUT /ed-fi/studentSection504ProgramAssociations/{id}`
+- `DELETE /ed-fi/studentSection504ProgramAssociations/{id}`

@@ -2,6 +2,10 @@
 
 Results of the [test prompts](api-spec-test-prompts.md) (FR-REL-1, FR-REL-2).
 
+> **Runs 1 and 2 used an earlier version of the generated content** that stated natural keys derived from the
+> OpenAPI metadata. Review showed the specification can't support that (a required reference may or may not be
+> part of a record's identity), so the content and the prompts changed. **Run 3 is the current result.**
+
 ## Run 1 · Claude Code · 2026-10-22
 
 - **Harness:** Claude Code, headless (`claude -p`), default model, fresh session per prompt.
@@ -84,8 +88,39 @@ context window.
 Observation: Copilot searched the index before opening a file in each prompt, so it did not hit the
 singular-file-name issue seen in Claude Code's first run.
 
+## Run 3 · Claude Code, after the review changes · 2026-10-23
+
+Same harness as Run 1, on the regenerated content: no natural keys, required flags only, the fields to supply
+in each reference, nested collections expanded one level. The prompts that depended on keys were rewritten
+(T1, T3, T4, T6, T7, T8), and two were added: T11 (identity is not inferred from required references, using
+`localAccounts`) and T12 (nested collections).
+
+| Test | Topic | With skill | Without skill |
+|---|---|---|---|
+| T1 | Required fields and references | ✅ Pass | ✅ Pass |
+| T2 | Natural language: enrollment | ✅ Pass | ✅ Pass |
+| T3 | Synonym: parents and guardians | ✅ Pass | ❌ Fail (`/ed-fi/parents`, `studentParentAssociations`) |
+| T4 | Daily attendance vs. section attendance | ✅ Pass | ✅ Pass |
+| T5 | Descriptors | ✅ Pass | ✅ Pass |
+| T6 | Fields inside a reference | ✅ Pass | ❌ Fail (`periodSequence` instead of `gradingPeriodName`) |
+| T7 | Synonym: test scores | ✅ Pass | ✅ Pass |
+| T8 | Limits: key changes | ✅ Pass | ✅ Pass |
+| T9 | Change-query endpoints | ✅ Pass | ✅ Pass |
+| T10 | Limits: extensions | ✅ Pass | ✅ Pass |
+| T11 | Identity not inferred from required references | ✅ Pass | ✅ Pass |
+| T12 | Nested collections | ✅ Pass | ✅ Pass |
+| **Total** | | **12 / 12** | **10 / 12** |
+
+- **T8 and T11 with the skill** separated what the index shows from what it doesn't: for `localAccounts`, the
+  answer said the specification marks no identity, gave the likely Data Standard key with that caveat, and
+  explained why `chartOfAccountReference` is probably not part of it.
+- **T12 with the skill** read the expanded `classPeriods` items directly from `sections.md`.
+- **Without the skill**, T8 and T11 passed by hedging and answering from Data Standard knowledge; the
+  remaining failures are, as in Run 1, Data Standard 4 names.
+- **Context use:** about 104 K input tokens for prompts that open one resource file, and about 140 K for those
+  that search the index more than once (cumulative over the session's turns, mostly cached).
+
 ## Not yet done
 
-- **GitHub Copilot:** the remaining seven prompts (optional; the smoke test covers the prompts that fail
-  without the skill).
+- **GitHub Copilot:** all 12 prompts on the regenerated content.
 - **Codex** (optional, NFR-PORT-1).

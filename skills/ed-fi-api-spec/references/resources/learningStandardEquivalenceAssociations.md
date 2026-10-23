@@ -4,33 +4,27 @@
 
 Indicates a directional association of equivalence from a source to a target learning standard.
 
-## Natural key
-
-`namespace`, `sourceLearningStandardReference`, `targetLearningStandardReference`
-
-_Derived from the OpenAPI metadata: identity fields plus required references. Reference rows below list the
-key fields inside each reference._
-
 ## Fields
 
-`key` = part of the natural key, `yes` = required.
+`yes` = required. The OpenAPI specification does not say which fields identify a record; for natural keys, see
+the Data Standard documentation.
 
 | Field | Required | Type | Description |
 |---|---|---|---|
-| `namespace` | key | string max 255 | The namespace of the organization that has created and owns the association. |
-| `sourceLearningStandardReference` | key | reference: `learningStandardId` |  |
-| `targetLearningStandardReference` | key | reference: `learningStandardId` |  |
+| `namespace` | yes | string max 255 | The namespace of the organization that has created and owns the association. |
+| `sourceLearningStandardReference` | yes | reference; supply `learningStandardId` | A statement that describes a specific competency or academic standard. |
+| `targetLearningStandardReference` | yes | reference; supply `learningStandardId` | A statement that describes a specific competency or academic standard. |
 | `effectiveDate` |  | string (date) | The date that the association is considered to be applicable or effective. |
 | `learningStandardEquivalenceStrengthDescription` |  | string max 255 | Captures supplemental information on the relationship. |
 | `learningStandardEquivalenceStrengthDescriptor` |  | descriptor URI | A measure that indicates the strength or quality of the equivalence relationship. |
 
 ## Endpoints
 
-- `DELETE /ed-fi/learningStandardEquivalenceAssociations/{id}`
+- `GET /ed-fi/learningStandardEquivalenceAssociations`
+- `POST /ed-fi/learningStandardEquivalenceAssociations`
 - `GET /ed-fi/learningStandardEquivalenceAssociations/deletes`
 - `GET /ed-fi/learningStandardEquivalenceAssociations/keyChanges`
 - `GET /ed-fi/learningStandardEquivalenceAssociations/partitions`
 - `GET /ed-fi/learningStandardEquivalenceAssociations/{id}`
-- `GET /ed-fi/learningStandardEquivalenceAssociations`
-- `POST /ed-fi/learningStandardEquivalenceAssociations`
 - `PUT /ed-fi/learningStandardEquivalenceAssociations/{id}`
+- `DELETE /ed-fi/learningStandardEquivalenceAssociations/{id}`

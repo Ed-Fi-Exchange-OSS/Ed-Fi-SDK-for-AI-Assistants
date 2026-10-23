@@ -5,30 +5,30 @@
 This association indicates those staff who were victims, perpetrators, witnesses, and reporters for a
 discipline incident.
 
-## Natural key
-
-`disciplineIncidentReference`, `staffReference`
-
-_Derived from the OpenAPI metadata: identity fields plus required references. Reference rows below list the
-key fields inside each reference._
-
 ## Fields
 
-`key` = part of the natural key, `yes` = required.
+`yes` = required. The OpenAPI specification does not say which fields identify a record; for natural keys, see
+the Data Standard documentation.
 
 | Field | Required | Type | Description |
 |---|---|---|---|
 | `disciplineIncidentParticipationCodes` | yes | array of edFi_staffDisciplineIncidentAssociationDisciplineIncidentParticipationCode | An unordered collection of staffDisciplineIncidentAssociationDisciplineIncidentParticipationCodes. |
-| `disciplineIncidentReference` | key | reference: `incidentIdentifier`, `schoolId` |  |
-| `staffReference` | key | reference: `staffUniqueId` |  |
+| `disciplineIncidentReference` | yes | reference; supply `incidentIdentifier`, `schoolId` | This event entity represents an occurrence of an infraction ranging from a minor behavioral problem that disrupts the orderly functioning of a school or classr… |
+| `staffReference` | yes | reference; supply `staffUniqueId` | This entity represents an individual who performs specified activities for any public or private education institution or agency that provides instructional an… |
+
+### Items in `disciplineIncidentParticipationCodes`
+
+| Field | Required | Type | Description |
+|---|---|---|---|
+| `disciplineIncidentParticipationCodeDescriptor` | yes | descriptor URI | The role or type of participation of a student in a discipline incident. |
 
 ## Endpoints
 
-- `DELETE /ed-fi/staffDisciplineIncidentAssociations/{id}`
+- `GET /ed-fi/staffDisciplineIncidentAssociations`
+- `POST /ed-fi/staffDisciplineIncidentAssociations`
 - `GET /ed-fi/staffDisciplineIncidentAssociations/deletes`
 - `GET /ed-fi/staffDisciplineIncidentAssociations/keyChanges`
 - `GET /ed-fi/staffDisciplineIncidentAssociations/partitions`
 - `GET /ed-fi/staffDisciplineIncidentAssociations/{id}`
-- `GET /ed-fi/staffDisciplineIncidentAssociations`
-- `POST /ed-fi/staffDisciplineIncidentAssociations`
 - `PUT /ed-fi/staffDisciplineIncidentAssociations/{id}`
+- `DELETE /ed-fi/staffDisciplineIncidentAssociations/{id}`

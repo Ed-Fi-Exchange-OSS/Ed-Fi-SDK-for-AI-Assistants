@@ -4,29 +4,23 @@
 
 The association provides information about the survey being taken and who the survey is about.
 
-## Natural key
-
-`staffReference`, `surveyResponseReference`
-
-_Derived from the OpenAPI metadata: identity fields plus required references. Reference rows below list the
-key fields inside each reference._
-
 ## Fields
 
-`key` = part of the natural key, `yes` = required.
+`yes` = required. The OpenAPI specification does not say which fields identify a record; for natural keys, see
+the Data Standard documentation.
 
 | Field | Required | Type | Description |
 |---|---|---|---|
-| `staffReference` | key | reference: `staffUniqueId` |  |
-| `surveyResponseReference` | key | reference: `namespace`, `surveyIdentifier`, `surveyResponseIdentifier` |  |
+| `staffReference` | yes | reference; supply `staffUniqueId` | This entity represents an individual who performs specified activities for any public or private education institution or agency that provides instructional an… |
+| `surveyResponseReference` | yes | reference; supply `namespace`, `surveyIdentifier`, `surveyResponseIdentifier` | Responses to a Survey for named or anonymous persons. |
 
 ## Endpoints
 
-- `DELETE /ed-fi/surveyResponseStaffTargetAssociations/{id}`
+- `GET /ed-fi/surveyResponseStaffTargetAssociations`
+- `POST /ed-fi/surveyResponseStaffTargetAssociations`
 - `GET /ed-fi/surveyResponseStaffTargetAssociations/deletes`
 - `GET /ed-fi/surveyResponseStaffTargetAssociations/keyChanges`
 - `GET /ed-fi/surveyResponseStaffTargetAssociations/partitions`
 - `GET /ed-fi/surveyResponseStaffTargetAssociations/{id}`
-- `GET /ed-fi/surveyResponseStaffTargetAssociations`
-- `POST /ed-fi/surveyResponseStaffTargetAssociations`
 - `PUT /ed-fi/surveyResponseStaffTargetAssociations/{id}`
+- `DELETE /ed-fi/surveyResponseStaffTargetAssociations/{id}`

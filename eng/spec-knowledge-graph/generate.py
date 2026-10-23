@@ -6,7 +6,7 @@
 """Generate a Markdown knowledge graph from Ed-Fi Resources and Descriptors OpenAPI specs.
 
 The output is the reference content of the ed-fi-api-spec skill: an index of resources, an index of
-descriptor types, and one file per resource with its natural key, fields, references and endpoints.
+descriptor types, and one file per resource with its fields, references, nested collections and endpoints.
 It needs only the Python standard library.
 
 Usage:
@@ -26,6 +26,7 @@ import urllib.request
 
 SKIP_FIELDS = {'id', '_etag', '_lastModifiedDate', 'link'}
 OPERATIONS = ('get', 'post', 'put', 'delete')
+RESOURCE_TEXT = {}  # resource (tag) name -> description, filled in main()
 LINE_LENGTH = 110  # .editorconfig max_line_length; tables are exempt
 # Index files keep one line per entry, so a line search returns the whole entry.
 ONE_LINE_NOTE = ('<!-- One line per entry, so a line search returns the whole entry. -->\n'
@@ -53,19 +54,26 @@ def wrap(text):
 
 
 def load(source):
-    if re.match(r'https?://', source):
+    if re.match(r'https://', source):
         # Some hosts reject Python's default User-Agent with 403.
         request = urllib.request.Request(source, headers={'User-Agent': 'ed-fi-spec-knowledge-graph'})
-        with urllib.request.urlopen(request) as resp:  # noqa: S310 - URL supplied by the person running it
+        with urllib.request.urlopen(request) as resp:  # noqa: S310 - https URL supplied by the person running it
             return json.load(resp)
+    if re.match(r'[a-z][a-z0-9+.-]*://', source, re.I):
+        raise SystemExit(f'Only https URLs and local files are supported: {source}')
     with open(source, encoding='utf-8-sig') as fh:
         return json.load(fh)
 
 
+ABBREVIATIONS = ('e.g.', 'i.e.', 'etc.', 'vs.')
+
+
 def first_sentence(text, limit=160):
     text = re.sub(r'\s+', ' ', (text or '').strip())
-    match = re.match(r'(.+?[.!?])(\s|$)', text)
-    text = match.group(1) if match else text
+    for match in re.finditer(r'[.!?](?=\s|$)', text):
+        if not text[:match.end()].lower().endswith(ABBREVIATIONS):
+            text = text[:match.end()]
+            break
     return text if len(text) <= limit else text[:limit - 1].rstrip() + '…'
 
 
@@ -87,31 +95,48 @@ def type_of(prop):
     return text
 
 
-def is_key(name, prop, required):
-    return bool(prop.get('x-Ed-Fi-isIdentity')) or (
-        name in required and name.endswith('Reference') and '$ref' in prop)
+def describe(name, prop, schemas):
+    """Field description; reference fields fall back to the referenced resource's description."""
+    if '$ref' not in prop:
+        return prop.get('description', '')
+    target = ref_name(prop['$ref'])
+    text = schemas.get(target, {}).get('description', '')
+    if not text and name.endswith('Reference'):
+        resource = (target[:-len('Reference')] if target.endswith('Reference') else target).split('_', 1)[-1]
+        plurals = (resource + 's', resource + 'es', resource[:-1] + 'ies')
+        text = next((RESOURCE_TEXT[p] for p in plurals if RESOURCE_TEXT.get(p)), f'Reference to {resource}.')
+    return text
 
 
 def field_rows(schema, schemas):
+    """Table rows for a schema's fields, and the (name, item schema) of its collections of objects."""
     required = set(schema.get('required', []))
-    rows = []
+    rows, collections = [], []
     for name, prop in schema.get('properties', {}).items():
         if name in SKIP_FIELDS:
             continue
         if name.endswith('Descriptor'):
             kind = 'descriptor URI'
         elif name.endswith('Reference') and '$ref' in prop:
-            keys = [k for k in schemas.get(ref_name(prop['$ref']), {}).get('properties', {}) if k != 'link']
-            kind = 'reference: ' + ', '.join(f'`{k}`' for k in keys)
+            fields = [k for k in schemas.get(ref_name(prop['$ref']), {}).get('properties', {}) if k != 'link']
+            kind = 'reference; supply ' + ', '.join(f'`{k}`' for k in fields)
         else:
             kind = type_of(prop)
-        if '$ref' in prop:
-            description = schemas.get(ref_name(prop['$ref']), {}).get('description', '')
-        else:
-            description = prop.get('description', '')
-        flag = 'key' if is_key(name, prop, required) else ('yes' if name in required else '')
-        rows.append(f'| `{name}` | {flag} | {kind} | {first_sentence(description)} |')
-    return rows
+            items = prop.get('items', {})
+            if prop.get('type') == 'array' and '$ref' in items:
+                collections.append((name, ref_name(items['$ref'])))
+        flag = 'yes' if name in required else ''
+        rows.append(f'| `{name}` | {flag} | {kind} | {first_sentence(describe(name, prop, schemas))} |')
+    return rows, collections
+
+
+def table(rows):
+    return ['| Field | Required | Type | Description |', '|---|---|---|---|'] + rows
+
+
+def endpoint_order(endpoint):
+    method, path = endpoint
+    return '{' in path, path, OPERATIONS.index(method.lower())
 
 
 def resource_file(tag, description, operations, schemas, synonyms):
@@ -123,20 +148,15 @@ def resource_file(tag, description, operations, schemas, synonyms):
         lines += ['Also searched as: ' + ', '.join(synonyms) + '.', '']
     if post:
         schema = schemas[ref_name(post['requestBody']['content']['application/json']['schema']['$ref'])]
-        required = set(schema.get('required', []))
-        keys = [n for n, p in schema.get('properties', {}).items() if is_key(n, p, required)]
-        updatable = any(op.get('x-Ed-Fi-isUpdatable') for m, _, op in operations if m == 'PUT')
-        key_text = ', '.join(f'`{k}`' for k in keys) or '(none)'
-        if updatable:
-            key_text += '. The natural key can be changed with PUT (cascading key updates).'
-        lines += ['## Natural key', '', key_text, '',
-                  '_Derived from the OpenAPI metadata: identity fields plus required references. Reference '
-                  'rows below list the key fields inside each reference._', '',
-                  '## Fields', '', '`key` = part of the natural key, `yes` = required.', '',
-                  '| Field | Required | Type | Description |', '|---|---|---|---|']
-        lines += field_rows(schema, schemas)
-        lines.append('')
-    lines += ['## Endpoints', ''] + sorted({f'- `{m} {p}`' for m, p, _ in operations})
+        rows, collections = field_rows(schema, schemas)
+        lines += ['## Fields', '', '`yes` = required. The OpenAPI specification does not say which fields identify a '
+                  'record; for natural keys, see the Data Standard documentation.', ''] + table(rows) + ['']
+        for name, item_schema in collections:
+            item_rows, _ = field_rows(schemas.get(item_schema, {}), schemas)
+            if item_rows:
+                lines += [f'### Items in `{name}`', ''] + table(item_rows) + ['']
+    endpoints = sorted({(m, p) for m, p, _ in operations}, key=endpoint_order)
+    lines += ['## Endpoints', ''] + [f'- `{m} {p}`' for m, p in endpoints]
     return collection, wrap('\n'.join(lines)) + '\n'
 
 
@@ -164,6 +184,7 @@ def main():
 
     schemas = resources['components']['schemas']
     tag_text = {t['name']: t.get('description', '') for t in resources.get('tags', [])}
+    RESOURCE_TEXT.update(tag_text)
     by_tag = {}
     for path, ops in resources['paths'].items():
         for method, op in ops.items():

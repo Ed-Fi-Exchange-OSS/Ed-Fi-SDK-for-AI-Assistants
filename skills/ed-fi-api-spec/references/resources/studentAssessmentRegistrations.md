@@ -5,38 +5,44 @@
 Identifies an assessment registration that a student is expected to participate in including the testing
 organization, reporting organization and assessment delivery details.
 
-## Natural key
-
-`assessmentAdministrationReference`, `studentEducationOrganizationAssociationReference`,
-`studentSchoolAssociationReference`
-
-_Derived from the OpenAPI metadata: identity fields plus required references. Reference rows below list the
-key fields inside each reference._
-
 ## Fields
 
-`key` = part of the natural key, `yes` = required.
+`yes` = required. The OpenAPI specification does not say which fields identify a record; for natural keys, see
+the Data Standard documentation.
 
 | Field | Required | Type | Description |
 |---|---|---|---|
-| `assessmentAdministrationReference` | key | reference: `administrationIdentifier`, `assessmentIdentifier`, `assigningEducationOrganizationId`, `namespace` |  |
-| `reportingEducationOrganizationReference` |  | reference: `educationOrganizationId` |  |
-| `scheduledStudentEducationOrganizationAssessmentAccommodationReference` |  | reference: `educationOrganizationId`, `studentUniqueId` |  |
-| `studentEducationOrganizationAssociationReference` | key | reference: `educationOrganizationId`, `studentUniqueId` |  |
-| `studentSchoolAssociationReference` | key | reference: `entryDate`, `schoolId`, `studentUniqueId` |  |
-| `testingEducationOrganizationReference` |  | reference: `educationOrganizationId` |  |
+| `assessmentAdministrationReference` | yes | reference; supply `administrationIdentifier`, `assessmentIdentifier`, `assigningEducationOrganizationId`, `namespace` | The anticipated administration of an assessment under the purview of an education organization. |
+| `reportingEducationOrganizationReference` |  | reference; supply `educationOrganizationId` | Reference to educationOrganization. |
+| `scheduledStudentEducationOrganizationAssessmentAccommodationReference` |  | reference; supply `educationOrganizationId`, `studentUniqueId` | The accommodation(s) required or expected for administering assessments as determined by the education organization. |
+| `studentEducationOrganizationAssociationReference` | yes | reference; supply `educationOrganizationId`, `studentUniqueId` | This association represents student information as reported in the context of the student's relationship to the education organization. |
+| `studentSchoolAssociationReference` | yes | reference; supply `entryDate`, `schoolId`, `studentUniqueId` | This association represents the school in which a student is enrolled. |
+| `testingEducationOrganizationReference` |  | reference; supply `educationOrganizationId` | Reference to educationOrganization. |
 | `assessmentAccommodations` |  | array of edFi_studentAssessmentRegistrationAssessmentAccommodation | An unordered collection of studentAssessmentRegistrationAssessmentAccommodations. |
 | `assessmentCustomizations` |  | array of edFi_studentAssessmentRegistrationAssessmentCustomization | An unordered collection of studentAssessmentRegistrationAssessmentCustomizations. |
 | `assessmentGradeLevelDescriptor` |  | descriptor URI | The grade level or primary instructional level at which the student is to be assessed. |
 | `platformTypeDescriptor` |  | descriptor URI | The environment or format in which the assessment is expected to be administered. |
 
+### Items in `assessmentAccommodations`
+
+| Field | Required | Type | Description |
+|---|---|---|---|
+| `accommodationDescriptor` | yes | descriptor URI | The special variation(s) to be used in how assessments (in general) are presented, how it is administered, or how the test taker is allowed to respond. |
+
+### Items in `assessmentCustomizations`
+
+| Field | Required | Type | Description |
+|---|---|---|---|
+| `customizationKey` | yes | string max 60 | An agreed upon identifier for the custom information. |
+| `customizationValue` | yes | string max 1024 | Custom value for the indicated CustomizationKey. |
+
 ## Endpoints
 
-- `DELETE /ed-fi/studentAssessmentRegistrations/{id}`
+- `GET /ed-fi/studentAssessmentRegistrations`
+- `POST /ed-fi/studentAssessmentRegistrations`
 - `GET /ed-fi/studentAssessmentRegistrations/deletes`
 - `GET /ed-fi/studentAssessmentRegistrations/keyChanges`
 - `GET /ed-fi/studentAssessmentRegistrations/partitions`
 - `GET /ed-fi/studentAssessmentRegistrations/{id}`
-- `GET /ed-fi/studentAssessmentRegistrations`
-- `POST /ed-fi/studentAssessmentRegistrations`
 - `PUT /ed-fi/studentAssessmentRegistrations/{id}`
+- `DELETE /ed-fi/studentAssessmentRegistrations/{id}`

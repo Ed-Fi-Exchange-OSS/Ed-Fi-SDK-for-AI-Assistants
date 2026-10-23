@@ -4,29 +4,23 @@
 
 This association provides information about the survey section and the person the survey section is about.
 
-## Natural key
-
-`personReference`, `surveySectionResponseReference`
-
-_Derived from the OpenAPI metadata: identity fields plus required references. Reference rows below list the
-key fields inside each reference._
-
 ## Fields
 
-`key` = part of the natural key, `yes` = required.
+`yes` = required. The OpenAPI specification does not say which fields identify a record; for natural keys, see
+the Data Standard documentation.
 
 | Field | Required | Type | Description |
 |---|---|---|---|
-| `personReference` | key | reference: `personId`, `sourceSystemDescriptor` |  |
-| `surveySectionResponseReference` | key | reference: `namespace`, `surveyIdentifier`, `surveyResponseIdentifier`, `surveySectionTitle` |  |
+| `personReference` | yes | reference; supply `personId`, `sourceSystemDescriptor` | Reference to person. |
+| `surveySectionResponseReference` | yes | reference; supply `namespace`, `surveyIdentifier`, `surveyResponseIdentifier`, `surveySectionTitle` | Optional information about the responses provided for a section of a survey. |
 
 ## Endpoints
 
-- `DELETE /tpdm/surveySectionResponsePersonTargetAssociations/{id}`
+- `GET /tpdm/surveySectionResponsePersonTargetAssociations`
+- `POST /tpdm/surveySectionResponsePersonTargetAssociations`
 - `GET /tpdm/surveySectionResponsePersonTargetAssociations/deletes`
 - `GET /tpdm/surveySectionResponsePersonTargetAssociations/keyChanges`
 - `GET /tpdm/surveySectionResponsePersonTargetAssociations/partitions`
 - `GET /tpdm/surveySectionResponsePersonTargetAssociations/{id}`
-- `GET /tpdm/surveySectionResponsePersonTargetAssociations`
-- `POST /tpdm/surveySectionResponsePersonTargetAssociations`
 - `PUT /tpdm/surveySectionResponsePersonTargetAssociations/{id}`
+- `DELETE /tpdm/surveySectionResponsePersonTargetAssociations/{id}`

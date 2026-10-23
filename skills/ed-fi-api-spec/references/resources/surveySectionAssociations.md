@@ -4,29 +4,23 @@
 
 The section associated with the survey.
 
-## Natural key
-
-`sectionReference`, `surveyReference`
-
-_Derived from the OpenAPI metadata: identity fields plus required references. Reference rows below list the
-key fields inside each reference._
-
 ## Fields
 
-`key` = part of the natural key, `yes` = required.
+`yes` = required. The OpenAPI specification does not say which fields identify a record; for natural keys, see
+the Data Standard documentation.
 
 | Field | Required | Type | Description |
 |---|---|---|---|
-| `sectionReference` | key | reference: `localCourseCode`, `schoolId`, `schoolYear`, `sectionIdentifier`, `sessionName` |  |
-| `surveyReference` | key | reference: `namespace`, `surveyIdentifier` |  |
+| `sectionReference` | yes | reference; supply `localCourseCode`, `schoolId`, `schoolYear`, `sectionIdentifier`, `sessionName` | This entity represents a setting in which organized instruction of course content is provided, in-person or otherwise, to one or more students for a given peri… |
+| `surveyReference` | yes | reference; supply `namespace`, `surveyIdentifier` | A survey to identified or anonymous respondents. |
 
 ## Endpoints
 
-- `DELETE /ed-fi/surveySectionAssociations/{id}`
+- `GET /ed-fi/surveySectionAssociations`
+- `POST /ed-fi/surveySectionAssociations`
 - `GET /ed-fi/surveySectionAssociations/deletes`
 - `GET /ed-fi/surveySectionAssociations/keyChanges`
 - `GET /ed-fi/surveySectionAssociations/partitions`
 - `GET /ed-fi/surveySectionAssociations/{id}`
-- `GET /ed-fi/surveySectionAssociations`
-- `POST /ed-fi/surveySectionAssociations`
 - `PUT /ed-fi/surveySectionAssociations/{id}`
+- `DELETE /ed-fi/surveySectionAssociations/{id}`

@@ -4,22 +4,16 @@
 
 An experimental or quasi-experimental study of an intervention technique.
 
-## Natural key
-
-`interventionStudyIdentificationCode`, `educationOrganizationReference`, `interventionPrescriptionReference`
-
-_Derived from the OpenAPI metadata: identity fields plus required references. Reference rows below list the
-key fields inside each reference._
-
 ## Fields
 
-`key` = part of the natural key, `yes` = required.
+`yes` = required. The OpenAPI specification does not say which fields identify a record; for natural keys, see
+the Data Standard documentation.
 
 | Field | Required | Type | Description |
 |---|---|---|---|
-| `interventionStudyIdentificationCode` | key | string max 60 | A unique number or alphanumeric code assigned to an intervention study. |
-| `educationOrganizationReference` | key | reference: `educationOrganizationId` |  |
-| `interventionPrescriptionReference` | key | reference: `educationOrganizationId`, `interventionPrescriptionIdentificationCode` |  |
+| `interventionStudyIdentificationCode` | yes | string max 60 | A unique number or alphanumeric code assigned to an intervention study. |
+| `educationOrganizationReference` | yes | reference; supply `educationOrganizationId` | Reference to educationOrganization. |
+| `interventionPrescriptionReference` | yes | reference; supply `educationOrganizationId`, `interventionPrescriptionIdentificationCode` | This entity represents a formal prescription of an instructional approach focusing on the specific techniques and materials used to teach a given subject. |
 | `appropriateGradeLevels` |  | array of edFi_interventionStudyAppropriateGradeLevel | An unordered collection of interventionStudyAppropriateGradeLevels. |
 | `appropriateSexes` |  | array of edFi_interventionStudyAppropriateSex | An unordered collection of interventionStudyAppropriateSexes. |
 | `deliveryMethodDescriptor` | yes | descriptor URI | The way in which an intervention was implemented: individual, small group, whole class, or whole school. |
@@ -32,13 +26,65 @@ key fields inside each reference._
 | `stateAbbreviations` |  | array of edFi_interventionStudyStateAbbreviation | An unordered collection of interventionStudyStateAbbreviations. |
 | `uris` |  | array of edFi_interventionStudyURI | An unordered collection of interventionStudyURIs. |
 
+### Items in `appropriateGradeLevels`
+
+| Field | Required | Type | Description |
+|---|---|---|---|
+| `gradeLevelDescriptor` | yes | descriptor URI | Grade levels participating in this study. |
+
+### Items in `appropriateSexes`
+
+| Field | Required | Type | Description |
+|---|---|---|---|
+| `sexDescriptor` | yes | descriptor URI | Sexes participating in this study. |
+
+### Items in `educationContents`
+
+| Field | Required | Type | Description |
+|---|---|---|---|
+| `educationContentReference` | yes | reference; supply `contentIdentifier` | This entity represents materials for students or teachers that can be used for teaching, learning, research, and more. |
+
+### Items in `interventionEffectivenesses`
+
+| Field | Required | Type | Description |
+|---|---|---|---|
+| `diagnosisDescriptor` | yes | descriptor URI | Targeted purpose of the intervention (e.g., attendance issue, dropout risk) for which the effectiveness is measured. |
+| `gradeLevelDescriptor` | yes | descriptor URI | Grade level for which effectiveness is measured. |
+| `populationServedDescriptor` | yes | descriptor URI | Population for which effectiveness is measured. |
+| `interventionEffectivenessRatingDescriptor` | yes | descriptor URI | An intervention demonstrates effectiveness if the research has shown that the program caused an improvement in outcomes. |
+| `improvementIndex` |  | integer (int32) | Along a percentile distribution of students, the improvement index represents the change in an average student's percentile rank that is considered to be due t… |
+
+### Items in `learningResourceMetadataURIs`
+
+| Field | Required | Type | Description |
+|---|---|---|---|
+| `learningResourceMetadataURI` | yes | string max 255 | The URI (typical a URL) pointing to the metadata entry in a LRMI metadata repository, which describes this content item. |
+
+### Items in `populationServeds`
+
+| Field | Required | Type | Description |
+|---|---|---|---|
+| `populationServedDescriptor` | yes | descriptor URI | A subset of students that are the focus of the intervention study. |
+
+### Items in `stateAbbreviations`
+
+| Field | Required | Type | Description |
+|---|---|---|---|
+| `stateAbbreviationDescriptor` | yes | descriptor URI | The abbreviation for the state (within the United States) or outlying area, the school system of which the participants of the study are considered to be a par… |
+
+### Items in `uris`
+
+| Field | Required | Type | Description |
+|---|---|---|---|
+| `uri` | yes | string max 255 | The URI (typical a URL) pointing to an education content item. |
+
 ## Endpoints
 
-- `DELETE /ed-fi/interventionStudies/{id}`
+- `GET /ed-fi/interventionStudies`
+- `POST /ed-fi/interventionStudies`
 - `GET /ed-fi/interventionStudies/deletes`
 - `GET /ed-fi/interventionStudies/keyChanges`
 - `GET /ed-fi/interventionStudies/partitions`
 - `GET /ed-fi/interventionStudies/{id}`
-- `GET /ed-fi/interventionStudies`
-- `POST /ed-fi/interventionStudies`
 - `PUT /ed-fi/interventionStudies/{id}`
+- `DELETE /ed-fi/interventionStudies/{id}`

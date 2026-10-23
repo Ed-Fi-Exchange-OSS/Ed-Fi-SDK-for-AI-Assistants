@@ -7,21 +7,15 @@ and more. Education content includes full courses, course materials, modules, in
 textbooks, streaming videos, tests, software, and any other tools, materials, or techniques used to support
 access to knowledge.
 
-## Natural key
-
-`contentIdentifier`
-
-_Derived from the OpenAPI metadata: identity fields plus required references. Reference rows below list the
-key fields inside each reference._
-
 ## Fields
 
-`key` = part of the natural key, `yes` = required.
+`yes` = required. The OpenAPI specification does not say which fields identify a record; for natural keys, see
+the Data Standard documentation.
 
 | Field | Required | Type | Description |
 |---|---|---|---|
-| `contentIdentifier` | key | string max 225 | A unique identifier for the education content. |
-| `learningStandardReference` |  | reference: `learningStandardId` |  |
+| `contentIdentifier` | yes | string max 225 | A unique identifier for the education content. |
+| `learningStandardReference` |  | reference; supply `learningStandardId` | A statement that describes a specific competency or academic standard. |
 | `additionalAuthorsIndicator` |  | boolean | Indicates whether there are additional un-named authors. |
 | `appropriateGradeLevels` |  | array of edFi_educationContentAppropriateGradeLevel | An unordered collection of educationContentAppropriateGradeLevels. |
 | `appropriateSexes` |  | array of edFi_educationContentAppropriateSex | An unordered collection of educationContentAppropriateSexes. |
@@ -45,13 +39,55 @@ key fields inside each reference._
 | `useRightsURL` |  | string max 255 | The URL where the owner specifies permissions for using the resource. |
 | `version` |  | string max 10 | The version identifier for the content. |
 
+### Items in `appropriateGradeLevels`
+
+| Field | Required | Type | Description |
+|---|---|---|---|
+| `gradeLevelDescriptor` | yes | descriptor URI | Grade levels for which this education content is applicable. |
+
+### Items in `appropriateSexes`
+
+| Field | Required | Type | Description |
+|---|---|---|---|
+| `sexDescriptor` | yes | descriptor URI | Sexes for which this education content is applicable. |
+
+### Items in `authors`
+
+| Field | Required | Type | Description |
+|---|---|---|---|
+| `author` | yes | string max 100 | The individual credited with the creation of the resource. |
+
+### Items in `derivativeSourceEducationContents`
+
+| Field | Required | Type | Description |
+|---|---|---|---|
+| `derivativeSourceEducationContentReference` | yes | reference; supply `contentIdentifier` | This entity represents materials for students or teachers that can be used for teaching, learning, research, and more. |
+
+### Items in `derivativeSourceLearningResourceMetadataURIs`
+
+| Field | Required | Type | Description |
+|---|---|---|---|
+| `derivativeSourceLearningResourceMetadataURI` | yes | string max 255 | The URI (typical a URL) pointing to the metadata entry in a LRMI metadata repository, which describes this content item. |
+
+### Items in `derivativeSourceURIs`
+
+| Field | Required | Type | Description |
+|---|---|---|---|
+| `derivativeSourceURI` | yes | string max 255 | The URI (typical a URL) pointing to an education content item. |
+
+### Items in `languages`
+
+| Field | Required | Type | Description |
+|---|---|---|---|
+| `languageDescriptor` | yes | descriptor URI | An indication of the languages in which the Education Content is designed. |
+
 ## Endpoints
 
-- `DELETE /ed-fi/educationContents/{id}`
+- `GET /ed-fi/educationContents`
+- `POST /ed-fi/educationContents`
 - `GET /ed-fi/educationContents/deletes`
 - `GET /ed-fi/educationContents/keyChanges`
 - `GET /ed-fi/educationContents/partitions`
 - `GET /ed-fi/educationContents/{id}`
-- `GET /ed-fi/educationContents`
-- `POST /ed-fi/educationContents`
 - `PUT /ed-fi/educationContents/{id}`
+- `DELETE /ed-fi/educationContents/{id}`

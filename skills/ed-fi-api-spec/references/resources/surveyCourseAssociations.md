@@ -4,29 +4,23 @@
 
 The course associated with the survey.
 
-## Natural key
-
-`courseReference`, `surveyReference`
-
-_Derived from the OpenAPI metadata: identity fields plus required references. Reference rows below list the
-key fields inside each reference._
-
 ## Fields
 
-`key` = part of the natural key, `yes` = required.
+`yes` = required. The OpenAPI specification does not say which fields identify a record; for natural keys, see
+the Data Standard documentation.
 
 | Field | Required | Type | Description |
 |---|---|---|---|
-| `courseReference` | key | reference: `courseCode`, `educationOrganizationId` |  |
-| `surveyReference` | key | reference: `namespace`, `surveyIdentifier` |  |
+| `courseReference` | yes | reference; supply `courseCode`, `educationOrganizationId` | This educational entity represents the organization of subject matter and related learning experiences provided for the instruction of students on a regular or… |
+| `surveyReference` | yes | reference; supply `namespace`, `surveyIdentifier` | A survey to identified or anonymous respondents. |
 
 ## Endpoints
 
-- `DELETE /ed-fi/surveyCourseAssociations/{id}`
+- `GET /ed-fi/surveyCourseAssociations`
+- `POST /ed-fi/surveyCourseAssociations`
 - `GET /ed-fi/surveyCourseAssociations/deletes`
 - `GET /ed-fi/surveyCourseAssociations/keyChanges`
 - `GET /ed-fi/surveyCourseAssociations/partitions`
 - `GET /ed-fi/surveyCourseAssociations/{id}`
-- `GET /ed-fi/surveyCourseAssociations`
-- `POST /ed-fi/surveyCourseAssociations`
 - `PUT /ed-fi/surveyCourseAssociations/{id}`
+- `DELETE /ed-fi/surveyCourseAssociations/{id}`

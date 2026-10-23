@@ -4,21 +4,15 @@
 
 The legal document giving authorization to perform teaching assignment services.
 
-## Natural key
-
-`credentialIdentifier`, `stateOfIssueStateAbbreviationDescriptor`
-
-_Derived from the OpenAPI metadata: identity fields plus required references. Reference rows below list the
-key fields inside each reference._
-
 ## Fields
 
-`key` = part of the natural key, `yes` = required.
+`yes` = required. The OpenAPI specification does not say which fields identify a record; for natural keys, see
+the Data Standard documentation.
 
 | Field | Required | Type | Description |
 |---|---|---|---|
-| `credentialIdentifier` | key | string max 60 | Identifier or serial number assigned to the credential. |
-| `stateOfIssueStateAbbreviationDescriptor` | key | descriptor URI | The abbreviation for the name of the state (within the United States) or extra-state jurisdiction in which a license/credential was issued. |
+| `credentialIdentifier` | yes | string max 60 | Identifier or serial number assigned to the credential. |
+| `stateOfIssueStateAbbreviationDescriptor` | yes | descriptor URI | The abbreviation for the name of the state (within the United States) or extra-state jurisdiction in which a license/credential was issued. |
 | `academicSubjects` |  | array of edFi_credentialAcademicSubject | An unordered collection of credentialAcademicSubjects. |
 | `credentialFieldDescriptor` |  | descriptor URI | The field of certification for the certificate (e.g., Mathematics, Music). |
 | `credentialTypeDescriptor` | yes | descriptor URI | An indication of the category of credential an individual holds. |
@@ -32,13 +26,31 @@ key fields inside each reference._
 | `teachingCredentialDescriptor` |  | descriptor URI | An indication of the category of a legal document giving authorization to perform teaching assignment services. |
 | `_ext` |  | credentialExtensions |  |
 
+### Items in `academicSubjects`
+
+| Field | Required | Type | Description |
+|---|---|---|---|
+| `academicSubjectDescriptor` | yes | descriptor URI | The academic subjects to which the credential pertains. |
+
+### Items in `endorsements`
+
+| Field | Required | Type | Description |
+|---|---|---|---|
+| `credentialEndorsement` | yes | string max 255 | Endorsements are attachments to teaching certificates and indicate areas of specialization. |
+
+### Items in `gradeLevels`
+
+| Field | Required | Type | Description |
+|---|---|---|---|
+| `gradeLevelDescriptor` | yes | descriptor URI | The grade level(s) certified for teaching. |
+
 ## Endpoints
 
-- `DELETE /ed-fi/credentials/{id}`
+- `GET /ed-fi/credentials`
+- `POST /ed-fi/credentials`
 - `GET /ed-fi/credentials/deletes`
 - `GET /ed-fi/credentials/keyChanges`
 - `GET /ed-fi/credentials/partitions`
 - `GET /ed-fi/credentials/{id}`
-- `GET /ed-fi/credentials`
-- `POST /ed-fi/credentials`
 - `PUT /ed-fi/credentials/{id}`
+- `DELETE /ed-fi/credentials/{id}`

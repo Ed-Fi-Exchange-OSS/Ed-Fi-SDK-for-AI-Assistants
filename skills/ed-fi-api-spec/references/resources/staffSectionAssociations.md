@@ -6,22 +6,16 @@ This association indicates the class sections to which a staff member is assigne
 
 Also searched as: teacher.
 
-## Natural key
-
-`beginDate`, `sectionReference`, `staffReference`
-
-_Derived from the OpenAPI metadata: identity fields plus required references. Reference rows below list the
-key fields inside each reference._
-
 ## Fields
 
-`key` = part of the natural key, `yes` = required.
+`yes` = required. The OpenAPI specification does not say which fields identify a record; for natural keys, see
+the Data Standard documentation.
 
 | Field | Required | Type | Description |
 |---|---|---|---|
-| `beginDate` | key | string (date) | Month, day, and year of a teacher's assignment to the section. |
-| `sectionReference` | key | reference: `localCourseCode`, `schoolId`, `schoolYear`, `sectionIdentifier`, `sessionName` |  |
-| `staffReference` | key | reference: `staffUniqueId` |  |
+| `beginDate` | yes | string (date) | Month, day, and year of a teacher's assignment to the section. |
+| `sectionReference` | yes | reference; supply `localCourseCode`, `schoolId`, `schoolYear`, `sectionIdentifier`, `sessionName` | This entity represents a setting in which organized instruction of course content is provided, in-person or otherwise, to one or more students for a given peri… |
+| `staffReference` | yes | reference; supply `staffUniqueId` | This entity represents an individual who performs specified activities for any public or private education institution or agency that provides instructional an… |
 | `classroomPositionDescriptor` | yes | descriptor URI | The type of position the staff member holds in the specific class/section. |
 | `endDate` |  | string (date) | Month, day, and year of the last day of a staff member's assignment to the section. |
 | `highlyQualifiedTeacher` |  | boolean | An indication of whether a teacher is classified as highly qualified for his/her assignment according to state definition. |
@@ -30,11 +24,11 @@ key fields inside each reference._
 
 ## Endpoints
 
-- `DELETE /ed-fi/staffSectionAssociations/{id}`
+- `GET /ed-fi/staffSectionAssociations`
+- `POST /ed-fi/staffSectionAssociations`
 - `GET /ed-fi/staffSectionAssociations/deletes`
 - `GET /ed-fi/staffSectionAssociations/keyChanges`
 - `GET /ed-fi/staffSectionAssociations/partitions`
 - `GET /ed-fi/staffSectionAssociations/{id}`
-- `GET /ed-fi/staffSectionAssociations`
-- `POST /ed-fi/staffSectionAssociations`
 - `PUT /ed-fi/staffSectionAssociations/{id}`
+- `DELETE /ed-fi/staffSectionAssociations/{id}`

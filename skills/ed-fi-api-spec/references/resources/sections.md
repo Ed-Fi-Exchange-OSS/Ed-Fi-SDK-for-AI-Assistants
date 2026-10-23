@@ -8,24 +8,17 @@ one section.
 
 Also searched as: class.
 
-## Natural key
-
-`sectionIdentifier`, `courseOfferingReference`. The natural key can be changed with PUT (cascading key
-updates).
-
-_Derived from the OpenAPI metadata: identity fields plus required references. Reference rows below list the
-key fields inside each reference._
-
 ## Fields
 
-`key` = part of the natural key, `yes` = required.
+`yes` = required. The OpenAPI specification does not say which fields identify a record; for natural keys, see
+the Data Standard documentation.
 
 | Field | Required | Type | Description |
 |---|---|---|---|
-| `sectionIdentifier` | key | string max 255 | The local identifier assigned to a section. |
-| `courseOfferingReference` | key | reference: `localCourseCode`, `schoolId`, `schoolYear`, `sessionName` |  |
-| `locationReference` |  | reference: `classroomIdentificationCode`, `schoolId` |  |
-| `locationSchoolReference` |  | reference: `schoolId` |  |
+| `sectionIdentifier` | yes | string max 255 | The local identifier assigned to a section. |
+| `courseOfferingReference` | yes | reference; supply `localCourseCode`, `schoolId`, `schoolYear`, `sessionName` | This entity represents an entry in the course catalog of available courses offered by the school during a session. |
+| `locationReference` |  | reference; supply `classroomIdentificationCode`, `schoolId` | This entity represents the physical space where students gather for a particular class/section. |
+| `locationSchoolReference` |  | reference; supply `schoolId` | This entity represents an educational organization that includes staff and students who participate in classes and educational activity groups. |
 | `availableCreditConversion` |  | number (double) | Conversion factor that when multiplied by the number of credits is equivalent to Carnegie units. |
 | `availableCredits` |  | number (double) | The value of credits or units of value awarded for the completion of a course. |
 | `availableCreditTypeDescriptor` |  | descriptor URI | The type of credits or units of value awarded for the completion of a course. |
@@ -43,13 +36,43 @@ key fields inside each reference._
 | `sectionTypeDescriptor` |  | descriptor URI | Specifies whether the section is for attendance only, credit only, or both. |
 | `sequenceOfCourse` |  | integer (int32) | When a section is part of a sequence of parts for a course, the number of the sequence. |
 
+### Items in `characteristics`
+
+| Field | Required | Type | Description |
+|---|---|---|---|
+| `sectionCharacteristicDescriptor` | yes | descriptor URI | Reflects important characteristics of the section, such as whether or not attendance is taken and the section is graded. |
+
+### Items in `classPeriods`
+
+| Field | Required | Type | Description |
+|---|---|---|---|
+| `classPeriodReference` | yes | reference; supply `classPeriodName`, `schoolId` | This entity represents the designation of a regularly scheduled series of class meetings at designated times and days of the week. |
+
+### Items in `courseLevelCharacteristics`
+
+| Field | Required | Type | Description |
+|---|---|---|---|
+| `courseLevelCharacteristicDescriptor` | yes | descriptor URI | The type of specific program or designation with which the section is associated. |
+
+### Items in `offeredGradeLevels`
+
+| Field | Required | Type | Description |
+|---|---|---|---|
+| `gradeLevelDescriptor` | yes | descriptor URI | The grade levels in which the section is offered. |
+
+### Items in `programs`
+
+| Field | Required | Type | Description |
+|---|---|---|---|
+| `programReference` | yes | reference; supply `educationOrganizationId`, `programName`, `programTypeDescriptor` | This entity represents any program designed to work in conjunction with, or as a supplement to, the main academic program. |
+
 ## Endpoints
 
-- `DELETE /ed-fi/sections/{id}`
+- `GET /ed-fi/sections`
+- `POST /ed-fi/sections`
 - `GET /ed-fi/sections/deletes`
 - `GET /ed-fi/sections/keyChanges`
 - `GET /ed-fi/sections/partitions`
 - `GET /ed-fi/sections/{id}`
-- `GET /ed-fi/sections`
-- `POST /ed-fi/sections`
 - `PUT /ed-fi/sections/{id}`
+- `DELETE /ed-fi/sections/{id}`

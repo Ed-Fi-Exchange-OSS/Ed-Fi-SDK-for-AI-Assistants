@@ -4,30 +4,30 @@
 
 The type of scheduled or unscheduled event for the day.
 
-## Natural key
-
-`date`, `calendarReference`
-
-_Derived from the OpenAPI metadata: identity fields plus required references. Reference rows below list the
-key fields inside each reference._
-
 ## Fields
 
-`key` = part of the natural key, `yes` = required.
+`yes` = required. The OpenAPI specification does not say which fields identify a record; for natural keys, see
+the Data Standard documentation.
 
 | Field | Required | Type | Description |
 |---|---|---|---|
 | `calendarEvents` | yes | array of edFi_calendarDateCalendarEvent | An unordered collection of calendarDateCalendarEvents. |
-| `date` | key | string (date) | The month, day, and year of the calendar event. |
-| `calendarReference` | key | reference: `calendarCode`, `schoolId`, `schoolYear` |  |
+| `date` | yes | string (date) | The month, day, and year of the calendar event. |
+| `calendarReference` | yes | reference; supply `calendarCode`, `schoolId`, `schoolYear` | A set of dates associated with an organization. |
+
+### Items in `calendarEvents`
+
+| Field | Required | Type | Description |
+|---|---|---|---|
+| `calendarEventDescriptor` | yes | descriptor URI | The type of scheduled or unscheduled event for the day. |
 
 ## Endpoints
 
-- `DELETE /ed-fi/calendarDates/{id}`
+- `GET /ed-fi/calendarDates`
+- `POST /ed-fi/calendarDates`
 - `GET /ed-fi/calendarDates/deletes`
 - `GET /ed-fi/calendarDates/keyChanges`
 - `GET /ed-fi/calendarDates/partitions`
 - `GET /ed-fi/calendarDates/{id}`
-- `GET /ed-fi/calendarDates`
-- `POST /ed-fi/calendarDates`
 - `PUT /ed-fi/calendarDates/{id}`
+- `DELETE /ed-fi/calendarDates/{id}`

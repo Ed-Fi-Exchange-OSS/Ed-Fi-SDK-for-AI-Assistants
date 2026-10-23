@@ -5,30 +5,30 @@
 The parts organized for administering an assessessment which together provide a comprehensive assessment of
 the students.
 
-## Natural key
-
-`assessmentBatteryPartName`, `assessmentReference`
-
-_Derived from the OpenAPI metadata: identity fields plus required references. Reference rows below list the
-key fields inside each reference._
-
 ## Fields
 
-`key` = part of the natural key, `yes` = required.
+`yes` = required. The OpenAPI specification does not say which fields identify a record; for natural keys, see
+the Data Standard documentation.
 
 | Field | Required | Type | Description |
 |---|---|---|---|
-| `assessmentBatteryPartName` | key | string max 65 | The name of the part of an assessment battery. |
-| `assessmentReference` | key | reference: `assessmentIdentifier`, `namespace` |  |
+| `assessmentBatteryPartName` | yes | string max 65 | The name of the part of an assessment battery. |
+| `assessmentReference` | yes | reference; supply `assessmentIdentifier`, `namespace` | This entity represents a tool, instrument, process, or exhibition composed of a systematic sampling of behavior for measuring a student's competence, knowledge… |
 | `objectiveAssessments` |  | array of edFi_assessmentBatteryPartObjectiveAssessment | An unordered collection of assessmentBatteryPartObjectiveAssessments. |
+
+### Items in `objectiveAssessments`
+
+| Field | Required | Type | Description |
+|---|---|---|---|
+| `objectiveAssessmentReference` | yes | reference; supply `assessmentIdentifier`, `identificationCode`, `namespace` | This entity represents subtests that assess specific learning objectives. |
 
 ## Endpoints
 
-- `DELETE /ed-fi/assessmentBatteryParts/{id}`
+- `GET /ed-fi/assessmentBatteryParts`
+- `POST /ed-fi/assessmentBatteryParts`
 - `GET /ed-fi/assessmentBatteryParts/deletes`
 - `GET /ed-fi/assessmentBatteryParts/keyChanges`
 - `GET /ed-fi/assessmentBatteryParts/partitions`
 - `GET /ed-fi/assessmentBatteryParts/{id}`
-- `GET /ed-fi/assessmentBatteryParts`
-- `POST /ed-fi/assessmentBatteryParts`
 - `PUT /ed-fi/assessmentBatteryParts/{id}`
+- `DELETE /ed-fi/assessmentBatteryParts/{id}`

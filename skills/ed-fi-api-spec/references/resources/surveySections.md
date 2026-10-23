@@ -4,29 +4,23 @@
 
 The section of questions for the survey.
 
-## Natural key
-
-`surveySectionTitle`, `surveyReference`
-
-_Derived from the OpenAPI metadata: identity fields plus required references. Reference rows below list the
-key fields inside each reference._
-
 ## Fields
 
-`key` = part of the natural key, `yes` = required.
+`yes` = required. The OpenAPI specification does not say which fields identify a record; for natural keys, see
+the Data Standard documentation.
 
 | Field | Required | Type | Description |
 |---|---|---|---|
-| `surveySectionTitle` | key | string max 255 | The title or label for the survey section. |
-| `surveyReference` | key | reference: `namespace`, `surveyIdentifier` |  |
+| `surveySectionTitle` | yes | string max 255 | The title or label for the survey section. |
+| `surveyReference` | yes | reference; supply `namespace`, `surveyIdentifier` | A survey to identified or anonymous respondents. |
 
 ## Endpoints
 
-- `DELETE /ed-fi/surveySections/{id}`
+- `GET /ed-fi/surveySections`
+- `POST /ed-fi/surveySections`
 - `GET /ed-fi/surveySections/deletes`
 - `GET /ed-fi/surveySections/keyChanges`
 - `GET /ed-fi/surveySections/partitions`
 - `GET /ed-fi/surveySections/{id}`
-- `GET /ed-fi/surveySections`
-- `POST /ed-fi/surveySections`
 - `PUT /ed-fi/surveySections/{id}`
+- `DELETE /ed-fi/surveySections/{id}`

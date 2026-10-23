@@ -45,7 +45,7 @@ Every descriptor resource has the same shape: `namespace`, `codeValue`, `shortDe
 - `contactTypeDescriptors`: This descriptor defines the set of contact types.
 - `contentClassDescriptors`: The predominate type or kind characterizing the learning resource.
 - `continuationOfServicesReasonDescriptors`: In the Migrant Education program, a provision allows continuation of services after a child is no longer considered migratory for certain r…
-- `costRateDescriptors`: The rate by which a cost applies (e.g.
+- `costRateDescriptors`: The rate by which a cost applies (e.g. $1 per student).
 - `coteachingStyleObservedDescriptors`: A type of co-teaching observed as part of the performance evaluation.
 - `countryDescriptors`: This descriptor defines the name and code of the country.
 - `courseAttemptResultDescriptors`: The result from the student's attempt to take the course.
@@ -143,7 +143,7 @@ Every descriptor resource has the same shape: `namespace`, `codeValue`, `shortDe
 - `monitoredDescriptors`: This descriptor defines monitorization statuses for students who are no longer receiving language instruction program services.
 - `neglectedOrDelinquentProgramDescriptors`: This descriptor defines the type of program under ESEA Title I, Part D, Subpart 1 (state programs) or Subpart 2 (LEA).
 - `neglectedOrDelinquentProgramServiceDescriptors`: This descriptor defines the services provided by an education organization to populations of students associated with a neglected or delinq…
-- `networkPurposeDescriptors`: The purpose(s) of the network, e.g.
+- `networkPurposeDescriptors`: The purpose(s) of the network, e.g. shared services, collective procurement, etc.
 - `nonMedicalImmunizationExemptionDescriptors`: The type of nonmedical exemption from vaccination claimed by the student's parent or guardian.
 - `objectiveRatingLevelDescriptors`: Rating levels for Evaluation Objectives.
 - `operationalStatusDescriptors`: The current operational status of the education organization (e.g., active, inactive).

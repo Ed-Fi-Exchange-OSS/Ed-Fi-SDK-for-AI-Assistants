@@ -7,23 +7,17 @@ Students program(s) that a student participates in or from which the student rec
 association is a subclass of the GeneralStudentProgramAssociation specifically designed for language
 instruction programs.
 
-## Natural key
-
-`beginDate`, `educationOrganizationReference`, `programReference`, `studentReference`
-
-_Derived from the OpenAPI metadata: identity fields plus required references. Reference rows below list the
-key fields inside each reference._
-
 ## Fields
 
-`key` = part of the natural key, `yes` = required.
+`yes` = required. The OpenAPI specification does not say which fields identify a record; for natural keys, see
+the Data Standard documentation.
 
 | Field | Required | Type | Description |
 |---|---|---|---|
-| `beginDate` | key | string (date) | The earliest date the student is involved with the program. |
-| `educationOrganizationReference` | key | reference: `educationOrganizationId` |  |
-| `programReference` | key | reference: `educationOrganizationId`, `programName`, `programTypeDescriptor` |  |
-| `studentReference` | key | reference: `studentUniqueId` |  |
+| `beginDate` | yes | string (date) | The earliest date the student is involved with the program. |
+| `educationOrganizationReference` | yes | reference; supply `educationOrganizationId` | Reference to educationOrganization. |
+| `programReference` | yes | reference; supply `educationOrganizationId`, `programName`, `programTypeDescriptor` | This entity represents any program designed to work in conjunction with, or as a supplement to, the main academic program. |
+| `studentReference` | yes | reference; supply `studentUniqueId` | This entity represents an individual for whom instruction, services, and/or care are provided in an early childhood, elementary, or secondary educational progr… |
 | `dosage` |  | integer (int32) | The duration of time in minutes for which the student was assigned to participate in the program. |
 | `endDate` |  | string (date) | The month, day, and year on which the student exited the program or stopped receiving services. |
 | `englishLanguageProficiencyAssessments` |  | array of edFi_studentLanguageInstructionProgramAssociationEnglishLanguageProficiencyAssessment | An unordered collection of studentLanguageInstructionProgramAssociationEnglishLanguageProficiencyAssessments. |
@@ -33,13 +27,41 @@ key fields inside each reference._
 | `reasonExitedDescriptor` |  | descriptor URI | The reason the student left the program within a school or district. |
 | `servedOutsideOfRegularSession` |  | boolean | Indicates whether the student received services during the summer session or between sessions. |
 
+### Items in `englishLanguageProficiencyAssessments`
+
+| Field | Required | Type | Description |
+|---|---|---|---|
+| `monitoredDescriptor` |  | descriptor URI | Student is monitored on content achievement who are no longer receiving services. |
+| `participationDescriptor` |  | descriptor URI | Field indicating the participation in the yearly English language assessment. |
+| `proficiencyDescriptor` |  | descriptor URI | The proficiency level for the yearly English language assessment. |
+| `progressDescriptor` |  | descriptor URI | The yearly progress or growth from last year's assessment. |
+| `schoolYearTypeReference` | yes | reference; supply `schoolYear` | Identifier for a school year. |
+
+### Items in `languageInstructionProgramServices`
+
+| Field | Required | Type | Description |
+|---|---|---|---|
+| `languageInstructionProgramServiceDescriptor` | yes | descriptor URI | Indicates the service being provided to the student by the language instruction program. |
+| `primaryIndicator` |  | boolean | True if service is a primary service. |
+| `serviceBeginDate` |  | string (date) | First date the student was in this option for the current school year. |
+| `serviceEndDate` |  | string (date) | Last date the student was in this option for the current school year. |
+
+### Items in `programParticipationStatuses`
+
+| Field | Required | Type | Description |
+|---|---|---|---|
+| `participationStatusDescriptor` | yes | descriptor URI | The student's program participation status. |
+| `statusBeginDate` | yes | string (date) | The date the student's program participation status began. |
+| `designatedBy` |  | string max 60 | The person, organization, or department that designated the participation status. |
+| `statusEndDate` |  | string (date) | The date the student's program participation status ended. |
+
 ## Endpoints
 
-- `DELETE /ed-fi/studentLanguageInstructionProgramAssociations/{id}`
+- `GET /ed-fi/studentLanguageInstructionProgramAssociations`
+- `POST /ed-fi/studentLanguageInstructionProgramAssociations`
 - `GET /ed-fi/studentLanguageInstructionProgramAssociations/deletes`
 - `GET /ed-fi/studentLanguageInstructionProgramAssociations/keyChanges`
 - `GET /ed-fi/studentLanguageInstructionProgramAssociations/partitions`
 - `GET /ed-fi/studentLanguageInstructionProgramAssociations/{id}`
-- `GET /ed-fi/studentLanguageInstructionProgramAssociations`
-- `POST /ed-fi/studentLanguageInstructionProgramAssociations`
 - `PUT /ed-fi/studentLanguageInstructionProgramAssociations/{id}`
+- `DELETE /ed-fi/studentLanguageInstructionProgramAssociations/{id}`

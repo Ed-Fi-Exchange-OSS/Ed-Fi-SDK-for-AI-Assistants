@@ -5,21 +5,15 @@
 An implementation of an instructional approach focusing on the specific techniques and materials used to teach
 a given subject.
 
-## Natural key
-
-`interventionIdentificationCode`, `educationOrganizationReference`
-
-_Derived from the OpenAPI metadata: identity fields plus required references. Reference rows below list the
-key fields inside each reference._
-
 ## Fields
 
-`key` = part of the natural key, `yes` = required.
+`yes` = required. The OpenAPI specification does not say which fields identify a record; for natural keys, see
+the Data Standard documentation.
 
 | Field | Required | Type | Description |
 |---|---|---|---|
-| `interventionIdentificationCode` | key | string max 60 | A unique number or alphanumeric code assigned to an intervention. |
-| `educationOrganizationReference` | key | reference: `educationOrganizationId` |  |
+| `interventionIdentificationCode` | yes | string max 60 | A unique number or alphanumeric code assigned to an intervention. |
+| `educationOrganizationReference` | yes | reference; supply `educationOrganizationId` | Reference to educationOrganization. |
 | `appropriateGradeLevels` |  | array of edFi_interventionAppropriateGradeLevel | An unordered collection of interventionAppropriateGradeLevels. |
 | `appropriateSexes` |  | array of edFi_interventionAppropriateSex | An unordered collection of interventionAppropriateSexes. |
 | `beginDate` | yes | string (date) | The start date for the intervention implementation. |
@@ -38,13 +32,74 @@ key fields inside each reference._
 | `staffs` |  | array of edFi_interventionStaff | An unordered collection of interventionStaffs. |
 | `uris` |  | array of edFi_interventionURI | An unordered collection of interventionURIs. |
 
+### Items in `appropriateGradeLevels`
+
+| Field | Required | Type | Description |
+|---|---|---|---|
+| `gradeLevelDescriptor` | yes | descriptor URI | Grade levels for the intervention. |
+
+### Items in `appropriateSexes`
+
+| Field | Required | Type | Description |
+|---|---|---|---|
+| `sexDescriptor` | yes | descriptor URI | Sexes for the intervention. |
+
+### Items in `diagnoses`
+
+| Field | Required | Type | Description |
+|---|---|---|---|
+| `diagnosisDescriptor` | yes | descriptor URI | Targeted purpose of the intervention. |
+
+### Items in `educationContents`
+
+| Field | Required | Type | Description |
+|---|---|---|---|
+| `educationContentReference` | yes | reference; supply `contentIdentifier` | This entity represents materials for students or teachers that can be used for teaching, learning, research, and more. |
+
+### Items in `interventionPrescriptions`
+
+| Field | Required | Type | Description |
+|---|---|---|---|
+| `interventionPrescriptionReference` | yes | reference; supply `educationOrganizationId`, `interventionPrescriptionIdentificationCode` | This entity represents a formal prescription of an instructional approach focusing on the specific techniques and materials used to teach a given subject. |
+
+### Items in `learningResourceMetadataURIs`
+
+| Field | Required | Type | Description |
+|---|---|---|---|
+| `learningResourceMetadataURI` | yes | string max 255 | The URI (typical a URL) pointing to the metadata entry in a LRMI metadata repository, which describes this content item. |
+
+### Items in `meetingTimes`
+
+| Field | Required | Type | Description |
+|---|---|---|---|
+| `endTime` | yes | string | An indication of the time of day the meeting time ends. |
+| `startTime` | yes | string | An indication of the time of day the meeting time begins. |
+
+### Items in `populationServeds`
+
+| Field | Required | Type | Description |
+|---|---|---|---|
+| `populationServedDescriptor` | yes | descriptor URI | A subset of students that are the focus of the intervention. |
+
+### Items in `staffs`
+
+| Field | Required | Type | Description |
+|---|---|---|---|
+| `staffReference` | yes | reference; supply `staffUniqueId` | This entity represents an individual who performs specified activities for any public or private education institution or agency that provides instructional an… |
+
+### Items in `uris`
+
+| Field | Required | Type | Description |
+|---|---|---|---|
+| `uri` | yes | string max 255 | The URI (typical a URL) pointing to an education content item. |
+
 ## Endpoints
 
-- `DELETE /ed-fi/interventions/{id}`
+- `GET /ed-fi/interventions`
+- `POST /ed-fi/interventions`
 - `GET /ed-fi/interventions/deletes`
 - `GET /ed-fi/interventions/keyChanges`
 - `GET /ed-fi/interventions/partitions`
 - `GET /ed-fi/interventions/{id}`
-- `GET /ed-fi/interventions`
-- `POST /ed-fi/interventions`
 - `PUT /ed-fi/interventions/{id}`
+- `DELETE /ed-fi/interventions/{id}`

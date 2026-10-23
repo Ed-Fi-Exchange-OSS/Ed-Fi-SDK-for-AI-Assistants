@@ -4,30 +4,24 @@
 
 Optional information about the responses provided for a section of a survey.
 
-## Natural key
-
-`surveyResponseReference`, `surveySectionReference`
-
-_Derived from the OpenAPI metadata: identity fields plus required references. Reference rows below list the
-key fields inside each reference._
-
 ## Fields
 
-`key` = part of the natural key, `yes` = required.
+`yes` = required. The OpenAPI specification does not say which fields identify a record; for natural keys, see
+the Data Standard documentation.
 
 | Field | Required | Type | Description |
 |---|---|---|---|
-| `surveyResponseReference` | key | reference: `namespace`, `surveyIdentifier`, `surveyResponseIdentifier` |  |
-| `surveySectionReference` | key | reference: `namespace`, `surveyIdentifier`, `surveySectionTitle` |  |
+| `surveyResponseReference` | yes | reference; supply `namespace`, `surveyIdentifier`, `surveyResponseIdentifier` | Responses to a Survey for named or anonymous persons. |
+| `surveySectionReference` | yes | reference; supply `namespace`, `surveyIdentifier`, `surveySectionTitle` | The section of questions for the survey. |
 | `sectionRating` |  | number (double) | Numeric rating computed from the survey responses for the section. |
 
 ## Endpoints
 
-- `DELETE /ed-fi/surveySectionResponses/{id}`
+- `GET /ed-fi/surveySectionResponses`
+- `POST /ed-fi/surveySectionResponses`
 - `GET /ed-fi/surveySectionResponses/deletes`
 - `GET /ed-fi/surveySectionResponses/keyChanges`
 - `GET /ed-fi/surveySectionResponses/partitions`
 - `GET /ed-fi/surveySectionResponses/{id}`
-- `GET /ed-fi/surveySectionResponses`
-- `POST /ed-fi/surveySectionResponses`
 - `PUT /ed-fi/surveySectionResponses/{id}`
+- `DELETE /ed-fi/surveySectionResponses/{id}`

@@ -4,32 +4,26 @@
 
 This association indicates the staff associated with a cohort of students.
 
-## Natural key
-
-`beginDate`, `cohortReference`, `staffReference`
-
-_Derived from the OpenAPI metadata: identity fields plus required references. Reference rows below list the
-key fields inside each reference._
-
 ## Fields
 
-`key` = part of the natural key, `yes` = required.
+`yes` = required. The OpenAPI specification does not say which fields identify a record; for natural keys, see
+the Data Standard documentation.
 
 | Field | Required | Type | Description |
 |---|---|---|---|
-| `beginDate` | key | string (date) | Start date for the association of staff to this cohort. |
-| `cohortReference` | key | reference: `cohortIdentifier`, `educationOrganizationId` |  |
-| `staffReference` | key | reference: `staffUniqueId` |  |
+| `beginDate` | yes | string (date) | Start date for the association of staff to this cohort. |
+| `cohortReference` | yes | reference; supply `cohortIdentifier`, `educationOrganizationId` | This entity represents any type of list of designated students for tracking, analysis, or intervention. |
+| `staffReference` | yes | reference; supply `staffUniqueId` | This entity represents an individual who performs specified activities for any public or private education institution or agency that provides instructional an… |
 | `endDate` |  | string (date) | End date for the association of staff to this cohort. |
 | `studentRecordAccess` |  | boolean | Indicator of whether the staff has access to the student records of the cohort per district interpretation of FERPA and other privacy laws, regulations, and po… |
 
 ## Endpoints
 
-- `DELETE /ed-fi/staffCohortAssociations/{id}`
+- `GET /ed-fi/staffCohortAssociations`
+- `POST /ed-fi/staffCohortAssociations`
 - `GET /ed-fi/staffCohortAssociations/deletes`
 - `GET /ed-fi/staffCohortAssociations/keyChanges`
 - `GET /ed-fi/staffCohortAssociations/partitions`
 - `GET /ed-fi/staffCohortAssociations/{id}`
-- `GET /ed-fi/staffCohortAssociations`
-- `POST /ed-fi/staffCohortAssociations`
 - `PUT /ed-fi/staffCohortAssociations/{id}`
+- `DELETE /ed-fi/staffCohortAssociations/{id}`

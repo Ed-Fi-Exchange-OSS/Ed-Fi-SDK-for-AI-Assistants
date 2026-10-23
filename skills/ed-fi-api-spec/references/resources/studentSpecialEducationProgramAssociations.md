@@ -6,23 +6,17 @@ This association represents the special education program(s) that a student part
 services from. The association is a subclass of the GeneralStudentProgramAssociation specifically designed for
 special education programs.
 
-## Natural key
-
-`beginDate`, `educationOrganizationReference`, `programReference`, `studentReference`
-
-_Derived from the OpenAPI metadata: identity fields plus required references. Reference rows below list the
-key fields inside each reference._
-
 ## Fields
 
-`key` = part of the natural key, `yes` = required.
+`yes` = required. The OpenAPI specification does not say which fields identify a record; for natural keys, see
+the Data Standard documentation.
 
 | Field | Required | Type | Description |
 |---|---|---|---|
-| `beginDate` | key | string (date) | The earliest date the student is involved with the program. |
-| `educationOrganizationReference` | key | reference: `educationOrganizationId` |  |
-| `programReference` | key | reference: `educationOrganizationId`, `programName`, `programTypeDescriptor` |  |
-| `studentReference` | key | reference: `studentUniqueId` |  |
+| `beginDate` | yes | string (date) | The earliest date the student is involved with the program. |
+| `educationOrganizationReference` | yes | reference; supply `educationOrganizationId` | Reference to educationOrganization. |
+| `programReference` | yes | reference; supply `educationOrganizationId`, `programName`, `programTypeDescriptor` | This entity represents any program designed to work in conjunction with, or as a supplement to, the main academic program. |
+| `studentReference` | yes | reference; supply `studentUniqueId` | This entity represents an individual for whom instruction, services, and/or care are provided in an early childhood, elementary, or secondary educational progr… |
 | `disabilities` |  | array of edFi_studentSpecialEducationProgramAssociationDisability | An unordered collection of studentSpecialEducationProgramAssociationDisabilities. |
 | `endDate` |  | string (date) | The month, day, and year on which the student exited the program or stopped receiving services. |
 | `ideaEligibility` |  | boolean | Indicator of the eligibility of the student to receive special education services according to the Individuals with Disabilities Education Act (IDEA). |
@@ -46,13 +40,49 @@ key fields inside each reference._
 | `specialEducationProgramServices` |  | array of edFi_studentSpecialEducationProgramAssociationSpecialEducationProgramService | An unordered collection of studentSpecialEducationProgramAssociationSpecialEducationProgramServices. |
 | `specialEducationSettingDescriptor` |  | descriptor URI | The major instructional setting (more than 50 percent of a student's special education program). |
 
+### Items in `disabilities`
+
+| Field | Required | Type | Description |
+|---|---|---|---|
+| `disabilityDescriptor` | yes | descriptor URI | A disability category that describes a individual's impairment. |
+| `disabilityDeterminationSourceTypeDescriptor` |  | descriptor URI | The source that provided the disability determination. |
+| `disabilityDiagnosis` |  | string max 80 | A description of the disability diagnosis. |
+| `orderOfDisability` |  | integer (int32) | The order by severity of individual's disabilities: 1- Primary, 2 - Secondary, 3 - Tertiary, etc. |
+| `designations` |  | array of edFi_studentSpecialEducationProgramAssociationDisabilityDesignation | An unordered collection of studentSpecialEducationProgramAssociationDisabilityDesignations. |
+
+### Items in `programParticipationStatuses`
+
+| Field | Required | Type | Description |
+|---|---|---|---|
+| `participationStatusDescriptor` | yes | descriptor URI | The student's program participation status. |
+| `statusBeginDate` | yes | string (date) | The date the student's program participation status began. |
+| `designatedBy` |  | string max 60 | The person, organization, or department that designated the participation status. |
+| `statusEndDate` |  | string (date) | The date the student's program participation status ended. |
+
+### Items in `serviceProviders`
+
+| Field | Required | Type | Description |
+|---|---|---|---|
+| `primaryProvider` |  | boolean | Primary ServiceProvider. |
+| `staffReference` | yes | reference; supply `staffUniqueId` | This entity represents an individual who performs specified activities for any public or private education institution or agency that provides instructional an… |
+
+### Items in `specialEducationProgramServices`
+
+| Field | Required | Type | Description |
+|---|---|---|---|
+| `specialEducationProgramServiceDescriptor` | yes | descriptor URI | Indicates the service being provided to the student by the special education program. |
+| `primaryIndicator` |  | boolean | True if service is a primary service. |
+| `serviceBeginDate` |  | string (date) | First date the student was in this option for the current school year. |
+| `serviceEndDate` |  | string (date) | Last date the student was in this option for the current school year. |
+| `providers` |  | array of edFi_studentSpecialEducationProgramAssociationSpecialEducationProgramServiceProvider | An unordered collection of studentSpecialEducationProgramAssociationSpecialEducationProgramServiceProviders. |
+
 ## Endpoints
 
-- `DELETE /ed-fi/studentSpecialEducationProgramAssociations/{id}`
+- `GET /ed-fi/studentSpecialEducationProgramAssociations`
+- `POST /ed-fi/studentSpecialEducationProgramAssociations`
 - `GET /ed-fi/studentSpecialEducationProgramAssociations/deletes`
 - `GET /ed-fi/studentSpecialEducationProgramAssociations/keyChanges`
 - `GET /ed-fi/studentSpecialEducationProgramAssociations/partitions`
 - `GET /ed-fi/studentSpecialEducationProgramAssociations/{id}`
-- `GET /ed-fi/studentSpecialEducationProgramAssociations`
-- `POST /ed-fi/studentSpecialEducationProgramAssociations`
 - `PUT /ed-fi/studentSpecialEducationProgramAssociations/{id}`
+- `DELETE /ed-fi/studentSpecialEducationProgramAssociations/{id}`

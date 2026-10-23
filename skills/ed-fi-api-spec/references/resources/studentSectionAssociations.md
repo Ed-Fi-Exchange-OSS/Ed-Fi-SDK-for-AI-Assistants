@@ -4,24 +4,17 @@
 
 This association indicates the course sections to which a student is assigned.
 
-## Natural key
-
-`beginDate`, `sectionReference`, `studentReference`. The natural key can be changed with PUT (cascading key
-updates).
-
-_Derived from the OpenAPI metadata: identity fields plus required references. Reference rows below list the
-key fields inside each reference._
-
 ## Fields
 
-`key` = part of the natural key, `yes` = required.
+`yes` = required. The OpenAPI specification does not say which fields identify a record; for natural keys, see
+the Data Standard documentation.
 
 | Field | Required | Type | Description |
 |---|---|---|---|
-| `beginDate` | key | string (date) | Month, day, and year of the student's entry or assignment to the section. |
-| `dualCreditEducationOrganizationReference` |  | reference: `educationOrganizationId` |  |
-| `sectionReference` | key | reference: `localCourseCode`, `schoolId`, `schoolYear`, `sectionIdentifier`, `sessionName` |  |
-| `studentReference` | key | reference: `studentUniqueId` |  |
+| `beginDate` | yes | string (date) | Month, day, and year of the student's entry or assignment to the section. |
+| `dualCreditEducationOrganizationReference` |  | reference; supply `educationOrganizationId` | Reference to educationOrganization. |
+| `sectionReference` | yes | reference; supply `localCourseCode`, `schoolId`, `schoolYear`, `sectionIdentifier`, `sessionName` | This entity represents a setting in which organized instruction of course content is provided, in-person or otherwise, to one or more students for a given peri… |
+| `studentReference` | yes | reference; supply `studentUniqueId` | This entity represents an individual for whom instruction, services, and/or care are provided in an early childhood, elementary, or secondary educational progr… |
 | `attemptStatusDescriptor` |  | descriptor URI | An indication of the student's completion status for the section. |
 | `dualCreditIndicator` |  | boolean | Indicates whether the student assigned to the section is to receive dual credit upon successful completion. |
 | `dualCreditInstitutionDescriptor` |  | descriptor URI | Descriptor for the postsecondary institution offering college credit. |
@@ -33,13 +26,19 @@ key fields inside each reference._
 | `repeatIdentifierDescriptor` |  | descriptor URI | An indication as to whether a student has previously taken a given course. |
 | `teacherStudentDataLinkExclusion` |  | boolean | Indicates that the student-section combination is excluded from calculation of value-added or growth attribution calculations used for a particular teacher eva… |
 
+### Items in `programs`
+
+| Field | Required | Type | Description |
+|---|---|---|---|
+| `programReference` | yes | reference; supply `educationOrganizationId`, `programName`, `programTypeDescriptor` | This entity represents any program designed to work in conjunction with, or as a supplement to, the main academic program. |
+
 ## Endpoints
 
-- `DELETE /ed-fi/studentSectionAssociations/{id}`
+- `GET /ed-fi/studentSectionAssociations`
+- `POST /ed-fi/studentSectionAssociations`
 - `GET /ed-fi/studentSectionAssociations/deletes`
 - `GET /ed-fi/studentSectionAssociations/keyChanges`
 - `GET /ed-fi/studentSectionAssociations/partitions`
 - `GET /ed-fi/studentSectionAssociations/{id}`
-- `GET /ed-fi/studentSectionAssociations`
-- `POST /ed-fi/studentSectionAssociations`
 - `PUT /ed-fi/studentSectionAssociations/{id}`
+- `DELETE /ed-fi/studentSectionAssociations/{id}`

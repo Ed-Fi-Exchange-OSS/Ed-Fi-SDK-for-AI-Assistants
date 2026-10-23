@@ -7,31 +7,31 @@ which a service or material object is acquired. The functions of a school distri
 into five broad areas, including instruction, support services, operation of non-instructional services,
 facilities acquisition and construction, and debt service.
 
-## Natural key
-
-`code`, `fiscalYear`
-
-_Derived from the OpenAPI metadata: identity fields plus required references. Reference rows below list the
-key fields inside each reference._
-
 ## Fields
 
-`key` = part of the natural key, `yes` = required.
+`yes` = required. The OpenAPI specification does not say which fields identify a record; for natural keys, see
+the Data Standard documentation.
 
 | Field | Required | Type | Description |
 |---|---|---|---|
-| `code` | key | string max 16 | The code representation of the account function dimension. |
-| `fiscalYear` | key | integer (int32) | The fiscal year for which the account function dimension is valid. |
+| `code` | yes | string max 16 | The code representation of the account function dimension. |
+| `fiscalYear` | yes | integer (int32) | The fiscal year for which the account function dimension is valid. |
 | `codeName` |  | string max 100 | A description of the account function dimension. |
 | `reportingTags` |  | array of edFi_functionDimensionReportingTag | An unordered collection of functionDimensionReportingTags. |
 
+### Items in `reportingTags`
+
+| Field | Required | Type | Description |
+|---|---|---|---|
+| `reportingTagDescriptor` | yes | descriptor URI | Optional tag for accountability reporting. |
+
 ## Endpoints
 
-- `DELETE /ed-fi/functionDimensions/{id}`
+- `GET /ed-fi/functionDimensions`
+- `POST /ed-fi/functionDimensions`
 - `GET /ed-fi/functionDimensions/deletes`
 - `GET /ed-fi/functionDimensions/keyChanges`
 - `GET /ed-fi/functionDimensions/partitions`
 - `GET /ed-fi/functionDimensions/{id}`
-- `GET /ed-fi/functionDimensions`
-- `POST /ed-fi/functionDimensions`
 - `PUT /ed-fi/functionDimensions/{id}`
+- `DELETE /ed-fi/functionDimensions/{id}`

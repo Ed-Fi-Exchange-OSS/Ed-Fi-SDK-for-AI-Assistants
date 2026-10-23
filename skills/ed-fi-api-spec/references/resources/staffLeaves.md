@@ -4,33 +4,27 @@
 
 This entity represents the recording of the dates of staff leave (e.g., sick leave, personal time, vacation).
 
-## Natural key
-
-`beginDate`, `staffLeaveEventCategoryDescriptor`, `staffReference`
-
-_Derived from the OpenAPI metadata: identity fields plus required references. Reference rows below list the
-key fields inside each reference._
-
 ## Fields
 
-`key` = part of the natural key, `yes` = required.
+`yes` = required. The OpenAPI specification does not say which fields identify a record; for natural keys, see
+the Data Standard documentation.
 
 | Field | Required | Type | Description |
 |---|---|---|---|
-| `beginDate` | key | string (date) | The begin date of the staff leave. |
-| `staffLeaveEventCategoryDescriptor` | key | descriptor URI | The code describing the type of leave taken. |
-| `staffReference` | key | reference: `staffUniqueId` |  |
+| `beginDate` | yes | string (date) | The begin date of the staff leave. |
+| `staffLeaveEventCategoryDescriptor` | yes | descriptor URI | The code describing the type of leave taken. |
+| `staffReference` | yes | reference; supply `staffUniqueId` | This entity represents an individual who performs specified activities for any public or private education institution or agency that provides instructional an… |
 | `endDate` |  | string (date) | The end date of the staff leave. |
 | `reason` |  | string max 40 | Expanded reason for the staff leave. |
 | `substituteAssigned` |  | boolean | Indicator of whether a substitute was assigned during the period of staff leave. |
 
 ## Endpoints
 
-- `DELETE /ed-fi/staffLeaves/{id}`
+- `GET /ed-fi/staffLeaves`
+- `POST /ed-fi/staffLeaves`
 - `GET /ed-fi/staffLeaves/deletes`
 - `GET /ed-fi/staffLeaves/keyChanges`
 - `GET /ed-fi/staffLeaves/partitions`
 - `GET /ed-fi/staffLeaves/{id}`
-- `GET /ed-fi/staffLeaves`
-- `POST /ed-fi/staffLeaves`
 - `PUT /ed-fi/staffLeaves/{id}`
+- `DELETE /ed-fi/staffLeaves/{id}`

@@ -8,28 +8,21 @@ described using the StudentEducationOrganizationAssociation.
 
 Also searched as: enrollment.
 
-## Natural key
-
-`entryDate`, `schoolReference`, `studentReference`. The natural key can be changed with PUT (cascading key
-updates).
-
-_Derived from the OpenAPI metadata: identity fields plus required references. Reference rows below list the
-key fields inside each reference._
-
 ## Fields
 
-`key` = part of the natural key, `yes` = required.
+`yes` = required. The OpenAPI specification does not say which fields identify a record; for natural keys, see
+the Data Standard documentation.
 
 | Field | Required | Type | Description |
 |---|---|---|---|
-| `entryDate` | key | string (date) | The month, day, and year on which an individual enters and begins to receive instructional services in a school for each school year. |
-| `calendarReference` |  | reference: `calendarCode`, `schoolId`, `schoolYear` |  |
-| `classOfSchoolYearTypeReference` |  | reference: `schoolYear` |  |
-| `graduationPlanReference` |  | reference: `educationOrganizationId`, `graduationPlanTypeDescriptor`, `graduationSchoolYear` |  |
-| `nextYearSchoolReference` |  | reference: `schoolId` |  |
-| `schoolReference` | key | reference: `schoolId` |  |
-| `schoolYearTypeReference` |  | reference: `schoolYear` |  |
-| `studentReference` | key | reference: `studentUniqueId` |  |
+| `entryDate` | yes | string (date) | The month, day, and year on which an individual enters and begins to receive instructional services in a school for each school year. |
+| `calendarReference` |  | reference; supply `calendarCode`, `schoolId`, `schoolYear` | A set of dates associated with an organization. |
+| `classOfSchoolYearTypeReference` |  | reference; supply `schoolYear` | Identifier for a school year. |
+| `graduationPlanReference` |  | reference; supply `educationOrganizationId`, `graduationPlanTypeDescriptor`, `graduationSchoolYear` | This entity is a plan outlining the required credits, credits by subject, credits by course, and other criteria required for graduation. |
+| `nextYearSchoolReference` |  | reference; supply `schoolId` | This entity represents an educational organization that includes staff and students who participate in classes and educational activity groups. |
+| `schoolReference` | yes | reference; supply `schoolId` | This entity represents an educational organization that includes staff and students who participate in classes and educational activity groups. |
+| `schoolYearTypeReference` |  | reference; supply `schoolYear` | Identifier for a school year. |
+| `studentReference` | yes | reference; supply `studentUniqueId` | This entity represents an individual for whom instruction, services, and/or care are provided in an early childhood, elementary, or secondary educational progr… |
 | `alternativeGraduationPlans` |  | array of edFi_studentSchoolAssociationAlternativeGraduationPlan | An unordered collection of studentSchoolAssociationAlternativeGraduationPlans. |
 | `educationPlans` |  | array of edFi_studentSchoolAssociationEducationPlan | An unordered collection of studentSchoolAssociationEducationPlans. |
 | `employedWhileEnrolled` |  | boolean | An individual who is a paid employee or works in his or her own business, profession, or farm and at the same time is enrolled in secondary, postsecondary, or… |
@@ -49,13 +42,25 @@ key fields inside each reference._
 | `schoolChoiceTransfer` |  | boolean | An indication of whether students transferred in or out of the school did so during the school year under the provisions for public school choice in accordance… |
 | `termCompletionIndicator` |  | boolean | Idicates whether or not a student completed the most recent school term. |
 
+### Items in `alternativeGraduationPlans`
+
+| Field | Required | Type | Description |
+|---|---|---|---|
+| `alternativeGraduationPlanReference` | yes | reference; supply `educationOrganizationId`, `graduationPlanTypeDescriptor`, `graduationSchoolYear` | This entity is a plan outlining the required credits, credits by subject, credits by course, and other criteria required for graduation. |
+
+### Items in `educationPlans`
+
+| Field | Required | Type | Description |
+|---|---|---|---|
+| `educationPlanDescriptor` | yes | descriptor URI | The type of education plan(s) the student is following, if appropriate. |
+
 ## Endpoints
 
-- `DELETE /ed-fi/studentSchoolAssociations/{id}`
+- `GET /ed-fi/studentSchoolAssociations`
+- `POST /ed-fi/studentSchoolAssociations`
 - `GET /ed-fi/studentSchoolAssociations/deletes`
 - `GET /ed-fi/studentSchoolAssociations/keyChanges`
 - `GET /ed-fi/studentSchoolAssociations/partitions`
 - `GET /ed-fi/studentSchoolAssociations/{id}`
-- `GET /ed-fi/studentSchoolAssociations`
-- `POST /ed-fi/studentSchoolAssociations`
 - `PUT /ed-fi/studentSchoolAssociations/{id}`
+- `DELETE /ed-fi/studentSchoolAssociations/{id}`

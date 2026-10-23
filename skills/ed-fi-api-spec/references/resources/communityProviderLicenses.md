@@ -5,22 +5,16 @@
 The legal document held by the community provider that authorizes the holder to perform certain functions and
 or services.
 
-## Natural key
-
-`licenseIdentifier`, `licensingOrganization`, `communityProviderReference`
-
-_Derived from the OpenAPI metadata: identity fields plus required references. Reference rows below list the
-key fields inside each reference._
-
 ## Fields
 
-`key` = part of the natural key, `yes` = required.
+`yes` = required. The OpenAPI specification does not say which fields identify a record; for natural keys, see
+the Data Standard documentation.
 
 | Field | Required | Type | Description |
 |---|---|---|---|
-| `licenseIdentifier` | key | string max 36 | The unique identifier issued by the licensing organization. |
-| `licensingOrganization` | key | string max 75 | The organization issuing the license. |
-| `communityProviderReference` | key | reference: `communityProviderId` |  |
+| `licenseIdentifier` | yes | string max 36 | The unique identifier issued by the licensing organization. |
+| `licensingOrganization` | yes | string max 75 | The organization issuing the license. |
+| `communityProviderReference` | yes | reference; supply `communityProviderId` | This entity represents an educational organization that includes staff and students who participate in classes and educational activity groups. |
 | `authorizedFacilityCapacity` |  | integer (int32) | The maximum number that can be contained or accommodated which a provider is authorized or licensed to serve. |
 | `licenseEffectiveDate` | yes | string (date) | The month, day, and year on which a license is active or becomes effective. |
 | `licenseExpirationDate` |  | string (date) | The month, day, and year on which a license will expire. |
@@ -32,11 +26,11 @@ key fields inside each reference._
 
 ## Endpoints
 
-- `DELETE /ed-fi/communityProviderLicenses/{id}`
+- `GET /ed-fi/communityProviderLicenses`
+- `POST /ed-fi/communityProviderLicenses`
 - `GET /ed-fi/communityProviderLicenses/deletes`
 - `GET /ed-fi/communityProviderLicenses/keyChanges`
 - `GET /ed-fi/communityProviderLicenses/partitions`
 - `GET /ed-fi/communityProviderLicenses/{id}`
-- `GET /ed-fi/communityProviderLicenses`
-- `POST /ed-fi/communityProviderLicenses`
 - `PUT /ed-fi/communityProviderLicenses/{id}`
+- `DELETE /ed-fi/communityProviderLicenses/{id}`

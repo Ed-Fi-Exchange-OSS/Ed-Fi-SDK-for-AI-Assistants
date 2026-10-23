@@ -5,22 +5,16 @@
 This educational entity represents the organization of subject matter and related learning experiences
 provided for the instruction of students on a regular or systematic basis.
 
-## Natural key
-
-`courseCode`, `educationOrganizationReference`
-
-_Derived from the OpenAPI metadata: identity fields plus required references. Reference rows below list the
-key fields inside each reference._
-
 ## Fields
 
-`key` = part of the natural key, `yes` = required.
+`yes` = required. The OpenAPI specification does not say which fields identify a record; for natural keys, see
+the Data Standard documentation.
 
 | Field | Required | Type | Description |
 |---|---|---|---|
-| `courseCode` | key | string max 60 | A unique alphanumeric code assigned to a course. |
+| `courseCode` | yes | string max 60 | A unique alphanumeric code assigned to a course. |
 | `identificationCodes` | yes | array of edFi_courseIdentificationCode | An unordered collection of courseIdentificationCodes. |
-| `educationOrganizationReference` | key | reference: `educationOrganizationId` |  |
+| `educationOrganizationReference` | yes | reference; supply `educationOrganizationId` | Reference to educationOrganization. |
 | `academicSubjects` |  | array of edFi_courseAcademicSubject | An unordered collection of courseAcademicSubjects. |
 | `careerPathwayDescriptor` |  | descriptor URI | Indicates the career cluster or pathway the course is associated with as part of a CTE curriculum. |
 | `competencyLevels` |  | array of edFi_courseCompetencyLevel | An unordered collection of courseCompetencyLevels. |
@@ -43,13 +37,52 @@ key fields inside each reference._
 | `offeredGradeLevels` |  | array of edFi_courseOfferedGradeLevel | An unordered collection of courseOfferedGradeLevels. |
 | `timeRequiredForCompletion` |  | integer (int32) | The actual or estimated number of clock minutes required for class completion. |
 
+### Items in `identificationCodes`
+
+| Field | Required | Type | Description |
+|---|---|---|---|
+| `courseIdentificationSystemDescriptor` | yes | descriptor URI | A system that is used to identify the organization of subject matter and related learning experiences provided for the instruction of students. |
+| `assigningOrganizationIdentificationCode` |  | string max 60 | The organization code or name assigning the Identification Code. |
+| `courseCatalogURL` |  | string max 255 | The URL for the course catalog that defines the course identification code. |
+| `identificationCode` | yes | string max 60 | A unique number or alphanumeric code assigned to a course by a school, school system, state, or other agency or entity. |
+
+### Items in `academicSubjects`
+
+| Field | Required | Type | Description |
+|---|---|---|---|
+| `academicSubjectDescriptor` | yes | descriptor URI | The intended major subject/s area of the course. |
+
+### Items in `competencyLevels`
+
+| Field | Required | Type | Description |
+|---|---|---|---|
+| `competencyLevelDescriptor` | yes | descriptor URI | The competency levels defined to rate the student for the course. |
+
+### Items in `learningStandards`
+
+| Field | Required | Type | Description |
+|---|---|---|---|
+| `learningStandardReference` | yes | reference; supply `learningStandardId` | A statement that describes a specific competency or academic standard. |
+
+### Items in `levelCharacteristics`
+
+| Field | Required | Type | Description |
+|---|---|---|---|
+| `courseLevelCharacteristicDescriptor` | yes | descriptor URI | The type of specific program or designation with which the course is associated (e.g., AP, IB, Dual Credit, CTE). |
+
+### Items in `offeredGradeLevels`
+
+| Field | Required | Type | Description |
+|---|---|---|---|
+| `gradeLevelDescriptor` | yes | descriptor URI | The grade levels in which the course is offered. |
+
 ## Endpoints
 
-- `DELETE /ed-fi/courses/{id}`
+- `GET /ed-fi/courses`
+- `POST /ed-fi/courses`
 - `GET /ed-fi/courses/deletes`
 - `GET /ed-fi/courses/keyChanges`
 - `GET /ed-fi/courses/partitions`
 - `GET /ed-fi/courses/{id}`
-- `GET /ed-fi/courses`
-- `POST /ed-fi/courses`
 - `PUT /ed-fi/courses/{id}`
+- `DELETE /ed-fi/courses/{id}`

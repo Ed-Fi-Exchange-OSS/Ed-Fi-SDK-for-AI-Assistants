@@ -5,32 +5,25 @@
 The association of individual StudentAssessments with EducationOrganizations indicating administration,
 enrollment, or attribution.
 
-## Natural key
-
-`educationOrganizationAssociationTypeDescriptor`, `educationOrganizationReference`,
-`studentAssessmentReference`
-
-_Derived from the OpenAPI metadata: identity fields plus required references. Reference rows below list the
-key fields inside each reference._
-
 ## Fields
 
-`key` = part of the natural key, `yes` = required.
+`yes` = required. The OpenAPI specification does not say which fields identify a record; for natural keys, see
+the Data Standard documentation.
 
 | Field | Required | Type | Description |
 |---|---|---|---|
-| `educationOrganizationAssociationTypeDescriptor` | key | descriptor URI | The type of association being represented. |
-| `educationOrganizationReference` | key | reference: `educationOrganizationId` |  |
-| `schoolYearTypeReference` |  | reference: `schoolYear` |  |
-| `studentAssessmentReference` | key | reference: `assessmentIdentifier`, `namespace`, `studentAssessmentIdentifier`, `studentUniqueId` |  |
+| `educationOrganizationAssociationTypeDescriptor` | yes | descriptor URI | The type of association being represented. |
+| `educationOrganizationReference` | yes | reference; supply `educationOrganizationId` | Reference to educationOrganization. |
+| `schoolYearTypeReference` |  | reference; supply `schoolYear` | Identifier for a school year. |
+| `studentAssessmentReference` | yes | reference; supply `assessmentIdentifier`, `namespace`, `studentAssessmentIdentifier`, `studentUniqueId` | This entity represents the analysis or scoring of a student's response on an assessment. |
 
 ## Endpoints
 
-- `DELETE /ed-fi/studentAssessmentEducationOrganizationAssociations/{id}`
+- `GET /ed-fi/studentAssessmentEducationOrganizationAssociations`
+- `POST /ed-fi/studentAssessmentEducationOrganizationAssociations`
 - `GET /ed-fi/studentAssessmentEducationOrganizationAssociations/deletes`
 - `GET /ed-fi/studentAssessmentEducationOrganizationAssociations/keyChanges`
 - `GET /ed-fi/studentAssessmentEducationOrganizationAssociations/partitions`
 - `GET /ed-fi/studentAssessmentEducationOrganizationAssociations/{id}`
-- `GET /ed-fi/studentAssessmentEducationOrganizationAssociations`
-- `POST /ed-fi/studentAssessmentEducationOrganizationAssociations`
 - `PUT /ed-fi/studentAssessmentEducationOrganizationAssociations/{id}`
+- `DELETE /ed-fi/studentAssessmentEducationOrganizationAssociations/{id}`

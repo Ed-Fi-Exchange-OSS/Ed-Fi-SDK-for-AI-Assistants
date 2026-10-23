@@ -4,21 +4,15 @@
 
 This entity holds a student's grade or competency level for a gradebook entry.
 
-## Natural key
-
-`gradebookEntryReference`, `studentReference`
-
-_Derived from the OpenAPI metadata: identity fields plus required references. Reference rows below list the
-key fields inside each reference._
-
 ## Fields
 
-`key` = part of the natural key, `yes` = required.
+`yes` = required. The OpenAPI specification does not say which fields identify a record; for natural keys, see
+the Data Standard documentation.
 
 | Field | Required | Type | Description |
 |---|---|---|---|
-| `gradebookEntryReference` | key | reference: `gradebookEntryIdentifier`, `namespace` |  |
-| `studentReference` | key | reference: `studentUniqueId` |  |
+| `gradebookEntryReference` | yes | reference; supply `gradebookEntryIdentifier`, `namespace` | This entity represents an assignment, homework, or classroom assessment to be recorded in a gradebook. |
+| `studentReference` | yes | reference; supply `studentUniqueId` | This entity represents an individual for whom instruction, services, and/or care are provided in an early childhood, elementary, or secondary educational progr… |
 | `assignmentLateStatusDescriptor` |  | descriptor URI | Status of whether the assignment was submitted after the due date and/or marked as. |
 | `competencyLevelDescriptor` |  | descriptor URI | The competency level assessed for the student for the referenced learning objective. |
 | `dateFulfilled` |  | string (date) | The date an assignment was turned in or the date of an assessment. |
@@ -31,11 +25,11 @@ key fields inside each reference._
 
 ## Endpoints
 
-- `DELETE /ed-fi/studentGradebookEntries/{id}`
+- `GET /ed-fi/studentGradebookEntries`
+- `POST /ed-fi/studentGradebookEntries`
 - `GET /ed-fi/studentGradebookEntries/deletes`
 - `GET /ed-fi/studentGradebookEntries/keyChanges`
 - `GET /ed-fi/studentGradebookEntries/partitions`
 - `GET /ed-fi/studentGradebookEntries/{id}`
-- `GET /ed-fi/studentGradebookEntries`
-- `POST /ed-fi/studentGradebookEntries`
 - `PUT /ed-fi/studentGradebookEntries/{id}`
+- `DELETE /ed-fi/studentGradebookEntries/{id}`

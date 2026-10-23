@@ -6,21 +6,15 @@ This association relates students to their parents, guardians, or caretakers.
 
 Also searched as: parent, guardian.
 
-## Natural key
-
-`contactReference`, `studentReference`
-
-_Derived from the OpenAPI metadata: identity fields plus required references. Reference rows below list the
-key fields inside each reference._
-
 ## Fields
 
-`key` = part of the natural key, `yes` = required.
+`yes` = required. The OpenAPI specification does not say which fields identify a record; for natural keys, see
+the Data Standard documentation.
 
 | Field | Required | Type | Description |
 |---|---|---|---|
-| `contactReference` | key | reference: `contactUniqueId` |  |
-| `studentReference` | key | reference: `studentUniqueId` |  |
+| `contactReference` | yes | reference; supply `contactUniqueId` | This entity represents a contact of a student, such as a parent, guardian or caretaker. |
+| `studentReference` | yes | reference; supply `studentUniqueId` | This entity represents an individual for whom instruction, services, and/or care are provided in an early childhood, elementary, or secondary educational progr… |
 | `contactPriority` |  | integer (int32) | The numeric order of the preferred sequence or priority of contact. |
 | `contactRestrictions` |  | string max 250 | Restrictions for student and/or teacher contact with the individual (e.g., the student may not be picked up by the individual). |
 | `emergencyContactStatus` |  | boolean | Indicator of whether the person is a designated emergency contact for the student. |
@@ -31,11 +25,11 @@ key fields inside each reference._
 
 ## Endpoints
 
-- `DELETE /ed-fi/studentContactAssociations/{id}`
+- `GET /ed-fi/studentContactAssociations`
+- `POST /ed-fi/studentContactAssociations`
 - `GET /ed-fi/studentContactAssociations/deletes`
 - `GET /ed-fi/studentContactAssociations/keyChanges`
 - `GET /ed-fi/studentContactAssociations/partitions`
 - `GET /ed-fi/studentContactAssociations/{id}`
-- `GET /ed-fi/studentContactAssociations`
-- `POST /ed-fi/studentContactAssociations`
 - `PUT /ed-fi/studentContactAssociations/{id}`
+- `DELETE /ed-fi/studentContactAssociations/{id}`
