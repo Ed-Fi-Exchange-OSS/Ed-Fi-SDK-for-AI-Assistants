@@ -21,10 +21,12 @@ the `original-sdk-as-mcp-server` release).
   - error diagnosis for `400`–`5xx` responses, with retry and logging guidance;
   - 21 shared rules (discovery, authentication, push, pull, errors) used both to build code and to review it.
 - **`ed-fi-api-spec` skill:** a Markdown index of the Ed-Fi Resources and Descriptors specifications (Data Standard
-  5.2) with each resource's natural key, fields, references and endpoints, so assistants can look them up without
-  loading the full OpenAPI specification.
+  5.2), so assistants can look up resources without loading the full OpenAPI specification. Each resource file
+  lists the required fields, the fields to supply in each reference, the fields of nested collections, the
+  endpoints, and whether `PUT` can change the resource's identifying values. It does not state natural keys,
+  because the specification doesn't mark which references identify a record.
 - **Spec knowledge graph generator** (`eng/spec-knowledge-graph/`): regenerates the `ed-fi-api-spec` content
-  from an Ed-Fi host's metadata, including that host's extensions.
+  from an Ed-Fi host's metadata, including that host's extensions, with a fixture-based test.
 - **Install and usage guide** (`docs/skills/using-the-skills.md`) for Claude Code and GitHub Copilot, with the
   GitHub CLI (`gh skill`), the `skills` CLI or a manual copy.
 - Skill authoring guide, test prompts and test results for each skill.
@@ -32,9 +34,10 @@ the `original-sdk-as-mcp-server` release).
 ### Verification
 
 - `ed-fi-api-client`: 10/10 test prompts pass in Claude Code (5/10 without the skill) and 10/10 in GitHub
-  Copilot. Code that Claude Code wrote with the skill ran unchanged against the Ed-Fi API 8.1 pilot test kit.
-- `ed-fi-api-spec`: 10/10 test prompts pass in Claude Code (7/10 without the skill); 3/3 in a GitHub Copilot
-  smoke test.
+  Copilot. Code that Claude Code wrote with the skill ran unchanged against the Ed-Fi API 8.1 pilot test kit
+  (8.1 pre-release).
+- `ed-fi-api-spec`: 12/12 test prompts pass in Claude Code (10/12 without the skill) and 10/12 in GitHub
+  Copilot.
 
 ### Deprecated
 
