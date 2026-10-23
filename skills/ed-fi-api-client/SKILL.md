@@ -75,12 +75,13 @@ Ed-Fi API 8 keeps the ODS/API resource model, but the release notes say client m
 | The `v3` segment is removed from resource URLs | Build resource URLs from the Discovery API (`urls.dataManagementApi`), never from a hard-coded `/data/v3/` path |
 | Property names are case-sensitive. A property with the wrong case (`FirstName`) or an unknown name is **silently ignored**, not rejected, so its value is lost | Use the exact camelCase names from the schema (`studentUniqueId`, not `StudentUniqueId`); don't rely on a `400` to catch naming mistakes |
 | The token endpoint moved to the Configuration Service (`/connect/token`); `/oauth/token` remains as a compatibility proxy | Take the token URL from `urls.oauth` in the Discovery API |
-| The token request accepts only the Basic `Authorization` header; credentials in the form body get `400` "Malformed Authorization header" | Send the key and secret in a Basic header (see [references/authentication.md](references/authentication.md#requesting-a-token)) |
 | No snapshot support | See [references/pull.md](references/pull.md#snapshots-consistent-reads) |
 | Cursor paging needs a `pageToken` on every request; `pageSize` alone gets `400` | Get the first token from `/partitions` (see [references/pull.md](references/pull.md#cursor-paging-odsapi-73-and-later)) |
 
 When in doubt, check the Discovery API response and the host's release notes. On Ed-Fi API 8, read
-`informationalVersion` (e.g. `8.1.0`): `version` reports `8.0.0` on 8.1 as well.
+`informationalVersion` too: early 8.1 pre-releases report `version` `8.0.0`. Those pre-releases (and 8.0)
+also reject credentials in the token request body; the Basic header recommended in Step 2 works on every
+version.
 
 ## Step 2: Authenticate with OAuth 2.0 client credentials
 

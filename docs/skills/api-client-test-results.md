@@ -96,17 +96,20 @@ Observations:
   Copilot also read other answer files and the T1 script. They hold Copilot's own answers, not the expected
   outcomes, so the results stand; future runs should keep results outside the workspace.
 
-## Ed-Fi API 8 verification · pilot test kit · 2026-10-22
+## Ed-Fi API 8.1 pre-release verification · pilot test kit · 2026-10-22
 
 - **Environment:** [Ed-Fi API v8 pilot test kit](https://github.com/Ed-Fi-Exchange-OSS/Ed-Fi-API-v8-pilot-testing-kit),
   populated template. Discovery reports `version 8.0.0`, `informationalVersion 8.1.0-beta1`, Data Standard 5.2.0.
   The kit's smoke test passed 13/13.
 - **Method:** direct HTTP checks of the skill's API 8 claims with a SIS-vendor credential and a data-warehouse
   credential created by the kit.
+- **Version:** these results are from `8.1.0-beta1`, an 8.1 pre-release. On 2026-10-23 the token check was
+  repeated on a later pre-release (`8.1.0-beta.0.1.32`, which reports `version 8.1.0`): it accepts credentials
+  in the body, form or JSON, as 8.1 does. The other rows were not repeated on that build.
 
 | Check | Result on API 8 | Skill change |
 |---|---|---|
-| Token with credentials in the form body | `400` "Malformed Authorization header" | Body credentials marked ODS/API 7.x only (AUTH-1, `authentication.md`, `SKILL.md`) |
+| Token with credentials in the form body | `8.1.0-beta1`: `400` "Malformed Authorization header". `8.1.0-beta.0.1.32`: `200` | AUTH-1 keeps the Basic header as the recommendation (it works on every version); body credentials are *Allowed but discouraged* |
 | `pageSize` without `pageToken` | `400` "PageToken is required when pageSize is specified" | First token from `/partitions` (`pull.md`, PULL-2, `SKILL.md`) |
 | `/partitions` | `pageTokens`; 13,015 records split into 4 even partitions; small resources return 1 token | None |
 | Cursor end | Last data page still has a token; the next returns `[]` with no token | Stop rule clarified |
@@ -117,8 +120,7 @@ Observations:
 | ETag / stale `If-Match` | Always on; `412` `optimistic-lock-failed` | Noted in `push.md` and `errors.md` |
 | Discovery, `limit` max 500, change queries, 409 / 403 / 400 types | As described in the skill | None |
 
-Not verified: tenant and context route segments (the kit is single-tenant). All Ed-Fi API 8 checks ran on
-8.1 (beta), the version the skill targets.
+Not verified: tenant and context route segments (the kit is single-tenant), and a released 8.1 build.
 
 ### Generated client, end to end
 

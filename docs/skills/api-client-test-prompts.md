@@ -164,7 +164,7 @@ caching and expiration, delete and repost instead of updating).
 2. **(key)** Property names are case-sensitive (wrong-case properties are silently ignored).
 3. **(key)** The token endpoint moved to `/connect/token` (with an `/oauth/token` compatibility proxy); take it
    from the Discovery API.
-4. Credentials must go in the Basic header; body credentials are rejected.
+4. Recommends the Basic header for credentials (it works on every version).
 5. No snapshot support.
 6. Cursor paging needs a `pageToken` from the first request (from `/partitions`).
 7. Does not claim other breaking changes that aren't documented or verified.

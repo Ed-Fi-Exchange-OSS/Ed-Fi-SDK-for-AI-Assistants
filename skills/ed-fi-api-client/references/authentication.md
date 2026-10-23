@@ -38,18 +38,18 @@ special character, then the token request fails with `401`. Ed-Fi API 8 secrets 
 one special character, so do not skip the encoding, even if your current secret happens to be
 alphanumeric.
 
-### Credentials in the request body (ODS/API 7.x only)
+### Credentials in the request body (allowed, not recommended)
 
-ODS/API 7.x also accepts the key and secret as form fields in the body
+ODS/API 7.x and Ed-Fi API 8.1 also accept the key and secret as form fields in the body
 (`grant_type=client_credentials&client_id=…&client_secret=…`), for compatibility with older clients
-and documentation examples. **Do not use it in new code:**
+and documentation examples. **Prefer the Basic header in new code:**
 
-- **Ed-Fi API 8 rejects it** with `400` `urn:ed-fi:api:bad-request` "Malformed Authorization header".
 - Request bodies are more likely to be logged by proxies, gateways or debugging tools, which would
   expose the secret.
+- The Basic header works on every version. Ed-Fi API 8.0 and early 8.1 pre-releases (such as
+  `8.1.0-beta1`) reject body credentials with `400` "Malformed Authorization header".
 
-When reviewing existing code that targets only ODS/API 7.x, flag this pattern as a recommended change;
-when the code targets or may move to Ed-Fi API 8, it is a defect.
+When reviewing existing code, flag this pattern as a recommended change, not a defect.
 
 A successful response:
 

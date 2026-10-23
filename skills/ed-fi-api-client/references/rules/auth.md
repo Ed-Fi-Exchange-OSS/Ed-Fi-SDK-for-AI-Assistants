@@ -5,15 +5,17 @@ building and reviewing code.
 
 ## AUTH-1: Send client credentials in a Basic `Authorization` header, urlencoded then base64-encoded
 
-- **Level:** Preferred. Credentials in the form body are **Allowed but discouraged** on ODS/API 7.x.
-- **Why:** request bodies are more likely to be logged by proxies, gateways and debugging tools. RFC 6749
-  §2.3.1 requires form-urlencoding the key and secret before joining them with `:` and base64-encoding;
-  Ed-Fi API 8 secrets always contain special characters, so skipping it causes `401` errors.
-- **Detect:** `client_id` / `client_secret` sent as form fields in the token request body (discouraged on
-  ODS/API 7.x; violation when the code targets Ed-Fi API 8); a Basic header built with a library's built-in
-  basic-auth helper or from the raw secret without urlencoding (violation).
-- **Versions:** Ed-Fi API 8 accepts only the Basic header and answers body credentials with `400`
-  "Malformed Authorization header".
+- **Level:** Preferred. Credentials in the form body are **Allowed but discouraged**.
+- **Why:** request bodies are more likely to be logged by proxies, gateways and debugging tools, and the
+  Basic header works on every version. RFC 6749 §2.3.1 requires form-urlencoding the key and secret before
+  joining them with `:` and base64-encoding; Ed-Fi API 8 secrets always contain special characters, so
+  skipping it causes `401` errors.
+- **Detect:** `client_id` / `client_secret` sent as form fields in the token request body (discouraged); a
+  Basic header built with a library's built-in basic-auth helper or from the raw secret without urlencoding
+  (violation).
+- **Versions:** ODS/API 7.x and Ed-Fi API 8.1 accept both. Ed-Fi API 8.0 and early 8.1 pre-releases (such as
+  `8.1.0-beta1`) accept only the Basic header and answer body credentials with `400` "Malformed
+  Authorization header".
 - **Details:** [authentication.md](../authentication.md#requesting-a-token)
 
 ## AUTH-2: Reuse the access token until it is about to expire
