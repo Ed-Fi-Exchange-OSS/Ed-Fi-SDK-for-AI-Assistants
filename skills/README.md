@@ -7,6 +7,7 @@ opens the files under `references/` only when the task needs them.
 | Skill | Use it for |
 |---|---|
 | [ed-fi-api-client](ed-fi-api-client/SKILL.md) | Building, reviewing or debugging a client of an Ed-Fi API: authentication, push and pull integrations, error diagnosis |
+| [ed-fi-api-spec](ed-fi-api-spec/SKILL.md) | Looking up resources, required fields, references and descriptor types (Data Standard 5.2) without loading the OpenAPI spec |
 
 Skills are added through pull requests; see the
 [authoring guide](../docs/skills/authoring-guide.md).

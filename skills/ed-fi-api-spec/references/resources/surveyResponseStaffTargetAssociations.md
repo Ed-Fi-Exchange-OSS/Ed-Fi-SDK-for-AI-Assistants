@@ -1,0 +1,26 @@
+# surveyResponseStaffTargetAssociations
+
+`/ed-fi/surveyResponseStaffTargetAssociations`
+
+The association provides information about the survey being taken and who the survey is about.
+
+## Fields
+
+`yes` = required. The OpenAPI specification does not say which fields identify a record; for natural keys, see
+the Data Standard documentation.
+
+| Field | Required | Type | Description |
+|---|---|---|---|
+| `staffReference` | yes | reference; supply `staffUniqueId` | This entity represents an individual who performs specified activities for any public or private education institution or agency that provides instructional an… |
+| `surveyResponseReference` | yes | reference; supply `namespace`, `surveyIdentifier`, `surveyResponseIdentifier` | Responses to a Survey for named or anonymous persons. |
+
+## Endpoints
+
+- `GET /ed-fi/surveyResponseStaffTargetAssociations`
+- `POST /ed-fi/surveyResponseStaffTargetAssociations`
+- `GET /ed-fi/surveyResponseStaffTargetAssociations/deletes`
+- `GET /ed-fi/surveyResponseStaffTargetAssociations/keyChanges`
+- `GET /ed-fi/surveyResponseStaffTargetAssociations/partitions`
+- `GET /ed-fi/surveyResponseStaffTargetAssociations/{id}`
+- `PUT /ed-fi/surveyResponseStaffTargetAssociations/{id}`
+- `DELETE /ed-fi/surveyResponseStaffTargetAssociations/{id}`
