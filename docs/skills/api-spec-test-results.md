@@ -120,7 +120,36 @@ in each reference, nested collections expanded one level. The prompts that depen
 - **Context use:** about 104 K input tokens for prompts that open one resource file, and about 140 K for those
   that search the index more than once (cumulative over the session's turns, mostly cached).
 
+## Run 4 · GitHub Copilot, after the review changes · 2026-10-23
+
+GitHub Copilot in VS Code, agent mode, skill in `.github/skills/`, regenerated content, fresh chat per prompt.
+With skill only. Copilot loaded the skill automatically in every prompt.
+
+| Test | Result | Notes |
+|---|---|---|
+| T1 | ✅ Pass | Required fields and the fields of each reference |
+| T2 | ✅ Pass | `studentSchoolAssociations` with its required fields |
+| T3 | ✅ Pass | `contacts` and `studentContactAssociations` |
+| T4 | ✅ Pass | `studentSchoolAttendanceEvents` with its required fields |
+| T5 | ✅ Pass | Key outcomes met, but it also said grade level is on the Student resource (it is on `studentSchoolAssociations`) |
+| T6 | ✅ Pass | All seven reference fields and `gradingPeriodName` |
+| T7 | ✅ Pass | `studentAssessments`, `assessments` first, scores in `scoreResults` |
+| T8 | ⚠️ Inconsistent | Two runs gave opposite answers: "generally can't change it with PUT" (fail) and "usually you can" (pass) |
+| T9 | ⚠️ Partial | Right endpoint (`/deletes`), but no change-version bounds and no `/keyChanges` |
+| T10 | ✅ Pass | Asked for the host's metadata; did not invent fields |
+| T11 | ✅ Pass | `chartOfAccountReference` not in the key, with a source. To get there it fetched the Data Standard model from GitHub |
+| T12 | ✅ Pass | `classPeriodReference` with `classPeriodName` and `schoolId` |
+| **Total** | **10 / 12** | |
+
+Observations:
+
+- **Key changes (T8):** the index no longer says anything about changing a record's identifying values, so the
+  answer comes from the model's own knowledge and varies between runs. The specification does carry
+  `x-Ed-Fi-isUpdatable` on the PUT operation, which doesn't depend on knowing which fields form the key; a
+  neutral line based on it could restore a consistent answer.
+- **Harness behavior:** in T10 Copilot asked for the host URL before answering, and in T11 it tried a GitKraken
+  tool (cancelled) and fetched a web page. These come from the VS Code setup, not the skill.
+
 ## Not yet done
 
-- **GitHub Copilot:** all 12 prompts on the regenerated content.
 - **Codex** (optional, NFR-PORT-1).
