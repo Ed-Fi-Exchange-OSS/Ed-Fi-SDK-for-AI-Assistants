@@ -11,8 +11,9 @@ building and reviewing code.
   joining them with `:` and base64-encoding; Ed-Fi API 8 secrets always contain special characters, so
   skipping it causes `401` errors.
 - **Detect:** `client_id` / `client_secret` sent as form fields in the token request body (discouraged); a
-  Basic header built with a library's built-in basic-auth helper or from the raw secret without urlencoding
-  (violation).
+  Basic header built with a library's built-in basic-auth helper (e.g. Python `requests`' `HTTPBasicAuth` or
+  `auth=(key, secret)`, axios's `auth` option, .NET `NetworkCredential`) or from the raw secret without
+  urlencoding (violation).
 - **Details:** [authentication.md](../authentication.md#requesting-a-token)
 
 ## AUTH-2: Reuse the access token until it is about to expire

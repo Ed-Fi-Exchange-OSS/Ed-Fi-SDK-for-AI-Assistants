@@ -38,6 +38,12 @@ Guidelines:
 
 - **Cite evidence.** Every finding needs a file and line (or function) and a short quote or description of
   the code.
+- **Keep the level from the table.** Report each finding in the section its rule level gives. Don't move a
+  finding up or down because of its impact; if the impact is unusually high or low, say so in the finding's
+  text.
+- **One place per rule.** Don't list a rule as passed if you report a finding for it. If different parts of
+  the code meet a rule at different levels (e.g. a hard-coded `verify=False` and a separate off-by-default
+  setting), report each part once, at its own level.
 - **Respect documented exceptions.** If the code explains a legitimate reason for a discouraged pattern (for
   example, deleting and reposting to change a natural key without cascading key updates, or disabling
   certificate validation only for local testing behind an explicit setting), report it as a suggestion at

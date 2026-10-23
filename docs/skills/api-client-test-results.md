@@ -161,6 +161,33 @@ The reviewer's miss did not reproduce in a clean workspace with either descripti
 depends on the session (other skills or project files competing). The new description matches the shape of
 the request without needing Ed-Fi words in it.
 
+## Code review on real client code · 2026-10-23
+
+The review interface (`references/review.md`) was run on three public Ed-Fi API clients, as test inputs: a small
+Python CLI for ODS/API 2.x–3.x (`Ed-Fi-Exchange-OSS/Python-Minimal-CLI`), a Python client library for ODS/API
+7.x (`edanalytics/edfi_api_client`), and a C# parallel-read example for ODS/API 6.1
+(`Ed-Fi-Exchange-OSS/ParallelAPIConsumption`).
+
+- **Harness:** Claude Code, headless, fresh session per repository, read-only tools. Request: "Review the Ed-Fi
+  API client code in this repository." The skill loaded on its own in all three.
+- **Accuracy:** about 15 findings were checked against the code, spread across the three reports; all were
+  real. Beyond the rules, the reviews also found ordinary bugs (for example a swallowed exception that
+  truncates parallel reads, a method called with an argument it doesn't take, an undefined variable on an
+  error path).
+- **Platform handling:** each report named the platform it inferred (ODS/API 2.x–3.x, 6.1, 7.x) and noted
+  where 7.x/8 rules only partly apply.
+
+Issues found in the reports, and the changes made:
+
+| Issue | Change |
+|---|---|
+| A finding reported above its rule's level (a *Preferred* rule under *Must fix*, with the text calling it a suggestion) | `review.md`: keep the level from the table; mention unusual impact in the text |
+| The same rule listed as *Passed* and as a finding | `review.md`: one place per rule; report each part once at its own level |
+| Unsure whether `requests`' `HTTPBasicAuth` counts as a "built-in basic-auth helper" (AUTH-1) | AUTH-1 **Detect** now names helpers in Python, JavaScript and .NET |
+
+A rerun of the library review after the first two changes kept every rule at its table level and no longer
+listed the same rule as passed and failed, except for a minor *Suggestion* that was also counted as passed.
+
 ## Not yet done
 
 - **GitHub Copilot:** a run without the skill for comparison.
