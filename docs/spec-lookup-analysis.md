@@ -202,6 +202,35 @@ Eighteen lookup tasks with a known correct answer, verified against the spec:
 | 17 | Descriptor | Which descriptor does `entryTypeDescriptor` on a studentSchoolAssociation use? | `entryTypeDescriptors` |
 | 18 | Reference | What keys do I need to reference a calendar? | `calendarCode`, `schoolId`, `schoolYear` |
 
+#### Held-out tasks
+
+Tasks 5, 6, 9 and 14 share wording with the Appendix A searches that shaped the synonyms, so they can favor
+option B. A second set of tasks, drawn from the topics that come up most in Ed-Fi support questions and
+written the way a community developer would ask them, measures how the lookup handles questions it has not
+seen. None of them shares terms with the synonyms or the Appendix A searches, and the synonyms and the index
+are not changed during the experiment.
+
+| # | Kind | Task (prompt to the assistant) | Expected answer |
+|---|---|---|---|
+| H3 | Natural language | Our test reports sub-scores by skill, like vocabulary and comprehension. Where do those go? | `objectiveAssessments`; each student's sub-scores in `studentAssessments`, `studentObjectiveAssessments` |
+| H5 | Descriptor | We map our state's codes to Ed-Fi. Where do I find the allowed values for exit reasons? | `exitWithdrawTypeDescriptors`, read from the API; used in `studentSchoolAssociations` |
+| H6 | Natural language | Where do semesters or trimesters go? | `sessions` (`sessionName`, `termDescriptor`, begin and end dates, school and school year) |
+| H7 | Reference | Which school year values can I use in a reference, and where does that list come from? | `schoolYearTypes` |
+| H11 | Natural language | Our SIS has a state ID and a local district ID for each student. Where does each one go? | `studentUniqueId` on `students`; the others in `studentEducationOrganizationAssociations`, `studentIdentificationCodes` |
+| H12 | Natural language | Our SIS flags students as gifted, at-risk or homeless. Where should those flags go? | `studentEducationOrganizationAssociations`, `studentCharacteristics`; for a tracked list, `cohorts` and `studentCohortAssociations` |
+
+Five more support-style questions use terms that the synonyms cover. They run as a separate
+synonym-sensitivity group: H8 and H9 show whether a synonym can lead the assistant to the wrong resource, not
+only whether it helps.
+
+| # | Kind | Task (prompt to the assistant) | Expected answer |
+|---|---|---|---|
+| H1 | Natural language | Where do I set up a test, like a state reading exam, before loading student scores? | `assessments`; scores in `studentAssessments` with an `assessmentReference` |
+| H2 | Natural language | Where do I put a student's result level on a test, like "Proficient"? | `studentAssessments`, `performanceLevels` (`performanceLevelDescriptor`) |
+| H8 | Natural language | How do I enroll a student in a class? | `studentSectionAssociations` |
+| H9 | Natural language | Where do I record which school a teacher works at? | `staffSchoolAssociations` |
+| H10 | Natural language | Where do I put a parent's phone number and email? | `contacts`, `telephones` and `electronicMails` |
+
 ### 6.3 Scoring rubric
 
 | Measure | How | ADR criterion |
@@ -230,6 +259,8 @@ language, field mapping, descriptor, reference).
   natural-language tasks: **adopt B** and record it in ADR 0001.
 - If C2 falls short mainly on natural-language tasks: first improve the index (word-split names, synonyms,
   domain grouping) and re-run. If it still falls short, **build C with A2** and compare C3 against C2.
+- Report the 80 % threshold for all tasks and for the held-out tasks separately. Synonyms added after the
+  first results don't count toward the held-out score, because they were tuned on those questions.
 
 ## 7. Next steps
 
