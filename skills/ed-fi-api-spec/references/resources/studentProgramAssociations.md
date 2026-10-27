@@ -4,10 +4,17 @@
 
 This association represents the program(s) that a student participates in or is served by.
 
+## Natural key
+
+`beginDate`, `educationOrganizationId`, `programEducationOrganizationId`, `programName`,
+`programTypeDescriptor`, `studentUniqueId`
+
+Field names from the GET query parameters marked `x-Ed-Fi-isIdentity`; fields of a reference appear without it
+(e.g. `schoolId` for `schoolReference`).
+
 ## Fields
 
-`yes` = required. The OpenAPI specification does not say which fields identify a record; for natural keys, see
-the Data Standard documentation.
+`yes` = required.
 
 | Field | Required | Type | Description |
 |---|---|---|---|

@@ -6,10 +6,16 @@ A valid combination of account dimensions under which financials are reported. T
 represents a funding source combined with its purpose and type of transaction. It provides a formal record of
 the debits and credits relating to the specific account.
 
+## Natural key
+
+`accountIdentifier`, `fiscalYear`, `educationOrganizationId`
+
+Field names from the GET query parameters marked `x-Ed-Fi-isIdentity`; fields of a reference appear without it
+(e.g. `schoolId` for `schoolReference`).
+
 ## Fields
 
-`yes` = required. The OpenAPI specification does not say which fields identify a record; for natural keys, see
-the Data Standard documentation.
+`yes` = required.
 
 | Field | Required | Type | Description |
 |---|---|---|---|

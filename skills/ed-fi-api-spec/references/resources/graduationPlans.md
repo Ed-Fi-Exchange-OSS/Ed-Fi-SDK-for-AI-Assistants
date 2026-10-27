@@ -6,10 +6,16 @@ This entity is a plan outlining the required credits, credits by subject, credit
 criteria required for graduation. A graduation plan may be one or more standard plans defined by an education
 organization and/or individual plans for some or all students.
 
+## Natural key
+
+`graduationPlanTypeDescriptor`, `educationOrganizationId`, `graduationSchoolYear`
+
+Field names from the GET query parameters marked `x-Ed-Fi-isIdentity`; fields of a reference appear without it
+(e.g. `schoolId` for `schoolReference`).
+
 ## Fields
 
-`yes` = required. The OpenAPI specification does not say which fields identify a record; for natural keys, see
-the Data Standard documentation.
+`yes` = required.
 
 | Field | Required | Type | Description |
 |---|---|---|---|

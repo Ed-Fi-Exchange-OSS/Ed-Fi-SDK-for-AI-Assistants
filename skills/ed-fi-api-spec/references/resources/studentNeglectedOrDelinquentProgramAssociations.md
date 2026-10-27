@@ -6,10 +6,17 @@ This association represents the Title I Part D Neglected or Delinquent program(s
 in or from which the student receives services. The association is a subclass of the
 GeneralStudentProgramAssociation specifically designed for Title I Part D Neglected or Delinquent programs.
 
+## Natural key
+
+`beginDate`, `educationOrganizationId`, `programEducationOrganizationId`, `programName`,
+`programTypeDescriptor`, `studentUniqueId`
+
+Field names from the GET query parameters marked `x-Ed-Fi-isIdentity`; fields of a reference appear without it
+(e.g. `schoolId` for `schoolReference`).
+
 ## Fields
 
-`yes` = required. The OpenAPI specification does not say which fields identify a record; for natural keys, see
-the Data Standard documentation.
+`yes` = required.
 
 | Field | Required | Type | Description |
 |---|---|---|---|

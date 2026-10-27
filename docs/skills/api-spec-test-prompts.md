@@ -146,10 +146,8 @@ read and the tokens used in [api-spec-test-results.md](api-spec-test-results.md)
 
 **Expected outcomes:**
 
-1. **(key)** Does not say `chartOfAccountReference` is part of the natural key because it is required.
-2. **(key)** Says the specification does not show which references identify a record, and points to the Data
-   Standard documentation (or gives the Data Standard key with that source: `accountIdentifier`,
-   `educationOrganizationId`, `fiscalYear`).
+1. **(key)** The natural key is `accountIdentifier`, `educationOrganizationId` and `fiscalYear`.
+2. **(key)** Does not say `chartOfAccountReference` is part of the natural key because it is required.
 
 ## T12 · Nested collections
 
@@ -160,3 +158,14 @@ read and the tokens used in [api-spec-test-results.md](api-spec-test-results.md)
 **Expected outcomes:**
 
 1. **(key)** Each item requires `classPeriodReference`, with `classPeriodName` and `schoolId`.
+
+## T13 · Natural key
+
+**Prompt:**
+
+> What's the natural key of an Ed-Fi studentSectionAssociation?
+
+**Expected outcomes:**
+
+1. **(key)** `beginDate`, `localCourseCode`, `schoolId`, `schoolYear`, `sectionIdentifier`, `sessionName` and
+   `studentUniqueId` (the section and student references' fields plus `beginDate`).

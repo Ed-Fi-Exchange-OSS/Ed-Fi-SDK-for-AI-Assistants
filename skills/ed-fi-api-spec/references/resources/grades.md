@@ -5,10 +5,17 @@
 This educational entity represents an overall score or assessment tied to a course over a period of time
 (i.e., the grading period). Student grades are usually a compilation of marks and other scores.
 
+## Natural key
+
+`gradeTypeDescriptor`, `gradingPeriodDescriptor`, `gradingPeriodName`, `schoolId`, `gradingPeriodSchoolYear`,
+`beginDate`, `localCourseCode`, `schoolYear`, `sectionIdentifier`, `sessionName`, `studentUniqueId`
+
+Field names from the GET query parameters marked `x-Ed-Fi-isIdentity`; fields of a reference appear without it
+(e.g. `schoolId` for `schoolReference`).
+
 ## Fields
 
-`yes` = required. The OpenAPI specification does not say which fields identify a record; for natural keys, see
-the Data Standard documentation.
+`yes` = required.
 
 | Field | Required | Type | Description |
 |---|---|---|---|

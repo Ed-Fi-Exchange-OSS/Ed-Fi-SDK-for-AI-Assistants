@@ -6,10 +6,16 @@ The NCES project accounting dimension. The project dimension reporting code perm
 accumulate expenditures to meet a variety of specialized reporting requirements at the local, state, and
 federal levels.
 
+## Natural key
+
+`code`, `fiscalYear`
+
+Field names from the GET query parameters marked `x-Ed-Fi-isIdentity`; fields of a reference appear without it
+(e.g. `schoolId` for `schoolReference`).
+
 ## Fields
 
-`yes` = required. The OpenAPI specification does not say which fields identify a record; for natural keys, see
-the Data Standard documentation.
+`yes` = required.
 
 | Field | Required | Type | Description |
 |---|---|---|---|

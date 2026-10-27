@@ -7,10 +7,16 @@ financial statements only report assets, deferred outflows of resources, liabili
 resources, and equity accounts. The statements are considered snapshots of how these accounts stand as of a
 certain point in time.
 
+## Natural key
+
+`code`, `fiscalYear`
+
+Field names from the GET query parameters marked `x-Ed-Fi-isIdentity`; fields of a reference appear without it
+(e.g. `schoolId` for `schoolReference`).
+
 ## Fields
 
-`yes` = required. The OpenAPI specification does not say which fields identify a record; for natural keys, see
-the Data Standard documentation.
+`yes` = required.
 
 | Field | Required | Type | Description |
 |---|---|---|---|

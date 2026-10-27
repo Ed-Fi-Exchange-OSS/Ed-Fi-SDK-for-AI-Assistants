@@ -5,10 +5,17 @@
 This entity is the final record of a student's performance in their courses at the end of a semester or school
 year.
 
+## Natural key
+
+`courseAttemptResultDescriptor`, `courseCode`, `courseEducationOrganizationId`, `educationOrganizationId`,
+`schoolYear`, `studentUniqueId`, `termDescriptor`
+
+Field names from the GET query parameters marked `x-Ed-Fi-isIdentity`; fields of a reference appear without it
+(e.g. `schoolId` for `schoolReference`).
+
 ## Fields
 
-`yes` = required. The OpenAPI specification does not say which fields identify a record; for natural keys, see
-the Data Standard documentation.
+`yes` = required.
 
 | Field | Required | Type | Description |
 |---|---|---|---|

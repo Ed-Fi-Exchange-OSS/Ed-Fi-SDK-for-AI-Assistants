@@ -6,10 +6,17 @@ This association indicates interventions made available by an education organiza
 education organization purchases a set of intervention prescriptions and makes them available to its schools
 for use on demand.
 
+## Natural key
+
+`educationOrganizationId`, `interventionPrescriptionEducationOrganizationId`,
+`interventionPrescriptionIdentificationCode`
+
+Field names from the GET query parameters marked `x-Ed-Fi-isIdentity`; fields of a reference appear without it
+(e.g. `schoolId` for `schoolReference`).
+
 ## Fields
 
-`yes` = required. The OpenAPI specification does not say which fields identify a record; for natural keys, see
-the Data Standard documentation.
+`yes` = required.
 
 | Field | Required | Type | Description |
 |---|---|---|---|

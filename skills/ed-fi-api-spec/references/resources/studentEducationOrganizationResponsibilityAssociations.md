@@ -6,10 +6,16 @@ This association indicates a relationship between a student and an education org
 enrollment relationship, and generally indicating some kind of responsibility of the education organization
 for the student. Enrollment relationship semantics are covered by StudentSchoolAssociation.
 
+## Natural key
+
+`responsibilityDescriptor`, `beginDate`, `educationOrganizationId`, `studentUniqueId`
+
+Field names from the GET query parameters marked `x-Ed-Fi-isIdentity`; fields of a reference appear without it
+(e.g. `schoolId` for `schoolReference`).
+
 ## Fields
 
-`yes` = required. The OpenAPI specification does not say which fields identify a record; for natural keys, see
-the Data Standard documentation.
+`yes` = required.
 
 | Field | Required | Type | Description |
 |---|---|---|---|

@@ -5,10 +5,16 @@
 This entity represents the designation of a regularly scheduled series of class meetings at designated times
 and days of the week.
 
+## Natural key
+
+`classPeriodName`, `schoolId`
+
+Field names from the GET query parameters marked `x-Ed-Fi-isIdentity`; fields of a reference appear without it
+(e.g. `schoolId` for `schoolReference`).
+
 ## Fields
 
-`yes` = required. The OpenAPI specification does not say which fields identify a record; for natural keys, see
-the Data Standard documentation.
+`yes` = required.
 
 | Field | Required | Type | Description |
 |---|---|---|---|

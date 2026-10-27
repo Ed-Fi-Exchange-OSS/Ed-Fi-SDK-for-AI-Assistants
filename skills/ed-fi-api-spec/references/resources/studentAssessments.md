@@ -7,10 +7,16 @@ in a value that represents a student's performance on a set of items on a test.
 
 Also searched as: test results, test scores.
 
+## Natural key
+
+`studentAssessmentIdentifier`, `assessmentIdentifier`, `namespace`, `studentUniqueId`
+
+Field names from the GET query parameters marked `x-Ed-Fi-isIdentity`; fields of a reference appear without it
+(e.g. `schoolId` for `schoolReference`).
+
 ## Fields
 
-`yes` = required. The OpenAPI specification does not say which fields identify a record; for natural keys, see
-the Data Standard documentation.
+`yes` = required.
 
 | Field | Required | Type | Description |
 |---|---|---|---|

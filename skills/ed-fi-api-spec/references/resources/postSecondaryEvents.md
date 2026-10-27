@@ -6,10 +6,16 @@ This entity captures significant postsecondary events during a student's high sc
 application or college application, acceptance, and enrollment) or during a student's enrollment at a
 post-secondary institution.
 
+## Natural key
+
+`postSecondaryEventCategoryDescriptor`, `eventDate`, `studentUniqueId`
+
+Field names from the GET query parameters marked `x-Ed-Fi-isIdentity`; fields of a reference appear without it
+(e.g. `schoolId` for `schoolReference`).
+
 ## Fields
 
-`yes` = required. The OpenAPI specification does not say which fields identify a record; for natural keys, see
-the Data Standard documentation.
+`yes` = required.
 
 | Field | Required | Type | Description |
 |---|---|---|---|

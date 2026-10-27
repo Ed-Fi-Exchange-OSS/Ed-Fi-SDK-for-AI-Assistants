@@ -27,6 +27,7 @@ import urllib.request
 SKIP_FIELDS = {'id', '_etag', '_lastModifiedDate', 'link'}
 OPERATIONS = ('get', 'post', 'put', 'delete')
 RESOURCE_TEXT = {}  # resource (tag) name -> description, filled in main()
+PARAMETERS = {}  # components.parameters, filled in main()
 LINE_LENGTH = 110  # .editorconfig max_line_length; tables are exempt
 # Index files keep one line per entry, so a line search returns the whole entry.
 ONE_LINE_NOTE = ('<!-- One line per entry, so a line search returns the whole entry. -->\n'
@@ -134,6 +135,23 @@ def table(rows):
     return ['| Field | Required | Type | Description |', '|---|---|---|---|'] + rows
 
 
+def natural_key(operations):
+    """Identity fields from the collection GET's query parameters (x-Ed-Fi-isIdentity).
+
+    The request schemas mark identity only on scalar fields, not on references; the GET query parameters flatten
+    references into their fields (e.g. schoolReference -> schoolId) and mark every identity field.
+    """
+    get = next((op for m, p, op in operations if m == 'GET' and '{' not in p and not p.endswith(
+        ('/deletes', '/keyChanges', '/partitions'))), None)
+    names = []
+    for param in (get or {}).get('parameters', []):
+        if '$ref' in param:
+            param = PARAMETERS.get(ref_name(param['$ref']), {})
+        if param.get('x-Ed-Fi-isIdentity') and param.get('name') not in names:
+            names.append(param['name'])
+    return names
+
+
 def endpoint_order(endpoint):
     method, path = endpoint
     return '{' in path, path, OPERATIONS.index(method.lower())
@@ -146,11 +164,15 @@ def resource_file(tag, description, operations, schemas, synonyms):
     lines = [f'# {tag}', '', f'`{collection}`', '', re.sub(r'\s+', ' ', description).strip(), '']
     if synonyms:
         lines += ['Also searched as: ' + ', '.join(synonyms) + '.', '']
+    key = natural_key(operations)
+    if key:
+        lines += ['## Natural key', '', ', '.join(f'`{k}`' for k in key), '',
+                  'Field names from the GET query parameters marked `x-Ed-Fi-isIdentity`; fields of a reference appear '
+                  'without it (e.g. `schoolId` for `schoolReference`).', '']
     if post:
         schema = schemas[ref_name(post['requestBody']['content']['application/json']['schema']['$ref'])]
         rows, collections = field_rows(schema, schemas)
-        lines += ['## Fields', '', '`yes` = required. The OpenAPI specification does not say which fields identify a '
-                  'record; for natural keys, see the Data Standard documentation.', ''] + table(rows) + ['']
+        lines += ['## Fields', '', '`yes` = required.', ''] + table(rows) + ['']
         for name, item_schema in collections:
             item_rows, _ = field_rows(schemas.get(item_schema, {}), schemas)
             if item_rows:
@@ -188,6 +210,7 @@ def main():
     schemas = resources['components']['schemas']
     tag_text = {t['name']: t.get('description', '') for t in resources.get('tags', [])}
     RESOURCE_TEXT.update(tag_text)
+    PARAMETERS.update(resources.get('components', {}).get('parameters', {}))
     by_tag = {}
     for path, ops in resources['paths'].items():
         for method, op in ops.items():
