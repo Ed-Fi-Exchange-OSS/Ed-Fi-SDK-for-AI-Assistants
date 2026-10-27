@@ -55,6 +55,8 @@ Guidelines:
   question to confirm, and state the fix that applies if it turns out to be a natural key.
 - **Stay in the client's scope.** Claim sets, Profiles configuration and other host settings are out of scope
   for client code; mention them only if the code works around them incorrectly.
+- **Report bugs that no rule covers separately.** Real defects outside the rules (e.g. a swallowed exception,
+  a wrong argument, an undefined variable) go under "Other issues (no rule)", not under a rule level.
 
 ## 4. Report
 
@@ -64,7 +66,7 @@ Use this structure:
 ## Ed-Fi client review: <repository or files>
 
 **Integration:** push / pull / both · **Platform:** ODS/API 7.x / Ed-Fi API 8 / unknown
-**Summary:** N must fix, N should fix, N suggestions · N rules passed · N not checked
+**Summary:** N must fix, N should fix, N suggestions · N other issues · N rules passed · N not checked
 
 ### Must fix
 - **PUSH-3** · `src/sync/students.py:88`: PUT to `/ed-fi/students/{studentUniqueId}` uses the natural key in
@@ -79,6 +81,10 @@ Use this structure:
 - **PUSH-2** · `src/sync/sections.py:120`: deletes and reposts sections to apply changes. Sections support
   cascading key updates, so PUT by `id` would work and keep the resource `id` stable.
 
+### Other issues (no rule)
+- `src/sync/reader.py:57`: the worker catches every exception and returns, so a failed page silently
+  truncates the extract. Log the error and fail the run, or retry the page.
+
 ### Not checked
 - **PUSH-7**: whether the host enables ETags is not visible from the code.
 ```
@@ -92,7 +98,8 @@ Before you send the report, check it:
    claims. Drop or correct any finding you can't confirm.
 2. **Check each rule ID appears in one section only**, except when separate parts of the code meet the rule at
    different levels. A rule with any finding is not "Passed".
-3. **Check the levels against the table in step 3**, and that "Must fix" holds only *Required* rules.
+3. **Check the levels against the table in step 3**, and that "Must fix" holds only *Required* rules. The
+   levels apply to rule findings only; bugs that no rule covers go under "Other issues (no rule)".
 
 ## 5. After the review
 

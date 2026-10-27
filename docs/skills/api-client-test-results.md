@@ -186,10 +186,11 @@ Issues found in the reports, and the changes made:
 | The same rule listed as *Passed* and as a finding | `review.md`: one place per rule; report each part once at its own level |
 | Unsure whether `requests`' `HTTPBasicAuth` counts as a "built-in basic-auth helper" (AUTH-1) | AUTH-1 **Detect** now names helpers in Python, JavaScript and .NET |
 | On the larger repository, the two rules above were not always followed, and one finding cited a line incorrectly | `review.md`: a check before sending the report (re-read every cited line, one section per rule, levels match the table) |
+| Bugs that no rule covers were reported under a different heading in each report, and one report put them under *Suggestions* | `review.md`: an "Other issues (no rule)" section in the report template; the final check says the levels apply to rule findings only |
 
 Reruns after the changes: the library review kept every rule at its table level. The Suite-3 review, with the
 final check, had no rule both passed and reported, no unconfirmed finding, and *Must fix* only for *Required*
-rules.
+rules. Both reruns still reported the bugs outside the rules, in a section of their own.
 
 ## Not yet done
 
