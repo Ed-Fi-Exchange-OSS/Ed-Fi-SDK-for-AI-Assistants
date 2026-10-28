@@ -10,12 +10,14 @@ This analysis evaluates the options in ADR 0001 with measured data and a working
 proposes the experiment that will settle the decision. It uses the ADR's option names and evaluation
 criteria.
 
-> **Update after implementation (PR #56):** the prototype described here derived natural keys from the
-> specification (identity fields plus required references). Review showed the specification can't support
-> that: it marks identity on scalar fields only, so a required reference may or may not be part of a record's
-> identity. The delivered `ed-fi-api-spec` skill does not state natural keys; it lists required fields, the
-> fields to supply in each reference, nested collections, and whether `PUT` can change a resource's
-> identifying values. Lookup tasks below that ask for natural keys refer to the prototype.
+> **Update after implementation (PRs #56 and #62):** the prototype described here derived natural keys from
+> the request schemas (identity fields plus required references). Review showed those schemas can't support
+> that: they mark identity on scalar fields only, so a required reference may or may not be part of a
+> record's identity. The delivered `ed-fi-api-spec` skill takes natural keys instead from the collection GET's
+> query parameters marked `x-Ed-Fi-isIdentity`, which flatten references into their fields (PR #62).
+>
+> **Results:** the experiment in section 6 was run; see [Spec lookup comparison: results](spec-lookup-results.md).
+> Option B was adopted and recorded in ADR 0001.
 
 ## 1. Problem size
 
@@ -267,7 +269,8 @@ language, field mapping, descriptor, reference).
 1. Review this analysis and agree on the recommendation (Q-1) and the experiment design (Q-2).
 2. Add the converter under `eng/`, so it can also generate a knowledge graph from a host's extensions, and
    generate the knowledge graph as a skill with a small set of common synonyms in the index (issue #45).
-3. Run the experiment (issue #47) and publish the results here and in ADR 0001.
+3. Run the experiment (issue #47) and publish the results here and in ADR 0001. Done:
+   [results](spec-lookup-results.md).
 
 ## Appendix A: lookup comparison method and results
 

@@ -39,6 +39,9 @@ the `original-sdk-as-mcp-server` release).
   the Ed-Fi API 8.1 pilot test kit (8.1 pre-release).
 - `ed-fi-api-spec`: 12/12 test prompts pass in Claude Code (10/12 without the skill) and 10/12 in GitHub
   Copilot.
+- Spec lookup comparison ([results](docs/spec-lookup-results.md)): on 29 lookup tasks in Claude Code, the spec
+  skill scored 100%, tied with keyword search and ahead of no spec help (98%), with five times fewer invented
+  names. ADR 0001 is accepted with option B.
 
 ### Removed
 

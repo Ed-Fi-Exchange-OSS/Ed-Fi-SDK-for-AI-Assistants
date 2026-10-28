@@ -1,7 +1,7 @@
 # ADR 0001: Delivering similarity search over the Ed-Fi API specifications
 
-- **Status:** Proposed (draft; decision deferred to implementation)
-- **Date:** 2026-10-20
+- **Status:** Accepted: Option B
+- **Date:** 2026-10-20 (proposed); TODO: date accepted
 - **Related:** PRD FR-SPEC-1 through FR-SPEC-5, Q-1, Q-2
 
 ## Context
@@ -22,10 +22,18 @@ Constraints from the PRD:
 
 ## Decision
 
-**Not yet decided.** The options below are candidates. The team will select one, or propose a different
-approach, during implementation, guided by the FR-SPEC-2 analysis and the Q-2 experiment (a fixed set of real
-lookup tasks scored on correctness, token usage and number of steps, in Claude Code and GitHub Copilot). This
-ADR will be updated with the outcome.
+**Option B: a Markdown knowledge graph delivered as an Agent Skill** (`skills/ed-fi-api-spec`), generated from
+the specifications by `eng/spec-knowledge-graph/generate.py`.
+
+The FR-SPEC-2 analysis recommended B first ([spec lookup analysis](../spec-lookup-analysis.md), section 5), and
+the Q-2 experiment confirmed it under the agreed decision rule
+([results](../spec-lookup-results.md)): B scored at least as well as no spec help and as keyword search, and
+100% on the natural-language and held-out tasks, above the 80% threshold. It was also the most consistent
+between runs, named five times fewer identifiers that don't exist in the specification than no spec help, and
+used fewer tokens and steps than keyword search.
+
+Embedding search (Options A, A2, A3 and the hybrid C) is not built for this release. The decision rule calls
+for C with A2 only if B falls short on natural-language tasks, which it didn't.
 
 ## Options considered
 
@@ -108,6 +116,12 @@ identifiers could be a component of a hybrid (Option C).
 
 ## Consequences
 
-To be completed when a decision is made. Whichever option is chosen, identifier word-splitting should be
-considered for any matching approach, and the selected design must satisfy FR-SPEC-4 (no composite or
-extension specs) and FR-SPEC-5 (local embeddings where a simple path exists).
+- No runtime, model or native dependency: the skill is plain Markdown and works in any harness that supports
+  Agent Skills. FR-SPEC-5 (local embeddings) doesn't apply, since no embeddings are used.
+- The index must be regenerated when the specification changes. Hosts with extensions can regenerate it from
+  their own specification with the same script; composite specifications stay out of scope (FR-SPEC-4).
+- Lookups cost more tokens than answering from memory (about 3× in Claude Code), in exchange for answers
+  grounded in the specification. Index size should be watched as the Data Standard grows.
+- Natural-language lookups rely on the assistant's own understanding plus a small set of synonyms in the
+  index. If later tasks show a gap (for example lesser-known resources or extensions), the analysis's fallback
+  still applies: add an optional embedding search (C with A2) to B.
