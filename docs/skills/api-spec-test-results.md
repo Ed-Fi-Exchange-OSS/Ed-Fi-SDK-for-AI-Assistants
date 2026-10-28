@@ -164,9 +164,13 @@ Re-run of the prompts about keys (T1, T8, T11) and a new one (T13), same harness
 | Test | With skill | Without skill |
 |---|---|---|
 | T1 · Required fields and references | ✅ Pass | ✅ Pass |
-| T8 · Key changes | ✅ Pass (cites `x-Ed-Fi-isUpdatable`; gives the section's natural key) | ✅ Pass (hedged: "depends on your version") |
+| T8 · Key changes | ✅ Pass (cites `x-Ed-Fi-isUpdatable`; gives the section's natural key) | ❌ Fail (hedged: "depends on your version"; key right, from memory) |
 | T11 · `localAccounts` natural key | ✅ Pass (key from the spec; `chartOfAccountReference` not in it) | ✅ Pass (from Data Standard knowledge, with a caveat) |
 | T13 · `studentSectionAssociations` natural key | ✅ Pass (seven fields, with the reference each comes from) | ✅ Pass |
+
+T8's expected outcomes were updated for this run: the index now shows the natural key and whether it can
+change, so the answer should give both from the specification. Both runs were scored against the updated
+outcomes; without the skill, the answer gives the key from memory but doesn't say whether it can change.
 
 With the skill, the answers about keys now come from the specification and say so; without it, the model
 answers these well-known resources from memory and hedges.

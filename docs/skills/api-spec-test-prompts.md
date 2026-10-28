@@ -110,10 +110,11 @@ read and the tokens used in [api-spec-test-results.md](api-spec-test-results.md)
 
 **Expected outcomes:**
 
-1. **(key)** Does not claim that the spec index shows which fields identify a section or whether they can
-   change.
-2. Any answer about key changes (for example, cascading key updates on `sections`) is presented as depending on
-   the platform and host, with a way to confirm it.
+1. **(key)** Says the key can be changed with a PUT, without deleting and recreating the section, because the
+   spec index marks `sections` as supporting cascading key updates.
+2. Gives the section's natural key from the index: `sectionIdentifier` plus the fields from
+   `courseOfferingReference` (`localCourseCode`, `schoolId`, `schoolYear`, `sessionName`).
+3. Presents the cascade as depending on the platform and host, with a way to confirm it.
 
 ## T9 · Change-query endpoints
 
