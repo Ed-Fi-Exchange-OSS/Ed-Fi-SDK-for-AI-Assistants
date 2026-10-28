@@ -34,8 +34,9 @@ the `original-sdk-as-mcp-server` release).
 ### Verification
 
 - `ed-fi-api-client`: 10/10 test prompts pass in Claude Code (5/10 without the skill) and 10/10 in GitHub
-  Copilot. Code that Claude Code wrote with the skill ran unchanged against the Ed-Fi API 8.1 pilot test kit
-  (8.1 pre-release).
+  Copilot (4/10 without the skill). The four prompts that depend on authentication pass again in both
+  assistants after the Ed-Fi API 8.1 changes. Code that Claude Code wrote with the skill ran unchanged against
+  the Ed-Fi API 8.1 pilot test kit (8.1 pre-release).
 - `ed-fi-api-spec`: 12/12 test prompts pass in Claude Code (10/12 without the skill) and 10/12 in GitHub
   Copilot.
 

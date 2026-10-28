@@ -192,7 +192,56 @@ Reruns after the changes: the library review kept every rule at its table level.
 final check, had no rule both passed and reported, no unconfirmed finding, and *Must fix* only for *Required*
 rules. Both reruns still reported the bugs outside the rules, in a section of their own.
 
+## Run 4 · Re-run after the Ed-Fi API 8.1 changes · 2026-10-26
+
+Runs 1–3 predate the 8.1 changes of 2026-10-23 (body credentials *Allowed but discouraged*, 8.1 as the target,
+new skill description). The four prompts that depend on authentication were run again against `main`.
+
+- **Claude Code:** 2.1.310, same harness and restrictions as Run 1, with and without the skill.
+- **GitHub Copilot:** same harness as Run 2, with the skill only. Results were kept outside the workspace.
+- **Skill invocation:** both assistants loaded the skill on their own in every prompt.
+
+| Test | Topic | Claude Code with skill | Claude Code without skill | Copilot with skill |
+|---|---|---|---|---|
+| T1 | Push script | ✅ Pass | ❌ Fail | ✅ Pass |
+| T3 | Review: token per call | ✅ Pass | ✅ Pass | ✅ Pass |
+| T5 | 401 on the token request | ✅ Pass | ✅ Pass | ✅ Pass |
+| T8 | Moving to Ed-Fi API 8 | ✅ Pass | ❌ Fail | ✅ Pass |
+| **Total** | | **4 / 4** | **2 / 4** | **4 / 4** |
+
+What the 8.1 changes show in the answers:
+
+- No answer says that Ed-Fi API 8 rejects credentials in the body. T3 keeps AUTH-1 under *Should fix*, and
+  Copilot calls body credentials "allowed but discouraged".
+- T5 (Claude Code) offers body credentials as a stopgap on ODS/API 7.x and 8.1, not as the fix.
+- T8 tells clients to target Ed-Fi API 8.1 or later in both assistants.
+
+Non-key gaps: Copilot's T1 passes descriptors and dates through from the CSV without a mapping or validation,
+and its T8 explains how to build the Basic header without recommending it. Without the skill, Claude Code's T5
+lists the urlencoding as one cause among several: a weak pass, where Run 1 failed.
+
+## Run 5 · GitHub Copilot without the skill · 2026-10-26
+
+Same harness as Run 2, in an empty workspace with no Ed-Fi skill, all ten prompts. This completes the
+with/without comparison in Copilot.
+
+| Test | Topic | Result | Notes |
+|---|---|---|---|
+| T1 | Push script | ❌ Fail | Hard-coded `/oauth/token` and `/data/v3`; credentials in the body |
+| T2 | Updating a record | ✅ Pass | GET by `studentUniqueId`, then PUT by `id` with the full record |
+| T3 | Review: token per call | ❌ Fail | Missed the new token on every call; the fix kept body credentials |
+| T4 | Diagnosing a 409 | ✅ Pass | Missing student; load it first. No branching on `type` (non-key) |
+| T5 | 401 on the token request | ✅ Pass | Identified the missing urlencoding |
+| T6 | Incremental sync | ❌ Fail | No `/deletes` or `/keyChanges`; only "confirm whether deletes are exposed" |
+| T7 | Large extract | ❌ Fail | Offset paging only; no cursor paging or `/partitions` |
+| T8 | Moving to Ed-Fi API 8 | ❌ Fail | Searched docs.ed-fi.org and found the `v3`, casing and `/connect/token` changes, but hard-coded the new paths instead of using Discovery and described 8.0 limits |
+| T9 | Descriptors | ✅ Pass | Full descriptor URI; values from the target API |
+| T10 | Review: documented exception | ❌ Fail | Rated delete and repost as high severity; no cascading key updates |
+| **Total** | | **4 / 10** | With the skill (Runs 2–4): 10 / 10 |
+
+Observations: agent mode again ran commands, wrote the T1 script to the workspace and asked for API access in
+T2 (told to just answer). T7 and T8 fetched web pages. One unrelated user-level skill loaded in T1.
+
 ## Not yet done
 
-- **GitHub Copilot:** a run without the skill for comparison.
 - **Codex** (optional, NFR-PORT-1).
