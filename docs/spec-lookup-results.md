@@ -48,6 +48,8 @@ C3 (embedding search) was not built: the decision rule only calls for it if C2 f
   backticks against the specification, because the automated judge's own counts were unreliable.
 - **Second review:** Ana Gutierrez scores a blind sample of 30 answers: all those adjusted or scored below 2,
   plus a random sample.
+- **Scripts and tasks:** [`eng/spec-lookup-comparison/`](../eng/spec-lookup-comparison/README.md), to repeat
+  the comparison.
 
 <!-- TODO: add the second reviewer's agreement once the scores are back. -->
 
