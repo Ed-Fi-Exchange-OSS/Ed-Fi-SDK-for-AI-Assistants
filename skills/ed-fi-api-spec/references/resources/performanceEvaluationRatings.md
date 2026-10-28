@@ -9,9 +9,6 @@ The summary rating for a Performance Evaluation across all Evaluation instrument
 `educationOrganizationId`, `evaluationPeriodDescriptor`, `performanceEvaluationTitle`,
 `performanceEvaluationTypeDescriptor`, `schoolYear`, `termDescriptor`, `personId`, `sourceSystemDescriptor`
 
-Field names from the GET query parameters marked `x-Ed-Fi-isIdentity`; fields of a reference appear without it
-(e.g. `schoolId` for `schoolReference`).
-
 ## Fields
 
 `yes` = required.

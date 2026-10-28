@@ -8,9 +8,6 @@ This association provides the contact information of the staff associated with t
 
 `contactTitle`, `educationOrganizationId`, `staffUniqueId`
 
-Field names from the GET query parameters marked `x-Ed-Fi-isIdentity`; fields of a reference appear without it
-(e.g. `schoolId` for `schoolReference`).
-
 ## Fields
 
 `yes` = required.

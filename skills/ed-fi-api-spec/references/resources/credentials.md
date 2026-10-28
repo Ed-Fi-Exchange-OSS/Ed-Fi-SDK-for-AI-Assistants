@@ -8,9 +8,6 @@ The legal document giving authorization to perform teaching assignment services.
 
 `stateOfIssueStateAbbreviationDescriptor`, `credentialIdentifier`
 
-Field names from the GET query parameters marked `x-Ed-Fi-isIdentity`; fields of a reference appear without it
-(e.g. `schoolId` for `schoolReference`).
-
 ## Fields
 
 `yes` = required.

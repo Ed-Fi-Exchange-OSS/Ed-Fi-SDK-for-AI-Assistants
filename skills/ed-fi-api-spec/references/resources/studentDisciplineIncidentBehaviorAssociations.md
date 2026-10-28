@@ -8,9 +8,6 @@ This association describes the behavior of students involved in a discipline inc
 
 `behaviorDescriptor`, `incidentIdentifier`, `schoolId`, `studentUniqueId`
 
-Field names from the GET query parameters marked `x-Ed-Fi-isIdentity`; fields of a reference appear without it
-(e.g. `schoolId` for `schoolReference`).
-
 ## Fields
 
 `yes` = required.

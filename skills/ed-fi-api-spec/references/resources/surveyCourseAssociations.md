@@ -8,9 +8,6 @@ The course associated with the survey.
 
 `courseCode`, `educationOrganizationId`, `namespace`, `surveyIdentifier`
 
-Field names from the GET query parameters marked `x-Ed-Fi-isIdentity`; fields of a reference appear without it
-(e.g. `schoolId` for `schoolReference`).
-
 ## Fields
 
 `yes` = required.

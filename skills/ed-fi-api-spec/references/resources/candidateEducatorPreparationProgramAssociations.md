@@ -8,9 +8,6 @@ Information about the association between the Teacher Candidate and the Educator
 
 `beginDate`, `candidateIdentifier`, `educationOrganizationId`, `programName`, `programTypeDescriptor`
 
-Field names from the GET query parameters marked `x-Ed-Fi-isIdentity`; fields of a reference appear without it
-(e.g. `schoolId` for `schoolReference`).
-
 ## Fields
 
 `yes` = required.

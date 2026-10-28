@@ -8,9 +8,6 @@ Captures attendance taken event for given section.
 
 `calendarCode`, `date`, `schoolId`, `schoolYear`, `localCourseCode`, `sectionIdentifier`, `sessionName`
 
-Field names from the GET query parameters marked `x-Ed-Fi-isIdentity`; fields of a reference appear without it
-(e.g. `schoolId` for `schoolReference`).
-
 ## Fields
 
 `yes` = required.

@@ -8,9 +8,6 @@ A set of dates associated with an organization.
 
 `calendarCode`, `schoolId`, `schoolYear`
 
-Field names from the GET query parameters marked `x-Ed-Fi-isIdentity`; fields of a reference appear without it
-(e.g. `schoolId` for `schoolReference`).
-
 ## Fields
 
 `yes` = required.

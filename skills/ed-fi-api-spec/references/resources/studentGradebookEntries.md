@@ -8,9 +8,6 @@ This entity holds a student's grade or competency level for a gradebook entry.
 
 `gradebookEntryIdentifier`, `namespace`, `studentUniqueId`
 
-Field names from the GET query parameters marked `x-Ed-Fi-isIdentity`; fields of a reference appear without it
-(e.g. `schoolId` for `schoolReference`).
-
 ## Fields
 
 `yes` = required.

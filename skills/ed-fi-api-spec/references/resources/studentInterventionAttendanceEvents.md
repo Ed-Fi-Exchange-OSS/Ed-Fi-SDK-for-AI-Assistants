@@ -9,9 +9,6 @@ This event entity represents the recording of whether a student is in attendance
 `attendanceEventCategoryDescriptor`, `eventDate`, `educationOrganizationId`, `interventionIdentificationCode`,
 `studentUniqueId`
 
-Field names from the GET query parameters marked `x-Ed-Fi-isIdentity`; fields of a reference appear without it
-(e.g. `schoolId` for `schoolReference`).
-
 ## Fields
 
 `yes` = required.

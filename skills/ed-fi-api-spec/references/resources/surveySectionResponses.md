@@ -8,9 +8,6 @@ Optional information about the responses provided for a section of a survey.
 
 `namespace`, `surveyIdentifier`, `surveyResponseIdentifier`, `surveySectionTitle`
 
-Field names from the GET query parameters marked `x-Ed-Fi-isIdentity`; fields of a reference appear without it
-(e.g. `schoolId` for `schoolReference`).
-
 ## Fields
 
 `yes` = required.

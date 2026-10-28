@@ -8,9 +8,6 @@ The anticipated administration of an assessment under the purview of an educatio
 
 `administrationIdentifier`, `assessmentIdentifier`, `namespace`, `assigningEducationOrganizationId`
 
-Field names from the GET query parameters marked `x-Ed-Fi-isIdentity`; fields of a reference appear without it
-(e.g. `schoolId` for `schoolReference`).
-
 ## Fields
 
 `yes` = required.

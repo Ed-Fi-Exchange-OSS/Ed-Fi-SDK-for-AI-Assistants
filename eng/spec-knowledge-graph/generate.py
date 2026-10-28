@@ -166,9 +166,7 @@ def resource_file(tag, description, operations, schemas, synonyms):
         lines += ['Also searched as: ' + ', '.join(synonyms) + '.', '']
     key = natural_key(operations)
     if key:
-        lines += ['## Natural key', '', ', '.join(f'`{k}`' for k in key), '',
-                  'Field names from the GET query parameters marked `x-Ed-Fi-isIdentity`; fields of a reference appear '
-                  'without it (e.g. `schoolId` for `schoolReference`).', '']
+        lines += ['## Natural key', '', ', '.join(f'`{k}`' for k in key), '']
     if post:
         schema = schemas[ref_name(post['requestBody']['content']['application/json']['schema']['$ref'])]
         rows, collections = field_rows(schema, schemas)

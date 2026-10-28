@@ -8,9 +8,6 @@ The association from feeder school to the receiving school.
 
 `beginDate`, `feederSchoolId`, `schoolId`
 
-Field names from the GET query parameters marked `x-Ed-Fi-isIdentity`; fields of a reference appear without it
-(e.g. `schoolId` for `schoolReference`).
-
 ## Fields
 
 `yes` = required.

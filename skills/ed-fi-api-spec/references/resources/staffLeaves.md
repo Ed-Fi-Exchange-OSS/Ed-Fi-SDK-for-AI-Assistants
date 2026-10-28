@@ -8,9 +8,6 @@ This entity represents the recording of the dates of staff leave (e.g., sick lea
 
 `staffLeaveEventCategoryDescriptor`, `beginDate`, `staffUniqueId`
 
-Field names from the GET query parameters marked `x-Ed-Fi-isIdentity`; fields of a reference appear without it
-(e.g. `schoolId` for `schoolReference`).
-
 ## Fields
 
 `yes` = required.

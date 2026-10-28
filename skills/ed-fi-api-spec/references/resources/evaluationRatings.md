@@ -10,9 +10,6 @@ The summary weighting for the Evaluation instrument for an individual educator.
 `performanceEvaluationTitle`, `performanceEvaluationTypeDescriptor`, `schoolYear`, `termDescriptor`,
 `personId`, `sourceSystemDescriptor`
 
-Field names from the GET query parameters marked `x-Ed-Fi-isIdentity`; fields of a reference appear without it
-(e.g. `schoolId` for `schoolReference`).
-
 ## Fields
 
 `yes` = required.

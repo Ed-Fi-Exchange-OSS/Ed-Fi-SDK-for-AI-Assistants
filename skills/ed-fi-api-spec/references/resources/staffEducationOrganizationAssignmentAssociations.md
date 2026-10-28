@@ -8,9 +8,6 @@ This association indicates the education organization to which a staff member pr
 
 `staffClassificationDescriptor`, `beginDate`, `educationOrganizationId`, `staffUniqueId`
 
-Field names from the GET query parameters marked `x-Ed-Fi-isIdentity`; fields of a reference appear without it
-(e.g. `schoolId` for `schoolReference`).
-
 ## Fields
 
 `yes` = required.

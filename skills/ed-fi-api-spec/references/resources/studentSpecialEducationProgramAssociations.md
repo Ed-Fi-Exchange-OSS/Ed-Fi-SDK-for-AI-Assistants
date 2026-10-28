@@ -11,9 +11,6 @@ special education programs.
 `beginDate`, `educationOrganizationId`, `programEducationOrganizationId`, `programName`,
 `programTypeDescriptor`, `studentUniqueId`
 
-Field names from the GET query parameters marked `x-Ed-Fi-isIdentity`; fields of a reference appear without it
-(e.g. `schoolId` for `schoolReference`).
-
 ## Fields
 
 `yes` = required.

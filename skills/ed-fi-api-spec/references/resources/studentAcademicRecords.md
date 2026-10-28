@@ -8,9 +8,6 @@ This educational entity represents the cumulative record of academic achievement
 
 `termDescriptor`, `educationOrganizationId`, `schoolYear`, `studentUniqueId`
 
-Field names from the GET query parameters marked `x-Ed-Fi-isIdentity`; fields of a reference appear without it
-(e.g. `schoolId` for `schoolReference`).
-
 ## Fields
 
 `yes` = required.

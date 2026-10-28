@@ -9,9 +9,6 @@ may be an indoor or outdoor area designated for the purpose of meeting the educa
 
 `classroomIdentificationCode`, `schoolId`
 
-Field names from the GET query parameters marked `x-Ed-Fi-isIdentity`; fields of a reference appear without it
-(e.g. `schoolId` for `schoolReference`).
-
 ## Fields
 
 `yes` = required.
