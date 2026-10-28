@@ -40,7 +40,7 @@ the `original-sdk-as-mcp-server` release).
 - `ed-fi-api-spec`: 12/12 test prompts pass in Claude Code (10/12 without the skill) and 10/12 in GitHub
   Copilot.
 
-### Deprecated
+### Removed
 
-- The MCP server under `sdk-as-mcp/` is superseded by the skills. The `original-sdk-as-mcp-server` release keeps
-  a copy of it.
+- The MCP server under `sdk-as-mcp/`, superseded by the skills. The `original-sdk-as-mcp-server` release keeps
+  its code.
