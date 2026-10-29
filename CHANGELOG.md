@@ -4,6 +4,18 @@ Notable changes to the Ed-Fi SDK for AI Assistants. Versions follow the Ed-Fi
 [software versioning](https://docs.ed-fi.org/community/sdlc/code-contribution-guidelines/software-versioning)
 guidelines (`x.y.z`).
 
+## Unreleased
+
+### Added
+
+- **Spec lookup comparison results** ([`docs/spec-lookup-results.md`](docs/spec-lookup-results.md)) and the
+  scripts to repeat it (`eng/spec-lookup-comparison/`). On 29 lookup tasks in Claude Code, the spec skill scored
+  100%, tied with keyword search and ahead of no spec help (97%), with five times fewer invented names. ADR 0001
+  is accepted with option B.
+- **`ed-fi-api-client` skill:** field names that assistants often get wrong: Data Standard 4 names (`parents`,
+  `periodSequence`) and data model names (`studentUSI`) instead of the Data Standard 5 API names. New test
+  prompt T11 passes 3/3 in Claude Code with the skill and 0/3 without it.
+
 ## 1.0.0 (2026-10-29)
 
 First release of the SDK as [Agent Skills](https://agentskills.io), replacing the earlier MCP server (kept in
@@ -19,9 +31,7 @@ the `original-sdk-as-mcp-server` release).
   - pull integrations: offset and cursor paging, partitions, change queries, deletes and key changes, and an
     incremental sync algorithm;
   - error diagnosis for `400`–`5xx` responses, with retry and logging guidance;
-  - 21 shared rules (discovery, authentication, push, pull, errors) used both to build code and to review it;
-  - field names that assistants often get wrong: Data Standard 4 names (`parents`, `periodSequence`) and data
-    model names (`studentUSI`) instead of the Data Standard 5 API names.
+  - 21 shared rules (discovery, authentication, push, pull, errors) used both to build code and to review it.
 - **`ed-fi-api-spec` skill:** a Markdown index of the Ed-Fi Resources and Descriptors specifications (Data Standard
   5.2), so assistants can look up resources without loading the full OpenAPI specification. Each resource file
   lists the natural key (from the GET query parameters marked `x-Ed-Fi-isIdentity`), the required fields, the
@@ -41,11 +51,6 @@ the `original-sdk-as-mcp-server` release).
   the Ed-Fi API 8.1 pilot test kit (8.1 pre-release).
 - `ed-fi-api-spec`: 12/12 test prompts pass in Claude Code (10/12 without the skill) and 10/12 in GitHub
   Copilot.
-- Spec lookup comparison ([results](docs/spec-lookup-results.md)): on 29 lookup tasks in Claude Code, the spec
-  skill scored 100%, tied with keyword search and ahead of no spec help (97%), with five times fewer invented
-  names. ADR 0001 is accepted with option B.
-- `ed-fi-api-client`: new test prompt T11 (field names from the spec, not from memory) passes 3/3 in Claude
-  Code with the skill and 0/3 without it.
 
 ### Removed
 
