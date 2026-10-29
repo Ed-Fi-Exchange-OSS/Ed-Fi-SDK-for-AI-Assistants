@@ -15,7 +15,7 @@ Reads from <results-dir>:
   unknown_names.json            optional; from verify_names.py
 
 The score per task and condition follows the design: the two runs' score if they agree, otherwise the majority
-of three runs.
+of three runs (the middle score, which is also the result when all three differ).
 """
 import collections
 import json
@@ -69,7 +69,7 @@ def main():
             if key not in third:
                 sys.exit(f'{key[0]} {key[1]}: runs disagree ({values}) and there is no third run')
             values.append(third[key])
-        pairs[key] = {'task': entries[0], 'score': collections.Counter(values).most_common(1)[0][0]}
+        pairs[key] = {'task': entries[0], 'score': sorted(values)[len(values) // 2]}
 
     print('## Correctness per task (majority rule)\n')
     rows = []

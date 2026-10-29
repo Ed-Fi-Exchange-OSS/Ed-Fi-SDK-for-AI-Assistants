@@ -64,5 +64,6 @@ python eng/spec-lookup-comparison/run_ab.py --out results --mcp-server ../sdk-mc
 
 4. Second review: `python eng/spec-lookup-comparison/make_review_sheet.py results` writes
    `second-review.xlsx` for the second reviewer and `second-review-key.json`, which maps each row back to its
-   condition and run. Share only the spreadsheet.
+   condition and run. Share only the spreadsheet. Check each score that differs against the specification,
+   update `correctness_final`, and run a third time any pair whose two runs now disagree.
 5. Tables: `python eng/spec-lookup-comparison/summarize.py results`.
