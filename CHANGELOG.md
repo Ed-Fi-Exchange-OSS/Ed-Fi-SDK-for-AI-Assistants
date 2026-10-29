@@ -19,7 +19,9 @@ the `original-sdk-as-mcp-server` release).
   - pull integrations: offset and cursor paging, partitions, change queries, deletes and key changes, and an
     incremental sync algorithm;
   - error diagnosis for `400`–`5xx` responses, with retry and logging guidance;
-  - 21 shared rules (discovery, authentication, push, pull, errors) used both to build code and to review it.
+  - 21 shared rules (discovery, authentication, push, pull, errors) used both to build code and to review it;
+  - field names that assistants often get wrong: Data Standard 4 names (`parents`, `periodSequence`) and data
+    model names (`studentUSI`) instead of the Data Standard 5 API names.
 - **`ed-fi-api-spec` skill:** a Markdown index of the Ed-Fi Resources and Descriptors specifications (Data Standard
   5.2), so assistants can look up resources without loading the full OpenAPI specification. Each resource file
   lists the natural key (from the GET query parameters marked `x-Ed-Fi-isIdentity`), the required fields, the
@@ -40,8 +42,10 @@ the `original-sdk-as-mcp-server` release).
 - `ed-fi-api-spec`: 12/12 test prompts pass in Claude Code (10/12 without the skill) and 10/12 in GitHub
   Copilot.
 - Spec lookup comparison ([results](docs/spec-lookup-results.md)): on 29 lookup tasks in Claude Code, the spec
-  skill scored 100%, tied with keyword search and ahead of no spec help (98%), with five times fewer invented
+  skill scored 100%, tied with keyword search and ahead of no spec help (97%), with five times fewer invented
   names. ADR 0001 is accepted with option B.
+- `ed-fi-api-client`: new test prompt T11 (field names from the spec, not from memory) passes 3/3 in Claude
+  Code with the skill and 0/3 without it.
 
 ### Removed
 

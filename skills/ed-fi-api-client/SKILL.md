@@ -122,6 +122,18 @@ The OpenAPI specification is several megabytes. Do not load it whole into contex
 - Otherwise fetch the specific resource's spec from `urls.openApiMetadata`, or ask the developer which
   resource they are working with.
 
+Take field and resource names from the spec, not from memory. Names from older Data Standards and from the
+data model are the most common mistakes, and Ed-Fi API 8 silently ignores unknown properties:
+
+| Not in the Data Standard 5.x API | Use instead |
+|---|---|
+| `parents`, `studentParentAssociations`, `parentReference`, `parentUniqueId` (Data Standard 4) | `contacts`, `studentContactAssociations`, `contactReference`, `contactUniqueId` (renamed in Data Standard 5.0, not 6) |
+| `periodSequence` in a `gradingPeriodReference` (Data Standard 4 key) | `gradingPeriodName` |
+| `studentUSI`, `staffUSI` (database surrogate keys) | `studentUniqueId`, `staffUniqueId` in the references |
+| Model entity names used as JSON fields, such as `studentAssessmentItems` or `educationOrganizationIdentificationCodes` | The property name in the resource's schema: `items`, `identificationCodes` |
+
+When `dataModels` in the Discovery API reports Data Standard 4, the older names are the right ones.
+
 ## Generated SDKs
 
 Instead of hand-writing request and model classes, a client can generate an SDK from the API's
