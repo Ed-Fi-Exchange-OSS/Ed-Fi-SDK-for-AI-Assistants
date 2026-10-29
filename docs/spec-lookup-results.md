@@ -11,8 +11,6 @@ API lookup questions with no spec help, with keyword search, and with the `ed-fi
 
 ## Summary
 
-<!-- TODO: update with the GitHub Copilot results before merging. -->
-
 - **Option B meets the decision rule, so it's adopted.** In Claude Code, the spec skill answered every task
   correctly (100%), tied with keyword search and ahead of no spec help (97%). It also reached 100% on the
   natural-language and held-out tasks, above the 80% threshold.
@@ -135,10 +133,9 @@ includes Data Standard 4 names that an answer flags as older, and a few false po
 
 ## Results: GitHub Copilot
 
-<!-- TODO: GitHub Copilot CLI run (same design: 29 tasks, C0/C1/C2, two runs each). -->
-
-Pending. The run uses the GitHub Copilot CLI in headless mode, with the skills in `.github/skills` and the
-keyword search server added as an MCP server. The CLI doesn't report tokens, so cost is compared by steps only.
+Pending; the results will be added in a follow-up. The run uses the same design (29 tasks, C0, C1 and C2, two
+runs each) with the GitHub Copilot CLI in headless mode, the skills in `.github/skills` and the keyword search
+server added as an MCP server. The CLI doesn't report tokens, so cost is compared by steps only.
 
 ## Decision
 

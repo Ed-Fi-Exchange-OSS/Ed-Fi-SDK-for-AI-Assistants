@@ -1,7 +1,7 @@
 # ADR 0001: Delivering similarity search over the Ed-Fi API specifications
 
 - **Status:** Accepted: Option B
-- **Date:** 2026-10-20 (proposed); TODO: date accepted
+- **Date:** 2026-10-20 (proposed); 2026-10-29 (accepted)
 - **Related:** PRD FR-SPEC-1 through FR-SPEC-5, Q-1, Q-2
 
 ## Context
