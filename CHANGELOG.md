@@ -4,7 +4,7 @@ Notable changes to the Ed-Fi SDK for AI Assistants. Versions follow the Ed-Fi
 [software versioning](https://docs.ed-fi.org/community/sdlc/code-contribution-guidelines/software-versioning)
 guidelines (`x.y.z`).
 
-## 1.0.0 (unreleased)
+## 1.0.0 (2026-10-29)
 
 First release of the SDK as [Agent Skills](https://agentskills.io), replacing the earlier MCP server (kept in
 the `original-sdk-as-mcp-server` release).
