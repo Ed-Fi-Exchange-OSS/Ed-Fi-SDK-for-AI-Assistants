@@ -1,0 +1,205 @@
+[
+ {
+  "id": "Q01",
+  "group": "original",
+  "kind": "Exact name",
+  "prompt": "What is the natural key of studentSchoolAssociations?",
+  "expected": "`entryDate`, `schoolId`, `studentUniqueId` (accept `schoolReference`/`studentReference` naming their fields)"
+ },
+ {
+  "id": "Q02",
+  "group": "original",
+  "kind": "Exact name",
+  "prompt": "Which fields are required to POST a student?",
+  "expected": "`studentUniqueId`, `firstName`, `lastSurname`, `birthDate`"
+ },
+ {
+  "id": "Q03",
+  "group": "original",
+  "kind": "Exact name",
+  "prompt": "What is the natural key of sections?",
+  "expected": "`sectionIdentifier`, `localCourseCode`, `schoolId`, `schoolYear`, `sessionName` (accept `courseOfferingReference` with its fields)"
+ },
+ {
+  "id": "Q04",
+  "group": "original",
+  "kind": "Exact name",
+  "prompt": "Can the natural key of sessions be changed with PUT?",
+  "expected": "Yes (cascading key updates)"
+ },
+ {
+  "id": "Q05",
+  "group": "original",
+  "kind": "Natural language",
+  "prompt": "Which resource records that a student is enrolled in a school?",
+  "expected": "`studentSchoolAssociations`"
+ },
+ {
+  "id": "Q06",
+  "group": "original",
+  "kind": "Natural language",
+  "prompt": "Where do I record daily school attendance for a student?",
+  "expected": "`studentSchoolAttendanceEvents`"
+ },
+ {
+  "id": "Q07",
+  "group": "original",
+  "kind": "Natural language",
+  "prompt": "Where do I record which teacher teaches a section?",
+  "expected": "`staffSectionAssociations`"
+ },
+ {
+  "id": "Q08",
+  "group": "original",
+  "kind": "Natural language",
+  "prompt": "Where are a student's standardized test results stored?",
+  "expected": "`studentAssessments`"
+ },
+ {
+  "id": "Q09",
+  "group": "original",
+  "kind": "Natural language",
+  "prompt": "How do I link a student to a parent or guardian?",
+  "expected": "`studentContactAssociations` (DS 5 uses \"contact\")"
+ },
+ {
+  "id": "Q10",
+  "group": "original",
+  "kind": "Natural language",
+  "prompt": "Where do I record a student's final course grade for a grading period?",
+  "expected": "`grades`"
+ },
+ {
+  "id": "Q11",
+  "group": "original",
+  "kind": "Natural language",
+  "prompt": "Where is a course on a student's transcript stored?",
+  "expected": "`courseTranscripts`"
+ },
+ {
+  "id": "Q12",
+  "group": "original",
+  "kind": "Natural language",
+  "prompt": "Where do I record a student's participation in special education?",
+  "expected": "`studentSpecialEducationProgramAssociations`"
+ },
+ {
+  "id": "Q13",
+  "group": "original",
+  "kind": "Natural language",
+  "prompt": "Where do I record a student's behavior in a discipline incident?",
+  "expected": "`studentDisciplineIncidentBehaviorAssociations`"
+ },
+ {
+  "id": "Q14",
+  "group": "original",
+  "kind": "Natural language",
+  "prompt": "Where do I record a staff member's assignment to a district?",
+  "expected": "`staffEducationOrganizationAssignmentAssociations`"
+ },
+ {
+  "id": "Q15",
+  "group": "original",
+  "kind": "Field mapping",
+  "prompt": "Our SIS has sch_id. Which Ed-Fi field does it map to on a school?",
+  "expected": "`schoolId`"
+ },
+ {
+  "id": "Q16",
+  "group": "original",
+  "kind": "Descriptor",
+  "prompt": "Which descriptor type lists grade levels, and how do I get its values?",
+  "expected": "`gradeLevelDescriptors`; read values from the API"
+ },
+ {
+  "id": "Q17",
+  "group": "original",
+  "kind": "Descriptor",
+  "prompt": "Which descriptor does entryTypeDescriptor on a studentSchoolAssociation use?",
+  "expected": "`entryTypeDescriptors`"
+ },
+ {
+  "id": "Q18",
+  "group": "original",
+  "kind": "Reference",
+  "prompt": "What keys do I need to reference a calendar?",
+  "expected": "`calendarCode`, `schoolId`, `schoolYear`"
+ },
+ {
+  "id": "H3",
+  "group": "held-out",
+  "kind": "Natural language",
+  "prompt": "Our test reports sub-scores by skill, like vocabulary and comprehension. Where do those go?",
+  "expected": "`objectiveAssessments`; each student's sub-scores in `studentAssessments`, `studentObjectiveAssessments`"
+ },
+ {
+  "id": "H5",
+  "group": "held-out",
+  "kind": "Descriptor",
+  "prompt": "We map our state's codes to Ed-Fi. Where do I find the allowed values for exit reasons?",
+  "expected": "`exitWithdrawTypeDescriptors`, read from the API; used in `studentSchoolAssociations`"
+ },
+ {
+  "id": "H6",
+  "group": "held-out",
+  "kind": "Natural language",
+  "prompt": "Where do semesters or trimesters go?",
+  "expected": "`sessions` (`sessionName`, `termDescriptor`, begin and end dates, school and school year)"
+ },
+ {
+  "id": "H7",
+  "group": "held-out",
+  "kind": "Reference",
+  "prompt": "Which school year values can I use in a reference, and where does that list come from?",
+  "expected": "`schoolYearTypes`"
+ },
+ {
+  "id": "H11",
+  "group": "held-out",
+  "kind": "Natural language",
+  "prompt": "Our SIS has a state ID and a local district ID for each student. Where does each one go?",
+  "expected": "`studentUniqueId` on `students`; the others in `studentEducationOrganizationAssociations`, `studentIdentificationCodes`"
+ },
+ {
+  "id": "H12",
+  "group": "held-out",
+  "kind": "Natural language",
+  "prompt": "Our SIS flags students as gifted, at-risk or homeless. Where should those flags go?",
+  "expected": "`studentEducationOrganizationAssociations`, `studentCharacteristics`; for a tracked list, `cohorts` and `studentCohortAssociations`"
+ },
+ {
+  "id": "H1",
+  "group": "synonym",
+  "kind": "Natural language",
+  "prompt": "Where do I set up a test, like a state reading exam, before loading student scores?",
+  "expected": "`assessments`; scores in `studentAssessments` with an `assessmentReference`"
+ },
+ {
+  "id": "H2",
+  "group": "synonym",
+  "kind": "Natural language",
+  "prompt": "Where do I put a student's result level on a test, like \"Proficient\"?",
+  "expected": "`studentAssessments`, `performanceLevels` (`performanceLevelDescriptor`)"
+ },
+ {
+  "id": "H8",
+  "group": "synonym",
+  "kind": "Natural language",
+  "prompt": "How do I enroll a student in a class?",
+  "expected": "`studentSectionAssociations`"
+ },
+ {
+  "id": "H9",
+  "group": "synonym",
+  "kind": "Natural language",
+  "prompt": "Where do I record which school a teacher works at?",
+  "expected": "`staffSchoolAssociations`"
+ },
+ {
+  "id": "H10",
+  "group": "synonym",
+  "kind": "Natural language",
+  "prompt": "Where do I put a parent's phone number and email?",
+  "expected": "`contacts`, `telephones` and `electronicMails`"
+ }
+]
