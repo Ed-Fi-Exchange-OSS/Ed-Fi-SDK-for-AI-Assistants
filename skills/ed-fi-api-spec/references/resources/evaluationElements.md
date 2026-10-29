@@ -5,10 +5,15 @@
 The lowest-level Elements or criterion of performance being evaluated by rubric, quantitative measure, or
 aggregate survey response.
 
+## Natural key
+
+`evaluationElementTitle`, `educationOrganizationId`, `evaluationObjectiveTitle`, `evaluationPeriodDescriptor`,
+`evaluationTitle`, `performanceEvaluationTitle`, `performanceEvaluationTypeDescriptor`, `schoolYear`,
+`termDescriptor`
+
 ## Fields
 
-`yes` = required. The OpenAPI specification does not say which fields identify a record; for natural keys, see
-the Data Standard documentation.
+`yes` = required.
 
 | Field | Required | Type | Description |
 |---|---|---|---|

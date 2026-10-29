@@ -4,10 +4,14 @@
 
 This association provides information about the survey section and the person the survey section is about.
 
+## Natural key
+
+`personId`, `sourceSystemDescriptor`, `namespace`, `surveyIdentifier`, `surveyResponseIdentifier`,
+`surveySectionTitle`
+
 ## Fields
 
-`yes` = required. The OpenAPI specification does not say which fields identify a record; for natural keys, see
-the Data Standard documentation.
+`yes` = required.
 
 | Field | Required | Type | Description |
 |---|---|---|---|

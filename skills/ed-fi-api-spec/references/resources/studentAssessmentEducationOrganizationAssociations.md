@@ -5,10 +5,14 @@
 The association of individual StudentAssessments with EducationOrganizations indicating administration,
 enrollment, or attribution.
 
+## Natural key
+
+`educationOrganizationAssociationTypeDescriptor`, `educationOrganizationId`, `assessmentIdentifier`,
+`namespace`, `studentAssessmentIdentifier`, `studentUniqueId`
+
 ## Fields
 
-`yes` = required. The OpenAPI specification does not say which fields identify a record; for natural keys, see
-the Data Standard documentation.
+`yes` = required.
 
 | Field | Required | Type | Description |
 |---|---|---|---|

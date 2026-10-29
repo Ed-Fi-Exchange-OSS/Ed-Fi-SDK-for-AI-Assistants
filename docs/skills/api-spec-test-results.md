@@ -2,9 +2,10 @@
 
 Results of the [test prompts](api-spec-test-prompts.md) (FR-REL-1, FR-REL-2).
 
-> **Runs 1 and 2 used an earlier version of the generated content** that stated natural keys derived from the
-> OpenAPI metadata. Review showed the specification can't support that (a required reference may or may not be
-> part of a record's identity), so the content and the prompts changed. **Run 3 is the current result.**
+> **Runs 1 and 2 used an earlier version of the generated content** that derived natural keys from the request
+> schemas (identity fields plus required references), which the specification can't support. Runs 3 and 4 used
+> content without natural keys. **Run 5** adds natural keys again, now from the GET query parameters marked
+> `x-Ed-Fi-isIdentity`, and re-runs the prompts about keys.
 
 ## Run 1 · Claude Code · 2026-10-22
 
@@ -150,6 +151,29 @@ Observations:
   the specification, and T11 still said the specification doesn't show which fields identify a record.
 - **Harness behavior:** in T10 Copilot asked for the host URL before answering, and in T11 it tried a GitKraken
   tool (cancelled) and fetched a web page. These come from the VS Code setup, not the skill.
+
+## Run 5 · Claude Code, natural keys from the GET query parameters · 2026-10-27
+
+The request schemas mark identity on scalar fields only, but the collection GET's query parameters flatten
+references into their fields and mark every identity field with `x-Ed-Fi-isIdentity` (all 138 collections in
+Data Standard 5.2). Each resource file now has a **Natural key** section built from them; for `localAccounts`
+it is `accountIdentifier`, `fiscalYear`, `educationOrganizationId`, without `chartOfAccountReference`.
+
+Re-run of the prompts about keys (T1, T8, T11) and a new one (T13), same harness as Run 3:
+
+| Test | With skill | Without skill |
+|---|---|---|
+| T1 · Required fields and references | ✅ Pass | ✅ Pass |
+| T8 · Key changes | ✅ Pass (cites `x-Ed-Fi-isUpdatable`; gives the section's natural key) | ❌ Fail (hedged: "depends on your version"; key right, from memory) |
+| T11 · `localAccounts` natural key | ✅ Pass (key from the spec; `chartOfAccountReference` not in it) | ✅ Pass (from Data Standard knowledge, with a caveat) |
+| T13 · `studentSectionAssociations` natural key | ✅ Pass (seven fields, with the reference each comes from) | ✅ Pass |
+
+T8's expected outcomes were updated for this run: the index now shows the natural key and whether it can
+change, so the answer should give both from the specification. Both runs were scored against the updated
+outcomes; without the skill, the answer gives the key from memory but doesn't say whether it can change.
+
+With the skill, the answers about keys now come from the specification and say so; without it, the model
+answers these well-known resources from memory and hedges.
 
 ## Not yet done
 

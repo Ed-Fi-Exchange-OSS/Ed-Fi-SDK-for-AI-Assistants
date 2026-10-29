@@ -4,10 +4,14 @@
 
 This event entity represents the recording of whether a student is in attendance for a section.
 
+## Natural key
+
+`attendanceEventCategoryDescriptor`, `eventDate`, `localCourseCode`, `schoolId`, `schoolYear`,
+`sectionIdentifier`, `sessionName`, `studentUniqueId`
+
 ## Fields
 
-`yes` = required. The OpenAPI specification does not say which fields identify a record; for natural keys, see
-the Data Standard documentation.
+`yes` = required.
 
 | Field | Required | Type | Description |
 |---|---|---|---|

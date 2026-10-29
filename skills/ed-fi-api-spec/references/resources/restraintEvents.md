@@ -7,10 +7,13 @@ restrained due to imminent serious physical harm to themselves or others, immine
 destruction or a combination of both imminent serious physical harm to themselves or others and imminent
 serious property destruction.
 
+## Natural key
+
+`restraintEventIdentifier`, `schoolId`, `studentUniqueId`
+
 ## Fields
 
-`yes` = required. The OpenAPI specification does not say which fields identify a record; for natural keys, see
-the Data Standard documentation.
+`yes` = required.
 
 | Field | Required | Type | Description |
 |---|---|---|---|

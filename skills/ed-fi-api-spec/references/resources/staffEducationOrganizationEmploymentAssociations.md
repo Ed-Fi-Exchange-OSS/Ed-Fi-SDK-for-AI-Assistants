@@ -6,10 +6,13 @@ This association indicates the education organization an employee, contractor, v
 provider is formally associated with typically indicated by which organization the staff member has a services
 contract with or receives compensation from.
 
+## Natural key
+
+`employmentStatusDescriptor`, `hireDate`, `educationOrganizationId`, `staffUniqueId`
+
 ## Fields
 
-`yes` = required. The OpenAPI specification does not say which fields identify a record; for natural keys, see
-the Data Standard documentation.
+`yes` = required.
 
 | Field | Required | Type | Description |
 |---|---|---|---|

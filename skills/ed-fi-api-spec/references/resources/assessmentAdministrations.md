@@ -4,10 +4,13 @@
 
 The anticipated administration of an assessment under the purview of an education organization.
 
+## Natural key
+
+`administrationIdentifier`, `assessmentIdentifier`, `namespace`, `assigningEducationOrganizationId`
+
 ## Fields
 
-`yes` = required. The OpenAPI specification does not say which fields identify a record; for natural keys, see
-the Data Standard documentation.
+`yes` = required.
 
 | Field | Required | Type | Description |
 |---|---|---|---|

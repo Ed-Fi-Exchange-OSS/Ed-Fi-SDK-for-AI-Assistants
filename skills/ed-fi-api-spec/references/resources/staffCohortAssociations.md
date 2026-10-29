@@ -4,10 +4,13 @@
 
 This association indicates the staff associated with a cohort of students.
 
+## Natural key
+
+`beginDate`, `cohortIdentifier`, `educationOrganizationId`, `staffUniqueId`
+
 ## Fields
 
-`yes` = required. The OpenAPI specification does not say which fields identify a record; for natural keys, see
-the Data Standard documentation.
+`yes` = required.
 
 | Field | Required | Type | Description |
 |---|---|---|---|

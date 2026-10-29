@@ -8,10 +8,13 @@ described using the StudentEducationOrganizationAssociation.
 
 Also searched as: enrollment.
 
+## Natural key
+
+`entryDate`, `schoolId`, `studentUniqueId`
+
 ## Fields
 
-`yes` = required. The OpenAPI specification does not say which fields identify a record; for natural keys, see
-the Data Standard documentation.
+`yes` = required.
 
 | Field | Required | Type | Description |
 |---|---|---|---|

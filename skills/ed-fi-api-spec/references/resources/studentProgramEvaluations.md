@@ -4,10 +4,15 @@
 
 The evaluation results for a student as evaluated in the context of a program.
 
+## Natural key
+
+`evaluationDate`, `programEducationOrganizationId`, `programEvaluationPeriodDescriptor`,
+`programEvaluationTitle`, `programEvaluationTypeDescriptor`, `programName`, `programTypeDescriptor`,
+`studentUniqueId`
+
 ## Fields
 
-`yes` = required. The OpenAPI specification does not say which fields identify a record; for natural keys, see
-the Data Standard documentation.
+`yes` = required.
 
 | Field | Required | Type | Description |
 |---|---|---|---|

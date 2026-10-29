@@ -4,10 +4,13 @@
 
 This entity represents any type of list of designated students for tracking, analysis, or intervention.
 
+## Natural key
+
+`cohortIdentifier`, `educationOrganizationId`
+
 ## Fields
 
-`yes` = required. The OpenAPI specification does not say which fields identify a record; for natural keys, see
-the Data Standard documentation.
+`yes` = required.
 
 | Field | Required | Type | Description |
 |---|---|---|---|

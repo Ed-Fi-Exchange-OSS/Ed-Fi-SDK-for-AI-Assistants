@@ -5,10 +5,14 @@
 An evaluation instrument applied to evaluate a student in the context of a program. Student evaluations are
 typically applied by a staff member based upon a rubric.
 
+## Natural key
+
+`programEvaluationPeriodDescriptor`, `programEvaluationTypeDescriptor`, `programEvaluationTitle`,
+`programEducationOrganizationId`, `programName`, `programTypeDescriptor`
+
 ## Fields
 
-`yes` = required. The OpenAPI specification does not say which fields identify a record; for natural keys, see
-the Data Standard documentation.
+`yes` = required.
 
 | Field | Required | Type | Description |
 |---|---|---|---|

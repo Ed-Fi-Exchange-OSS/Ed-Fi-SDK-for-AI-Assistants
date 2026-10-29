@@ -4,10 +4,13 @@
 
 This association indicates the students participating in an intervention.
 
+## Natural key
+
+`educationOrganizationId`, `interventionIdentificationCode`, `studentUniqueId`
+
 ## Fields
 
-`yes` = required. The OpenAPI specification does not say which fields identify a record; for natural keys, see
-the Data Standard documentation.
+`yes` = required.
 
 | Field | Required | Type | Description |
 |---|---|---|---|

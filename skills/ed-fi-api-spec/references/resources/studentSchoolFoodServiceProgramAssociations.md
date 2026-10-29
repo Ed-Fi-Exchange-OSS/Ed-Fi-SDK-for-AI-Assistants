@@ -6,10 +6,14 @@ This association represents the school food services program(s), such as the Fre
 that a student participates in or from which the student receives services. The association is a subclass of
 the GeneralStudentProgramAssociation specifically designed for school food service programs.
 
+## Natural key
+
+`beginDate`, `educationOrganizationId`, `programEducationOrganizationId`, `programName`,
+`programTypeDescriptor`, `studentUniqueId`
+
 ## Fields
 
-`yes` = required. The OpenAPI specification does not say which fields identify a record; for natural keys, see
-the Data Standard documentation.
+`yes` = required.
 
 | Field | Required | Type | Description |
 |---|---|---|---|

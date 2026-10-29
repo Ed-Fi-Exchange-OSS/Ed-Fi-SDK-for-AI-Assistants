@@ -4,10 +4,13 @@
 
 The legal document giving authorization to perform teaching assignment services.
 
+## Natural key
+
+`stateOfIssueStateAbbreviationDescriptor`, `credentialIdentifier`
+
 ## Fields
 
-`yes` = required. The OpenAPI specification does not say which fields identify a record; for natural keys, see
-the Data Standard documentation.
+`yes` = required.
 
 | Field | Required | Type | Description |
 |---|---|---|---|

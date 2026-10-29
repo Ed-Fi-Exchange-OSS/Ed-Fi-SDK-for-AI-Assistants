@@ -4,10 +4,13 @@
 
 Properties of the association between the education organization and its network(s).
 
+## Natural key
+
+`memberEducationOrganizationId`, `educationOrganizationNetworkId`
+
 ## Fields
 
-`yes` = required. The OpenAPI specification does not say which fields identify a record; for natural keys, see
-the Data Standard documentation.
+`yes` = required.
 
 | Field | Required | Type | Description |
 |---|---|---|---|

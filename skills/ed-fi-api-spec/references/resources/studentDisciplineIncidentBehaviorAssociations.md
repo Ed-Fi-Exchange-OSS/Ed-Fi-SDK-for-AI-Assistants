@@ -4,10 +4,13 @@
 
 This association describes the behavior of students involved in a discipline incident.
 
+## Natural key
+
+`behaviorDescriptor`, `incidentIdentifier`, `schoolId`, `studentUniqueId`
+
 ## Fields
 
-`yes` = required. The OpenAPI specification does not say which fields identify a record; for natural keys, see
-the Data Standard documentation.
+`yes` = required.
 
 | Field | Required | Type | Description |
 |---|---|---|---|

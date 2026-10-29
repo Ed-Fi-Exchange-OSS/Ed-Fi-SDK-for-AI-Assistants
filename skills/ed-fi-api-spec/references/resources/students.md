@@ -7,10 +7,13 @@ childhood, elementary, or secondary educational program under the jurisdiction o
 or other institution or program. A student is a person who has been enrolled in a school or other educational
 institution.
 
+## Natural key
+
+`studentUniqueId`
+
 ## Fields
 
-`yes` = required. The OpenAPI specification does not say which fields identify a record; for natural keys, see
-the Data Standard documentation.
+`yes` = required.
 
 | Field | Required | Type | Description |
 |---|---|---|---|

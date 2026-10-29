@@ -5,10 +5,13 @@
 This association indicates those staff who were victims, perpetrators, witnesses, and reporters for a
 discipline incident.
 
+## Natural key
+
+`incidentIdentifier`, `schoolId`, `staffUniqueId`
+
 ## Fields
 
-`yes` = required. The OpenAPI specification does not say which fields identify a record; for natural keys, see
-the Data Standard documentation.
+`yes` = required.
 
 | Field | Required | Type | Description |
 |---|---|---|---|

@@ -5,10 +5,13 @@
 An implementation of an instructional approach focusing on the specific techniques and materials used to teach
 a given subject.
 
+## Natural key
+
+`interventionIdentificationCode`, `educationOrganizationId`
+
 ## Fields
 
-`yes` = required. The OpenAPI specification does not say which fields identify a record; for natural keys, see
-the Data Standard documentation.
+`yes` = required.
 
 | Field | Required | Type | Description |
 |---|---|---|---|

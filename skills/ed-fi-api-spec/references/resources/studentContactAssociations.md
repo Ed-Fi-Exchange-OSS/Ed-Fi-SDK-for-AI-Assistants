@@ -6,10 +6,13 @@ This association relates students to their parents, guardians, or caretakers.
 
 Also searched as: parent, guardian.
 
+## Natural key
+
+`contactUniqueId`, `studentUniqueId`
+
 ## Fields
 
-`yes` = required. The OpenAPI specification does not say which fields identify a record; for natural keys, see
-the Data Standard documentation.
+`yes` = required.
 
 | Field | Required | Type | Description |
 |---|---|---|---|

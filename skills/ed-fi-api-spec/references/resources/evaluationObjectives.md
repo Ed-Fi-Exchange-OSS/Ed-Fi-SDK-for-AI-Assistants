@@ -5,10 +5,14 @@
 A subcomponent of an Evaluation, a specific educator Objective or domain of performance that is being
 evaluated.
 
+## Natural key
+
+`evaluationObjectiveTitle`, `educationOrganizationId`, `evaluationPeriodDescriptor`, `evaluationTitle`,
+`performanceEvaluationTitle`, `performanceEvaluationTypeDescriptor`, `schoolYear`, `termDescriptor`
+
 ## Fields
 
-`yes` = required. The OpenAPI specification does not say which fields identify a record; for natural keys, see
-the Data Standard documentation.
+`yes` = required.
 
 | Field | Required | Type | Description |
 |---|---|---|---|

@@ -5,10 +5,14 @@
 A subcomponent of a ProgramEvaluation, a specific student objective or domain of performance that is being
 evaluated.
 
+## Natural key
+
+`programEvaluationObjectiveTitle`, `programEducationOrganizationId`, `programEvaluationPeriodDescriptor`,
+`programEvaluationTitle`, `programEvaluationTypeDescriptor`, `programName`, `programTypeDescriptor`
+
 ## Fields
 
-`yes` = required. The OpenAPI specification does not say which fields identify a record; for natural keys, see
-the Data Standard documentation.
+`yes` = required.
 
 | Field | Required | Type | Description |
 |---|---|---|---|

@@ -5,10 +5,13 @@
 This educational entity represents the organization of subject matter and related learning experiences
 provided for the instruction of students on a regular or systematic basis.
 
+## Natural key
+
+`courseCode`, `educationOrganizationId`
+
 ## Fields
 
-`yes` = required. The OpenAPI specification does not say which fields identify a record; for natural keys, see
-the Data Standard documentation.
+`yes` = required.
 
 | Field | Required | Type | Description |
 |---|---|---|---|

@@ -20,10 +20,11 @@ python eng/spec-knowledge-graph/generate.py \
 `--resources` and `--descriptors` accept an `https` URL or a local file. The output folder's `resources/`
 directory is replaced on each run.
 
-Each resource file lists the fields with their required flags, the fields to supply in each reference, and the
-fields of nested collections (one level). It does not state natural keys: the OpenAPI specification marks
-identity on scalar fields only, not on references, so a required reference may or may not be part of a
-record's identity.
+Each resource file lists the natural key, the fields with their required flags, the fields to supply in each
+reference, and the fields of nested collections (one level). The natural key comes from the collection GET's
+query parameters marked `x-Ed-Fi-isIdentity`, which flatten references into their fields. The request schemas
+can't be used for this: they mark identity on scalar fields only, so a required reference may or may not be
+part of a record's identity.
 
 Resource files are wrapped at 110 characters, like the rest of the repository. `index.md` and `descriptors.md`
 keep one line per entry, so searching them for a term returns the whole entry; they turn off the line-length

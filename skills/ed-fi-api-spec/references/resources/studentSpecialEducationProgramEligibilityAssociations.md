@@ -5,10 +5,14 @@
 Captures details regarding the evaluation process for eligibility of students for special education services
 under IDEA Part C or Part B.
 
+## Natural key
+
+`consentToEvaluationReceivedDate`, `educationOrganizationId`, `programEducationOrganizationId`, `programName`,
+`programTypeDescriptor`, `studentUniqueId`
+
 ## Fields
 
-`yes` = required. The OpenAPI specification does not say which fields identify a record; for natural keys, see
-the Data Standard documentation.
+`yes` = required.
 
 | Field | Required | Type | Description |
 |---|---|---|---|

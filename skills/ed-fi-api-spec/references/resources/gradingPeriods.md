@@ -4,10 +4,13 @@
 
 This entity represents the time span for which grades are reported.
 
+## Natural key
+
+`gradingPeriodDescriptor`, `gradingPeriodName`, `schoolId`, `schoolYear`
+
 ## Fields
 
-`yes` = required. The OpenAPI specification does not say which fields identify a record; for natural keys, see
-the Data Standard documentation.
+`yes` = required.
 
 | Field | Required | Type | Description |
 |---|---|---|---|

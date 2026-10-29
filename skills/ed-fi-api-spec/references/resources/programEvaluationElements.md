@@ -5,10 +5,14 @@
 The lowest level elements or criterion of a students's performance that is being evaluated, typically by a
 rubric.
 
+## Natural key
+
+`programEvaluationElementTitle`, `programEducationOrganizationId`, `programEvaluationPeriodDescriptor`,
+`programEvaluationTitle`, `programEvaluationTypeDescriptor`, `programName`, `programTypeDescriptor`
+
 ## Fields
 
-`yes` = required. The OpenAPI specification does not say which fields identify a record; for natural keys, see
-the Data Standard documentation.
+`yes` = required.
 
 | Field | Required | Type | Description |
 |---|---|---|---|

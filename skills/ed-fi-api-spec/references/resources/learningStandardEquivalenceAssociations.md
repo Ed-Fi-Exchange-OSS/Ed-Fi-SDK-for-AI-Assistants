@@ -4,10 +4,13 @@
 
 Indicates a directional association of equivalence from a source to a target learning standard.
 
+## Natural key
+
+`namespace`, `sourceLearningStandardId`, `targetLearningStandardId`
+
 ## Fields
 
-`yes` = required. The OpenAPI specification does not say which fields identify a record; for natural keys, see
-the Data Standard documentation.
+`yes` = required.
 
 | Field | Required | Type | Description |
 |---|---|---|---|

@@ -4,10 +4,13 @@
 
 The association from an education organization to its peers.
 
+## Natural key
+
+`educationOrganizationId`, `peerEducationOrganizationId`
+
 ## Fields
 
-`yes` = required. The OpenAPI specification does not say which fields identify a record; for natural keys, see
-the Data Standard documentation.
+`yes` = required.
 
 | Field | Required | Type | Description |
 |---|---|---|---|

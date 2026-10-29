@@ -8,10 +8,13 @@ in the involvement of a law enforcement official (such as robbery). A single eve
 incident regardless of how many perpetrators or victims are involved. Discipline incidents are events
 classified as warranting discipline action.
 
+## Natural key
+
+`incidentIdentifier`, `schoolId`
+
 ## Fields
 
-`yes` = required. The OpenAPI specification does not say which fields identify a record; for natural keys, see
-the Data Standard documentation.
+`yes` = required.
 
 | Field | Required | Type | Description |
 |---|---|---|---|

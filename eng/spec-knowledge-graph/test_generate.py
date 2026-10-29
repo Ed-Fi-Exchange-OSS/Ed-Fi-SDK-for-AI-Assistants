@@ -25,7 +25,12 @@ RESOURCES = {
     ],
     'paths': {
         '/ed-fi/sections': {
-            'get': {'tags': ['sections']},
+            'get': {'tags': ['sections'], 'parameters': [
+                {'$ref': '#/components/parameters/offset'},
+                {'name': 'sectionIdentifier', 'in': 'query', 'x-Ed-Fi-isIdentity': True},
+                {'name': 'schoolId', 'in': 'query', 'x-Ed-Fi-isIdentity': True},
+                {'name': 'sectionName', 'in': 'query'},
+            ]},
             'post': {'tags': ['sections'], 'requestBody': {'content': {'application/json': {'schema': {
                 '$ref': '#/components/schemas/edFi_section'}}}}},
         },
@@ -35,7 +40,7 @@ RESOURCES = {
         '/ed-fi/sections/deletes': {'get': {'tags': ['sections']}},
         '/ed-fi/schools': {'get': {'tags': ['schools']}},
     },
-    'components': {'schemas': {
+    'components': {'parameters': {'offset': {'name': 'offset', 'in': 'query'}}, 'schemas': {
         'edFi_section': {
             'required': ['sectionIdentifier', 'schoolReference'],
             'properties': {
@@ -82,11 +87,14 @@ class GenerateTest(unittest.TestCase):
     def tearDownClass(cls):
         cls.tmp.cleanup()
 
-    def test_required_flags_without_key_claims(self):
+    def test_required_flags(self):
         self.assertIn('| `sectionIdentifier` | yes |', self.section)
         self.assertIn('| `sectionName` |  |', self.section)
-        self.assertNotIn('Natural key', self.section)
         self.assertNotIn('| key |', self.section)
+
+    def test_natural_key_comes_from_get_identity_parameters(self):
+        self.assertIn('## Natural key\n\n`sectionIdentifier`, `schoolId`\n', self.section)
+        self.assertNotIn('`sectionName`, ', self.section.split('## Fields')[0])
 
     def test_reference_lists_fields_to_supply_and_falls_back_to_resource_description(self):
         self.assertIn('reference; supply `schoolId` | A school.', self.section)

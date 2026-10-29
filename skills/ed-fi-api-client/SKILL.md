@@ -115,8 +115,8 @@ straight to [references/review.md](references/review.md); there is no need to as
 
 The OpenAPI specification is several megabytes. Do not load it whole into context.
 
-- If the `ed-fi-api-spec` skill is installed, use it to find the resource for a concept, its required fields,
-  references and descriptor types.
+- If the `ed-fi-api-spec` skill is installed, use it to find the resource for a concept, its natural key,
+  required fields, references and descriptor types.
 - If an Ed-Fi spec lookup tool is available instead (for example the `search_endpoints` and
   `get_schema_details` tools of the original Ed-Fi SDK MCP server), use it.
 - Otherwise fetch the specific resource's spec from `urls.openApiMetadata`, or ask the developer which

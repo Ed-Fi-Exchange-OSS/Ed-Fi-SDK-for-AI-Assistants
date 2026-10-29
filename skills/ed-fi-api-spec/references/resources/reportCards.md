@@ -4,10 +4,14 @@
 
 This educational entity represents the collection of student grades for courses taken during a grading period.
 
+## Natural key
+
+`educationOrganizationId`, `gradingPeriodDescriptor`, `gradingPeriodName`, `gradingPeriodSchoolId`,
+`gradingPeriodSchoolYear`, `studentUniqueId`
+
 ## Fields
 
-`yes` = required. The OpenAPI specification does not say which fields identify a record; for natural keys, see
-the Data Standard documentation.
+`yes` = required.
 
 | Field | Required | Type | Description |
 |---|---|---|---|

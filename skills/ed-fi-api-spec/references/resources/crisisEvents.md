@@ -5,10 +5,13 @@
 A natural or man-made event that causes the disruption of school-level activities and the temporary or
 permanent displacement of students.
 
+## Natural key
+
+`crisisEventName`
+
 ## Fields
 
-`yes` = required. The OpenAPI specification does not say which fields identify a record; for natural keys, see
-the Data Standard documentation.
+`yes` = required.
 
 | Field | Required | Type | Description |
 |---|---|---|---|

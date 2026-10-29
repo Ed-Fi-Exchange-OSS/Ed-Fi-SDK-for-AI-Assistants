@@ -6,10 +6,13 @@ This entity represents a contact of a student, such as a parent, guardian or car
 
 Also searched as: parent, guardian.
 
+## Natural key
+
+`contactUniqueId`
+
 ## Fields
 
-`yes` = required. The OpenAPI specification does not say which fields identify a record; for natural keys, see
-the Data Standard documentation.
+`yes` = required.
 
 | Field | Required | Type | Description |
 |---|---|---|---|

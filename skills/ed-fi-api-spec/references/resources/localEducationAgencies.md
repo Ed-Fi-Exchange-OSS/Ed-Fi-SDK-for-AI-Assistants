@@ -8,10 +8,13 @@ organizations, or other local administrative organizations.
 
 Also searched as: district.
 
+## Natural key
+
+`localEducationAgencyId`
+
 ## Fields
 
-`yes` = required. The OpenAPI specification does not say which fields identify a record; for natural keys, see
-the Data Standard documentation.
+`yes` = required.
 
 | Field | Required | Type | Description |
 |---|---|---|---|

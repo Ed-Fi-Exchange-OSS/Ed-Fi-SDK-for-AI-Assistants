@@ -5,10 +5,13 @@
 The NCES operational unit accounting dimension. This dimension is used to segregate costs by school and
 operational unit such as physical location, department, or other method.
 
+## Natural key
+
+`code`, `fiscalYear`
+
 ## Fields
 
-`yes` = required. The OpenAPI specification does not say which fields identify a record; for natural keys, see
-the Data Standard documentation.
+`yes` = required.
 
 | Field | Required | Type | Description |
 |---|---|---|---|

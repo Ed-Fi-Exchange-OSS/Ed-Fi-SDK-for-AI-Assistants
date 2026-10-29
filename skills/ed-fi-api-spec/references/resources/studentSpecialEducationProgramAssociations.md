@@ -6,10 +6,14 @@ This association represents the special education program(s) that a student part
 services from. The association is a subclass of the GeneralStudentProgramAssociation specifically designed for
 special education programs.
 
+## Natural key
+
+`beginDate`, `educationOrganizationId`, `programEducationOrganizationId`, `programName`,
+`programTypeDescriptor`, `studentUniqueId`
+
 ## Fields
 
-`yes` = required. The OpenAPI specification does not say which fields identify a record; for natural keys, see
-the Data Standard documentation.
+`yes` = required.
 
 | Field | Required | Type | Description |
 |---|---|---|---|

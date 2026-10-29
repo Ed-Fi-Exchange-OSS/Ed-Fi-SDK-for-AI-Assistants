@@ -22,9 +22,9 @@ the `original-sdk-as-mcp-server` release).
   - 21 shared rules (discovery, authentication, push, pull, errors) used both to build code and to review it.
 - **`ed-fi-api-spec` skill:** a Markdown index of the Ed-Fi Resources and Descriptors specifications (Data Standard
   5.2), so assistants can look up resources without loading the full OpenAPI specification. Each resource file
-  lists the required fields, the fields to supply in each reference, the fields of nested collections, the
-  endpoints, and whether `PUT` can change the resource's identifying values. It does not state natural keys,
-  because the specification doesn't mark which references identify a record.
+  lists the natural key (from the GET query parameters marked `x-Ed-Fi-isIdentity`), the required fields, the
+  fields to supply in each reference, the fields of nested collections, the endpoints, and whether `PUT` can
+  change the resource's identifying values.
 - **Spec knowledge graph generator** (`eng/spec-knowledge-graph/`): regenerates the `ed-fi-api-spec` content
   from an Ed-Fi host's metadata, including that host's extensions, with a fixture-based test.
 - **Install and usage guide** (`docs/skills/using-the-skills.md`) for Claude Code and GitHub Copilot, with the

@@ -5,10 +5,14 @@
 Identifies an assessment registration that a student is expected to participate in including the testing
 organization, reporting organization and assessment delivery details.
 
+## Natural key
+
+`administrationIdentifier`, `assessmentIdentifier`, `assigningEducationOrganizationId`, `namespace`,
+`educationOrganizationId`, `studentUniqueId`
+
 ## Fields
 
-`yes` = required. The OpenAPI specification does not say which fields identify a record; for natural keys, see
-the Data Standard documentation.
+`yes` = required.
 
 | Field | Required | Type | Description |
 |---|---|---|---|

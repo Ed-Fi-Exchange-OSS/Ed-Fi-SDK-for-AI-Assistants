@@ -4,10 +4,14 @@
 
 The summary rating for a Performance Evaluation across all Evaluation instruments for an individual educator.
 
+## Natural key
+
+`educationOrganizationId`, `evaluationPeriodDescriptor`, `performanceEvaluationTitle`,
+`performanceEvaluationTypeDescriptor`, `schoolYear`, `termDescriptor`, `personId`, `sourceSystemDescriptor`
+
 ## Fields
 
-`yes` = required. The OpenAPI specification does not say which fields identify a record; for natural keys, see
-the Data Standard documentation.
+`yes` = required.
 
 | Field | Required | Type | Description |
 |---|---|---|---|

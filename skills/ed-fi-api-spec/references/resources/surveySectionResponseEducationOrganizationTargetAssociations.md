@@ -5,10 +5,13 @@
 This association provides information about the survey section and the education organization the survey
 section is about.
 
+## Natural key
+
+`educationOrganizationId`, `namespace`, `surveyIdentifier`, `surveyResponseIdentifier`, `surveySectionTitle`
+
 ## Fields
 
-`yes` = required. The OpenAPI specification does not say which fields identify a record; for natural keys, see
-the Data Standard documentation.
+`yes` = required.
 
 | Field | Required | Type | Description |
 |---|---|---|---|

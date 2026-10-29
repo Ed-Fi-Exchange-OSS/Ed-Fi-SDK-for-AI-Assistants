@@ -5,10 +5,13 @@
 The legal document held by the community provider that authorizes the holder to perform certain functions and
 or services.
 
+## Natural key
+
+`licenseIdentifier`, `licensingOrganization`, `communityProviderId`
+
 ## Fields
 
-`yes` = required. The OpenAPI specification does not say which fields identify a record; for natural keys, see
-the Data Standard documentation.
+`yes` = required.
 
 | Field | Required | Type | Description |
 |---|---|---|---|

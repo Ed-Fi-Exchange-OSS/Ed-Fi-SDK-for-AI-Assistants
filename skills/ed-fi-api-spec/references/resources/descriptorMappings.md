@@ -5,10 +5,13 @@
 A mapping of a descriptor value in one namespace to a descriptor value in another namespace. This can be used
 to exchange known contextual mappings of enumeration values.
 
+## Natural key
+
+`mappedNamespace`, `mappedValue`, `namespace`, `value`
+
 ## Fields
 
-`yes` = required. The OpenAPI specification does not say which fields identify a record; for natural keys, see
-the Data Standard documentation.
+`yes` = required.
 
 | Field | Required | Type | Description |
 |---|---|---|---|

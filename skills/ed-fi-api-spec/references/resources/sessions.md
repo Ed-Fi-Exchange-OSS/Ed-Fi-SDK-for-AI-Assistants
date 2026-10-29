@@ -6,10 +6,13 @@ A specific designated unit of time during which instruction is provided, grades 
 credits are awarded to students (whenever applicable). Sessions serve as organized segments of the academic
 year and can be interrupted by vacations or other events.
 
+## Natural key
+
+`sessionName`, `schoolId`, `schoolYear`
+
 ## Fields
 
-`yes` = required. The OpenAPI specification does not say which fields identify a record; for natural keys, see
-the Data Standard documentation.
+`yes` = required.
 
 | Field | Required | Type | Description |
 |---|---|---|---|

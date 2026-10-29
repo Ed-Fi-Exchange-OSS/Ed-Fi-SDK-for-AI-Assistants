@@ -5,10 +5,13 @@
 This entity represents an administrative unit at the state level which exists primarily to operate local
 community providers.
 
+## Natural key
+
+`communityOrganizationId`
+
 ## Fields
 
-`yes` = required. The OpenAPI specification does not say which fields identify a record; for natural keys, see
-the Data Standard documentation.
+`yes` = required.
 
 | Field | Required | Type | Description |
 |---|---|---|---|

@@ -4,10 +4,13 @@
 
 The association from feeder school to the receiving school.
 
+## Natural key
+
+`beginDate`, `feederSchoolId`, `schoolId`
+
 ## Fields
 
-`yes` = required. The OpenAPI specification does not say which fields identify a record; for natural keys, see
-the Data Standard documentation.
+`yes` = required.
 
 | Field | Required | Type | Description |
 |---|---|---|---|
