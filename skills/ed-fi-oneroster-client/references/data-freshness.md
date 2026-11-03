@@ -29,17 +29,17 @@ What else to know:
 
 ## Incremental sync
 
-- `dateLastModified` comes from the Ed-Fi record behind each OneRoster record (for example the student),
+- `dateLastModified` comes from the ODS/API record behind each OneRoster record (for example the student),
   not from the OneRoster row. A change in related data, such as a new school association or role, may not
   change it. Filtering on `dateLastModified` alone can miss changes.
 - Run a **full sync** periodically (for example nightly, after the host's refresh) even if you also run
   incremental syncs.
-- Match records by `sourcedId`, and remember that it changes when the Ed-Fi data behind it changes
+- Match records by `sourcedId`, and remember that it changes when the ODS/API data behind it changes
   ([mapping-to-ed-fi.md](mapping-to-ed-fi.md)).
 
 ## Deleting local records
 
-A record can be missing from one run without having been deleted in Ed-Fi:
+A record can be missing from one run without having been deleted in the ODS/API:
 
 - the resource it depends on hasn't refreshed yet (see above);
 - its `sourcedId` changed: a student or staff member moving schools, a re-enrollment, or a contact whose
@@ -54,4 +54,4 @@ Before deleting local records that are missing from the feed:
    and alert instead.
 3. Prefer a soft delete (mark inactive) and purge only after the record has been missing for several runs.
 4. Don't wait for `status: tobedeleted`. This service returns every record as `active`; records deleted in
-   Ed-Fi simply stop appearing.
+   the ODS/API simply stop appearing.

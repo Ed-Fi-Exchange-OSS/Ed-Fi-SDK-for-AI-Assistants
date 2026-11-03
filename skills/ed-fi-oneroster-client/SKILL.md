@@ -1,17 +1,17 @@
 ---
 name: ed-fi-oneroster-client
-description: Guidance for writing, reviewing, or debugging code that reads rostering data from the Ed-Fi OneRoster API (edfi-oneroster), the service that serves 1EdTech OneRoster 1.2 Rostering from an Ed-Fi ODS. Covers getting a token from the ODS/API, OneRoster scopes, Discovery, paging and rate limits, the imsx error format, data freshness (scheduled refresh), and how OneRoster records map back to Ed-Fi to explain missing, empty, or duplicated results. Use whenever a task mentions OneRoster together with Ed-Fi or the ODS/API, /ims/oneroster/rostering/v1p2, roster.readonly scopes, or a rostering sync from an Ed-Fi host.
+description: Guidance for writing, reviewing, or debugging code that reads rostering data from the Ed-Fi OneRoster API (edfi-oneroster), the service that serves 1EdTech OneRoster 1.2 Rostering from an Ed-Fi ODS. Covers getting a token from the ODS/API, OneRoster scopes, Discovery, paging and rate limits, the imsx error format, data freshness (scheduled refresh), and how OneRoster records map back to the Ed-Fi ODS/API to explain missing, empty, or duplicated results. Use whenever a task mentions OneRoster together with Ed-Fi or the ODS/API, /ims/oneroster/rostering/v1p2, roster.readonly scopes, or a rostering sync from an Ed-Fi ODS/API host.
 ---
 
 # Ed-Fi OneRoster API Client
 
 The [Ed-Fi OneRoster API](https://github.com/Ed-Fi-Alliance-OSS/edfi-oneroster) serves 1EdTech
 **OneRoster 1.2 Rostering** from the data in an Ed-Fi ODS. It is a separate service next to the ODS/API
-(7.3.2 and later), and it reads from views over the ODS (Data Standard 4.0 and 5.x, and 6.1 in recent
-pre-releases).
+(7.3.2 and later), and it reads from views over the ODS (Data Standard 4.0, 5.1 and 5.2, and 6.1 in
+recent pre-releases).
 
-This skill covers how the **Ed-Fi service** behaves. It does not teach the OneRoster standard; follow the
-[OneRoster 1.2 specification](https://www.imsglobal.org/spec/oneroster/v1p2) for field meanings.
+This skill covers how the **Ed-Fi OneRoster service** behaves. It does not teach the OneRoster standard;
+follow the [OneRoster 1.2 specification](https://www.imsglobal.org/spec/oneroster/v1p2) for field meanings.
 This skill targets the service running next to ODS/API 7.3.2 and later; OneRoster support for Ed-Fi API 8
 has not been announced.
 
@@ -20,7 +20,7 @@ Several things differ from both a generic OneRoster provider and the ODS/API:
 - Tokens come from the **ODS/API**, with the same key and secret. There is no separate OneRoster credential.
 - It is **read-only Rostering**: no Gradebook, no Resources, no CSV, no POST/PUT/DELETE.
 - Data is **refreshed on a schedule** the host sets (from every 15 minutes to once a day), not live.
-- Errors use the OneRoster `imsx_*` body, not Ed-Fi problem details.
+- Errors use the OneRoster `imsx_*` body, not the ODS/API problem details.
 - Users are **school-scoped**: a student at two schools appears twice.
 
 ## Step 1: Start from Discovery
@@ -67,12 +67,12 @@ Scopes, host setup that causes `401`/`403`, and empty results:
 | Token, scopes, `401`, `403`, or `200` with empty collections | [references/authentication.md](references/authentication.md) |
 | Listing resources, paging a full sync, filters, `429`, any error body | [references/requests-and-paging.md](references/requests-and-paging.md) |
 | "I wrote it to the ODS/API, why isn't it here?", refresh schedule, incremental sync, deleting local records | [references/data-freshness.md](references/data-freshness.md) |
-| Duplicated, missing or changed records; empty fields; which Ed-Fi data a record comes from | [references/mapping-to-ed-fi.md](references/mapping-to-ed-fi.md) |
+| Duplicated, missing or changed records; empty fields; which ODS/API data a record comes from | [references/mapping-to-ed-fi.md](references/mapping-to-ed-fi.md) |
 
 ## When to use `ed-fi-api-client` instead
 
 Use the ODS/API (and the `ed-fi-api-client` skill, if installed) to **write** data, including grades and
-attendance, or to read Ed-Fi data that OneRoster doesn't expose. Never generate requests to
+attendance, or to read ODS/API data that OneRoster doesn't expose. Never generate requests to
 `/ims/oneroster/gradebook/...` or `/ims/oneroster/resources/...` for this service; they don't exist.
 
 ## Rules for every OneRoster client
@@ -88,4 +88,4 @@ attendance, or to read Ed-Fi data that OneRoster doesn't expose. Never generate 
 
 - [OneRoster API (ODS/API 7.3 feature)](https://docs.ed-fi.org/reference/ods-api/platform-dev-guide/features/oneroster)
 - [How To: Enable OneRoster with the Ed-Fi ODS/API](https://docs.ed-fi.org/reference/ed-fi-api/how-to-guides/how-to-oneroster-with-the-ed-fi-ods-api)
-- [OneRoster data model (Ed-Fi mapping)](https://docs.ed-fi.org/reference/oneroster/data-model/)
+- [OneRoster data model (mapping from the ODS/API)](https://docs.ed-fi.org/reference/oneroster/data-model/)

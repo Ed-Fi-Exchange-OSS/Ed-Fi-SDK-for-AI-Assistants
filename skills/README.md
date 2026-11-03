@@ -8,7 +8,7 @@ opens the files under `references/` only when the task needs them.
 |---|---|
 | [ed-fi-api-client](ed-fi-api-client/SKILL.md) | Building, reviewing or debugging a client of an Ed-Fi API: authentication, push and pull integrations, error diagnosis |
 | [ed-fi-api-spec](ed-fi-api-spec/SKILL.md) | Looking up resources, required fields, references and descriptor types (Data Standard 5.2) without loading the OpenAPI spec |
-| [ed-fi-oneroster-client](ed-fi-oneroster-client/SKILL.md) | Building or debugging a client of the Ed-Fi OneRoster API: tokens and scopes, paging, data freshness, mapping to Ed-Fi |
+| [ed-fi-oneroster-client](ed-fi-oneroster-client/SKILL.md) | Building or debugging a client of the Ed-Fi OneRoster API: tokens and scopes, paging, data freshness, mapping to the ODS/API |
 
 Skills are added through pull requests; see the
 [authoring guide](../docs/skills/authoring-guide.md).

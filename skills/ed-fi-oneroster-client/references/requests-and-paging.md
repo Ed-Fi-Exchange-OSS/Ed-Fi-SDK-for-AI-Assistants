@@ -14,7 +14,7 @@ Read-only GET, relative to `urls.dataManagementApi` (`.../ims/oneroster/rosterin
 | `academicSessions` | `academicSessions/{sourcedId}` | School years, terms and grading periods |
 | `terms`, `gradingPeriods` | `terms/{sourcedId}`, `gradingPeriods/{sourcedId}` | Subsets of `academicSessions` |
 | `courses` | `courses/{sourcedId}` | |
-| `classes` | `classes/{sourcedId}` | One per Ed-Fi section |
+| `classes` | `classes/{sourcedId}` | One per ODS/API section |
 | `users` | `users/{sourcedId}` | Students, staff and contacts |
 | `students`, `teachers` | `students/{sourcedId}`, `teachers/{sourcedId}` | Subsets of `users` |
 | `enrollments` | `enrollments/{sourcedId}` | Student and staff section associations |
@@ -99,7 +99,7 @@ Except for `429`, errors use the OneRoster status info body:
 }
 ```
 
-`imsx_codeMinor` is not always present. The Ed-Fi problem-details rules of `ed-fi-api-client` (ERR-1) don't
+`imsx_codeMinor` is not always present. The ODS/API problem-details rules of `ed-fi-api-client` (ERR-1) don't
 apply.
 
 | Status | Meaning here | Client action |
@@ -112,4 +112,4 @@ apply.
 | `500` | Server error (no detail returned), including a timeout while a refresh is running | Retry with backoff a few times, then report to the host with the time and URL |
 
 Discovery errors are different: an unknown tenant or school year on the Discovery URL returns `404` with an
-Ed-Fi style body (`error`, `title`, `status`), not an `imsx` body.
+ODS/API-style body (`error`, `title`, `status`), not an `imsx` body.

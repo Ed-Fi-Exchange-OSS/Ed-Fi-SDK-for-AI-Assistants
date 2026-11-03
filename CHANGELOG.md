@@ -11,7 +11,7 @@ guidelines (`x.y.z`).
 - **`ed-fi-oneroster-client` skill:** guidance for writing and debugging clients of the Ed-Fi OneRoster API
   (OneRoster 1.2 Rostering served from an Ed-Fi ODS): tokens from the ODS/API, OneRoster scopes, Discovery,
   paging and rate limits, the `imsx` error format, the scheduled data refresh, and how OneRoster records map
-  back to Ed-Fi. Includes test prompts.
+  back to the ODS/API. Includes test prompts.
 
 ## 1.0.0 (2026-10-29)
 

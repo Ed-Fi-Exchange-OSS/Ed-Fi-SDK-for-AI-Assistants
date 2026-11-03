@@ -7,7 +7,7 @@ The steps are the same for every skill; replace the skill name in the commands.
 |---|---|
 | `ed-fi-api-client` | Writing, reviewing or debugging code that calls an Ed-Fi API: authentication, push and pull integrations, error diagnosis |
 | `ed-fi-api-spec` | Finding the right Ed-Fi resource, its required fields, references and endpoints without loading the OpenAPI specification |
-| `ed-fi-oneroster-client` | Writing or debugging code that reads rostering data from the Ed-Fi OneRoster API: tokens and scopes, paging, data freshness, mapping back to Ed-Fi |
+| `ed-fi-oneroster-client` | Writing or debugging code that reads rostering data from the Ed-Fi OneRoster API: tokens and scopes, paging, data freshness, mapping back to the ODS/API |
 
 `ed-fi-api-client` and `ed-fi-api-spec` work well together: install both, and `ed-fi-api-client` uses
 `ed-fi-api-spec` to look up resources and fields. Add `ed-fi-oneroster-client` if you read rosters through

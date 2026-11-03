@@ -63,7 +63,7 @@ The service checks OneRoster 1.2 scopes in the token's `scope` claim. Each scope
   `roster.readonly` gets `403` on `/demographics` and `200` everywhere else.
 - A missing scope is a permissions problem. Retrying or getting a new token doesn't help.
 - How a client gets the scopes into its token depends on the host's ODS/API configuration. Ask the host
-  whether the token request must include a `scope` parameter; the Ed-Fi documentation doesn't say.
+  whether the token request must include a `scope` parameter; the Ed-Fi ODS/API documentation doesn't say.
 
 ## Empty or partial results with a valid token
 
