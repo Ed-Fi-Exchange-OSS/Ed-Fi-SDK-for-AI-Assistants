@@ -92,7 +92,56 @@ The prompts most affected were run again with the skill (same harness):
 | T6 | ✅ Pass | Unchanged diagnosis; mentions the school-level token hiding parent orgs |
 | T8 | ✅ Pass | Reads subjects and grade levels from the ODS/API through `metadata.edfi`, not from the OneRoster course |
 
+## Run 2 · GitHub Copilot · 2026-11-03
+
+- **Harness:** GitHub Copilot CLI 1.0.105, headless (`copilot -p`), model `claude-sonnet-5.5`, fresh session per
+  prompt, with the skill as it stood after the fact-check above.
+- **Conditions:** *with skill* (`ed-fi-oneroster-client` installed in the project's `.github/skills/`) and
+  *without skill* (empty project).
+- **Restrictions:** file writes and shell denied; web fetch, web search and GitHub code search excluded, so
+  answers come from the model plus, when installed, the skill. A first pass still allowed GitHub code search,
+  which the runs without the skill used in T4 and T8; those two prompts were run again with it excluded, and
+  those are the results below.
+- **Skill invocation:** the skill was invoked automatically in all 8 prompts, followed by one to three reference
+  file reads or searches.
+
+### Summary
+
+| Test | Topic | With skill | Without skill |
+|---|---|---|---|
+| T1 | First request (token from the ODS/API) | ✅ Pass | ✅ Pass |
+| T2 | Demographics returns 403 | ✅ Pass | ✅ Pass |
+| T3 | Paging a full sync | ✅ Pass | ❌ Fail |
+| T4 | Writing grades (not supported) | ✅ Pass | ❌ Fail |
+| T5 | Data freshness and deletions | ✅ Pass | ❌ Fail |
+| T6 | Empty results with a valid token | ✅ Pass | ✅ Pass |
+| T7 | Duplicate students | ✅ Pass | ❌ Fail |
+| T8 | Missing fields in classes | ✅ Pass | ❌ Fail |
+| **Total** | | **8 / 8** | **3 / 8** |
+
+The CLI doesn't report tokens.
+
+### What the skill changed
+
+| Test | Without the skill | With the skill |
+|---|---|---|
+| T1 | Passed; Basic auth without urlencoding, hard-coded OneRoster path, a new token on every call, no JWT note | Discovery on both roots, urlencoded Basic header, token from ODS/API `urls.oauth`, one retry on `401`, `imsx` errors, JWT and edorg notes |
+| T2 | Passed: a separate demographics scope granted by the admin. Also guessed the client's `roster.readonly` might be the core-only scope, and suggested requesting the scope in the token request | `roster.readonly` excludes demographics by design; a host-side permission; retrying won't help |
+| T3 | Built around `X-Total-Count` and `Link` headers the service doesn't send; stops on a page shorter than `limit` and suggests raising `limit` to the server maximum, which breaks when the host clamps it; credentials in the form body | `limit` 500, pages to an empty page, advances by records received, backoff on `429`/`500` with `Retry-After`, group by `identifier` |
+| T4 | Planned `PUT lineItems` and `PUT results` against a Gradebook the service doesn't have | Read-only Rostering, no Gradebook; grades go to the ODS/API `grades` resource |
+| T5 | Told the client to delete only records marked `tobedeleted`, which this service never sends | Both refresh schedules, resources refresh separately, the reasons a record goes missing, safeguards before deleting |
+| T7 | Blamed duplicate Ed-Fi records first; school-scoped users only as a guess | Users are school-scoped by design; group by `identifier` |
+| T8 | Told the developer to fill `academicSubjectDescriptor` and `offeredGradeLevels` on the course | The service never fills these fields; read them from the ODS/API through `metadata.edfi` |
+
+Partial outcomes with the skill: T1 gets a new token per call instead of reusing it (outcome 3), T3 logs the
+raw error body instead of parsing `imsx` fields (outcome 5), and T7 doesn't mention `demographics` (outcome 3).
+No change to the skill was needed.
+
+The first pass of T4 without the skill, with GitHub code search available, searched Ed-Fi repositories,
+found nothing, and still answered that the service is read-only. A smoke run before it, and the rerun above,
+both planned Gradebook calls. Without the skill the answer to T4 depends on the run; with the skill it was
+correct in all three.
+
 ## Still to run
 
-- GitHub Copilot (VS Code agent mode), with and without the skill, when a license is available.
 - A check of T1, T3 and T6 against a running Ed-Fi OneRoster service, if a test environment is available.
