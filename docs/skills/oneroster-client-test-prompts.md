@@ -25,10 +25,12 @@ T4), data freshness (T5) and mapping to Ed-Fi (T7, T8).
    key and secret. Doesn't invent a separate OneRoster credential.
 2. **(key)** Calls `/ims/oneroster/rostering/v1p2/classes` on the OneRoster service with
    `Authorization: Bearer`.
-3. Sends the credentials in a Basic header and reuses the token until it is about to expire.
-4. Doesn't post credentials to the OneRoster service's `/oauth/token`, or explains that it only redirects to
+3. **(key)** Requests a OneRoster scope (`roster.readonly` or `roster-core.readonly`, as the full URI) in the
+   token request's `scope` parameter. Without it the token carries no scopes and the request gets `403`.
+4. Sends the credentials in a Basic header and reuses the token until it is about to expire.
+5. Doesn't post credentials to the OneRoster service's `/oauth/token`, or explains that it only redirects to
    the ODS/API.
-5. Notes that the host must issue JWT tokens that the OneRoster service accepts, and that GUID tokens fail
+6. Notes that the host must issue JWT tokens that the OneRoster service accepts, and that GUID tokens fail
    with `401`.
 
 ## T2 · Authentication: demographics returns 403
@@ -42,9 +44,10 @@ T4), data freshness (T5) and mapping to Ed-Fi (T7, T8).
 
 1. **(key)** Explains that demographics needs `roster-demographics.readonly`; `roster.readonly` excludes it by
    design in OneRoster 1.2.
-2. **(key)** The fix goes through the API host: the client's permissions in the ODS/API. It is not a code
-   change in the client.
-3. Doesn't suggest retrying or getting a new token as the fix.
+2. **(key)** The fix: request `roster-demographics.readonly` in the token request's `scope` parameter, next to
+   the scope already used. If the token's `scope` claim still lacks it, the host must allow it in the API
+   client's claim set.
+3. Doesn't suggest retrying, or getting a new token without changing the requested scopes, as the fix.
 
 ## T3 · Paging a full sync
 
