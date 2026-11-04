@@ -71,7 +71,10 @@ The service checks OneRoster 1.2 scopes in the token's `scope` claim. Each scope
   the matching OneRoster claim). Others are dropped without an error: the token request still returns `200`.
   Check the `scope` claim in the JWT (a string for one scope, an array for several).
 - A requested scope that is missing from the token is a host permission: ask the host to allow it in the API
-  client's claim set. Retrying or getting a new token doesn't help until then.
+  client's claim set. Retrying or getting a new token doesn't help until then. As shipped, the ODS/API gives
+  the OneRoster claims (read only) to the `Ed-Fi Sandbox`, `Roster Vendor`, `Assessment Vendor` and
+  `Assessment Read` claim sets; an API client on another claim set, such as `SIS Vendor`, gets no OneRoster
+  scopes unless the host adds them.
 - A `scope` value that isn't a OneRoster scope URI (or an education organization ID) gets `400`
   `invalid_scope` from the token endpoint.
 

@@ -11,10 +11,15 @@ refreshed on a schedule **the host sets**. The schedule depends on the database:
 | ODS database | How it refreshes | Schedule as shipped |
 |---|---|---|
 | PostgreSQL | The service refreshes one materialized view per resource, each on its own | A cron the host sets (`PGBOSS_CRON`); the shipped examples use every 15 minutes |
-| SQL Server | A SQL Server Agent job refreshes the tables one after another | Once a day at 02:00, unless the host changes the job |
+| SQL Server | A SQL Server Agent job refreshes the tables one after another | Once a day at 02:00, unless the host changes the job. **No schedule at all** if the job wasn't created |
 
 So a record written to the ODS/API can take minutes or **until the next day** to appear in OneRoster. Ask the
 host for the actual schedule before designing a sync around it. Polling faster doesn't help.
+
+On SQL Server, the deployment creates the Agent job as a separate step, and it can be skipped or fail (it
+needs permissions on `msdb`, and SQL Server Express has no Agent) without stopping the deployment. Then the
+data only changes when the host runs the refresh by hand. If OneRoster data never catches up with the
+ODS/API, ask the host whether the job exists.
 
 What else to know:
 
