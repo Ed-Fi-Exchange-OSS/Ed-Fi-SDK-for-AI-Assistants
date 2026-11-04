@@ -1,6 +1,6 @@
 # Spec lookup comparison: results (Q-2)
 
-- **Status:** Claude Code complete, with the second review; GitHub Copilot pending
+- **Status:** complete in Claude Code and GitHub Copilot, each with a second review
 - **Author:** Rafael Ceballos (Simpat Tech)
 - **Addresses:** PRD FR-SPEC-3 and Q-2 (issue #47, DEVOPS-148)
 - **Design:** [Spec lookup analysis](spec-lookup-analysis.md), section 6; run plan on issue #47
@@ -22,6 +22,9 @@ API lookup questions with no spec help, with keyword search, and with the `ed-fi
   names than no spec help.
 - **Cost:** the spec skill used about 3× the tokens of no spec help, but about 20% fewer than keyword search,
   with fewer steps.
+- **GitHub Copilot confirms it.** The spec skill answered every task and every answer correctly there too, with
+  the fewest invented names. Without spec help, Copilot almost never looked anything up and scored lower (88%)
+  than Claude Code did.
 
 ## Setup
 
@@ -133,9 +136,74 @@ includes Data Standard 4 names that an answer flags as older, and a few false po
 
 ## Results: GitHub Copilot
 
-Pending; the results will be added in a follow-up. The run uses the same design (29 tasks, C0, C1 and C2, two
-runs each) with the GitHub Copilot CLI in headless mode, the skills in `.github/skills` and the keyword search
-server added as an MCP server. The CLI doesn't report tokens, so cost is compared by steps only.
+### Setup
+
+- **Assistant:** GitHub Copilot CLI 1.0.105, headless, with the model pinned to Claude Sonnet 5.5 (`--model`)
+  so every run uses the same one. The skills go in `.github/skills`, and C1 adds the same keyword search server
+  as an MCP server.
+- **Same design:** the same 29 tasks, conditions, skill version (`2e013ca`), rubric and review steps as in
+  Claude Code. Tools that write files or run commands are disabled. One run without spec help tried to fetch a
+  page; the fetch failed and the answer didn't depend on it.
+- **Runs:** 174, and a third run for 7 pairs whose two runs disagreed (all without spec help or with keyword
+  search).
+- **Second review:** Ana Gutierrez scored a blind sample of 30 answers: the 20 adjusted or scored below 2 in the
+  first review, plus 10 picked at random. The reviewers agreed on 24. The second review scored 5 answers lower,
+  all without spec help or with keyword search, for the same kinds of names as in Claude Code
+  (`studentAssessmentItems`, `unaccompaniedYouth` instead of `homelessUnaccompaniedYouth`, identification codes
+  on `students`, the Data Standard 4 grading period key, dates directly on a student characteristic). It scored
+  one hedged keyword search answer higher. The 8 answers from the spec skill in the sample scored 2 from both
+  reviewers.
+
+### Correctness
+
+| Group | C0 No spec help | C1 Keyword search | C2 Option B |
+|---|---|---|---|
+| All 29 tasks | 51/58 (88%) | 58/58 (100%) | **58/58 (100%)** |
+| Original 18 | 33/36 (92%) | 36/36 (100%) | 36/36 (100%) |
+| Original, natural language (10) | 17/20 (85%) | 20/20 (100%) | 20/20 (100%) |
+| Held-out 6 | 10/12 (83%) | 12/12 (100%) | 12/12 (100%) |
+| Synonym sensitivity 5 | 8/10 (80%) | 10/10 (100%) | 10/10 (100%) |
+
+Every answer, before the majority rule:
+
+| Group | C0 | C1 | C2 |
+|---|---|---|---|
+| All 29 tasks | 102/116 (88%) | 113/116 (97%) | **116/116 (100%)** |
+| Original, natural language (10) | 34/40 (85%) | 37/40 (92%) | 40/40 (100%) |
+| Held-out 6 | 20/24 (83%) | 24/24 (100%) | 24/24 (100%) |
+| Synonym sensitivity 5 | 18/20 (90%) | 20/20 (100%) | 20/20 (100%) |
+
+Tasks below 2 after the majority rule, all without spec help:
+
+- **Task 9 and H10 (parents):** Data Standard 4 names (`parents`, `studentParentAssociations`) instead of
+  `contacts` and `studentContactAssociations`, in both runs of task 9 and two of three runs of H10.
+- **Task 10 (final grade):** the Data Standard 4 grading period key.
+- **H11 (state and local IDs):** identification codes on `students` instead of
+  `studentEducationOrganizationAssociations`.
+- **H12 (student flags):** field names that don't exist (`unaccompaniedYouth`, dates directly on a student
+  characteristic).
+
+With keyword search, one run of task 9 searched for "parent", found nothing, and answered with the Data
+Standard 4 names from memory; its third run scored 2.
+
+### Invented names
+
+| | C0 | C1 | C2 |
+|---|---|---|---|
+| Unknown identifiers | 28 of 612 | 11 of 615 | **3 of 781** |
+| Runs with any | 22/58 | 7/58 | **3/58** |
+
+### Steps
+
+The CLI doesn't report tokens, so cost is compared by steps only.
+
+| | C0 | C1 | C2 |
+|---|---|---|---|
+| Runs that used a tool | 2/58 | 57/58 | 58/58 |
+| Steps per task (average) | 0.1 | 4.8 | 2.3 |
+
+Without spec help, Copilot answered from memory in 56 of 58 runs, which explains its lower score than Claude
+Code's (88% against 97%). With the spec skill, it took about half the steps of keyword search.
 
 ## Decision
 
@@ -144,6 +212,8 @@ reaches at least 80% on the natural-language tasks, also on the held-out tasks:
 
 - C2 scored 100% overall, tied with C1 and ahead of C0 (97%).
 - C2 scored 100% on the natural-language tasks and 100% on the held-out tasks.
+- GitHub Copilot gives the same result: C2 scored 100% overall, on the natural-language tasks and on the
+  held-out tasks, tied with C1 and ahead of C0 (88%).
 
 **B is adopted**, and recorded in [ADR 0001](adr/0001-api-spec-similarity-search.md). C3 (embedding search) is
 not needed for this release.
@@ -151,8 +221,8 @@ not needed for this release.
 What the scores don't show on their own:
 
 - **Ceiling effect.** The model answers most of these tasks from memory, so this task set can't show a large
-  correctness gain per task. The gains show up per answer (100% against 93% and 96%), as consistency between
-  runs, fewer Data Standard 4 names and fewer invented names, and answers that cite the specification instead
-  of hedging.
+  correctness gain per task in Claude Code. The gains show up per answer (100% against 93% and 96%), as
+  consistency between runs, fewer Data Standard 4 names and fewer invented names, and answers that cite the
+  specification instead of hedging.
 - **Harder lookups.** Tasks about lesser-known resources, extensions or a host's own specification would
   likely separate the setups more, since the model can't answer those from memory.
