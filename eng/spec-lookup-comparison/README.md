@@ -41,6 +41,7 @@ python eng/spec-lookup-comparison/run_ab.py --out results --mcp-server ../sdk-mc
 - `--assistant copilot` runs the GitHub Copilot CLI instead of Claude Code. Skills go in `.github/skills`
   and the keyword search server is added with `--additional-mcp-config`. The CLI doesn't report tokens.
 - `--skill-ref` takes the skills from another commit (default `HEAD`).
+- `--model` sets the model, so every run uses the same one (default: the CLI's own default).
 - Each run starts in a work folder that holds only the condition's skills. Tools that write files, run commands
   or search the web are disabled.
 - For the task-condition pairs whose two runs disagree, run a third, for example:
