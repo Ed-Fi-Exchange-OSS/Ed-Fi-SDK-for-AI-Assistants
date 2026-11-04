@@ -51,7 +51,9 @@ Configure only the OneRoster root URL. A GET on it (no token needed) returns:
 ## Step 2: Authenticate through the ODS/API
 
 Request a token from `urls.oauth` with the client credentials grant and the ODS/API key and secret, then send
-`Authorization: Bearer <token>` to the OneRoster service. This works only when the host has set the ODS/API
+`Authorization: Bearer <token>` to the OneRoster service. **Include a `scope` parameter** with the OneRoster
+scope URIs the client needs, separated by spaces: a token requested without it carries no OneRoster scopes,
+and every request gets `403`. This works only when the host has set the ODS/API
 to issue JWT tokens for the OneRoster service; tell the developer so, since a `401` from OneRoster with a
 token that works on the ODS/API is a host setting, not a client bug. The token rules of `ed-fi-api-client`
 apply as written (AUTH-1 to AUTH-5): Basic header, reuse until near expiry, one retry on `401`, no secrets in

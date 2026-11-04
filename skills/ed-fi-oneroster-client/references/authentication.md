@@ -11,18 +11,21 @@ The OneRoster service doesn't issue tokens. It accepts **JWT access tokens issue
    issuer URL the host configured, so on multi-tenant or multi-year hosts compare it with `urls.oauth` in the
    ODS/API Discovery response; if they differ, use the ODS/API one.
 2. POST `grant_type=client_credentials` with the ODS/API key and secret in a Basic `Authorization` header
-   (form-urlencode each, join with `:`, base64). If `ed-fi-api-client` is installed, follow its
+   (form-urlencode each, join with `:`, base64), and a `scope` parameter with the OneRoster scopes the client
+   needs ([Scopes](#scopes)). If `ed-fi-api-client` is installed, follow its
    [authentication guide](https://github.com/Ed-Fi-Exchange-OSS/Ed-Fi-SDK-for-AI-Assistants/blob/main/skills/ed-fi-api-client/references/authentication.md);
    the rules are the same.
 3. Send `Authorization: Bearer <access_token>` on every OneRoster request. Reuse the token until it is about to
-   expire (`expires_in`); there is no refresh token.
+   expire (`expires_in`); there is no refresh token. The ODS/API limits how many unexpired tokens a client can
+   hold (15 by default, each valid for 30 minutes) and answers `429` (`too-many-tokens`) over the limit, so
+   don't request a token per call.
 
 ```http
 POST https://api.example.org/v7.3/api/oauth/token
 Authorization: Basic BASE64(urlencode(YOUR_KEY):urlencode(YOUR_SECRET))
 Content-Type: application/x-www-form-urlencoded
 
-grant_type=client_credentials
+grant_type=client_credentials&scope=https%3A%2F%2Fpurl.imsglobal.org%2Fspec%2For%2Fv1p2%2Fscope%2Froster.readonly
 ```
 
 ### Don't post credentials to the OneRoster host
@@ -41,7 +44,7 @@ developer what to ask the host.
 |---|---|
 | `401` "Invalid or expired token" on every request, but the same token works on the ODS/API | The ODS/API issues GUID tokens instead of JWT (`Security:AccessTokenType` must be `jwt`); or the JWT's audience, issuer or signing key doesn't match the OneRoster service's settings |
 | `401` "Not authorized to access the requested resource" on a multi-tenant or multi-year host | The URL's tenant or school year isn't one the token is for. Check the segments in the URL; the token carries its tenant and ODS instances |
-| `403` with "Insufficient scope" | The API client's permissions don't include the OneRoster scope for that endpoint |
+| `403` with "Insufficient scope" | First check the client: the token request must ask for that scope ([Scopes](#scopes)). If it does and the token's `scope` claim still lacks it, the API client's claim set doesn't allow it |
 | `403` with `imsx_codeMinor` `forbidden` | Internal authorization error in the service; report it to the host with the URL and time |
 | `404` "The specified data could not be found" on every data endpoint | The token has no ODS instance the service can resolve; ask the host to check the API client's ODS instance |
 | `200` with empty arrays on every collection | The API client has no education organizations associated |
@@ -61,9 +64,16 @@ The service checks OneRoster 1.2 scopes in the token's `scope` claim. Each scope
 
 - `roster.readonly` does **not** include demographics, by design in OneRoster 1.2. A token with only
   `roster.readonly` gets `403` on `/demographics` and `200` everywhere else.
-- A missing scope is a permissions problem. Retrying or getting a new token doesn't help.
-- How a client gets the scopes into its token depends on the host's ODS/API configuration. Ask the host
-  whether the token request must include a `scope` parameter; the Ed-Fi ODS/API documentation doesn't say.
+- **The client must ask for the scopes.** Send them in the token request's `scope` parameter, separated by
+  spaces. A token requested without `scope` carries no OneRoster scopes and gets `403` on every endpoint,
+  even when the API client is allowed to read everything.
+- The ODS/API grants only the requested scopes that the API client's **claim set** allows (read access to
+  the matching OneRoster claim). Others are dropped without an error: the token request still returns `200`.
+  Check the `scope` claim in the JWT (a string for one scope, an array for several).
+- A requested scope that is missing from the token is a host permission: ask the host to allow it in the API
+  client's claim set. Retrying or getting a new token doesn't help until then.
+- A `scope` value that isn't a OneRoster scope URI (or an education organization ID) gets `400`
+  `invalid_scope` from the token endpoint.
 
 ## Empty or partial results with a valid token
 
@@ -71,7 +81,8 @@ The service filters every query by the **education organization IDs in the token
 returns `200` with empty collections, not an error, and `404` for single records. When "the token works but
 everything is empty":
 
-1. Ask the host to associate the API client with the right education organizations in the ODS/API.
+1. Ask the host to associate the API client with the right education organizations in the ODS/API. New
+   tokens can take a few minutes to reflect the change, because the ODS/API caches it.
 2. If the host was just deployed or the data was just loaded, wait for the next refresh
    ([data-freshness.md](data-freshness.md)).
 3. Check the tenant and context segments in the URL; a wrong school year points to another ODS.
