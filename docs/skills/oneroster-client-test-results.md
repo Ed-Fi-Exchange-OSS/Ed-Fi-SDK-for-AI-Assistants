@@ -13,7 +13,8 @@ Results of the [test prompts](oneroster-client-test-prompts.md) (FR-REL-1, FR-RE
   reference file reads. The run log didn't record which files; the answers use details that appear only in the
   matching reference files.
 - **Not checked against a running service:** no OneRoster test instance was available, so the expected outcomes
-  come from the service source (`edfi-oneroster` `main`, 2026-10-16) and the Ed-Fi documentation.
+  come from the service source (`edfi-oneroster` `main`, 2026-10-16) and the Ed-Fi documentation. Run 3
+  checks them against a running service.
 
 ### Summary
 
@@ -142,6 +143,67 @@ found nothing, and still answered that the service is read-only. A smoke run bef
 both planned Gradebook calls. Without the skill the answer to T4 depends on the run; with the skill it was
 correct in all three.
 
+## Run 3 · Check against a running service · 2026-11-04
+
+- **Service:** the Docker demo stack in the `edfi-oneroster` repository (`stack/`, `main` at `c0b9bb0`), single
+  tenant on PostgreSQL: ODS/API 7.3.2 with the populated template (Data Standard 5.2), the
+  `one-roster-api:pre` image and NGINX on `https://localhost`. The refresh cron was set to every 5 minutes.
+- **Method:** HTTP calls with the stack's LEA and school test API clients, then the T1 code from the rerun
+  below executed against the stack. Test data and permission changes were made only in the local stack.
+
+### What the service did
+
+| # | Check | Result |
+|---|---|---|
+| 1 | Discovery on the OneRoster root, no token | ✅ `version`, `urls.oauth` (the ODS/API token URL), `urls.dataManagementApi`, plus `openApiMetadata` and `swaggerUI` |
+| 2 | Token from `urls.oauth` with a Basic header | ✅ A JWT valid for 30 minutes, accepted by the OneRoster service |
+| 3 | `POST /oauth/token` on the OneRoster host | ✅ `307` to the ODS/API token URL |
+| 4 | Token requested **without** `scope` | ❌ The skill said to ask the host. The token has no `scope` claim and every endpoint returns `403`. **Fixed** (below) |
+| 5 | Token with `roster-core.readonly` only | ✅ `403` "Insufficient scope" on `demographics`, `200` on `users` |
+| 6 | No token, an invalid token, a token with another audience | ✅ `401` "Missing or invalid Authorization header." and "Invalid or expired token." |
+| 7 | `users?limit=10000` | ✅ 500 records, no error, no total-count header (only `RateLimit-*`); 100 records without `limit` |
+| 8 | Page `users` to an empty page | ✅ 2,888 records in 7 pages, no duplicate `sourcedId` |
+| 9 | More than 100 requests in a minute | ✅ `429` with a plain-text body, `Retry-After: 30` and `RateLimit-*` headers; Discovery still `200` |
+| 10 | `limit=0`, `limit=abc`, `offset=-1`, `limit` twice, a field not allowed in `filter` or `fields` | ✅ `400` with an `imsx` body (`invalid_data`); `schools/{id}/classes` returns `404` |
+| 11 | API client with no education organizations | ✅ `200` with empty collections, `404` for a single record. New tokens reflected the change after about 3 minutes |
+| 12 | School-level API client | ✅ Only its school in `orgs`; the parent district returns `404` |
+| 13 | A student associated with a second school | ✅ Two `users` records with the same `identifier` and different `sourcedId`s; `dateLastModified` didn't change |
+| 14 | A student written through the ODS/API | ✅ Not in OneRoster until the next scheduled refresh, then present; the service also refreshes right after it starts |
+
+No endpoint reports the last refresh. Upstream commit `c0b9bb0` records refresh history in a SQL Server
+table, not in the API.
+
+### Corrections to the skill
+
+- **Scopes (check 4):** the ODS/API puts in the token only the OneRoster scopes that the client **requests**
+  in the token request's `scope` parameter **and** the API client's claim set allows; the rest are dropped
+  without an error. `authentication.md` and `SKILL.md` now tell the client to request the scopes, to check the
+  token's `scope` claim, and to go to the host only when a requested scope is missing.
+- **Token limit:** the ODS/API allows 15 unexpired tokens per client by default and answers `429`
+  (`too-many-tokens`) over it. `authentication.md` now says so next to "reuse the token".
+- **Education organization changes** take a few minutes to reach new tokens (check 11); added to
+  `authentication.md`.
+- **Test prompts:** T1 has a new key outcome (request a OneRoster scope in the token request), and T2
+  outcome 2 now expects the client to request `roster-demographics.readonly` before going to the host.
+  Under the earlier criteria, "request the scope" counted against the answers without the skill in T2.
+
+### Rerun of T1 and T2
+
+Same harnesses and restrictions as Runs 1 and 2, with the corrected skill. The other prompts weren't run
+again; the corrections only touch the token request.
+
+| Test | Claude Code with skill | Claude Code without | Copilot with skill | Copilot without |
+|---|---|---|---|---|
+| T1 | ✅ Pass: requests `roster.readonly` | ❌ Fail: no `scope` (outcome 3) | ✅ Pass: requests `roster.readonly` | ❌ Fail: no `scope` (outcome 3) |
+| T2 | ✅ Pass | ✅ Pass | ✅ Pass | ✅ Pass |
+
+With these results, the totals are 8/8 with the skill in both harnesses, and 2/8 without it in both (Copilot's
+T1 without the skill moves from pass to fail, Claude Code's T2 from fail to pass).
+
+Both Claude Code answers to T1 were then run against the stack, unchanged except for the environment
+variables: the code written with the skill listed the first 100 classes; the code written without it failed
+with `403` on its first OneRoster request.
+
 ## Still to run
 
-- A check of T1, T3 and T6 against a running Ed-Fi OneRoster service, if a test environment is available.
+- The SQL Server variant of the stack, where the refresh is a SQL Server Agent job.
