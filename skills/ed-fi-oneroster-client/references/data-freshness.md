@@ -5,32 +5,21 @@ Why OneRoster data lags behind the ODS/API, and how to write sync jobs that stay
 
 ## How the data is refreshed
 
-The service doesn't query the ODS tables live. It reads OneRoster tables built from the ODS, which are
-refreshed on a schedule **the host sets**. The schedule depends on the database:
+The service doesn't read the ODS/API data live. It serves a copy that the host refreshes on a schedule, from
+every few minutes to once a day. Between refreshes, a direct ODS/API `GET` and a OneRoster `GET` can
+disagree: a record written to the ODS/API appears in OneRoster only after the next refresh, and a change or
+delete shows up in OneRoster late too.
 
-| ODS database | How it refreshes | Schedule as shipped |
-|---|---|---|
-| PostgreSQL | The service refreshes one materialized view per resource, each on its own | A cron the host sets (`PGBOSS_CRON`); the shipped examples use every 15 minutes |
-| SQL Server | A SQL Server Agent job refreshes the tables one after another | Once a day at 02:00, unless the host changes the job. **No schedule at all** if the job wasn't created |
-
-So a record written to the ODS/API can take minutes or **until the next day** to appear in OneRoster. Ask the
-host for the actual schedule before designing a sync around it. Polling faster doesn't help.
-
-On SQL Server, the deployment creates the Agent job as a separate step, and it can be skipped or fail (it
-needs permissions on `msdb`, and SQL Server Express has no Agent) without stopping the deployment. Then the
-data only changes when the host runs the refresh by hand. If OneRoster data never catches up with the
-ODS/API, ask the host whether the job exists.
-
-What else to know:
-
+- When OneRoster data doesn't match the ODS/API, check whether the change is newer than the last refresh
+  before looking for another cause. Ask the host for the refresh schedule; polling faster doesn't help.
+- If OneRoster data never catches up with the ODS/API, ask the host whether the scheduled refresh is set up
+  and running.
 - **There is no endpoint that reports when the last refresh ran** or whether it succeeded.
-- **Resources can come from different refreshes.** On PostgreSQL each resource refreshes on its own, so
-  `enrollments` can include a section association whose student hasn't reached `users` yet. On SQL Server, a
-  failure partway through the job leaves the remaining tables from the previous run.
+- **Resources can come from different refreshes.** For example, `enrollments` can include a section
+  association whose student hasn't reached `users` yet.
 - **A failed refresh keeps the previous data**: the resource goes stale, it doesn't empty out.
-- **Requests can slow down or fail during a refresh.** Reads wait while a table is being rebuilt, and a long
-  wait can end in a `500`. Retry `500` responses with backoff.
-- On PostgreSQL, after the service restarts, the first request to an ODS triggers an immediate refresh.
+- **Requests can slow down or fail during a refresh.** A long wait can end in a `500`. Retry `500` responses
+  with backoff.
 
 ## Incremental sync
 

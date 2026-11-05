@@ -92,9 +92,8 @@ T4), data freshness (T5) and mapping to Ed-Fi (T7, T8).
 
 **Expected outcomes:**
 
-1. **(key)** Explains that the OneRoster data is refreshed on a schedule the host sets (often every 15 minutes
-   on PostgreSQL, once a day as shipped on SQL Server), so recent ODS/API writes appear after the next refresh.
-   Doesn't promise a fixed delay.
+1. **(key)** Explains that the OneRoster data is refreshed on a schedule the host sets (from every few minutes
+   to once a day), so recent ODS/API writes appear after the next refresh. Doesn't promise a fixed delay.
 2. **(key)** Warns that a record can be missing without being deleted (resources refresh separately, a key
    change creates a new `sourcedId`, lost access to an education organization, an incomplete run), and
    recommends safeguards before deleting, such as a threshold or a soft delete.
