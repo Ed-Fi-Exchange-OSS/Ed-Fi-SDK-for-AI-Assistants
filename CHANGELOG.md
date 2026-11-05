@@ -4,6 +4,18 @@ Notable changes to the Ed-Fi SDK for AI Assistants. Versions follow the Ed-Fi
 [software versioning](https://docs.ed-fi.org/community/sdlc/code-contribution-guidelines/software-versioning)
 guidelines (`x.y.z`).
 
+## Unreleased
+
+### Added
+
+- **Spec lookup comparison results** ([`docs/spec-lookup-results.md`](docs/spec-lookup-results.md)) and the
+  scripts to repeat it (`eng/spec-lookup-comparison/`). On 29 lookup tasks in Claude Code, the spec skill scored
+  100%, tied with keyword search and ahead of no spec help (97%), with five times fewer invented names. ADR 0001
+  is accepted with option B.
+- **`ed-fi-api-client` skill:** field names that assistants often get wrong: Data Standard 4 names (`parents`,
+  `periodSequence`) and data model names (`studentUSI`) instead of the Data Standard 5 API names. New test
+  prompt T11 passes 3/3 in Claude Code with the skill and 0/3 without it.
+
 ## 1.0.0 (2026-10-29)
 
 First release of the SDK as [Agent Skills](https://agentskills.io), replacing the earlier MCP server (kept in

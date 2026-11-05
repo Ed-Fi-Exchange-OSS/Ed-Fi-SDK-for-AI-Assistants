@@ -242,6 +242,25 @@ with/without comparison in Copilot.
 Observations: agent mode again ran commands, wrote the T1 script to the workspace and asked for API access in
 T2 (told to just answer). T7 and T8 fetched web pages. One unrelated user-level skill loaded in T1.
 
+## Run 6 · T11, field names from the spec · 2026-10-29
+
+T11 was added after the spec lookup comparison (#47): without the spec skill, answers used Data Standard 4 names
+and data model names as JSON fields. The skill now lists those names next to the Data Standard 5 ones.
+
+- **Claude Code:** 2.1.312, same harness and restrictions as Run 1, three runs with and three without the skill.
+- **Skill invocation:** the skill loaded on its own in all three runs.
+
+| Outcome | With skill | Without skill |
+|---|---|---|
+| 1. `studentContactAssociations` with `contactUniqueId` | 3/3 | 3/3 |
+| 2. `gradingPeriodName` in the grading period reference | 3/3 | 0/3 (`periodSequence`, the Data Standard 4 key) |
+| 3. `studentUniqueId`, not `studentUSI` | 3/3 | 3/3 |
+| 4. Rename placed in Data Standard 5.0 | ⚠️ one run says 5.2, two say 5.x | ⚠️ all say 5.x |
+| **Result** | **3/3 pass** | **0/3 pass** |
+
+The model already knows the `contact` rename; the grading period key is where it still uses the Data
+Standard 4 name without the skill.
+
 ## Not yet done
 
 - **Codex** (optional, NFR-PORT-1).
