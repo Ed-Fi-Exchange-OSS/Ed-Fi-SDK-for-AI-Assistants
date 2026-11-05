@@ -8,7 +8,7 @@ documentation; outcomes marked **(key)** must be met for the prompt to pass.
 Run each prompt in a fresh session, with the skill installed and without it, and record the results in
 `oneroster-client-test-results.md`. Score each outcome ✅ met, ⚠️ partially met or ❌ not met.
 
-The prompts cover the four topics of the skill: authentication (T1, T2, T6), what the service offers (T3,
+The prompts cover the four topics of the skill: authentication (T1, T2, T6, T9), what the service offers (T3,
 T4), data freshness (T5) and mapping to Ed-Fi (T7, T8).
 
 ## T1 · Authentication: first request
@@ -143,3 +143,19 @@ T4), data freshness (T5) and mapping to Ed-Fi (T7, T8).
 2. Suggests a workaround in the client, such as reading the values from the ODS/API (the OneRoster course
    doesn't have them either), or raising it with the host or Ed-Fi.
 3. Doesn't invent an Ed-Fi field or a configuration setting that would fill them.
+
+## T9 · Claim set without OneRoster claims
+
+**Prompt:**
+
+> Our OneRoster sync gets 403 on every endpoint. We send `roster.readonly` in the `scope` parameter of the
+> token request, and the same key and secret work fine on the Ed-Fi ODS/API, but the token's `scope` claim
+> is empty. Our API client uses the `SIS Vendor` claim set. What's wrong?
+
+**Expected outcomes:**
+
+1. **(key)** Explains that the ODS/API grants only the requested OneRoster scopes that the API client's claim
+   set allows, and drops the rest without an error, so this claim set has no OneRoster claims.
+2. **(key)** The fix is on the host side: add the OneRoster claims (read) to the API client's claim set, or
+   move the client to a claim set that has them. It is not a code change in the client.
+3. Doesn't suggest retrying, getting a new token or changing the `scope` value as the fix.

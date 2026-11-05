@@ -204,6 +204,29 @@ Both Claude Code answers to T1 were then run against the stack, unchanged except
 variables: the code written with the skill listed the first 100 classes; the code written without it failed
 with `403` on its first OneRoster request.
 
-## Still to run
+## Run 4 · Review changes · 2026-11-05
 
-- The SQL Server variant of the stack, where the refresh is a SQL Server Agent job.
+After the second review of PR #70, `data-freshness.md` no longer describes the backend databases (only the
+refresh cycle and what it means for a client), `SKILL.md` has a rule to request the OneRoster scopes, and
+`authentication.md` no longer names specific claim sets. A new prompt, T9, covers an API client whose claim set
+has no OneRoster claims.
+
+Same harnesses and restrictions as Runs 1 and 2, with the final skill. T1, T2 and T5 cover the changed text;
+the other prompts don't depend on it and weren't run again.
+
+| Test | Claude Code with skill | Claude Code without | Copilot with skill | Copilot without |
+|---|---|---|---|---|
+| T1 | ✅ Pass | ❌ Fail: no `scope` (outcome 3) | ✅ Pass | ❌ Fail: no `scope` (outcome 3) |
+| T2 | ✅ Pass | ✅ Pass | ✅ Pass | ✅ Pass |
+| T5 | ✅ Pass: refresh cycle, no database details | ❌ Fail: relies on `tobedeleted` | ✅ Pass | ❌ Fail: relies on `tobedeleted` |
+| T9 | ✅ Pass | ✅ Pass | ✅ Pass | ❌ Fail: says the claim set has no bearing on OneRoster scopes |
+
+- **T9 with the skill:** both answers say the claim set has no OneRoster claims, the ODS/API drops the
+  requested scope without an error, and the host has to add the claims or change the claim set. Claude Code
+  also suggests sending the full scope URI, because the prompt writes the short name; that's a reasonable side
+  check, not the fix it leads with (outcome 3 ⚠️).
+- **T9 without the skill:** Claude Code reaches the claim set from the general Ed-Fi security model, with
+  hedging; Copilot says the claim set is unrelated and points to an identity provider.
+
+With T9, the totals are 9/9 with the skill in both harnesses, and 3/9 (Claude Code) and 2/9 (Copilot) without
+it.
