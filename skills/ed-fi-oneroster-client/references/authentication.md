@@ -44,6 +44,7 @@ developer what to ask the host.
 |---|---|
 | `401` "Invalid or expired token" on every request, but the same token works on the ODS/API | The ODS/API issues GUID tokens instead of JWT (`Security:AccessTokenType` must be `jwt`); or the JWT's audience, issuer or signing key doesn't match the OneRoster service's settings |
 | `401` "Not authorized to access the requested resource" on a multi-tenant or multi-year host | The URL's tenant or school year isn't one the token is for. Check the segments in the URL; the token carries its tenant and ODS instances |
+| `403` on every endpoint, and the token has no `scope` claim | First check the client: the token request must include a `scope` parameter ([Scopes](#scopes)). If it does, the API client's claim set has no OneRoster claims |
 | `403` with "Insufficient scope" | First check the client: the token request must ask for that scope ([Scopes](#scopes)). If it does and the token's `scope` claim still lacks it, the API client's claim set doesn't allow it |
 | `403` with `imsx_codeMinor` `forbidden` | Internal authorization error in the service; report it to the host with the URL and time |
 | `404` "The specified data could not be found" on every data endpoint | The token has no ODS instance the service can resolve; ask the host to check the API client's ODS instance |
@@ -71,10 +72,9 @@ The service checks OneRoster 1.2 scopes in the token's `scope` claim. Each scope
   the matching OneRoster claim). Others are dropped without an error: the token request still returns `200`.
   Check the `scope` claim in the JWT (a string for one scope, an array for several).
 - A requested scope that is missing from the token is a host permission: ask the host to allow it in the API
-  client's claim set. Retrying or getting a new token doesn't help until then. As shipped, the ODS/API gives
-  the OneRoster claims (read only) to the `Ed-Fi Sandbox`, `Roster Vendor`, `Assessment Vendor` and
-  `Assessment Read` claim sets; an API client on another claim set, such as `SIS Vendor`, gets no OneRoster
-  scopes unless the host adds them.
+  client's claim set. Retrying or getting a new token doesn't help until then. Which claim sets include the
+  OneRoster claims is up to the host; an API client whose claim set has none gets no OneRoster scopes at all,
+  whatever it requests.
 - A `scope` value that isn't a OneRoster scope URI (or an education organization ID) gets `400`
   `invalid_scope` from the token endpoint.
 

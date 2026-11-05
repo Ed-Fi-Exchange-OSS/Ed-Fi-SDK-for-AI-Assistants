@@ -80,11 +80,13 @@ attendance, or to read ODS/API data that OneRoster doesn't expose. Never generat
 ## Rules for every OneRoster client
 
 1. Take the token URL and the API base from Discovery; never hard-code `/oauth/token` on the OneRoster host.
-2. Page until an **empty** page; don't rely on a total count or on the requested `limit` being honored.
-3. Back off on `429` and keep one token for the whole run.
-4. Read errors from `imsx_codeMajor` / `imsx_codeMinor` / `imsx_description`.
-5. Never delete local records only because they are missing from one sync run.
-6. Never put real keys, secrets or tokens in code, logs or examples.
+   On multi-tenant or multi-year hosts, use the ODS/API Discovery's `urls.oauth` if the two differ.
+2. Request the OneRoster scopes the client needs in the token request's `scope` parameter.
+3. Page until an **empty** page; don't rely on a total count or on the requested `limit` being honored.
+4. Back off on `429` and keep one token for the whole run.
+5. Read errors from `imsx_codeMajor` / `imsx_codeMinor` / `imsx_description`.
+6. Never delete local records only because they are missing from one sync run.
+7. Never put real keys, secrets or tokens in code, logs or examples.
 
 ## Further reading
 
