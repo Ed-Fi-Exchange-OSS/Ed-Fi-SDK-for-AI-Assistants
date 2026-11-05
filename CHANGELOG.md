@@ -8,6 +8,13 @@ guidelines (`x.y.z`).
 
 ### Added
 
+- **Spec lookup comparison results** ([`docs/spec-lookup-results.md`](docs/spec-lookup-results.md)) and the
+  scripts to repeat it (`eng/spec-lookup-comparison/`). On 29 lookup tasks in Claude Code, the spec skill scored
+  100%, tied with keyword search and ahead of no spec help (97%), with five times fewer invented names. ADR 0001
+  is accepted with option B.
+- **`ed-fi-api-client` skill:** field names that assistants often get wrong: Data Standard 4 names (`parents`,
+  `periodSequence`) and data model names (`studentUSI`) instead of the Data Standard 5 API names. New test
+  prompt T11 passes 3/3 in Claude Code with the skill and 0/3 without it.
 - **`ed-fi-oneroster-client` skill:** guidance for writing and debugging clients of the Ed-Fi OneRoster API
   (OneRoster 1.2 Rostering served from an Ed-Fi ODS): tokens from the ODS/API, OneRoster scopes, Discovery,
   paging and rate limits, the `imsx` error format, the scheduled data refresh, and how OneRoster records map

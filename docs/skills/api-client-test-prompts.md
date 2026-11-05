@@ -207,3 +207,23 @@ Outcomes 4 and 6 were added on 2026-10-22 after the [Ed-Fi API 8 verification](a
 2. **(key)** Points out that `sections` supports cascading key updates in ODS/API 7.x, so a PUT changing the
    key would keep the `id` stable.
 3. Mentions dependent records (`409 dependent-item-exists` on delete) if the delete is kept.
+
+## T11 · Push: field names from the spec, not from memory
+
+Added after the spec lookup comparison (#47), where answers without the spec skill used Data Standard 4 names
+and data model names as JSON fields.
+
+**Prompt:**
+
+> Our SIS exports guardians and quarter grades. Show me the JSON bodies to (1) link a student to a guardian,
+> and (2) post a student's grade for the first quarter, on an ODS/API 7.3 host with Data Standard 5.2.
+
+**Expected outcomes:**
+
+1. **(key)** Links the student with `studentContactAssociations`, using `contactReference` with
+   `contactUniqueId`; no `parents`, `studentParentAssociations` or `parentUniqueId`.
+2. **(key)** The grade's `gradingPeriodReference` uses `gradingPeriodName` (with `gradingPeriodDescriptor`,
+   `schoolId` and `schoolYear`), not `periodSequence`.
+3. **(key)** References use `studentUniqueId`, not `studentUSI`.
+4. If it mentions the parent to contact rename, places it in Data Standard 5.0.
+5. Descriptors as full URIs (PUSH-5), with values read from the target API.
