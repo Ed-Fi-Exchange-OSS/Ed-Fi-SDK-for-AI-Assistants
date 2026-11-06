@@ -13,6 +13,7 @@ Conditions (design in docs/spec-lookup-analysis.md, section 6):
 Usage:
     python run_ab.py --out <dir> [--assistant claude|copilot] [--conditions C0,C1,C2] [--tasks Q01,H3,...]
                      [--runs 2] [--first-run 1] [--skill-ref HEAD] [--mcp-server <path to dist/index.js>]
+                     [--model <name>]
 
 Each run is a fresh session in a work folder that holds only the condition's skills. Results go to
 <out>/<condition>/<task>-r<n>.md and <out>/runs.jsonl (one line per run, appended), with the answer, tool
@@ -36,6 +37,7 @@ SKILLS = {'C0': ['ed-fi-api-client'], 'C1': ['ed-fi-api-client'], 'C2': ['ed-fi-
 SKILLS_DIR = {'claude': '.claude', 'copilot': '.github'}
 CLAUDE_DENIED = ['Write', 'Edit', 'Bash', 'PowerShell', 'NotebookEdit', 'WebSearch']
 COPILOT_DENIED = ['shell', 'write']
+COPILOT_EXCLUDED = ['web_search', 'semantic_code_search']  # search tools, as WebSearch for Claude Code
 COPILOT_HIDDEN = {'report_intent', 'skill'}  # bookkeeping tools, not lookup steps
 
 
@@ -63,9 +65,11 @@ def setup(cond, args):
     return work, mcp
 
 
-def run_claude(task, work, mcp):
+def run_claude(task, work, mcp, model):
     cmd = [shutil.which('claude') or 'claude', '-p', PREFIX + task['prompt'], '--output-format', 'stream-json',
            '--verbose', '--no-session-persistence', '--disallowedTools'] + CLAUDE_DENIED + ['--strict-mcp-config']
+    if model:
+        cmd += ['--model', model]
     if mcp:
         cmd += ['--mcp-config', mcp, '--allowedTools', f'mcp__{MCP_NAME}']
     p = subprocess.run(cmd, cwd=work, capture_output=True, text=True, encoding='utf-8', timeout=1200)
@@ -88,11 +92,13 @@ def run_claude(task, work, mcp):
                                                 'cost_usd': cost}
 
 
-def run_copilot(task, work, mcp):
+def run_copilot(task, work, mcp, model):
     """Copilot CLI, JSONL output. The CLI doesn't report tokens or cost."""
     cmd = [shutil.which('copilot') or 'copilot', '-p', PREFIX + task['prompt'], '--output-format', 'json',
            '--no-ask-user', '--allow-all-tools', '--disable-builtin-mcps', '--no-auto-update'] + [
-        f'--deny-tool={t}' for t in COPILOT_DENIED]
+        f'--deny-tool={t}' for t in COPILOT_DENIED] + ['--excluded-tools'] + COPILOT_EXCLUDED
+    if model:
+        cmd += ['--model', model]
     if mcp:
         cmd += ['--additional-mcp-config', '@' + mcp]
     p = subprocess.run(cmd, cwd=work, capture_output=True, text=True, encoding='utf-8', timeout=1200)
@@ -119,7 +125,7 @@ def run_copilot(task, work, mcp):
 def run(job):
     cond, task, n, work, mcp, args = job
     runner = run_copilot if args.assistant == 'copilot' else run_claude
-    tools, files, answer, rc, extra = runner(task, work, mcp)
+    tools, files, answer, rc, extra = runner(task, work, mcp, args.model)
     rec = {'assistant': args.assistant, 'condition': cond, 'task': task['id'], 'group': task['group'],
            'kind': task['kind'], 'run': n, 'prompt': task['prompt'], 'expected': task['expected'], 'answer': answer,
            'tools': tools, 'steps': len(tools), 'files': files, 'exit_code': rc} | extra
@@ -142,6 +148,7 @@ def main():
     parser.add_argument('--first-run', type=int, default=1, help='number of the first run, e.g. 3 for third runs')
     parser.add_argument('--skill-ref', default='HEAD', help='git ref to take the skills from')
     parser.add_argument('--mcp-server', help='path to the built FTS5 MCP server (dist/index.js), for C1')
+    parser.add_argument('--model', help="model name passed to the CLI's --model; the CLI's default if empty")
     parser.add_argument('--workers', type=int, default=4)
     args = parser.parse_args()
     args.out = os.path.abspath(args.out)  # the MCP config path is read by a process running in the work folder
