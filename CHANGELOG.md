@@ -15,6 +15,10 @@ guidelines (`x.y.z`).
 - **`ed-fi-api-client` skill:** field names that assistants often get wrong: Data Standard 4 names (`parents`,
   `periodSequence`) and data model names (`studentUSI`) instead of the Data Standard 5 API names. New test
   prompt T11 passes 3/3 in Claude Code with the skill and 0/3 without it.
+- **`ed-fi-oneroster-client` skill:** guidance for writing and debugging clients of the Ed-Fi OneRoster API
+  (OneRoster 1.2 Rostering served from an Ed-Fi ODS): tokens from the ODS/API, OneRoster scopes, Discovery,
+  paging and rate limits, the `imsx` error format, the scheduled data refresh, and how OneRoster records map
+  back to the ODS/API. Includes test prompts.
 
 ## 1.0.0 (2026-10-29)
 

@@ -1,0 +1,95 @@
+# Authentication and authorization
+
+How a client gets access to the Ed-Fi OneRoster API, and what to check when access fails. Part of the
+[ed-fi-oneroster-client](../SKILL.md) skill.
+
+## Getting a token
+
+The OneRoster service doesn't issue tokens. It accepts **JWT access tokens issued by the ODS/API**:
+
+1. Take the token URL from `urls.oauth` in the OneRoster Discovery response. The service builds it from the
+   issuer URL the host configured, so on multi-tenant or multi-year hosts compare it with `urls.oauth` in the
+   ODS/API Discovery response; if they differ, use the ODS/API one.
+2. POST `grant_type=client_credentials` with the ODS/API key and secret in a Basic `Authorization` header
+   (form-urlencode each, join with `:`, base64), and a `scope` parameter with the OneRoster scopes the client
+   needs ([Scopes](#scopes)). If `ed-fi-api-client` is installed, follow its
+   [authentication guide](https://github.com/Ed-Fi-Exchange-OSS/Ed-Fi-SDK-for-AI-Assistants/blob/main/skills/ed-fi-api-client/references/authentication.md);
+   the rules are the same.
+3. Send `Authorization: Bearer <access_token>` on every OneRoster request. Reuse the token until it is about to
+   expire (`expires_in`); there is no refresh token. The ODS/API limits how many unexpired tokens a client can
+   hold (15 by default, each valid for 30 minutes) and answers `429` (`too-many-tokens`) over the limit, so
+   don't request a token per call.
+
+```http
+POST https://api.example.org/v7.3/api/oauth/token
+Authorization: Basic BASE64(urlencode(YOUR_KEY):urlencode(YOUR_SECRET))
+Content-Type: application/x-www-form-urlencoded
+
+grant_type=client_credentials&scope=https%3A%2F%2Fpurl.imsglobal.org%2Fspec%2For%2Fv1p2%2Fscope%2Froster.readonly
+```
+
+### Don't post credentials to the OneRoster host
+
+The OneRoster service answers `/oauth/token` with a `307` redirect to the issuer's `/oauth/token`, always
+without the tenant or school-year segments. Some HTTP clients drop the POST body or the `Authorization` header
+when they follow a redirect to another host, and on multi-tenant or multi-year hosts the redirect can point to
+the wrong token endpoint. Call the ODS/API token URL directly.
+
+## Host setup the client depends on
+
+These are set by the API host, not in client code. When they are wrong, the client can't fix them; tell the
+developer what to ask the host.
+
+| Symptom | Likely cause on the host |
+|---|---|
+| `401` "Invalid or expired token" on every request, but the same token works on the ODS/API | The ODS/API issues GUID tokens instead of JWT (`Security:AccessTokenType` must be `jwt`); or the JWT's audience, issuer or signing key doesn't match the OneRoster service's settings |
+| `401` "Not authorized to access the requested resource" on a multi-tenant or multi-year host | The URL's tenant or school year isn't one the token is for. Check the segments in the URL; the token carries its tenant and ODS instances |
+| `403` on every endpoint, and the token has no `scope` claim | First check the client: the token request must include a `scope` parameter ([Scopes](#scopes)). If it does, the API client's claim set has no OneRoster claims |
+| `403` with "Insufficient scope" | First check the client: the token request must ask for that scope ([Scopes](#scopes)). If it does and the token's `scope` claim still lacks it, the API client's claim set doesn't allow it |
+| `403` with `imsx_codeMinor` `forbidden` | Internal authorization error in the service; report it to the host with the URL and time |
+| `404` "The specified data could not be found" on every data endpoint | The token has no ODS instance the service can resolve; ask the host to check the API client's ODS instance |
+| `200` with empty arrays on every collection | The API client has no education organizations associated |
+| `431`, `400` or a dropped connection for a client with access to many education organizations | The token is very large (thousands of education organization IDs) and exceeds header size limits |
+
+A `401` with "Missing or invalid Authorization header" means the request itself has no `Bearer` token; that is
+a client bug.
+
+## Scopes
+
+The service checks OneRoster 1.2 scopes in the token's `scope` claim. Each scope is a full URI:
+
+| Endpoints | Scope required (any one) |
+|---|---|
+| Every rostering endpoint except demographics | `https://purl.imsglobal.org/spec/or/v1p2/scope/roster.readonly` or `https://purl.imsglobal.org/spec/or/v1p2/scope/roster-core.readonly` |
+| `/demographics` | `https://purl.imsglobal.org/spec/or/v1p2/scope/roster-demographics.readonly` |
+
+- `roster.readonly` does **not** include demographics, by design in OneRoster 1.2. A token with only
+  `roster.readonly` gets `403` on `/demographics` and `200` everywhere else.
+- **The client must ask for the scopes.** Send them in the token request's `scope` parameter, separated by
+  spaces. A token requested without `scope` carries no OneRoster scopes and gets `403` on every endpoint,
+  even when the API client is allowed to read everything.
+- The ODS/API grants only the requested scopes that the API client's **claim set** allows (read access to
+  the matching OneRoster claim). Others are dropped without an error: the token request still returns `200`.
+  Check the `scope` claim in the JWT (a string for one scope, an array for several).
+- A requested scope that is missing from the token is a host permission: ask the host to allow it in the API
+  client's claim set. Retrying or getting a new token doesn't help until then. Which claim sets include the
+  OneRoster claims is up to the host; an API client whose claim set has none gets no OneRoster scopes at all,
+  whatever it requests.
+- A `scope` value that isn't a OneRoster scope URI (or an education organization ID) gets `400`
+  `invalid_scope` from the token endpoint.
+
+## Empty or partial results with a valid token
+
+The service filters every query by the **education organization IDs in the token**. A token with none
+returns `200` with empty collections, not an error, and `404` for single records. When "the token works but
+everything is empty":
+
+1. Ask the host to associate the API client with the right education organizations in the ODS/API. New
+   tokens can take a few minutes to reflect the change, because the ODS/API caches it.
+2. If the host was just deployed or the data was just loaded, wait for the next refresh
+   ([data-freshness.md](data-freshness.md)).
+3. Check the tenant and context segments in the URL; a wrong school year points to another ODS.
+
+With a school-level token, the school's own `orgs` record is visible but its district and state are not, so
+following a school's `parent` reference can return `404`. Some records can also be missing for scoped tokens
+when the host's descriptor mapping is incomplete ([mapping-to-ed-fi.md](mapping-to-ed-fi.md)).
