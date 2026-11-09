@@ -57,14 +57,14 @@ differ in credit.
 
 - `studentCTEProgramAssociations`: `CTEProgram` common removed.
 - `studentSpecialEducationProgramEligibilityAssociations`: role name added for `Program`
-  (source: "Adding role name for Program"; exact property name not given).
+  (source: "Adding role name for Program"); `programEducationOrganizationId` is now in the natural key.
 - Orphaned data elements removed from the model (elements not named in source).
 
 ## Definition-only changes (names unchanged, not breaking)
 
 - Duration properties now state their unit (renaming deferred to a later release):
   `assessmentItems.expectedTimeAssessed`, `learningResources.timeRequired`,
-  `studentAssessmentItem.timeAssessed`, `studentInterventionAttendanceEvents.attendanceEventDuration`,
+  `studentAssessments` items' `timeAssessed`, `studentInterventionAttendanceEvents.attendanceEventDuration`,
   `studentProgramEvaluations.duration`, `surveyResponses.responseTime`, attendance events `eventDuration`.
 
 ## Descriptors

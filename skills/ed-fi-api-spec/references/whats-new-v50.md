@@ -53,7 +53,7 @@ R = required, O = optional. Names as in the API; the source names are the same w
 | `studentSpecialEducationProgramAssociations` | `specialEducationExitDate` | date, optional |
 | | `specialEducationExitReasonDescriptor` | descriptor, optional; 7 predefined categories |
 | | `specialEducationExitExplained` | string, optional; long explanation of exit |
-| Name common (all resources with names) | `preferredFirstName`, `preferredLastName` | optional; source says "Name common" |
+| Name common (`students`, `staffs`, `contacts`, `candidates`) | `preferredFirstName`, `preferredLastName` | optional |
 | `studentSchoolAssociations` | `nextYearSchoolReference` | school, optional (source: NextYearSchool number) |
 | | `nextYearGradeLevelDescriptor` | descriptor |
 | | `schoolChoice` | boolean |
@@ -63,17 +63,16 @@ R = required, O = optional. Names as in the API; the source names are the same w
 | `staffEducationOrganizationEmploymentAssociations` | `annualWage` | optional |
 | `studentEducationOrganizationAssociations` | `supporterMilitaryConnectionDescriptor` | optional; values Active Duty, Reserve, Veteran, DoD Civilian, Not Military Connected, Unknown |
 
-The source also adds a Gender Identity string, described as "added to the core model" without naming the
-resource or field; the Sex descriptor definition and where it is collected were updated. Check
-`studentEducationOrganizationAssociations` for the field.
+The source also adds a Gender Identity string, described as "added to the core model". In 5.2 it is
+`genderIdentity` on `contacts`, `staffs` and `studentEducationOrganizationAssociations`. The Sex descriptor
+definition and where it is collected were updated.
 
 ## Changed fields
 
 | Resource | Change |
 |---|---|
-| `gradingPeriods` | `gradingPeriodDescriptor` is now the SEA-predefined name. `periodSequence` required -> optional |
+| `gradingPeriods` | `gradingPeriodName` replaces `periodSequence` in the natural key, which is now `gradingPeriodDescriptor`, `gradingPeriodName`, `schoolId`, `schoolYear` (B). Every grading period reference changes (`grades`, `gradebookEntries`, ...). `gradingPeriodDescriptor` is now the SEA-predefined name. `periodSequence` required -> optional |
 | `staffSectionAssociations` | `beginDate` is now part of the identity (natural key) (B) |
-| `studentSectionAssociations` | `beginDate` is an identity field, as part of the Section model updates (B) |
 | `courseTranscripts` | `earnedCredit` required -> optional |
 | `studentSchoolAttendanceEvents` | `eventDuration`: minimum and maximum constraints added |
 | `letterGradeEarned` (resource not named in source) | maximum length 20 -> 64 |

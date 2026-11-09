@@ -326,8 +326,8 @@ Usage by model:
 Prompt cache (main):   4 requests · 80% of input tokens from cache · no misses · warm (1h TTL, last activity 2m 57s ago)
 ```
 
-After: this one did _not_ invoke the skill on first attempt. After updating the skill to mention update paths,
-Claude Code _did_ load the skill correctly.
+After: this one did *not* invoke the skill on first attempt. After updating the skill to mention update paths,
+Claude Code *did* load the skill correctly.
 
 ```plaintext
 Total cost:            $0.1387
@@ -345,6 +345,8 @@ Substantial cost and time savings. Claude Code's assessment:
 > Both answers reach the same bottom line: Data Standard 5.1 is non-breaking for a 5.0 integration. Both also
 > assume edfi-cli is the integration. The difference is in what each one is built on and what it tells you to
 > do.
+
+A note on the test setup:
 
 > [!NOTE]
 > `edfi-cli` is an old Python script that I had copied into my repository for other testing. I did not intend

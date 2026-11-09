@@ -243,9 +243,9 @@ installed, and without it.
 
 1. **(key)** Parent becomes Contact: `parents` to `contacts` and `studentParentAssociations` to
    `studentContactAssociations`, with `contactReference` and `contactUniqueId`.
-2. **(key)** `gradingPeriods` gets a required `gradingPeriodName`; `periodSequence` is now optional.
-3. **(key)** `beginDate` is now part of the key of `staffSectionAssociations` and
-   `studentSectionAssociations`.
+2. **(key)** `gradingPeriods` gets a required `gradingPeriodName`, which replaces `periodSequence` in the
+   natural key (so every grading period reference changes); `periodSequence` is now optional.
+3. **(key)** `beginDate` is now part of the key of `staffSectionAssociations`.
 4. Previously deprecated elements were removed, and `schoolChoiceTransfer` is deprecated. Does not invent
    which elements were removed.
 5. Mentions new optional fields (for example `nextYearSchoolReference`, `specialEducationExitDate`,
