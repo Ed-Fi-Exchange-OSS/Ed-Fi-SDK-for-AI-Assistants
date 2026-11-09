@@ -59,7 +59,6 @@ R = required, O = optional. Names as in the API; the source names are the same w
 | | `schoolChoice` | boolean |
 | | `schoolChoiceBasisDescriptor` | descriptor |
 | | `enrollmentTypeDescriptor` | descriptor |
-| `gradingPeriods` | `gradingPeriodName` | required (B) |
 | `staffEducationOrganizationEmploymentAssociations` | `annualWage` | optional |
 | `studentEducationOrganizationAssociations` | `supporterMilitaryConnectionDescriptor` | optional; values Active Duty, Reserve, Veteran, DoD Civilian, Not Military Connected, Unknown |
 
@@ -71,8 +70,7 @@ definition and where it is collected were updated.
 
 | Resource | Change |
 |---|---|
-| `gradingPeriods` | `gradingPeriodName` replaces `periodSequence` in the natural key, which is now `gradingPeriodDescriptor`, `gradingPeriodName`, `schoolId`, `schoolYear` (B). Every grading period reference changes (`grades`, `gradebookEntries`, ...). `gradingPeriodDescriptor` is now the SEA-predefined name. `periodSequence` required -> optional |
-| `staffSectionAssociations` | `beginDate` is now part of the identity (natural key) (B) |
+| `gradingPeriods` | `gradingPeriodDescriptor` is now the SEA-predefined name. `periodSequence` required -> optional (`gradingPeriodName` was already part of the natural key) |
 | `courseTranscripts` | `earnedCredit` required -> optional |
 | `studentSchoolAttendanceEvents` | `eventDuration`: minimum and maximum constraints added |
 | `letterGradeEarned` (resource not named in source) | maximum length 20 -> 64 |

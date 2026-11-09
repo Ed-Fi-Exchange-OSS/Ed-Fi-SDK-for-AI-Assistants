@@ -243,14 +243,13 @@ installed, and without it.
 
 1. **(key)** Parent becomes Contact: `parents` to `contacts` and `studentParentAssociations` to
    `studentContactAssociations`, with `contactReference` and `contactUniqueId`.
-2. **(key)** `gradingPeriods` gets a required `gradingPeriodName`, which replaces `periodSequence` in the
-   natural key (so every grading period reference changes); `periodSequence` is now optional.
-3. **(key)** `beginDate` is now part of the key of `staffSectionAssociations`.
-4. Previously deprecated elements were removed, and `schoolChoiceTransfer` is deprecated. Does not invent
+2. `gradingPeriods`: `periodSequence` is now optional (it was required). Does not claim the natural key
+   changed; `gradingPeriodName` was already part of it.
+3. Previously deprecated elements were removed, and `schoolChoiceTransfer` is deprecated. Does not invent
    which elements were removed.
-5. Mentions new optional fields (for example `nextYearSchoolReference`, `specialEducationExitDate`,
+4. Mentions new optional fields (for example `nextYearSchoolReference`, `specialEducationExitDate`,
    `preferredFirstName`) and the new `studentSpecialEducationProgramEligibilityAssociations` resource.
-6. Treats 5.0 as breaking and says to check the resource files for details, instead of claiming a complete
+5. Treats 5.0 as breaking and says to check the resource files for details, instead of claiming a complete
    list of changes.
 
 ## T13 · Upgrade: Data Standard 5.0 to 5.1
