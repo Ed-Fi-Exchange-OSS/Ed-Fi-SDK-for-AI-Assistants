@@ -28,13 +28,21 @@ usually needs 8–10 thousand.
 3. **For descriptor types**, search [references/descriptors.md](references/descriptors.md). Descriptor
    *values* are data, not part of the spec: read them from the target API.
 
+4. **For upgrades between Data Standard versions**, open the matching change list: 4.0 to 5.0
+   ([whats-new-v50.md](references/whats-new-v50.md)), 5.0 to 5.1
+   ([whats-new-v51.md](references/whats-new-v51.md)) or 5.1 to 5.2
+   ([whats-new-v52.md](references/whats-new-v52.md)). Each lists added, renamed, changed and removed resources,
+   fields and descriptors, and marks breaking changes. Read only the versions between the source and target;
+   resource files describe 5.2 only.
+
 Don't open `index.md` and many resource files "just in case"; open what the task needs.
 
 ## Limits
 
-- **Data Standard 5.2 only.** Paths are shown as in the spec (`/ed-fi/students`); build full URLs from the
-  host's Discovery API (`urls.dataManagementApi`), which differs between ODS/API 7.x (`.../data/v3/`) and
-  Ed-Fi API 8 (`.../data/`).
+- **Data Standard 5.2 only.** Earlier versions are covered only by the change lists in step 4. Paths are
+  shown as in the spec (`/ed-fi/students`); build full URLs from the host's Discovery API
+  (`urls.dataManagementApi`), which differs between ODS/API 7.x (`.../data/v3/`) and Ed-Fi API 8
+  (`.../data/`).
 - **Host extensions are not included.** Extensions appear only in each host's own metadata; regenerate this
   index from that host with `eng/spec-knowledge-graph/generate.py` (see its README in the repository).
 - **Natural keys are field names, not references.** They come from the GET query parameters marked
