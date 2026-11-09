@@ -71,6 +71,7 @@ definition and where it is collected were updated.
 | Resource | Change |
 |---|---|
 | `gradingPeriods` | `gradingPeriodDescriptor` is now the SEA-predefined name. `periodSequence` required -> optional (`gradingPeriodName` was already part of the natural key) |
+| `staffSectionAssociations` | `beginDate` is now part of the identity (natural key) (B) |
 | `courseTranscripts` | `earnedCredit` required -> optional |
 | `studentSchoolAttendanceEvents` | `eventDuration`: minimum and maximum constraints added |
 | `letterGradeEarned` (resource not named in source) | maximum length 20 -> 64 |
