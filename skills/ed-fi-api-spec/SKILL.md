@@ -1,6 +1,6 @@
 ---
 name: ed-fi-api-spec
-description: Look up Ed-Fi API resources and descriptor types without loading the OpenAPI specification — which resource to use for a concept (e.g. enrollment, attendance, grades, parents), its collection path, natural key, required fields, the fields to supply in each reference, the fields of nested collections, and its endpoints. Data Standard 5.2. Use when writing or reviewing code against an Ed-Fi API and the resource name, its fields or its key are not known.
+description: Look up Ed-Fi API resources and descriptor types without loading the OpenAPI (swagger) specification — which resource to use for a concept (e.g. enrollment, attendance, grades, parents), its collection path, natural key, required fields, the fields to supply in each reference, the fields of nested collections, and its endpoints. Covers Data Standard 5.2, and upgrade / migration instructions from versions 4.0 and 5.1. Use when writing or reviewing code against an Ed-Fi API and the resource name, its fields or its key are not known.
 ---
 
 # Ed-Fi API spec lookup
