@@ -253,7 +253,7 @@ and data model names as JSON fields. The skill now lists those names next to the
 | Outcome | With skill | Without skill |
 |---|---|---|
 | 1. `studentContactAssociations` with `contactUniqueId` | 3/3 | 3/3 |
-| 2. `gradingPeriodName` in the grading period reference | 3/3 | 0/3 (`periodSequence`, the Data Standard 4 key) |
+| 2. `gradingPeriodName` in the grading period reference | 3/3 | 0/3 (`periodSequence`, the Data Standard 4 key, replaced by `gradingPeriodName` in Data Standard 5.0) |
 | 3. `studentUniqueId`, not `studentUSI` | 3/3 | 3/3 |
 | 4. Rename placed in Data Standard 5.0 | ⚠️ one run says 5.2, two say 5.x | ⚠️ all say 5.x |
 | **Result** | **3/3 pass** | **0/3 pass** |

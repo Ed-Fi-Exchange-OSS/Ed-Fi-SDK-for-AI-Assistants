@@ -63,14 +63,14 @@ R = required, O = optional. Names as in the API; the source names are the same w
 | `studentEducationOrganizationAssociations` | `supporterMilitaryConnectionDescriptor` | optional; values Active Duty, Reserve, Veteran, DoD Civilian, Not Military Connected, Unknown |
 
 The source also adds a Gender Identity string, described as "added to the core model". In 5.0 it is
-`genderIdentity` on `contacts`, `staffs` and `studentEducationOrganizationAssociations` (carried into 5.2). The Sex descriptor
-definition and where it is collected were updated.
+`genderIdentity` on `contacts`, `staffs` and `studentEducationOrganizationAssociations` (carried into 5.2).
+The Sex descriptor definition and where it is collected were updated.
 
 ## Changed fields
 
 | Resource | Change |
 |---|---|
-| `gradingPeriods` | `gradingPeriodDescriptor` is now the SEA-predefined name. `periodSequence` required -> optional (`gradingPeriodName` was already part of the natural key) |
+| `gradingPeriods` | **Natural key changed (breaking):** `gradingPeriodName` replaced `periodSequence` in the key. The 5.0 key is `gradingPeriodDescriptor`, `gradingPeriodName`, `schoolId`, `schoolYear`, so every grading period reference changes (`grades`, `gradebookEntries`, `sessions`, `reportCards`, `studentCompetencyObjectives`). `periodSequence` is now optional. `gradingPeriodDescriptor` is now the SEA-predefined name |
 | `staffSectionAssociations` | `beginDate` is now part of the identity (natural key) (B) |
 | `courseTranscripts` | `earnedCredit` required -> optional |
 | `studentSchoolAttendanceEvents` | `eventDuration`: minimum and maximum constraints added |
