@@ -62,8 +62,8 @@ R = required, O = optional. Names as in the API; the source names are the same w
 | `staffEducationOrganizationEmploymentAssociations` | `annualWage` | optional |
 | `studentEducationOrganizationAssociations` | `supporterMilitaryConnectionDescriptor` | optional; values Active Duty, Reserve, Veteran, DoD Civilian, Not Military Connected, Unknown |
 
-The source also adds a Gender Identity string, described as "added to the core model". In 5.2 it is
-`genderIdentity` on `contacts`, `staffs` and `studentEducationOrganizationAssociations`. The Sex descriptor
+The source also adds a Gender Identity string, described as "added to the core model". In 5.0 it is
+`genderIdentity` on `contacts`, `staffs` and `studentEducationOrganizationAssociations` (carried into 5.2). The Sex descriptor
 definition and where it is collected were updated.
 
 ## Changed fields
