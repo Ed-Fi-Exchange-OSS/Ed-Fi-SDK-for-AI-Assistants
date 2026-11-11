@@ -175,6 +175,91 @@ outcomes; without the skill, the answer gives the key from memory but doesn't sa
 With the skill, the answers about keys now come from the specification and say so; without it, the model
 answers these well-known resources from memory and hedges.
 
+## Run 6 · Claude Code, upgrade prompts T12–T14 · 2026-11-11
+
+- **Harness:** Claude Code, headless, default model (`claude-sonnet-5-5`), fresh session per prompt.
+- **Conditions:** *with skill* (`ed-fi-api-spec` installed, including the version change lists
+  `references/whats-new-v50.md`, `v51.md` and `v52.md`) and *without skill* (empty project).
+- **Restrictions:** the *without skill* runs were not limited to the model alone. The usage records show web
+  searches by a `claude-haiku-5-5` helper model (1 in T12, 2 in T13, 3 in T14), although the top-level
+  `server_tool_use` counters read 0. In T14 the answer also says it could not read the local spec files. The
+  *with skill* runs made no searches.
+- **Prompts:** the upgrade prompts T12 (Data Standard 4.0 to 5.0), T13 (5.0 to 5.1) and T14 (5.1 to 5.2) from
+  [api-client-test-prompts.md](api-client-test-prompts.md). The prompts with the same numbers in this
+  file's [test prompts](api-spec-test-prompts.md) (nested collections, natural key) were not run.
+- **Skill invocation:** the skill was invoked automatically in all three prompts. In an earlier run of T13
+  it was not; the `SKILL.md` description change fixed that.
+
+### Summary
+
+| Test | Topic | With skill | Without skill |
+|---|---|---|---|
+| T12 | Upgrade: Data Standard 4.0 to 5.0 | ✅ Pass | ❌ Fail (grading period key change missing) |
+| T13 | Upgrade: Data Standard 5.0 to 5.1 | ✅ Pass | ✅ Pass (key outcomes only; see below) |
+| T14 | Upgrade: Data Standard 5.1 to 5.2 | ✅ Pass | ❌ Fail (one of five registration resources, no load order) |
+| **Total** | | **3 / 3** | **1 / 3** |
+
+### Outcomes by test
+
+| Test | Key outcomes | With skill | Without skill |
+|---|---|---|---|
+| T12 | Parent becomes Contact | ✅ `parents` to `contacts`, `studentParentAssociations` to `studentContactAssociations`, `parentReference` to `contactReference` (does not name `contactUniqueId`) | ⚠️ "StudentParentAssociation equivalents"; asks to confirm `/ed-fi/contacts`; no exact names |
+| T12 | `gradingPeriods` natural key changed | ✅ Old and new key, `periodSequence` optional, every `gradingPeriodReference` changes, affected resources listed | ❌ Says `GradingPeriodName` was added as required and `PeriodSequence` is optional; never says the key or its references changed |
+| T12 | `beginDate` in the key of `staffSectionAssociations` | ✅ Only `staffSectionAssociations` | ✅ |
+| T13 | No breaking changes | ✅ Includes the namespace caveat | ✅ For the data model, but then lists ODS/API 7.2 breakages it did not confirm as 5.1 changes |
+| T13 | New resources `crisisEvents`, `studentHealths`, `studentTransportations` | ✅ With keys and required fields | ✅ Named as entities (`CrisisEvent`, etc.) |
+| T14 | Dual credit on `studentSectionAssociations`, all five properties | ✅ Five properties, and says not on `sections` | ⚠️ Right resource, three of five properties; misses `dualCreditTypeDescriptor` and `dualCreditEducationOrganizationReference` |
+| T14 | Five new assessment registration resources | ✅ All five, plus `studentEducationOrganizationAssessmentAccommodations` | ❌ Only `studentAssessmentRegistrations`; "other resources may exist, I did not enumerate them" |
+| T14 | 5.2 is non-breaking | ✅ Cites the change list | ⚠️ "Minor release, intended to be non-breaking", hedged |
+
+Other outcomes:
+
+| Test | Outcome | With skill | Without skill |
+|---|---|---|---|
+| T12 | Deprecated elements removed, `schoolChoiceTransfer` deprecated, none invented | ✅ | ✅ |
+| T12 | New optional fields and `studentSpecialEducationProgramEligibilityAssociations` | ✅ | ✅ |
+| T12 | Treats 5.0 as breaking, no claim of a complete list | ✅ | ✅ |
+| T13 | `displacedStudents` references `crisisEvent` by `crisisEventName` | ✅ | ⚠️ Collection found, no `crisisEventName`; unsure of the field name |
+| T13 | `hispanicLatinoEthnicity` deprecated, not removed | ✅ | ✅ |
+| T13 | New descriptor types; values come from the target API | ✅ Nine types, "values must be loaded by the host" | ❌ Only the Race sample values |
+| T13 | No other changes claimed | ✅ | ⚠️ Adds ODS/API 7.2 changes (labeled as platform) |
+| T14 | `assessment` created before `assessmentAdministrations` | ✅ | ❌ |
+| T14 | `studentSection504ProgramAssociations` and deprecated descriptor values | ✅ Both, about 110 values across 19 descriptors | ❌ |
+| T14 | No renamed fields claimed | ✅ Says duration properties only state their unit | ✅ |
+
+### What the skill changed
+
+- **T12:** the clearest gain is the grading period key. With the skill the answer gave the old and new key, said
+  `periodSequence` is optional and listed the five resources whose references change. Without it, the answer
+  mentioned only that `gradingPeriodName` is required. The Run 6 error of adding `beginDate` to the key of
+  `studentSectionAssociations` did not recur.
+- **T13:** both conditions passed the key outcomes. The skill added the field-level detail (keys, required
+  fields, the nine descriptor types, `crisisEventName`) and kept to the data standard. Without it, the answer
+  mixed in ODS/API 7.2 changes and said it could not confirm which were new in 7.2.
+- **T14:** with the skill the answer was field-level, gave the load order and listed the 504 resource and the
+  deprecated descriptor values. Without it, the answer relied on search summaries and got the registration
+  resources and dual credit properties only partly.
+- **Web search narrowed the gap.** Compared with an offline baseline, the *without skill* answers named the
+  Contact rename, the dual credit location and `studentAssessmentRegistrations`. They still missed everything
+  that needs the change list itemized.
+
+### Context use
+
+| Test | Without skill (cost · time · turns) | With skill (cost · time · turns) |
+|---|---|---|
+| T12 | $0.188 · 81 s · 5 | $0.142 · 21 s · 5 |
+| T13 | $0.153 · 99 s · 7 | $0.134 · 17 s · 5 |
+| T14 | $0.208 · 48 s · 9 | $0.145 · 22 s · 6 |
+
+The *without skill* costs include the Haiku helper's web searches. With the skill, each answer was about 30%
+cheaper and 2 to 5 times faster.
+
+> [!NOTE]
+> As with all runs, review the answers before relying on them. The with-skill T14 answer says
+> `programEducationOrganizationId` is now in the natural key of
+> `studentSpecialEducationProgramEligibilityAssociations`; this was not checked against the specification.
+
 ## Not yet done
 
 - **Codex** (optional, NFR-PORT-1).
+- **GitHub Copilot** for prompts T12-T14

@@ -227,3 +227,67 @@ and data model names as JSON fields.
 3. **(key)** References use `studentUniqueId`, not `studentUSI`.
 4. If it mentions the parent to contact rename, places it in Data Standard 5.0.
 5. Descriptors as full URIs (PUSH-5), with values read from the target API.
+
+## T12 · Upgrade: Data Standard 4.0 to 5.0
+
+Prompts T12–T14 test the version change lists of the `ed-fi-api-spec` skill
+(`references/whats-new-v50.md`, `v51.md`, `v52.md`), not the API client rules. Run them with the spec skill
+installed, and without it.
+
+**Prompt:**
+
+> We're upgrading our Ed-Fi integration from Data Standard 4.0 to 5.0. What do we have to change in the
+> records we send?
+
+**Expected outcomes:**
+
+1. **(key)** Parent becomes Contact: `parents` to `contacts` and `studentParentAssociations` to
+   `studentContactAssociations`, with `contactReference` and `contactUniqueId`.
+2. **(key)** `gradingPeriods`: the natural key changed. `gradingPeriodName` replaced `periodSequence` in the
+   key, so every grading period reference changes; `periodSequence` is now optional.
+3. **(key)** `beginDate` is now part of the key of `staffSectionAssociations`.
+4. Previously deprecated elements were removed, and `schoolChoiceTransfer` is deprecated. Does not invent
+   which elements were removed.
+5. Mentions new optional fields (for example `nextYearSchoolReference`, `specialEducationExitDate`,
+   `preferredFirstName`) and the new `studentSpecialEducationProgramEligibilityAssociations` resource.
+6. Treats 5.0 as breaking and says to check the resource files for details, instead of claiming a complete
+   list of changes.
+
+## T13 · Upgrade: Data Standard 5.0 to 5.1
+
+**Prompt:**
+
+> We're moving from Data Standard 5.0 to 5.1. Will our existing integration break, and what is new?
+
+**Expected outcomes:**
+
+1. **(key)** Says there are no breaking changes: all additions are optional, and no resources, properties or
+   keys were renamed or removed.
+2. **(key)** Names the new resources `crisisEvents`, `studentHealths` and `studentTransportations`.
+3. `studentEducationOrganizationAssociations` gets an optional `displacedStudents` collection, which
+   references a `crisisEvent` by `crisisEventName`.
+4. `hispanicLatinoEthnicity` is deprecated but not removed.
+5. Mentions the new descriptor types (for example `crisisTypeDescriptors`, `immunizationTypeDescriptors`) and
+   that descriptor values are read from the target API.
+6. Does not claim other changes, such as renamed fields.
+
+## T14 · Upgrade: Data Standard 5.1 to 5.2
+
+**Prompt:**
+
+> Our SIS needs to report dual credit courses and assessment registrations. We are on Data Standard 5.1.
+> What does 5.2 add, and does upgrading break anything?
+
+**Expected outcomes:**
+
+1. **(key)** Dual credit is on `studentSectionAssociations` (`dualCreditIndicator`,
+   `dualCreditTypeDescriptor`, `dualHighSchoolCreditIndicator`, `dualCreditEducationOrganizationReference`,
+   `dualCreditInstitutionDescriptor`), not on `sections`.
+2. **(key)** Assessment registration resources are new: `assessmentAdministrations`,
+   `assessmentAdministrationParticipations`, `assessmentBatteryParts`, `studentAssessmentRegistrations`,
+   `studentAssessmentRegistrationBatteryPartAssociations`.
+3. **(key)** Says 5.2 is non-breaking.
+4. Create the `assessment` before its `assessmentAdministrations`.
+5. Mentions `studentSection504ProgramAssociations` and the deprecated descriptor values that were moved to
+   the suggested values list.
+6. Does not claim that fields were renamed (duration properties only state their unit).

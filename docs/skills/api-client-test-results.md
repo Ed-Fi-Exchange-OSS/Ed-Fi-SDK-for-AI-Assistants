@@ -253,7 +253,7 @@ and data model names as JSON fields. The skill now lists those names next to the
 | Outcome | With skill | Without skill |
 |---|---|---|
 | 1. `studentContactAssociations` with `contactUniqueId` | 3/3 | 3/3 |
-| 2. `gradingPeriodName` in the grading period reference | 3/3 | 0/3 (`periodSequence`, the Data Standard 4 key) |
+| 2. `gradingPeriodName` in the grading period reference | 3/3 | 0/3 (`periodSequence`, the Data Standard 4 key, replaced by `gradingPeriodName` in Data Standard 5.0) |
 | 3. `studentUniqueId`, not `studentUSI` | 3/3 | 3/3 |
 | 4. Rename placed in Data Standard 5.0 | ⚠️ one run says 5.2, two say 5.x | ⚠️ all say 5.x |
 | **Result** | **3/3 pass** | **0/3 pass** |
@@ -264,3 +264,124 @@ Standard 4 name without the skill.
 ## Not yet done
 
 - **Codex** (optional, NFR-PORT-1).
+
+## Run 7 - T12 - T14
+
+Each of the experiments below were performed only with Claude Code, as the developer had run out of GitHub
+Copilot AI Credits for the month already. `/clear` was used between every prompt to reset the context. Before
+/ after results were saved to markdown, and comparisons were made with prompts like this:
+
+> compare @docs/skills/50-before.md and @docs/skills/50-after.md, providing a summary of differences. "before"
+> did not utilize the `ed-fi-api-spec` skill, whereas "after" did use it.
+
+### T12 - Claude Code Only
+
+Before installing the skill, Claude Code accessed docs.ed-fi.org to find the upgrade information. Usage:
+
+```plaintext
+Total cost:            $0.2070
+Total duration (API):  1m 7s
+Total duration (wall): 2m 51s
+Total code changes:    0 lines added, 0 lines removed
+Usage by model:
+   claude-haiku-5-5:  1.2k input, 8.0k output, 67.8k cache read, 46.2k cache write, 1 web search ($0.0206)
+   claude-sonnet-5-5:  518 input, 3.1k output, 198.8k cache read, 33.6k cache write ($0.1864)
+Prompt cache (main):   4 requests · 82% of input tokens from cache · no misses · warm (1h TTL, last activity 31s ago)
+```
+
+After:
+
+```plaintext
+Total cost:            $0.1248
+Total duration (API):  17s
+Total duration (wall): 1m 20s
+Total code changes:    0 lines added, 0 lines removed
+Usage by model:
+   claude-haiku-5-5:  995 input, 266 output, 1.3k cache read, 0 cache write ($0.0002)
+   claude-sonnet-5-5:  8 input, 1.9k output, 105.0k cache read, 23.8k cache write ($0.1246)
+Prompt cache (main):   3 requests · 81% of input tokens from cache · no misses · warm (1h TTL, last activity 59s ago)
+```
+
+Substantial cost and time savings. Claude Code's assessment:
+
+> The "after" answer is more actionable. It uses the exact resource and field names a developer would see in
+> API payloads, spells out the Contact rename and the beginDate key change, and is cleaner about what is known
+> versus unknown. It uses less hedging and gives no sources. The "before" answer is more cautious and cites
+> its web sources. It includes a few details the "after" drops, such as the required fields on the new
+> eligibility resource and the 5.1/5.2/6.0 upgrade-path advice. Neither answer identifies which deprecated
+> elements were removed or the field-level changes in the other breaking domains.
+
+### T13 - Claude Code Only
+
+Before the update, again Claude Code accessed docs.ed-fi.org to find the upgrade information. Usage:
+
+```plaintext
+Total cost:            $0.2602
+Total duration (API):  1m 9s
+Total duration (wall): 7m 20s
+Total code changes:    0 lines added, 0 lines removed
+Usage by model:
+    claude-haiku-5-5:  1.2k input, 8.2k output, 83.0k cache read, 39.1k cache write, 1 web search ($0.0199)
+    claude-sonnet-5-5:  108 input, 3.6k output, 233.3k cache read, 45.3k cache write ($0.2403)
+Prompt cache (main):   4 requests · 80% of input tokens from cache · no misses · warm (1h TTL, last activity 2m 57s ago)
+```
+
+After: this one did *not* invoke the skill on first attempt. After updating the skill to mention update paths,
+Claude Code *did* load the skill correctly.
+
+```plaintext
+Total cost:            $0.1387
+Total duration (API):  16s
+Total duration (wall): 1m 57s
+Total code changes:    0 lines added, 0 lines removed
+Usage by model:
+   claude-haiku-5-5:  985 input, 29 output, 1.3k cache read, 0 cache write ($0.0001)
+   claude-sonnet-5-5:  8 input, 1.8k output, 108.2k cache read, 27.4k cache write ($0.1385)
+Prompt cache (main):   3 requests · 80% of input tokens from cache · no misses · warm (1h TTL, last activity 1m 46s ago)
+```
+
+Substantial cost and time savings. Claude Code's assessment:
+
+> Both answers reach the same bottom line: Data Standard 5.1 is non-breaking for a 5.0 integration. Both also
+> assume edfi-cli is the integration. The difference is in what each one is built on and what it tells you to
+> do.
+
+A note on the test setup:
+
+> [!NOTE]
+> `edfi-cli` is an old Python script that I had copied into my repository for other testing. I did not intend
+> for it to be used in this test, so it was interesting to see Claude Code looking at it.
+
+### T14 - Claude Code Only
+
+Before:
+
+```plaintext
+Total cost:            $0.1589
+Total duration (API):  33s
+Total duration (wall): 1m 29s
+Total code changes:    0 lines added, 0 lines removed
+Usage by model:
+    claude-haiku-5-5:  1.3k input, 2.4k output, 7.7k cache read, 33.6k cache write, 2 web search ($0.0256)
+    claude-sonnet-5-5:  514 input, 2.0k output, 146.7k cache read, 24.4k cache write ($0.1333)
+Prompt cache (main):   3 requests · 82% of input tokens from cache · no misses · warm (1h TTL, last activity 44s ago)
+```
+
+After:
+
+```plaintext
+Total cost:            $0.1424
+Total duration (API):  19s
+Total duration (wall): 1m 51s
+Total code changes:    0 lines added, 0 lines removed
+Usage by model:
+    claude-haiku-5-5:  1.0k input, 288 output, 0 cache read, 1.3k cache write ($0.0004)
+    claude-sonnet-5-5:  8 input, 2.1k output, 102.6k cache read, 27.8k cache write ($0.1420)
+Prompt cache (main):   3 requests · 79% of input tokens from cache · no misses · warm (1h TTL, last activity 1m 21s ago)
+```
+
+Did not save much. Sonnet actually used more, but Haiku used less. Claude Code's assessment:
+
+> Using the skill gave a precise, field-level answer with actionable upgrade checks. The skill-less run was
+> less specific and possibly wrong on the dual credit structure. Before's one advantage is the Data Standard
+> 6.0 warning, which the skill's 5.2 change list doesn't cover.
