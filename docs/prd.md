@@ -166,7 +166,8 @@ user data is processed.
   API host providers.
 - Domain-specific overlays (assessments, gradebook): deferred to 2027.
 - Composite and extension specifications in spec lookup.
-- Data Standard Extension Builder skills: belong in a separate product for API host providers.
+- Data Standard Extension Builder skills: a separate product for API host providers, with its own PRD
+  ([prd-extensions.md](prd-extensions.md)).
 - Semantic layer / data MCP server: belongs in a separate product.
 - Community contribution and governance process (target Q1 2027).
 - Remote or hosted servers.
