@@ -9,13 +9,25 @@ Requires Python 3.9 or later; standard library only.
 
 ## Regenerate the skill content
 
+The skill has one folder per Data Standard version. The public sandbox runs Data Standard 5.2 under `/v7.3/`
+and 6.1 under `/v7.3.2/` (check `dataModels` at the API root):
+
 ```bash
 python eng/spec-knowledge-graph/generate.py \
   --resources https://api.ed-fi.org/v7.3/api/metadata/data/v3/resources/swagger.json \
   --descriptors https://api.ed-fi.org/v7.3/api/metadata/data/v3/descriptors/swagger.json \
-  --out skills/ed-fi-api-spec/references \
-  --label "ODS/API 7.3, Data Standard 5.2"
+  --out skills/ed-fi-api-spec/references/ds-5.2 \
+  --data-standard 5.2 --label "ODS/API 7.3, Data Standard 5.2"
+
+python eng/spec-knowledge-graph/generate.py \
+  --resources https://api.ed-fi.org/v7.3.2/api/metadata/data/v3/resources/swagger.json \
+  --descriptors https://api.ed-fi.org/v7.3.2/api/metadata/data/v3/descriptors/swagger.json \
+  --out skills/ed-fi-api-spec/references/ds-6.1 \
+  --data-standard 6.1 --label "ODS/API 7.3, Data Standard 6.1"
 ```
+
+To add a version, generate it into a new `ds-<version>` folder, add its synonyms (below) and list it in the
+skill's `SKILL.md`.
 
 `--resources` and `--descriptors` accept an `https` URL or a local file. The output folder's `resources/`
 directory is replaced on each run.
@@ -41,14 +53,15 @@ python -m unittest discover -s eng/spec-knowledge-graph
 ## Include a host's extensions
 
 Extensions only appear in the metadata of the host that has them. Point the generator at that host's metadata
-(listed by `GET {urls.openApiMetadata}?sdk=true`) and write the output to the developer's own copy of the skill:
+(listed by `GET {urls.openApiMetadata}?sdk=true`) and write the output to the folder of the host's Data Standard
+version in the developer's own copy of the skill:
 
 ```bash
 python eng/spec-knowledge-graph/generate.py \
   --resources https://<host>/<path>/metadata/data/v3/resources/swagger.json \
   --descriptors https://<host>/<path>/metadata/data/v3/descriptors/swagger.json \
-  --out <installed skill folder>/references \
-  --label "<host name>, Data Standard 5.2 with extensions"
+  --out <installed skill folder>/references/ds-6.1 \
+  --data-standard 6.1 --label "<host name>, Data Standard 6.1 with extensions"
 ```
 
 ## Synonyms
@@ -56,3 +69,7 @@ python eng/spec-knowledge-graph/generate.py \
 [`synonyms.json`](synonyms.json) maps common developer terms that don't appear in Ed-Fi resource names or
 descriptions (for example "enrollment" or "parent") to the resources they should lead to. The generator adds
 them to the index lines ("Also: …") and to each resource file. Add an entry when a lookup test shows a miss.
+
+Terms under `byDataStandard` apply only to the version passed with `--data-standard`, because the resource that
+holds some data changes between versions: "address" leads to `studentEducationOrganizationAssociations` in 5.2
+and to `studentDirectories` in 6.1.

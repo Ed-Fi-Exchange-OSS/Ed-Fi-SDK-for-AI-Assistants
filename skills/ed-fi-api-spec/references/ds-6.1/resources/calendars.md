@@ -1,0 +1,38 @@
+# calendars
+
+`/ed-fi/calendars`
+
+A set of dates associated with an organization.
+
+## Natural key
+
+`calendarCode`, `schoolId`, `schoolYear`
+
+## Fields
+
+`yes` = required.
+
+| Field | Required | Type | Description |
+|---|---|---|---|
+| `calendarCode` | yes | string max 120 | The identifier for the calendar. |
+| `schoolReference` | yes | reference; supply `schoolId` | This entity represents an educational organization that includes staff, students and candidates who participate in classes and educational activity groups, inc… |
+| `schoolYearTypeReference` | yes | reference; supply `schoolYear` | Identifier for a school year. |
+| `calendarTypeDescriptor` | yes | descriptor URI | Indicates the type of calendar. |
+| `gradeLevels` |  | array of edFi_calendarGradeLevel | An unordered collection of calendarGradeLevels. |
+
+### Items in `gradeLevels`
+
+| Field | Required | Type | Description |
+|---|---|---|---|
+| `gradeLevelDescriptor` | yes | descriptor URI | Indicates the grade level associated with the calendar. |
+
+## Endpoints
+
+- `GET /ed-fi/calendars`
+- `POST /ed-fi/calendars`
+- `GET /ed-fi/calendars/deletes`
+- `GET /ed-fi/calendars/keyChanges`
+- `GET /ed-fi/calendars/partitions`
+- `GET /ed-fi/calendars/{id}`
+- `PUT /ed-fi/calendars/{id}`
+- `DELETE /ed-fi/calendars/{id}`
