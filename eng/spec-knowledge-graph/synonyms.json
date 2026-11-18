@@ -1,5 +1,5 @@
 {
-  "_comment": "Common developer terms that don't appear in the Ed-Fi resource names or descriptions. Each term maps to the resources (or descriptor types) it should lead to. Add an entry when a lookup test shows a miss. When Data Standard 6 arrives, add address -> the Directory resources.",
+  "_comment": "Common developer terms that don't appear in the Ed-Fi resource names or descriptions. Each term maps to the resources (or descriptor types) it should lead to. 'synonyms' apply to every Data Standard version; 'byDataStandard' adds terms whose target differs between versions, used with --data-standard. Add an entry when a lookup test shows a miss.",
   "synonyms": {
     "enrollment": ["studentSchoolAssociations"],
     "parent": ["contacts", "studentContactAssociations"],
@@ -10,5 +10,19 @@
     "state agency": ["stateEducationAgencies"],
     "test results": ["studentAssessments"],
     "test scores": ["studentAssessments"]
+  },
+  "byDataStandard": {
+    "5.2": {
+      "address": ["studentEducationOrganizationAssociations", "staffs", "contacts"],
+      "demographics": ["studentEducationOrganizationAssociations", "staffs"],
+      "race": ["studentEducationOrganizationAssociations", "staffs"],
+      "student ID": ["studentEducationOrganizationAssociations"]
+    },
+    "6.1": {
+      "address": ["studentDirectories", "staffDirectories", "contacts"],
+      "phone": ["studentDirectories", "staffDirectories"],
+      "race": ["studentDemographics", "staffDemographics"],
+      "student ID": ["studentIdentificationCodes"]
+    }
   }
 }
