@@ -5,6 +5,8 @@
 This association represents student information as reported in the context of the student's relationship to
 the education organization. Enrollment relationship semantics are covered by StudentSchoolAssociation.
 
+Also searched as: address, demographics, race, student ID.
+
 ## Natural key
 
 `educationOrganizationId`, `studentUniqueId`

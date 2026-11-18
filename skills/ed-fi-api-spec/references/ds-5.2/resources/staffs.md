@@ -6,7 +6,7 @@ This entity represents an individual who performs specified activities for any p
 institution or agency that provides instructional and/or support services to students or staff at the early
 childhood level through high school completion.
 
-Also searched as: teacher.
+Also searched as: teacher, address, demographics, race.
 
 ## Natural key
 

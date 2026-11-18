@@ -4,7 +4,7 @@
 
 This entity represents a contact of a student, such as a parent, guardian or caretaker.
 
-Also searched as: parent, guardian.
+Also searched as: parent, guardian, address.
 
 ## Natural key
 
