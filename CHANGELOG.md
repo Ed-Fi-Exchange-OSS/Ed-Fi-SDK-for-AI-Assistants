@@ -10,9 +10,11 @@ guidelines (`x.y.z`).
 
 - **`ed-fi-extension-builder` skill:** guidance for extending the Data Standard on Ed-Fi API 8.1 and newer:
   deciding whether an extension is needed, modeling it in MetaEd (new entities, associations, descriptors,
-  additions to core resources and common types), running the MetaEd build from the command line, and fixing
-  build errors. Worked through the Alternative Education Program and Student Transcript examples, both built
-  with MetaEd 4.9.0. Deployment, security and verification guidance will follow.
+  additions to core resources and common types), running the MetaEd build from the command line, fixing build
+  errors, and reviewing extension source against shared modeling rules adapted from `review-model-pr`. Worked
+  through the Alternative Education Program and Student Transcript examples, both built with MetaEd 4.9.0. On
+  an extension with 13 planted defects, the review found 13 with the skill and 8 without it. Deployment,
+  security and verification guidance will follow.
 - **Spec lookup comparison results** ([`docs/spec-lookup-results.md`](docs/spec-lookup-results.md)) and the
   scripts to repeat it (`eng/spec-lookup-comparison/`). On 29 lookup tasks in Claude Code, the spec skill scored
   100%, tied with keyword search and ahead of no spec help (97%), with five times fewer invented names. GitHub

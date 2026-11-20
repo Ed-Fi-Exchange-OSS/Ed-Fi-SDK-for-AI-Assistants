@@ -97,17 +97,14 @@ case sensitive. Without the prefix, MetaEd looks for the name in the extension p
 - `additions`, subclasses (`based on`), common extensions and descriptors can't add identity properties.
 - In entities about a student, put the `Student` reference first.
 
-## Naming and documentation
+## Rules
 
-- Entity names are singular and in PascalCase: `StaffDemographic`, not `StaffDemographics`. The API pluralizes.
-- Associations end in `Association`; descriptors don't end in `Descriptor` (MetaEd adds it).
-- Avoid filler such as `Information`, and trailing numbers on property names.
-- Write documentation for people: "staff member", not "staff record"; give realistic examples in descriptor
-  documentation ("Examples include: Home, Hospital, School").
-- Don't use the deprecated `queryable` and `renames identity property` keywords.
+Follow the [extension modeling rules](rules.md) while writing; the review uses the same ones. In short:
 
-## What an extension can't do
-
-- Change, remove or rename core entities and properties, or change their identity or cardinality.
-- Edit files in the core model folder. Only the Ed-Fi Alliance uses Alliance Mode, which allows it.
-- Add descriptor values in MetaEd: values are loaded into the descriptor through the API.
+- Don't change the core model or duplicate it, and use `EdFi.` for core names (CORE-1 to CORE-3). An
+  extension can't remove, rename or change the identity of core entities and properties.
+- Don't model descriptor values; they are data (CORE-4).
+- Keep additions to core resources optional (CORE-5).
+- Singular PascalCase names; `Association` suffix on associations, none on descriptors (NAME-1, NAME-2).
+- Documentation that says what each element means, in plain words (DOC-1 to DOC-5).
+- No deprecated keywords such as `queryable` and `renames identity property` (HYG-2).
