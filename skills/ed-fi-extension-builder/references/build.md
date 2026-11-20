@@ -84,6 +84,10 @@ The build writes one JSON line per message to standard output:
 - Only `"level":"error"` lines fail the build. Each ends with the file and `(line:column)`.
 - One `warn` line about `LearningStandardEquivalenceAssociation` in the core `Assessment.metaed` is expected with
   this model package; it isn't about the extension.
+- Read every other warning. `X named Y already exists in project Ed-Fi` means the extension declares a new
+  entity with a core name instead of extending the core one (rule CORE-1 in [rules.md](rules.md)); the build
+  succeeds, but the API gets a second, unrelated resource. MetaEd reports these warnings only when the build
+  has no errors.
 - Node.js deprecation warnings on standard error are noise.
 
 ## Common errors
