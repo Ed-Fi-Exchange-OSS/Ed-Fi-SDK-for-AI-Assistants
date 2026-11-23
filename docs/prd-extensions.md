@@ -145,7 +145,8 @@ existing core resource (Student Transcript).
 ### 3.5 Security
 
 - **FR-SEC-1:** The skill SHALL guide writing a claims fragment for every new resource and descriptor, with
-  claim URIs that match the generated schema's `projectEndpointName` and resource names.
+  claim URIs that match the generated schema's `projectEndpointName` and resource names, and SHALL check
+  before staging that the fragment has an entry for every new resource and descriptor.
 - **FR-SEC-2:** The skill SHALL explain the two access patterns in the how-to guides: inheriting access by
   placing claims under existing domains, and restricting access with a new domain that names its claim sets.
 - **FR-SEC-3:** The skill SHALL state that an extension resource is not accessible until it is in the claims
@@ -169,8 +170,8 @@ existing core resource (Student Transcript).
   slowly changing dimensions. Items specific to the Ed-Fi-Model repository (for example the `DATASTD-` PR
   title) SHALL be left out.
 - **FR-REVIEW-3:** The review guidance SHALL add extension-specific checks: no changes to core entities,
-  consistent project name and namespace, references to core entities that exist in the target Data Standard,
-  and a claims fragment entry for every new resource.
+  consistent project name and namespace, and references to core entities that exist in the target Data
+  Standard. The claims fragment is checked by the security guidance (FR-SEC-1).
 - **FR-REVIEW-4:** The review SHALL run the MetaEd build when possible, and SHALL report findings with file
   and line, separated into blocking issues and suggestions.
 - **FR-REVIEW-5:** Modeling rules SHOULD be defined once and shared by the build guidance and the review
