@@ -1,6 +1,6 @@
 ---
 name: ed-fi-extension-builder
-description: Guidance for extending the Ed-Fi Data Standard on an Ed-Fi API 8.1 or later host with MetaEd. Covers deciding whether an extension is needed, modeling it in MetaEd (new domain entities, associations based on core associations, descriptors, additions to core resources and common types, references to core entities), running the MetaEd build from the command line, and explaining and fixing build errors. Use whenever a task mentions a Data Standard extension, MetaEd, .metaed files, ApiSchema-EXTENSION.json, _ext properties, or adding resources or fields to an Ed-Fi API.
+description: Guidance for extending the Ed-Fi Data Standard on an Ed-Fi API 8.1 or later host with MetaEd. Covers deciding whether an extension is needed, modeling it in MetaEd (new domain entities, associations based on core associations, descriptors, additions to core resources and common types, references to core entities), running the MetaEd build from the command line, explaining and fixing build errors, and reviewing extension source against Ed-Fi modeling rules. Use whenever a task mentions a Data Standard extension, MetaEd, .metaed files, ApiSchema-EXTENSION.json, _ext properties, or adding resources or fields to an Ed-Fi API.
 ---
 
 # Ed-Fi Data Standard Extension Builder
@@ -46,6 +46,8 @@ If an extension is still needed, say which kind fits (see the table in
 |---|---|
 | New project, `package.json`, choosing the kind of extension, writing `.metaed` files, identity, naming | [references/modeling.md](references/modeling.md) |
 | Installing MetaEd for the command line, running the build, reading errors, finding the output | [references/build.md](references/build.md) |
+| Reviewing or checking existing extension source (`.metaed` files, a pull request) | [references/review.md](references/review.md) |
+| The modeling rules, by ID | [references/rules.md](references/rules.md) |
 | A new resource and descriptor, worked end to end | [references/examples/alternative-education-program.md](references/examples/alternative-education-program.md) |
 | Properties added to a core resource and common type, worked end to end | [references/examples/student-transcript.md](references/examples/student-transcript.md) |
 
