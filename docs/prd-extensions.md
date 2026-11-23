@@ -81,8 +81,8 @@ existing core resource (Student Transcript).
 ## 2. System context
 
 - Skills are static files in this repository, consumed locally by AI coding harnesses. No hosted service.
-- **Target platform:** Ed-Fi API 8.1 and later, with Data Standard 5.2. ODS/API 7.3 may be added later (see
-  section 6).
+- **Target platform:** Ed-Fi API 8.1 and later, with Data Standard 5.2 or 6.1; Ed-Fi API 8.1 supports both.
+  The first release is tested with 5.2, and 6.1 follows. ODS/API 7.3 may be added later (see section 6).
 - **Modeling and build:** MetaEd 4.9 or later, which produces `ApiSchema-EXTENSION.json`. The skills run the
   MetaEd build through its command-line package (`@edfi/metaed-console`), which requires Node.js and access
   to the Ed-Fi package feed.
@@ -94,7 +94,8 @@ existing core resource (Student Transcript).
 - **Security:** new resources are added to the claims hierarchy through a claims fragment, with claim URIs of
   the form `http://ed-fi.org/identity/claims/{projectEndpointName}/{resourceName}`. Placement in the
   hierarchy decides which claim sets inherit access.
-- **Development environment:** Ed-Fi API 8.1 with Data Standard 5.2, running locally as in the how-to guides.
+- **Development environment:** Ed-Fi API 8.1 with Data Standard 5.2 or 6.1, running locally as in the how-to
+  guides.
 
 ## 3. Functional requirements
 
@@ -122,8 +123,8 @@ existing core resource (Student Transcript).
 
 ### 3.3 Build
 
-- **FR-BUILD-1:** The skill SHALL run the MetaEd build from the command line, targeting Ed-Fi API 8.1 and Data
-  Standard 5.2, and SHALL report whether it succeeded.
+- **FR-BUILD-1:** The skill SHALL run the MetaEd build from the command line, targeting Ed-Fi API 8.1 and the
+  Data Standard the host runs (5.2 or 6.1), and SHALL report whether it succeeded.
 - **FR-BUILD-2:** When the build fails, the skill SHALL explain each error in terms of the `.metaed` source and
   offer a fix. It SHALL apply a fix only after the user agrees, and SHALL rebuild after each fix.
 - **FR-BUILD-3:** The skill SHALL ask the user to accept the Ed-Fi license before running the build, rather
@@ -231,7 +232,6 @@ data belong to the user.
 - Data Standard governance and the community extension review process.
 - Migrating data between versions of an installed extension, beyond the rule that changes need a clean
   database and a data reload.
-- Data Standard 6, until Ed-Fi API 8 targets it.
 - Indexing extension specifications in the `ed-fi-api-spec` lookup.
 - Skills cannot decide what a host's data means; the implementer remains responsible for the design.
 
