@@ -92,3 +92,13 @@ With `projectName` `SampleStudentTranscript`, the build succeeds and `ApiSchema-
   `submissionCertificationDescriptors`)
 - `studentAcademicRecords`, marked as a resource extension. Its new properties go under
   `_ext.samplestudenttranscript` in the payload of the core `/data/ed-fi/studentAcademicRecords` resource.
+
+## Deploying it
+
+As written, this example **doesn't deploy on Ed-Fi API 8.1.0**: the additions to `StudentAcademicRecord` and
+to its `ClassRanking` common map to the same table, and the start fails (see
+[deploy.md](../deploy.md#known-issues)). Without the `ClassRanking` additions (the `Common` file, and the
+`common extension EdFi.ClassRanking` property), it deploys and works: on 2026-11-23, Discovery listed
+`SampleStudentTranscript`, the four descriptors and `postSecondaryOrganizations` accepted writes, and a
+`studentAcademicRecords` record with `_ext.samplestudenttranscript` was stored and read back with its
+reference to the postsecondary organization. The claims fragment is in [security.md](../security.md).

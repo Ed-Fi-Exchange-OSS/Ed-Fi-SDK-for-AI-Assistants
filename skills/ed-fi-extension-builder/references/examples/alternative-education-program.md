@@ -62,3 +62,10 @@ succeeds and `ApiSchema-EXTENSION.json` has:
 
 After deployment the association is at
 `/data/sample-alternative-education-program/studentAlternativeEducationProgramAssociations`.
+
+## Deploying it
+
+The claims fragment in [security.md](../security.md) puts the descriptor under `systemDescriptors` and the
+association under `relationshipBasedData`. Deployed on 2026-11-23 with [deploy.md](../deploy.md): Discovery
+listed `SampleAlternativeEducationProgram`, both endpoints returned `200`, and a descriptor value was written
+and read back.
