@@ -25,7 +25,7 @@ guidance step by step, not through an assistant; assistant runs are part of the 
 |---|---|---|
 | 1 | Start with the Student Transcript example as written | ❌ `api-schema-tools ddl provision failed ... exit code 1`. `ddl emit` shows `An item with the same key has already been added. Key: samplestudenttranscript.StudentAcademicRecordExtension`. Same with the `v8.1.0` tag. |
 | 2 | Same, without the `ClassRanking` additions | ✅ Starts; claims gate passed (3 checks, 10 deferred) |
-| 3 | `ddl emit` with only the `ClassRanking` additions | ✅ No error. Only the combination fails. |
+| 3 | `ddl emit` with only the `ClassRanking` additions | ❌ Corrected on 2026-11-24, see below. The first run had the `Common` file but not the `common extension` property, so it tested nothing. |
 | 4 | Discovery | ✅ Lists `SampleAlternativeEducationProgram`, `SampleStudentTranscript` and `SampleTest` 1.0.0 |
 | 5 | GET on the new endpoints (EdFiSandbox) | ✅ `200 []` on the AEP descriptor and association, and on `postSecondaryOrganizations` |
 | 6 | POST descriptor values with namespace `uri://sample.org/...` | ❌ `403 namespace-mismatch` (expected: not one of the vendor's prefixes) |
@@ -41,6 +41,20 @@ guidance step by step, not through an assistant; assistant runs are part of the 
 | 16 | CORE-5: POST `staffs` with `isTenured` = `"notabool"` | `400`, `isTenured Value is "string" but should be "boolean"` |
 | 17 | CORE-5: POST `staffs` with `isTenured` `true` and `false` | `201`; read back with the value |
 
+### Common extension, rechecked on 2026-11-24
+
+After review, four variants of the Student Transcript example were built with MetaEd 4.9.0 and checked with
+`ddl emit` from the `v8.1.0` tag, on PostgreSQL and SQL Server (same result on both). No stack was started.
+
+| Additions to `StudentAcademicRecord` | `Common EdFi.ClassRanking additions` | Result |
+|---|---|---|
+| Only `common extension EdFi.ClassRanking` | Yes | ❌ `An item with the same key has already been added. Key: samplestudenttranscript.StudentAcademicRecordExtension` |
+| None | Yes | ✅ Emits, but `studentAcademicRecords` isn't extended: `classRanking` gets no `_ext`. MetaEd gives no warning. |
+| Only `descriptor SubmissionCertification` | No | ✅ Emits |
+| Both, as in the example | Yes | ❌ Same error as the first row |
+
+The `common extension` property is what fails, not the combination with other additions.
+
 Other observations:
 
 - The generated table column for the required addition is nullable (`"IsTenured" boolean NULL`).
@@ -52,7 +66,7 @@ Other observations:
 - Rule CORE-5 now says that Ed-Fi API 8.1 doesn't enforce required additions (results 14 and 15). The earlier
   reason, that clients must send the value, was wrong.
 - `deploy.md` documents the Student Transcript failure as a known issue, with the `ddl emit` command that shows
-  the cause.
+  the cause. Since the recheck, it says that the `common extension` property fails on its own.
 - `security.md` and `verify.md` cover descriptor namespace prefixes and relationship-based access, which the
   guides don't mention.
 

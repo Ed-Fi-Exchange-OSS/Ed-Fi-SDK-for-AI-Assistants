@@ -78,7 +78,8 @@ What to notice:
 - `PostSecondaryOrganization` reuses the core `EdFi.NameOfInstitution` shared type as its identity.
 - `additions` adds properties without identity; the core resource keeps its identity and its URL.
 - The common type extension takes two declarations: `Common EdFi.ClassRanking additions`, and
-  `common extension EdFi.ClassRanking` in the additions of the entity that uses it.
+  `common extension EdFi.ClassRanking` in the additions of the entity that uses it. On Ed-Fi API 8.1.0 the
+  second one fails to deploy; see [Deploying it](#deploying-it).
 - The documentation of `PostSecondaryOrganization` only repeats its name. In your own extensions, say what the
   entity means.
 
@@ -95,10 +96,11 @@ With `projectName` `SampleStudentTranscript`, the build succeeds and `ApiSchema-
 
 ## Deploying it
 
-As written, this example **doesn't deploy on Ed-Fi API 8.1.0**: the additions to `StudentAcademicRecord` and
-to its `ClassRanking` common map to the same table, and the start fails (see
-[deploy.md](../deploy.md#known-issues)). Without the `ClassRanking` additions (the `Common` file, and the
-`common extension EdFi.ClassRanking` property), it deploys and works: on 2026-11-23, Discovery listed
-`SampleStudentTranscript`, the four descriptors and `postSecondaryOrganizations` accepted writes, and a
-`studentAcademicRecords` record with `_ext.samplestudenttranscript` was stored and read back with its
-reference to the postsecondary organization. The claims fragment is in [security.md](../security.md).
+As written, this example **doesn't deploy on Ed-Fi API 8.1.0**: the `common extension EdFi.ClassRanking`
+property makes the start fail, even without the other additions (see [deploy.md](../deploy.md#known-issues)).
+The `Common` file without that property builds, but adds nothing to `classRanking`. Without the `ClassRanking`
+additions (the `Common` file, and the `common extension EdFi.ClassRanking` property), it deploys and works: on
+2026-11-23, Discovery listed `SampleStudentTranscript`, the four descriptors and `postSecondaryOrganizations`
+accepted writes, and a `studentAcademicRecords` record with `_ext.samplestudenttranscript` was stored and read
+back with its reference to the postsecondary organization. The claims fragment is in
+[security.md](../security.md).

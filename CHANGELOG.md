@@ -15,8 +15,8 @@ guidelines (`x.y.z`).
   through the Alternative Education Program and Student Transcript examples, both built with MetaEd 4.9.0. On
   an extension with 13 planted defects, the review found 13 with the skill and 8 without it. Deploying to
   the local Ed-Fi API (staging, claims fragments, reset and start) and verifying with API calls, tested with
-  both examples on Ed-Fi API 8.1. The Student Transcript example fails to start as written (its two
-  `additions` map to the same table); the skill explains the cause and how to deploy without it.
+  both examples on Ed-Fi API 8.1. The Student Transcript example fails to start as written (its
+  `ClassRanking` common extension); the skill explains the cause and how to deploy without it.
 - **Spec lookup comparison results** ([`docs/spec-lookup-results.md`](docs/spec-lookup-results.md)) and the
   scripts to repeat it (`eng/spec-lookup-comparison/`). On 29 lookup tasks in Claude Code, the spec skill scored
   100%, tied with keyword search and ahead of no spec help (97%), with five times fewer invented names. GitHub

@@ -114,10 +114,12 @@ build, then Steps 2 to 5 again. The data is lost, so reload it through the API a
 
 ## Known issues
 
-- **Additions to a resource and to a common inside it (Ed-Fi API 8.1.0).** The Student Transcript example
-  extends `StudentAcademicRecord` and its `ClassRanking` common, which is a single object (not a collection).
-  Both extensions map to the same table name, and the start fails with `ddl provision failed`; `ddl emit`
-  shows `An item with the same key has already been added. Key:
-  samplestudenttranscript.StudentAcademicRecordExtension`. Each addition alone deploys. Until the Ed-Fi API
-  fixes it, tell the developer, and model one of the two (for example, put the property on the resource
-  instead of the common) if the extension must deploy now.
+- **Extending a common inside a core resource (Ed-Fi API 8.1.0).** The Student Transcript example extends
+  the `ClassRanking` common of `StudentAcademicRecord`, which is a single object (not a collection). The
+  `common extension EdFi.ClassRanking` property fails on its own, with or without other additions to the
+  resource: the start fails with `ddl provision failed`, and `ddl emit` shows `An item with the same key has
+  already been added. Key: samplestudenttranscript.StudentAcademicRecordExtension`. Without that property,
+  `Common EdFi.ClassRanking additions` builds and deploys but changes nothing: `classRanking` gets no `_ext`,
+  and MetaEd gives no warning. Until the Ed-Fi API fixes it, tell the developer, and put the new properties on
+  the resource instead of the common if the extension must deploy now. Commons that are collections weren't
+  tested.
