@@ -54,6 +54,10 @@ Don't open `index.md` and many resource files "just in case"; open what the task
   resources.** In 6.1 they are no longer in `studentEducationOrganizationAssociations`, `students` or
   `staffs`: use `studentDemographics`, `studentDirectories` (addresses, telephones, email),
   `studentIdentificationCodes`, `staffDemographics`, `staffDirectories` and `staffIdentificationCodes`.
+  Student disabilities, characteristics and `limitedEnglishProficiencyDescriptor` are in `studentDemographics`.
+- **`staffEducationOrganizationContactAssociations` is removed.** Staff contact information for an education
+  organization is in `staffDirectories` (addresses, telephones, email); it has no `contactTitle` or
+  `contactTypeDescriptor`.
 - **TPDM resources are in the `ed-fi` namespace** (`/ed-fi/candidates`, not `/tpdm/candidates`).
 - Resources whose description starts with **EARLY ACCESS** (for example `studentIEPs`) may still change; say
   so when you use one.
