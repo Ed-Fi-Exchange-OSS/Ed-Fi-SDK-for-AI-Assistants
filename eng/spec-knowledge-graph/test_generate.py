@@ -119,6 +119,27 @@ class GenerateTest(unittest.TestCase):
     def test_skips_server_fields(self):
         self.assertNotIn('| `id` |', self.section)
 
+    def test_version_specific_synonyms_apply_only_to_their_version(self):
+        path = os.path.join(self.tmp.name, 'versioned.json')
+        with open(path, 'w', encoding='utf-8') as fh:
+            json.dump({'synonyms': {'class': ['sections']},
+                       'byDataStandard': {'5.2': {'address': ['studentEducationOrganizationAssociations']},
+                                          '6.1': {'address': ['studentDirectories']}}}, fh)
+        self.assertEqual(generate.load_synonyms(path, '6.1'),
+                         {'sections': ['class'], 'studentDirectories': ['address']})
+        self.assertEqual(generate.load_synonyms(path, '5.2')['studentEducationOrganizationAssociations'],
+                         ['address'])
+        self.assertEqual(generate.load_synonyms(path), {'sections': ['class']})
+
+    def test_unknown_version_uses_the_common_synonyms(self):
+        path = os.path.join(self.tmp.name, 'versioned.json')
+        with open(path, 'w', encoding='utf-8') as fh:
+            json.dump({'synonyms': {'class': ['sections']}, 'byDataStandard': {'5.2': {'x': ['y']}}}, fh)
+        self.assertEqual(generate.load_synonyms(path, '6.0'), {'sections': ['class']})
+
+    def test_default_label_names_the_data_standard(self):
+        self.assertIn('# Ed-Fi API resources (Data Standard)', self.index)
+
     def test_load_rejects_non_https_urls(self):
         with self.assertRaises(SystemExit):
             generate.load('http://example.org/swagger.json')
