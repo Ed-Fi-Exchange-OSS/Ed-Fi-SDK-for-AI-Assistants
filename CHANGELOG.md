@@ -8,6 +8,11 @@ guidelines (`x.y.z`).
 
 ### Added
 
+- **`ed-fi-api-spec` skill: Data Standard 6.1**, next to 5.2. The skill tells the assistant to read the host's
+  version from `dataModels` in the Discovery API (or ask the developer) and open that version's index. 6.1 has
+  192 resources (5.2 has 153); student and staff demographics, contact information and identification codes
+  move to their own resources, and TPDM moves into the `ed-fi` namespace. The generator takes
+  `--data-standard` for synonyms that differ by version, such as "address".
 - **`ed-fi-extension-builder` skill:** guidance for extending the Data Standard on Ed-Fi API 8.1 and newer:
   deciding whether an extension is needed, modeling it in MetaEd (new entities, associations, descriptors,
   additions to core resources and common types), running the MetaEd build from the command line, fixing build
@@ -28,6 +33,11 @@ guidelines (`x.y.z`).
   (OneRoster 1.2 Rostering served from an Ed-Fi ODS): tokens from the ODS/API, OneRoster scopes, Discovery,
   paging and rate limits, the `imsx` error format, the scheduled data refresh, and how OneRoster records map
   back to the ODS/API. Includes test prompts.
+
+### Changed
+
+- **`ed-fi-api-spec` skill:** the 5.2 index moved from `references/` to `references/ds-5.2/`. Regenerate any
+  local copy that includes host extensions into the folder of the host's version.
 
 ## 1.0.0 (2026-10-29)
 
