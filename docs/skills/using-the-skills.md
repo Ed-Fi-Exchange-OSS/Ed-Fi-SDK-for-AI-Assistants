@@ -94,14 +94,14 @@ Remove a skill by deleting its folder, or with `npx skills remove <skill-name>`.
 
 ## Include your host's extensions
 
-`ed-fi-api-spec` covers the core Ed-Fi Resources and Descriptors (Data Standard 5.2). Extensions exist only in
-each host's own metadata. To include them, regenerate the skill's content from your host with the generator in
-[`eng/spec-knowledge-graph/`](../../eng/spec-knowledge-graph/README.md), writing the output into your installed
-copy of the skill.
+`ed-fi-api-spec` covers the core Ed-Fi Resources and Descriptors (Data Standard 5.2 and 6.1). Extensions exist
+only in each host's own metadata. To include them, regenerate the skill's content from your host with the
+generator in [`eng/spec-knowledge-graph/`](../../eng/spec-knowledge-graph/README.md), writing the output into
+the folder of your host's version in your installed copy of the skill.
 
 ## Supported versions
 
-- **Ed-Fi APIs:** ODS/API 7.x and Ed-Fi API 8.1 and newer, Data Standard 5.2.
+- **Ed-Fi APIs:** ODS/API 7.x and Ed-Fi API 8.1 and newer, Data Standard 5.2 and 6.1.
 - **Assistants:** verified in Claude Code and GitHub Copilot (VS Code agent mode). The skills follow the
   [Agent Skills](https://agentskills.io) format, so other assistants that support it, such as Codex, can use
   them from their own skills folder.

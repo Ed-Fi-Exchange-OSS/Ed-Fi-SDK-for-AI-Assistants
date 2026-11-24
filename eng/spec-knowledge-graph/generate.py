@@ -11,7 +11,7 @@ It needs only the Python standard library.
 
 Usage:
     python generate.py --resources <file-or-url> --descriptors <file-or-url> --out <dir>
-                       [--synonyms synonyms.json] [--label "ODS/API 7.3, Data Standard 5.2"]
+                       [--data-standard 6.1] [--synonyms synonyms.json] [--label "ODS/API 7.3, Data Standard 6.1"]
 
 Point it at a host's own metadata (e.g. {urls.openApiMetadata}data/v3/resources/swagger.json) to include
 that host's extensions.
@@ -21,6 +21,7 @@ import json
 import os
 import re
 import shutil
+import sys
 import textwrap
 import urllib.request
 
@@ -183,22 +184,43 @@ def resource_file(tag, description, operations, schemas, synonyms):
     return collection, wrap('\n'.join(lines)) + '\n'
 
 
+def load_synonyms(path, data_standard=None):
+    """Map each resource or descriptor type to the terms that should lead to it.
+
+    Terms under "synonyms" apply to every version; terms under "byDataStandard" apply only to that version,
+    because the resource that holds some data changes between versions (addresses moved in Data Standard 6).
+    """
+    if not os.path.exists(path):
+        return {}
+    with open(path, encoding='utf-8') as fh:
+        data = json.load(fh)
+    by_version = data.get('byDataStandard', {})
+    if data_standard and data_standard not in by_version:
+        print(f'Warning: no version-specific synonyms for Data Standard {data_standard} in {path}; '
+              f'using the common ones only', file=sys.stderr)
+    synonyms = {}
+    for group in (data.get('synonyms', {}), by_version.get(data_standard, {})):
+        for term, targets in group.items():
+            for target in targets:
+                synonyms.setdefault(target, []).append(term)
+    return synonyms
+
+
 def main():
     parser = argparse.ArgumentParser(description=__doc__.split('\n\n', 1)[0])
     parser.add_argument('--resources', required=True)
     parser.add_argument('--descriptors', required=True)
     parser.add_argument('--out', required=True)
     parser.add_argument('--synonyms', default=os.path.join(os.path.dirname(__file__), 'synonyms.json'))
-    parser.add_argument('--label', default='Data Standard 5.2')
+    parser.add_argument('--data-standard', help='Data Standard version of the specs, e.g. 6.1; selects the '
+                        'version-specific synonyms')
+    parser.add_argument('--label', help='Shown in the index titles; defaults to "Data Standard <version>"')
     args = parser.parse_args()
+    if not args.label:
+        args.label = f'Data Standard {args.data_standard}' if args.data_standard else 'Data Standard'
 
     resources, descriptors = load(args.resources), load(args.descriptors)
-    synonyms = {}
-    if os.path.exists(args.synonyms):
-        with open(args.synonyms, encoding='utf-8') as fh:
-            for term, targets in json.load(fh).get('synonyms', {}).items():
-                for target in targets:
-                    synonyms.setdefault(target, []).append(term)
+    synonyms = load_synonyms(args.synonyms, args.data_standard)
 
     out_resources = os.path.join(args.out, 'resources')
     if os.path.isdir(out_resources):

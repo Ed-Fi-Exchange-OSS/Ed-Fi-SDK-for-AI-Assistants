@@ -259,7 +259,63 @@ cheaper and 2 to 5 times faster.
 > `programEducationOrganizationId` is now in the natural key of
 > `studentSpecialEducationProgramEligibilityAssociations`; this was not checked against the specification.
 
+## Run 7 · Claude Code and GitHub Copilot, Data Standard 6.1 · 2026-11-18
+
+The skill now has one index per Data Standard version (`references/ds-5.2/` and `references/ds-6.1/`) and
+tells the assistant to pick the one the host reports. New prompts T14–T19 check the version-specific answers;
+T1, T3, T6, T12 and T13 check that the 5.2 answers still hold with the new layout.
+
+- **Harness:** Claude Code (headless, default model) and GitHub Copilot CLI 1.0.105 (headless, model pinned to
+  Claude Sonnet 5.5), fresh session per prompt, working folder outside any project.
+- **Conditions:** *with skill* (`ed-fi-api-spec` in `.claude/skills/` or `.github/skills/`) and *without
+  skill* (empty folder).
+- **Restrictions:** file writes, shell and web access disabled in both conditions.
+- **Skill invocation:** automatic in all 22 *with skill* runs.
+- A first attempt was discarded: its working folders were inside a project whose own instructions the
+  assistant loaded.
+
+### Summary
+
+| Test | Topic | Claude Code with | Claude Code without | Copilot with | Copilot without |
+|---|---|---|---|---|---|
+| T1 | Required fields and references | ✅ | ✅ | ✅ | ✅ |
+| T3 | Parents and guardians (5.2) | ✅ | ❌ `/ed-fi/parents` | ✅ | ❌ `/ed-fi/parents` |
+| T6 | Fields inside a reference | ✅ | ❌ `periodSequence` | ✅ | ❌ `periodSequence` |
+| T12 | Nested collections | ✅ | ✅ | ✅ | ✅ |
+| T13 | Natural key | ✅ | ✅ | ✅ | ✅ |
+| T14 | 6.1: student address | ✅ | ❌ 5.2 resource | ✅ | ❌ 5.2 resource |
+| T15 | 5.2: student address | ✅ | ✅ | ✅ | ✅ |
+| T16 | 6.1: race and ethnicity | ✅ | ❌ 5.2 resource | ✅ | ❌ 5.2 resource |
+| T17 | 6.1: state student ID | ✅ | ❌ 5.2 collection | ✅ | ❌ on `students` |
+| T18 | 6.1: TPDM path | ✅ | ❌ `/tpdm/candidates` | ✅ | ❌ `/ed-fi/teacherCandidates` |
+| T19 | Version not given | ✅ | ❌ 5.2 only | ❌ partial | ❌ 5.2 only |
+| **Total** | | **11 / 11** | **4 / 11** | **10 / 11** | **4 / 11** |
+
+### What the skill changed
+
+- **Without the skill, both assistants answer 6.1 questions with the 5.2 model.** Told the host runs 6.1, they
+  still sent addresses, race and identification codes to `studentEducationOrganizationAssociations` and used
+  `/tpdm/candidates` (Copilot invented `/ed-fi/teacherCandidates`). Several said they were answering from
+  memory and could not confirm 6.1.
+- **With the skill, each 6.1 answer came from the 6.1 folder** (the resource file, or the index line in
+  Copilot's T18) and said the data moved from where it was in 5.2. T15 (5.2) stayed on
+  `studentEducationOrganizationAssociations` and mentioned the 6.1 change.
+- **When the prompt gives no version** (T1, T6, T12, T13, T19), both assistants opened the file in both
+  folders (Copilot searched both with one grep in T12 and T13) and said whether the versions differ. In T19,
+  Claude Code gave both resources and said how to check the version (`dataModels`). Copilot gave both
+  resources but did not say how to check the version or ask for it, so it misses the first key outcome.
+- **One wrong detail with the skill:** Claude Code's T17 says the identification code was "a collection on
+  `students`" in 5.2; it was on `studentEducationOrganizationAssociations`. The 6.1 answer itself is right.
+
+### Context use
+
+Claude Code, T14–T19: *with skill* 112–233 K input tokens per prompt ($0.08–$0.11), *without skill* about 31 K
+($0.03–$0.07; T17 searched the empty folder). Most of the difference is the skill's files, mostly cached. T19
+used the most (233 K), because it searched both indexes. The Copilot CLI doesn't report tokens.
+
 ## Not yet done
 
 - **Codex** (optional, NFR-PORT-1).
-- **GitHub Copilot** for prompts T12-T14
+- **GitHub Copilot** for prompts T12-T14 of the upgrade prompts (Run 6).
+- **A check against a running 6.1 API.** The 6.1 index comes from the ODS/API 7.3 sandbox metadata; no answer
+  was tried against a host.

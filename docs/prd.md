@@ -49,15 +49,23 @@ knowledge, not data.
   this 409 mean?") and how to handle it in code.
 - When I need to find an endpoint or property, I want to avoid loading the entire OpenAPI spec into context
   (see FR-SPEC; experimental).
+- When my host runs a different Data Standard version than the code I start from (5.2 or 6.1), I want my
+  assistant to use the resources and fields of the host's version, so that my writes are not rejected (see
+  FR-DS).
 
 ## 2. System context
 
 - Skills are static files in a Git repository, consumed locally by AI coding harnesses. No hosted service.
 - Target API: Ed-Fi ODS/API 7 and Ed-Fi API 8. Client guidance is largely the same for both; version-specific
   differences (e.g., URL paths, property-name casing, token endpoint, snapshots) are called out where they
-  matter (see NFR-COMP-1). Data Standard 5.2 is the baseline.
+  matter (see NFR-COMP-1).
+- Data Standard: 5.2 and 6.1, side by side. ODS/API 7.3 and Ed-Fi API 8 support both. Moving from 5.2 to 6.1
+  breaks some client code: 6.1 moves student and staff demographics, contact information (addresses,
+  telephones, email) and identification codes out of `students`, `staffs` and
+  `studentEducationOrganizationAssociations` into new resources, and moves the TPDM resources into the
+  `ed-fi` namespace. A host reports its versions in the `dataModels` list of its Discovery API.
 - Development environment: Ed-Fi API 8 with Data Standard 5.2, started using the Ed-Fi Alliance pilot test
-  kit.
+  kit. Data Standard 6.1 is checked against the public ODS/API 7.3 sandbox that runs it.
 
 ## 3. Functional requirements
 
@@ -129,14 +137,30 @@ knowledge, not data.
 - **FR-REL-3:** The release SHALL be a tagged release of the repository.
 - **FR-REL-4:** The repository SHOULD document how to install and use each skill in supported harnesses.
 
+### 3.8 Data Standard versions
+
+- **FR-DS-1:** Skills SHALL support Data Standard 5.2 and 6.1 side by side. Neither version replaces the other.
+- **FR-DS-2:** Before relying on a resource's name or fields, the assistant SHALL check the Data Standard
+  version in the host's Discovery API (`dataModels`). When it can't reach the host, it SHALL ask the developer
+  which version the host runs rather than assume one.
+- **FR-DS-3:** The client skill SHALL call out the changes from 5.2 to 6.1 that break client code, such as
+  writing demographics or addresses to `studentEducationOrganizationAssociations`, and name the 6.1 resources
+  to use instead.
+- **FR-DS-4:** Spec lookup SHALL provide a separate index for each supported Data Standard version, generated
+  from the published Resources and Descriptors specifications, and SHALL direct the assistant to the index
+  that matches the host.
+- **FR-DS-5:** Spec lookup SHOULD mark resources that the specification labels as early access.
+- **FR-DS-6:** Test prompts SHALL include tasks whose correct answer differs between 5.2 and 6.1, run against
+  each version.
+
 ## 4. Non-functional requirements
 
 - **NFR-ACC-1:** Guidance SHALL be consistent with normative Ed-Fi Alliance documentation. Where the source is
   ambiguous, the skill SHALL say so rather than guess.
 - **NFR-TOK-1:** Skills SHALL minimize context use: concise entry files, with detail in separately loaded
   files.
-- **NFR-COMP-1:** Skills SHALL apply to ODS/API 7 and Ed-Fi API 8, with Data Standard 5.2 as the baseline.
-  Version-specific differences SHALL be called out explicitly.
+- **NFR-COMP-1:** Skills SHALL apply to ODS/API 7 and Ed-Fi API 8, with Data Standard 5.2 and 6.1 (see
+  FR-DS). Version-specific differences SHALL be called out explicitly.
 - **NFR-PORT-1:** Skills SHOULD be harness-neutral, following the Agent Skills format, and SHOULD work in
   other harnesses (e.g., Codex, Cursor) without modification.
 - **NFR-SEC-1:** Skills and examples SHALL NOT contain real credentials. Guidance SHALL recommend secure
@@ -166,6 +190,8 @@ user data is processed.
   API host providers.
 - Domain-specific overlays (assessments, gradebook): deferred to 2027.
 - Composite and extension specifications in spec lookup.
+- Data Standard versions other than 5.2 and 6.1 (for example 4.0 and 6.0). The client skill may still name
+  older resource names that assistants confuse with current ones.
 - Data Standard Extension Builder skills: a separate product for API host providers, with its own PRD
   ([prd-extensions.md](prd-extensions.md)).
 - Semantic layer / data MCP server: belongs in a separate product.
@@ -186,6 +212,8 @@ user data is processed.
 - **Progressive disclosure:** Loading a short base skill first, and detailed files only as needed.
 - **MCP:** Model Context Protocol, a server-based mechanism for giving AI tools context or data.
 - **Descriptor:** Ed-Fi Data Standard code-list type resolved by URI.
+- **Discovery API:** The root endpoint of an Ed-Fi API. It reports the API version, the Data Standard version
+  of each data model (`dataModels`) and the URLs of the other endpoints.
 - **Change queries:** ODS/API mechanism for retrieving changes since a version.
 - **AMT:** Analytics Middle Tier, views that flatten Ed-Fi data for analytics.
 - **IIA:** Texas's _Insight to Impact Application_ project from which the performance evaluation domain
