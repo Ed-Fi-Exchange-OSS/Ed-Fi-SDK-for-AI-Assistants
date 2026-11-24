@@ -4,7 +4,7 @@
 
 The demographic information associated to a student.
 
-Also searched as: race.
+Also searched as: race, disability, student characteristic, English proficiency.
 
 ## Natural key
 

@@ -4,7 +4,7 @@
 
 The contact information associated to a staff member.
 
-Also searched as: address, phone.
+Also searched as: address, phone, staff contact.
 
 ## Natural key
 

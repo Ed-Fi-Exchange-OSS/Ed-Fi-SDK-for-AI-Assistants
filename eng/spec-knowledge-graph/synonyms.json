@@ -22,6 +22,10 @@
       "address": ["studentDirectories", "staffDirectories", "contacts"],
       "phone": ["studentDirectories", "staffDirectories"],
       "race": ["studentDemographics", "staffDemographics"],
+      "disability": ["studentDemographics"],
+      "student characteristic": ["studentDemographics"],
+      "English proficiency": ["studentDemographics"],
+      "staff contact": ["staffDirectories"],
       "student ID": ["studentIdentificationCodes"]
     }
   }

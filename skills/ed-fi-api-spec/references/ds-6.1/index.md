@@ -123,7 +123,7 @@ One line per resource: name, collection path and description. Search this file f
 - [staffAbsenceEvents](resources/staffAbsenceEvents.md) `/ed-fi/staffAbsenceEvents`: This event entity represents the recording of the dates of staff absence.
 - [staffCohortAssociations](resources/staffCohortAssociations.md) `/ed-fi/staffCohortAssociations`: This association indicates the staff associated with a cohort of students.
 - [staffDemographics](resources/staffDemographics.md) `/ed-fi/staffDemographics`: The demographic information associated to a Staff member Also: race.
-- [staffDirectories](resources/staffDirectories.md) `/ed-fi/staffDirectories`: The contact information associated to a staff member. Also: address, phone.
+- [staffDirectories](resources/staffDirectories.md) `/ed-fi/staffDirectories`: The contact information associated to a staff member. Also: address, phone, staff contact.
 - [staffDisciplineIncidentAssociations](resources/staffDisciplineIncidentAssociations.md) `/ed-fi/staffDisciplineIncidentAssociations`: This association indicates those staff who were victims, perpetrators, witnesses, and reporters for a discipline incident.
 - [staffEducationOrganizationAssignmentAssociations](resources/staffEducationOrganizationAssignmentAssociations.md) `/ed-fi/staffEducationOrganizationAssignmentAssociations`: This association indicates the education organization to which a staff member provides services.
 - [staffEducationOrganizationEmploymentAssociations](resources/staffEducationOrganizationEmploymentAssociations.md) `/ed-fi/staffEducationOrganizationEmploymentAssociations`: This association indicates the education organization an employee, contractor, volunteer, or other service provider is formally associated…
@@ -144,7 +144,7 @@ One line per resource: name, collection path and description. Search this file f
 - [studentCohortAssociations](resources/studentCohortAssociations.md) `/ed-fi/studentCohortAssociations`: This association represents the cohort(s) for which a student is designated.
 - [studentCompetencyObjectives](resources/studentCompetencyObjectives.md) `/ed-fi/studentCompetencyObjectives`: This entity represents the competency assessed or evaluated for the student against a specific competency objective.
 - [studentContactAssociations](resources/studentContactAssociations.md) `/ed-fi/studentContactAssociations`: This association relates students to their parents, guardians, or caretakers. Also: parent, guardian.
-- [studentDemographics](resources/studentDemographics.md) `/ed-fi/studentDemographics`: The demographic information associated to a student. Also: race.
+- [studentDemographics](resources/studentDemographics.md) `/ed-fi/studentDemographics`: The demographic information associated to a student. Also: race, disability, student characteristic, English proficiency.
 - [studentDirectories](resources/studentDirectories.md) `/ed-fi/studentDirectories`: The contact information associated to a student. Also: address, phone.
 - [studentDisciplineIncidentBehaviorAssociations](resources/studentDisciplineIncidentBehaviorAssociations.md) `/ed-fi/studentDisciplineIncidentBehaviorAssociations`: This association describes the behavior of students involved in a discipline incident.
 - [studentDisciplineIncidentNonOffenderAssociations](resources/studentDisciplineIncidentNonOffenderAssociations.md) `/ed-fi/studentDisciplineIncidentNonOffenderAssociations`: This association indicates those students who were involved and not perpetrators for a discipline incident.
