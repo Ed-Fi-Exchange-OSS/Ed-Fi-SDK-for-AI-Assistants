@@ -192,7 +192,8 @@ user data is processed.
 - Composite and extension specifications in spec lookup.
 - Data Standard versions other than 5.2 and 6.1 (for example 4.0 and 6.0). The client skill may still name
   older resource names that assistants confuse with current ones.
-- Data Standard Extension Builder skills: belong in a separate product for API host providers.
+- Data Standard Extension Builder skills: a separate product for API host providers, with its own PRD
+  ([prd-extensions.md](prd-extensions.md)).
 - Semantic layer / data MCP server: belongs in a separate product.
 - Community contribution and governance process (target Q1 2027).
 - Remote or hosted servers.
