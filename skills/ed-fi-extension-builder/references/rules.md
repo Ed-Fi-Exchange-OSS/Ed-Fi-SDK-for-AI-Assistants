@@ -30,8 +30,9 @@ Levels: **Required** rules are blocking; **Preferred** rules are suggestions. Ea
   Values are data, loaded into the descriptor through the API.
 - **CORE-5 (Preferred): Additions to core resources are optional.** *Detect:* `is required` (or
   `is required collection`) on a property in `Domain Entity EdFi.X additions` or `Association EdFi.X
-  additions`. Reason: a required addition asks every client that writes the core resource for the extension's
-  data, including clients that don't know the extension. If it must be required, say so in the documentation.
+  additions`. Reason: Ed-Fi API 8.1 doesn't enforce it. A write to the core resource without `_ext` succeeds
+  and stores no value, so `is required` promises data that may not be there. If the value must always be
+  present, the clients that write it have to check it.
 
 ## Project
 

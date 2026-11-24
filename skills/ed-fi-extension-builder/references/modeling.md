@@ -46,7 +46,7 @@ MyExtension/
 | A specialization of a core domain entity | `Domain Entity X based on EdFi.Y` | |
 | A new code set | `Descriptor X` (the values are data, loaded through the API) | `AlternativeEducationEligibilityReason` |
 | New fields on a core resource | `Domain Entity EdFi.Y additions` or `Association EdFi.Y additions` | `EdFi.StudentAcademicRecord additions` |
-| New fields on a core common type | `Common EdFi.Y additions`, plus `common extension EdFi.Y` in the additions of the entity that uses it | `EdFi.ClassRanking additions` |
+| New fields on a core common type | `Common EdFi.Y additions`, plus `common extension EdFi.Y` in the additions of the entity that uses it (doesn't deploy on Ed-Fi API 8.1.0; see [Known issues](deploy.md#known-issues)) | `EdFi.ClassRanking additions` |
 | A group of properties reused by several entities | `Common X` | |
 
 `additions` keeps the core resource and adds the new properties under `_ext`, in an object named after the
