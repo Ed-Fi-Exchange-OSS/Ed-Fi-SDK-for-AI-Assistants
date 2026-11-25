@@ -11,7 +11,8 @@ skill taken from a git ref.
 
 Usage:
     python run_prompts.py --out <dir> [--assistant claude|copilot] [--conditions with,without]
-                          [--tasks T1,T2] [--skill-ref HEAD] [--model <name>] [--parallel 4]
+                          [--tasks T1,T2] [--skill-ref HEAD] [--extra-skills ed-fi-api-spec] [--model <name>]
+                          [--parallel 4]
 
 Answers go to <out>/<assistant>/<condition>/<task>.md, and one line per run to <out>/runs.jsonl.
 """
@@ -72,7 +73,8 @@ def setup(assistant, cond, args):
         shutil.rmtree(work)
     shutil.copytree(FIXTURES, work)
     if cond == 'with':
-        data = subprocess.run(['git', '-C', REPO, 'archive', args.skill_ref, f'skills/{SKILL}'],
+        names = [SKILL] + [n for n in args.extra_skills.split(',') if n]
+        data = subprocess.run(['git', '-C', REPO, 'archive', args.skill_ref] + [f'skills/{n}' for n in names],
                               capture_output=True, check=True).stdout
         with tarfile.open(fileobj=io.BytesIO(data)) as tar:
             tar.extractall(os.path.join(work, SKILLS_DIR[assistant]), filter='data')
@@ -160,6 +162,7 @@ def main():
     ap.add_argument('--conditions', default='with,without')
     ap.add_argument('--tasks', default='')
     ap.add_argument('--skill-ref', default='HEAD')
+    ap.add_argument('--extra-skills', default='', help='other skills to install in the "with" condition')
     ap.add_argument('--model', default='')
     ap.add_argument('--parallel', type=int, default=4)
     args = ap.parse_args()

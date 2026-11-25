@@ -25,6 +25,7 @@ python eng/extension-test-prompts/run_prompts.py --out ../ext-runs-copilot --ass
 ```
 
 - `--tasks T4,T11` runs some prompts only; `--conditions with` runs one condition.
+- `--extra-skills ed-fi-api-spec` installs other skills next to the extension builder in the *with* condition.
 - Put `--out` outside the repository, so the sessions don't read the repository's files.
 - Answers go to `<out>/<assistant>/<condition>/<task>.md`, with the model, skills, tools and files each run
   used; `<out>/runs.jsonl` has one line per run.
