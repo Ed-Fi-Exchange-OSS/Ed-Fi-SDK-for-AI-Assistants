@@ -1,0 +1,10 @@
+Domain Entity Staff
+    documentation "A staff record for a bus driver."
+    string StaffUniqueId
+        documentation "The identifier of the staff member."
+        is part of identity
+        max length 32
+    string DriverLicenseNumber
+        documentation "The driver's license number."
+        is required
+        max length 20
