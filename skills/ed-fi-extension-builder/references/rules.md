@@ -60,7 +60,9 @@ Levels: **Required** rules are blocking; **Preferred** rules are suggestions. Ea
 ## Identity
 
 - **KEY-1 (Required): Every new domain entity has an identity**, made of values that don't change for the
-  record. The build fails without one; review whether the chosen properties are stable.
+  record. The build fails without one; review whether the chosen properties are stable. An association needs
+  no `is part of identity` on its two entity references: they are its identity already. Don't report them as
+  missing.
 - **KEY-2 (Preferred): In entities about a student, the `Student` reference comes first.**
 - **KEY-3 (Preferred): `required` and `optional` fit the data.** A value that every record has is
   `is required`; don't make a property required only because it is usually present.

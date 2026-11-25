@@ -1,6 +1,6 @@
 ---
 name: ed-fi-extension-builder
-description: Guidance for extending the Ed-Fi Data Standard on an Ed-Fi API 8.1 or later host with MetaEd. Covers deciding whether an extension is needed, modeling it in MetaEd (new domain entities, associations based on core associations, descriptors, additions to core resources and common types, references to core entities), running the MetaEd build from the command line, explaining and fixing build errors, deploying the extension to a local Ed-Fi API with a claims fragment, verifying it with API calls, and reviewing extension source against Ed-Fi modeling rules. Use whenever a task mentions a Data Standard extension, MetaEd, .metaed files, ApiSchema-EXTENSION.json, _ext properties, or adding resources or fields to an Ed-Fi API.
+description: Guidance for extending the Ed-Fi Data Standard on an Ed-Fi API 8.1 or later host with MetaEd. Covers deciding whether an extension is needed, modeling it in MetaEd (new domain entities, associations based on core associations, descriptors, additions to core resources and common types, references to core entities), running the MetaEd build from the command line, explaining and fixing build errors, deploying the extension to a local Ed-Fi API with a claims fragment, verifying it with API calls, and reviewing extension source against Ed-Fi modeling rules. Use whenever a task mentions a Data Standard extension, MetaEd, .metaed files (including MetaEd source pasted into the chat), a MetaEd build error, ApiSchema-EXTENSION.json, _ext properties, or adding resources or fields to an Ed-Fi API.
 ---
 
 # Ed-Fi Data Standard Extension Builder
@@ -39,6 +39,12 @@ say to avoid them where possible. Before modeling, check with the developer:
 - Is it an aggregate (a count, a total)? Collect the underlying records instead.
 - Will an upcoming Data Standard release cover it?
 
+Check the core model before writing any `.metaed` file: with the `ed-fi-api-spec` skill if it is installed, or
+by searching the core model's `.metaed` files (for example in `node_modules/@edfi/ed-fi-model-5.2` of the
+build folder). Data Standard 5.x added areas that older models lack, such as student transportation, health
+and immunizations, so don't rely on memory. If you can't check, say so and ask the developer to confirm before
+you model anything.
+
 If an extension is still needed, say which kind fits (see the table in
 [references/modeling.md](references/modeling.md#choose-the-kind-of-extension)) and why.
 
@@ -62,12 +68,16 @@ If an extension is still needed, say which kind fits (see the table in
    with `additions` in the extension project instead.
 2. Prefix every core entity, common, descriptor or shared type with `EdFi.`; names defined in the extension
    project need no prefix.
-3. Don't mark properties `is part of identity` in `additions` or in a subclass; MetaEd doesn't allow it.
-4. Give every entity and property a `documentation` string that says what it means, in plain words.
-5. Run the build after every change, and fix errors before any deployment step.
-6. Ask the developer before accepting the Ed-Fi license for them, before changing their `.metaed` files to fix
+3. Don't mark properties `is part of identity` in `additions` or in a subclass; MetaEd doesn't allow it. An
+   association's two entity references are already its identity.
+4. Give every `string` a `max length`, and every `decimal` its `total digits` and `decimal places`; the build
+   fails without them. MetaEd 4.x files have no `Namespace` block: the project's `package.json` sets the
+   namespace.
+5. Give every entity and property a `documentation` string that says what it means, in plain words.
+6. Run the build after every change, and fix errors before any deployment step.
+7. Ask the developer before accepting the Ed-Fi license for them, before changing their `.metaed` files to fix
    an error, and before any step that deletes databases.
-7. Treat an installed extension as fixed: changing it needs a new database and reloading the data through the
+8. Treat an installed extension as fixed: changing it needs a new database and reloading the data through the
    API.
 
 ## Further reading
