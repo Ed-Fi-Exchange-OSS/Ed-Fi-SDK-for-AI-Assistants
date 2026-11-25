@@ -8,10 +8,12 @@ The steps are the same for every skill; replace the skill name in the commands.
 | `ed-fi-api-client` | Writing, reviewing or debugging code that calls an Ed-Fi API: authentication, push and pull integrations, error diagnosis |
 | `ed-fi-api-spec` | Finding the right Ed-Fi resource, its required fields, references and endpoints without loading the OpenAPI specification |
 | `ed-fi-oneroster-client` | Writing or debugging code that reads rostering data from the Ed-Fi OneRoster API: tokens and scopes, paging, data freshness, mapping back to the ODS/API |
+| `ed-fi-extension-builder` | Extending the Data Standard on Ed-Fi API 8.1 and newer: modeling in MetaEd, building from the command line, deploying to a local Ed-Fi API, verifying, and reviewing extension source |
 
 `ed-fi-api-client` and `ed-fi-api-spec` work well together: install both, and `ed-fi-api-client` uses
 `ed-fi-api-spec` to look up resources and fields. Add `ed-fi-oneroster-client` if you read rosters through
-the Ed-Fi OneRoster API.
+the Ed-Fi OneRoster API. Install `ed-fi-extension-builder` if you host an Ed-Fi API and add extensions to it;
+with `ed-fi-api-spec` installed too, it checks whether the core model already has what you need.
 
 ## Install
 
@@ -69,6 +71,9 @@ For example:
 - "We get a 409 when posting a studentSchoolAssociation. What's wrong?"
 - "Which Ed-Fi resource holds daily attendance, and which fields are required?"
 - "Our OneRoster users feed shows the same student twice. Why?"
+- "We need to record why students were referred to our mentoring program. Write the MetaEd extension."
+- "Build the extension in `./SampleMentoring` and deploy it to our local Ed-Fi API 8.1."
+- "Review the MetaEd extension in `./BusRoutes` before we deploy it."
 
 **Check that the skill was used.** Claude Code shows a **Skill** step for `ed-fi-api-client` before it
 answers. Copilot shows "Read skill `ed-fi-api-client`" at the top of its answer, followed by the reference
@@ -81,6 +86,13 @@ added to your request directly, so no separate Skill step appears.
 
 **In Copilot agent mode**, the assistant may try to run changes against an API instead of answering. Say so
 when you only want an answer, for example "show me the HTTP requests; don't run anything".
+
+**`ed-fi-extension-builder` runs tools on your machine.** Building needs Node.js and the MetaEd packages from
+the Ed-Fi package feed; deploying needs the local Ed-Fi API stack from the
+[Data Management Service](https://github.com/Ed-Fi-Alliance-OSS/Data-Management-Service) repository (Docker,
+PowerShell 7 and the .NET 10 SDK). The skill tells the assistant to ask you before it accepts the Ed-Fi
+License Agreement for the MetaEd build, before it changes your `.metaed` files, and before any step that
+deletes the stack's databases.
 
 ## Keep skills up to date
 
@@ -102,6 +114,8 @@ the folder of your host's version in your installed copy of the skill.
 ## Supported versions
 
 - **Ed-Fi APIs:** ODS/API 7.x and Ed-Fi API 8.1 and newer, Data Standard 5.2 and 6.1.
+  `ed-fi-extension-builder` covers Ed-Fi API 8.1 and newer only, with MetaEd 4.9 and Data Standard 5.2;
+  ODS/API 7.x deploys extensions differently.
 - **Assistants:** verified in Claude Code and GitHub Copilot (VS Code agent mode). The skills follow the
   [Agent Skills](https://agentskills.io) format, so other assistants that support it, such as Codex, can use
   them from their own skills folder.
