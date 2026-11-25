@@ -25,7 +25,7 @@ review (T11) and hosts the skill doesn't cover (T12). T11 needs the `BusRoutes` 
 
 **Expected outcomes:**
 
-1. **(key)** Says the core model already covers it: `StudentTransportation` (Data Standard 5.0 and later),
+1. **(key)** Says the core model already covers it: `StudentTransportation` (Data Standard 5.1 and later),
    with `transportationPublicExpenseEligibilityTypeDescriptor` and the `studentBusDetails` collection
    (`busNumber`, `busRouteDescriptor`).
 2. **(key)** Recommends using the core resource, `/ed-fi/studentTransportations`, instead of writing an
