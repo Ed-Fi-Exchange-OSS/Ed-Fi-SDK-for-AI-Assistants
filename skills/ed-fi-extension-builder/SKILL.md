@@ -1,6 +1,6 @@
 ---
 name: ed-fi-extension-builder
-description: Guidance for extending the Ed-Fi Data Standard on an Ed-Fi API 8.1 or later host with MetaEd. Covers deciding whether an extension is needed, modeling it in MetaEd (new domain entities, associations based on core associations, descriptors, additions to core resources and common types, references to core entities), running the MetaEd build from the command line, explaining and fixing build errors, deploying the extension to a local Ed-Fi API with a claims fragment, verifying it with API calls, and reviewing extension source against Ed-Fi modeling rules. Use whenever a task mentions a Data Standard extension, MetaEd, .metaed files (including MetaEd source pasted into the chat), a MetaEd build error, ApiSchema-EXTENSION.json, _ext properties, or adding resources or fields to an Ed-Fi API.
+description: Guidance for extending the Ed-Fi Data Standard on an Ed-Fi API 8.1 or later host with MetaEd. Covers deciding whether an extension is needed, modeling it in MetaEd (new domain entities, associations based on core associations, descriptors, additions to core resources and common types, references to core entities), running the MetaEd build from the command line, explaining and fixing build errors, deploying the extension to a local Ed-Fi API with a claims fragment, and verifying it with API calls. Use whenever a task mentions a Data Standard extension, MetaEd, .metaed files (including MetaEd source pasted into the chat), a MetaEd build error, ApiSchema-EXTENSION.json, _ext properties, or adding resources or fields to an Ed-Fi API.
 ---
 
 # Ed-Fi Data Standard Extension Builder
@@ -11,7 +11,8 @@ and the MetaEd build turns it into `ApiSchema-EXTENSION.json`, the file the Ed-F
 
 This skill targets **Ed-Fi API 8.1 and later**, with **MetaEd 4.9 or later** and **Data Standard 5.2**. ODS/API
 7.x extensions use a different deployment (a C# extension project, SQL claims scripts, `initdev`); don't apply
-those steps to Ed-Fi API 8.
+those steps to Ed-Fi API 8. To review existing extension source or a pull request, use the
+`ed-fi-extension-review` skill; it applies the same [rules](references/rules.md).
 
 ## The flow
 
@@ -57,7 +58,6 @@ If an extension is still needed, say which kind fits (see the table in
 | Staging the schemas, resetting and starting the local Ed-Fi API, ports, deployment errors | [references/deploy.md](references/deploy.md) |
 | Claims fragments, claim names, which claim sets get access, descriptor namespaces | [references/security.md](references/security.md) |
 | Checking a deployed extension, API clients, reading `403`, `404`, `409` responses | [references/verify.md](references/verify.md) |
-| Reviewing or checking existing extension source (`.metaed` files, a pull request) | [references/review.md](references/review.md) |
 | The modeling rules, by ID | [references/rules.md](references/rules.md) |
 | A new resource and descriptor, worked end to end | [references/examples/alternative-education-program.md](references/examples/alternative-education-program.md) |
 | Properties added to a core resource and common type, worked end to end | [references/examples/student-transcript.md](references/examples/student-transcript.md) |

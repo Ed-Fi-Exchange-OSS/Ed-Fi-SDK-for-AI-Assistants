@@ -99,7 +99,8 @@ case sensitive. Without the prefix, MetaEd looks for the name in the extension p
 
 ## Rules
 
-Follow the [extension modeling rules](rules.md) while writing; the review uses the same ones. In short:
+Follow the [extension modeling rules](rules.md) while writing; the `ed-fi-extension-review` skill uses the same
+ones. In short:
 
 - Don't change the core model or duplicate it, and use `EdFi.` for core names (CORE-1 to CORE-3). An
   extension can't remove, rename or change the identity of core entities and properties.

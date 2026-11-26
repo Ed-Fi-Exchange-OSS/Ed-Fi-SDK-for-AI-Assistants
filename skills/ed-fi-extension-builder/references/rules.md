@@ -1,7 +1,8 @@
 # Extension modeling rules
 
-Rules for MetaEd extension source, used both to write an extension ([modeling.md](modeling.md)) and to review
-one ([review.md](review.md)). They adapt the Ed-Fi-Model review checklist (`review-model-pr` in
+Rules for MetaEd extension source, used both to write an extension (the `ed-fi-extension-builder` skill) and
+to review one (the `ed-fi-extension-review` skill). Both skills carry this same file. The rules adapt the
+Ed-Fi-Model review checklist (`review-model-pr` in
 [AI-Tools-for-Ed-Fi-SDLC](https://github.com/Ed-Fi-Alliance-OSS/AI-Tools-for-Ed-Fi-SDLC)) to extensions, and
 add checks that only apply to extensions.
 
