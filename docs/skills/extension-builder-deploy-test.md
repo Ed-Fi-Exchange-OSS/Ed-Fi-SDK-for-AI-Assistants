@@ -61,6 +61,21 @@ Other observations:
 - `EdFiSandbox` can't create `schoolYearTypes` (`403`); a client with `EdFiAPIPublisherWriter` did.
 - A second `Get-SmokeTestCredential` call with the default vendor and application names fails with `400`.
 
+## Provisioning for a host (2026-11-26)
+
+`api-schema-tools ddl provision`, as in [deploy-host.md](../../skills/ed-fi-extension-builder/references/deploy-host.md),
+with the Data Standard 6.1 core and the three extensions built for 6.1, against a new PostgreSQL database on the
+test stack's server:
+
+| Check | Result |
+|---|---|
+| Provision a new database (`--create-database`) | ✅ `Provisioning complete`, 481 resource keys |
+| Same command again | ✅ No change, same effective schema hash |
+| Core and one extension on the same database | ❌ As expected: `dms.EffectiveSchema validation failed: EffectiveSchemaHash: stored=..., expected=...` |
+| `api-schema-tools hash` with the same files | ✅ Same hash as the database and as the local stack's staging |
+
+The API wasn't started against this database, and the claims settings for a host weren't tested.
+
 ## Changes from this test
 
 - Rule CORE-5 now says that Ed-Fi API 8.1 doesn't enforce required additions (results 14 and 15). The earlier

@@ -1,6 +1,6 @@
 ---
 name: ed-fi-extension-builder
-description: Guidance for extending the Ed-Fi Data Standard on an Ed-Fi API 8.1 or later host with MetaEd. Covers deciding whether an extension is needed, modeling it in MetaEd (new domain entities, associations based on core associations, descriptors, additions to core resources and common types, references to core entities), running the MetaEd build from the command line, explaining and fixing build errors, deploying the extension to a local Ed-Fi API with a claims fragment, and verifying it with API calls. Use whenever a task mentions a Data Standard extension, MetaEd, .metaed files (including MetaEd source pasted into the chat), a MetaEd build error, ApiSchema-EXTENSION.json, _ext properties, or adding resources or fields to an Ed-Fi API.
+description: Guidance for extending the Ed-Fi Data Standard on an Ed-Fi API 8.1 or later host with MetaEd. Covers deciding whether an extension is needed, modeling it in MetaEd (new domain entities, associations based on core associations, descriptors, additions to core resources and common types, references to core entities), running the MetaEd build from the command line, explaining and fixing build errors, deploying the extension with a claims fragment to a local Ed-Fi API or to a host's own environment, and verifying it with API calls. Use whenever a task mentions a Data Standard extension, MetaEd, .metaed files (including MetaEd source pasted into the chat), a MetaEd build error, ApiSchema-EXTENSION.json, _ext properties, or adding resources or fields to an Ed-Fi API.
 ---
 
 # Ed-Fi Data Standard Extension Builder
@@ -23,7 +23,8 @@ those steps to Ed-Fi API 8. To review existing extension source or a pull reques
    [references/security.md](references/security.md). Core resources that only get `additions` need no new
    claims.
 5. **Deploy**: stage the core and extension schemas and the claims, and start the API on a clean database:
-   [references/deploy.md](references/deploy.md).
+   [references/deploy.md](references/deploy.md) for the local stack, or
+   [references/deploy-host.md](references/deploy-host.md) for a server, containers or a cloud deployment.
 6. **Verify** with Discovery and authenticated calls to the new resources and the `_ext` properties:
    [references/verify.md](references/verify.md).
 
@@ -56,6 +57,7 @@ If an extension is still needed, say which kind fits (see the table in
 | New project, `package.json`, choosing the kind of extension, writing `.metaed` files, identity, naming | [references/modeling.md](references/modeling.md) |
 | Installing MetaEd for the command line, running the build, reading errors, finding the output | [references/build.md](references/build.md) |
 | Staging the schemas, resetting and starting the local Ed-Fi API, ports, deployment errors | [references/deploy.md](references/deploy.md) |
+| Deploying to a host's own environment: the schema manifest, `api-schema-tools ddl provision`, claims settings | [references/deploy-host.md](references/deploy-host.md) |
 | Claims fragments, claim names, which claim sets get access, descriptor namespaces | [references/security.md](references/security.md) |
 | Checking a deployed extension, API clients, reading `403`, `404`, `409` responses | [references/verify.md](references/verify.md) |
 | The modeling rules, by ID | [references/rules.md](references/rules.md) |

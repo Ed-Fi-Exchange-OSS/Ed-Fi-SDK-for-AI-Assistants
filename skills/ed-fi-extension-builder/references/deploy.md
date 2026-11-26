@@ -6,9 +6,9 @@ Steps 4 to 6 of the how-to guides; claims are in [security.md](security.md) and 
 [verify.md](verify.md). Tested on 2026-11-23 with the repository's `main` branch (8.1 line), PowerShell 7 and
 Docker Desktop.
 
-A host that doesn't run the local stack (a hosted or packaged Ed-Fi API) loads the same two inputs, the
-staged schemas and a claims fragment, through its own deployment. Ask the developer how their host is
-deployed before giving these commands.
+A host that doesn't run the local stack (a server, containers from the published images, a cloud deployment)
+loads the same inputs with its own settings: see [deploy-host.md](deploy-host.md). Ask the developer how their
+host is deployed before giving these commands.
 
 ## Before you start
 
