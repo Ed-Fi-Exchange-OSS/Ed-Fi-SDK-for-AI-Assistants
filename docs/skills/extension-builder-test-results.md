@@ -94,6 +94,17 @@ With the fixes, the *with skill* runs pass 11 of 12 prompts in each harness, and
 `ed-fi-api-spec` installed (the other prompts weren't run with it). The *without skill* runs weren't
 repeated, since nothing changed for them.
 
+## Review as a separate skill (T11, 2026-11-26)
+
+The review moved to the `ed-fi-extension-review` skill. T11 ran again in the *with skill* condition, with both
+skills installed (`--extra-skills ed-fi-extension-review`). Both assistants loaded the review skill, not the
+builder.
+
+| Run | Claude Code | Copilot | Notes |
+|---|---|---|---|
+| First | ✅ 13/13 | ❌ 12/13 | Copilot missed the undeclared `BusEligibility` (key outcome 2); it couldn't run the build and didn't look for the errors the build would give |
+| After the fix to `review.md` | not rerun | ✅ 13/13, twice | `review.md` now says to check, when the build can't run, that every referenced name is declared |
+
 ## Not tested yet
 
 - The MetaEd build and the Ed-Fi API from the assistant's own output: the assistants couldn't run tools here.
