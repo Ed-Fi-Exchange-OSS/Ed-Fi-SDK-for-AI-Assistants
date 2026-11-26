@@ -8,7 +8,7 @@
     "check:shared": "node eng/check-shared-files.mjs"
   },
   "devDependencies": {
-    "markdownlint-cli2": "0.24.0"
+    "markdownlint-cli2": "0.24.2"
   },
   "overrides": {
     "katex": "0.18.2",
