@@ -1,0 +1,16 @@
+Domain Entity BusRoutes
+    documentation "BusRoutes"
+    string RouteNumber
+        documentation "Teh number of the route."
+        is part of identity
+        max length 20
+    domain entity EdFi.School
+        documentation "The school the route serves."
+        is part of identity
+    descriptor BusTypeDescriptor
+        documentation "The type of bus."
+        is required
+    integer SeatCount
+        documentation "The number of seats on the bus."
+        is required
+        is queryable field

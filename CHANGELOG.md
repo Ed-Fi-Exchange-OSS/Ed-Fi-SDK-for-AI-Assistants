@@ -21,7 +21,11 @@ guidelines (`x.y.z`).
   an extension with 13 planted defects, the review found 13 with the skill and 8 without it. Deploying to
   the local Ed-Fi API (staging, claims fragments, reset and start) and verifying with API calls, tested with
   both examples on Ed-Fi API 8.1. The Student Transcript example fails to start as written (its
-  `ClassRanking` common extension); the skill explains the cause and how to deploy without it.
+  `ClassRanking` common extension); the skill explains the cause and how to deploy without it. On 12 test
+  prompts, 10 passed with the skill and 3 without it in Claude Code, and 10 and 2 in GitHub Copilot; after
+  fixes to the skill, 11 passed in each, and the twelfth passed with `ed-fi-api-spec` installed too
+  ([results](docs/skills/extension-builder-test-results.md)). Installation and usage are in
+  [Installing and using the Ed-Fi SDK for AI](docs/skills/using-the-skills.md).
 - **Spec lookup comparison results** ([`docs/spec-lookup-results.md`](docs/spec-lookup-results.md)) and the
   scripts to repeat it (`eng/spec-lookup-comparison/`). On 29 lookup tasks in Claude Code, the spec skill scored
   100%, tied with keyword search and ahead of no spec help (97%), with five times fewer invented names. GitHub

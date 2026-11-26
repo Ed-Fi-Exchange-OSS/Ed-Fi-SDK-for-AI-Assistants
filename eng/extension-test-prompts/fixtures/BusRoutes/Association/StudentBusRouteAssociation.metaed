@@ -1,0 +1,9 @@
+Association StudentBusRouteAssociation
+    documentation "This association links a student record to a bus route."
+    domain entity BusRoutes
+        documentation "The bus route."
+    domain entity EdFi.Student
+        documentation "The student who rides the route."
+    descriptor GradeLevel
+        documentation "The grade level of the student when assigned to the route."
+        is required

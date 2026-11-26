@@ -1,0 +1,2 @@
+Descriptor BusTypeDescriptor
+    documentation "The type of bus. Examples include: Value1, Value2."

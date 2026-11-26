@@ -10,6 +10,9 @@ The [`skills/`](skills/README.md) folder holds [Agent Skills](https://agentskill
 assistants such as Claude Code and GitHub Copilot accurate, Ed-Fi-specific guidance. See
 [Installing and using the Ed-Fi SDK for AI](docs/skills/using-the-skills.md) to get started.
 
+- **For API client developers:** `ed-fi-api-client`, `ed-fi-api-spec` and `ed-fi-oneroster-client`.
+- **For API hosts that extend the Data Standard:** `ed-fi-extension-builder`, for Ed-Fi API 8.1 and newer.
+
 ## License
 
 Copyright (c) 2026, Ed-Fi Alliance, LLC. All rights reserved.

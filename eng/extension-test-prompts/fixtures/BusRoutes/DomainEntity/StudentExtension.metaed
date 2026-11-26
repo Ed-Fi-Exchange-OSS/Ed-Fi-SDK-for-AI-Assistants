@@ -1,0 +1,10 @@
+Domain Entity EdFi.Student additions
+    descriptor BusEligibility
+        documentation "Whether the student is eligible for bus transportation."
+        is required
+    date LanguageBeginDate
+        documentation "The date the student began speaking the home language."
+        is optional
+    date LanguageEndDate
+        documentation "The date the student stopped speaking the home language."
+        is optional

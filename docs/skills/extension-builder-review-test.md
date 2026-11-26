@@ -118,6 +118,7 @@ Other findings:
 
 ## Not tested yet
 
-- GitHub Copilot.
+- GitHub Copilot with the build tools. The [test prompts](extension-builder-test-prompts.md) (T11) ran this
+  review read-only in Claude Code and GitHub Copilot: 13/13 in both after the fixes.
 - Repeated runs; each condition ran once.
 - Extensions larger than this one, and review of a pull request diff.
