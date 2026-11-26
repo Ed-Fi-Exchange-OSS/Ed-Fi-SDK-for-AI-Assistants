@@ -103,7 +103,7 @@ builder.
 | Run | Claude Code | Copilot | Notes |
 |---|---|---|---|
 | First | ✅ 13/13 | ❌ 12/13 | Copilot missed the undeclared `BusEligibility` (key outcome 2); it couldn't run the build and didn't look for the errors the build would give |
-| After the fix to `review.md` | not rerun | ✅ 13/13, twice | `review.md` now says to check, when the build can't run, that every referenced name is declared |
+| After the fix to `review.md` | ✅ 13/13 | ✅ 13/13, twice | `review.md` now says to check, when the build can't run, that every referenced name is declared |
 
 ## Not tested yet
 
