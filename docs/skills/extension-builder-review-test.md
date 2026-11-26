@@ -1,6 +1,7 @@
 # Extension review: test with planted defects
 
-Test of the review guidance in `ed-fi-extension-builder` ([review.md](../../skills/ed-fi-extension-builder/references/review.md)),
+Test of the review guidance, then in `ed-fi-extension-builder` and now the `ed-fi-extension-review` skill
+([review.md](../../skills/ed-fi-extension-review/references/review.md)),
 against an extension with 13 planted defects. Run on 2026-11-20 in Claude Code (headless, default model), one
 run with the skill installed and one without, from the same prompt. GitHub Copilot runs are part of the full
 test prompt set.

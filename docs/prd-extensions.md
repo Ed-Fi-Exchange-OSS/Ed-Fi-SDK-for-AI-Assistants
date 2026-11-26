@@ -89,8 +89,10 @@ existing core resource (Student Transcript).
 - **Deployment:** the how-to guides use the local Ed-Fi API stack from the Data Management Service
   repository: `prepare-dms-schema.ps1` stages the core and extension schemas, `prepare-dms-claims.ps1` stages
   the claims fragment, and `bootstrap-local-dms.ps1` provisions a clean database and seeds the Configuration
-  Service. The schema and claims load only into empty databases, so any change to an installed extension
-  needs a teardown that deletes data.
+  Service. A host's own environment loads the same inputs with its own settings: a schema directory with a
+  manifest, a database provisioned with `api-schema-tools`, and the claims fragments in the Configuration
+  Service's claims directory. The schema and claims load only into empty databases, so any change to an
+  installed extension needs a new database and reloading the data.
 - **Security:** new resources are added to the claims hierarchy through a claims fragment, with claim URIs of
   the form `http://ed-fi.org/identity/claims/{projectEndpointName}/{resourceName}`. Placement in the
   hierarchy decides which claim sets inherit access.
@@ -140,8 +142,10 @@ existing core resource (Student Transcript).
   extension was provisioned.
 - **FR-DEPLOY-3:** The skill SHALL warn before any step that deletes databases or staged files, and SHALL
   state that changing an installed extension requires a clean database and reloading data through the API.
-- **FR-DEPLOY-4:** The skill SHOULD state which steps are specific to the local development stack, so that a
-  host can map them to its own deployment.
+- **FR-DEPLOY-4:** The skill SHALL also guide deployment to a host's own environment (a server, containers
+  from the published images, or a cloud deployment): the schema directory and its manifest, provisioning a new
+  database with `api-schema-tools`, and the Configuration Service claims settings. It SHALL ask how the host
+  is deployed before giving these steps, and SHALL say which steps were tested.
 
 ### 3.5 Security
 
@@ -164,8 +168,9 @@ existing core resource (Student Transcript).
 
 ### 3.7 Review
 
-- **FR-REVIEW-1:** The product SHALL provide review guidance for MetaEd extension source (`.metaed` files and
-  the project `package.json`). It SHALL NOT review the generated `ApiSchema-EXTENSION.json`.
+- **FR-REVIEW-1:** The product SHALL provide a separate review skill for MetaEd extension source (`.metaed`
+  files and the project `package.json`), as `review-model-pr` is separate for the core model. It SHALL NOT
+  review the generated `ApiSchema-EXTENSION.json`.
 - **FR-REVIEW-2:** The review guidance SHALL adapt the `review-model-pr` checklist to extensions: build
   validity, typos and grammar, documentation completeness, identity, naming, deprecation, shared types and
   slowly changing dimensions. Items specific to the Ed-Fi-Model repository (for example the `DATASTD-` PR
@@ -175,8 +180,8 @@ existing core resource (Student Transcript).
   Standard. The claims fragment is checked by the security guidance (FR-SEC-1).
 - **FR-REVIEW-4:** The review SHALL run the MetaEd build when possible, and SHALL report findings with file
   and line, separated into blocking issues and suggestions.
-- **FR-REVIEW-5:** Modeling rules SHOULD be defined once and shared by the build guidance and the review
-  guidance.
+- **FR-REVIEW-5:** The extension skill and the review skill SHALL use the same modeling rules. Each skill is
+  installed on its own, so each carries a copy, and a repository check SHALL fail when the copies differ.
 
 ### 3.8 Validation and release
 
@@ -187,7 +192,8 @@ existing core resource (Student Transcript).
 - **FR-REL-3:** Both how-to examples SHALL be built with the MetaEd command line, deployed to a local Ed-Fi
   API 8.1 and verified with API calls, following the assistant's output.
 - **FR-REL-4:** The review guidance SHALL be tested against extension source with planted defects, with the
-  expected findings documented.
+  expected findings documented. The test set is the two how-to examples and that extension; other examples,
+  such as a state extension, are not needed.
 - **FR-REL-5:** The repository SHOULD document how to install and use the extension skills.
 
 ## 4. Non-functional requirements
@@ -214,10 +220,10 @@ existing core resource (Student Transcript).
 | Extension skill entry file | When to extend, end-to-end flow, routing | Loaded first |
 | Modeling guidance | MetaEd project, entity kinds, identity, naming | Shared rules with review |
 | Build guidance | MetaEd command line: install, configure, run, fix errors | Runs the build |
-| Deployment guidance | Gather, stage, start, reset | Local stack as in the how-to guides |
+| Deployment guidance | Gather, stage, start, reset | Local stack as in the how-to guides, and a host's own environment |
 | Security guidance | Claims fragments, claim URIs, inherited and restricted access | |
 | Verification guidance | Discovery, token, endpoint calls, `_ext` | |
-| Review guidance | Checklist for `.metaed` source | Adapted from `review-model-pr` |
+| Review skill | Checklist for `.metaed` source, with its own entry file | Adapted from `review-model-pr`; same rules as the extension skill |
 | Worked examples | Alternative Education Program, Student Transcript | From the API 8.1 how-to guides |
 | Test harnesses | Claude Code, GitHub Copilot | Required validation targets |
 
@@ -235,16 +241,7 @@ data belong to the user.
 - Indexing extension specifications in the `ed-fi-api-spec` lookup.
 - Skills cannot decide what a host's data means; the implementer remains responsible for the design.
 
-## 7. Open questions
-
-- **Q-1:** The how-to guides deploy to the local development stack. Should the skills also guide deployment to
-  a host's own environment (for example, setting `ApiSchemaPath` and provisioning with `api-schema-tools`
-  directly), or only the local stack in the first release?
-- **Q-2:** One skill for building and reviewing, or a separate review skill, as with `review-model-pr`?
-- **Q-3:** Should extension examples beyond the two how-to guides (for example, a state extension) be part of
-  the test set?
-
-## 8. Glossary
+## 7. Glossary
 
 - **Agent Skill:** A packaged set of instructions and resources an AI coding harness loads on demand.
 - **Extension:** Additions to the Ed-Fi Data Standard (new entities, descriptors or properties on core

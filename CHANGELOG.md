@@ -26,6 +26,14 @@ guidelines (`x.y.z`).
   fixes to the skill, 11 passed in each, and the twelfth passed with `ed-fi-api-spec` installed too
   ([results](docs/skills/extension-builder-test-results.md)). Installation and usage are in
   [Installing and using the Ed-Fi SDK for AI](docs/skills/using-the-skills.md).
+- **`ed-fi-extension-review` skill:** the review of extension source, moved out of `ed-fi-extension-builder`
+  into a skill of its own, as `review-model-pr` is for the core model. Both skills carry the same rules and
+  build files, and a check in the pull request workflow (`npm run check:shared`) fails when the copies
+  differ.
+- **Extension deployment to a host:** `ed-fi-extension-builder` now also covers a host's own environment (a
+  server, containers or a cloud deployment): the schema manifest, provisioning a new database with
+  `api-schema-tools`, and the Configuration Service claims settings. Provisioning was tested; the rest follows
+  the Ed-Fi API 8.1 documentation.
 - **Spec lookup comparison results** ([`docs/spec-lookup-results.md`](docs/spec-lookup-results.md)) and the
   scripts to repeat it (`eng/spec-lookup-comparison/`). On 29 lookup tasks in Claude Code, the spec skill scored
   100%, tied with keyword search and ahead of no spec help (97%), with five times fewer invented names. GitHub

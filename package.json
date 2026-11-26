@@ -1,10 +1,11 @@
 {
   "name": "ed-fi-sdk-for-ai-assistants",
   "private": true,
-  "description": "Development tooling only (Markdown lint). Not a published package.",
+  "description": "Development tooling only (Markdown lint, shared file check). Not a published package.",
   "license": "Apache-2.0",
   "scripts": {
-    "lint:md": "markdownlint-cli2"
+    "lint:md": "markdownlint-cli2",
+    "check:shared": "node eng/check-shared-files.mjs"
   },
   "devDependencies": {
     "markdownlint-cli2": "0.24.0"

@@ -26,3 +26,5 @@ jobs:
         run: npm ci --ignore-scripts --no-audit --no-fund
       - name: Run markdownlint-cli2
         run: npm run lint:md
+      - name: Check that shared skill files match
+        run: npm run check:shared
