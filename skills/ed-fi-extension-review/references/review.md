@@ -19,7 +19,9 @@ Run the MetaEd build ([build.md](build.md)), after asking the developer to accep
 haven't. Report every error (BUILD-1) and every `already exists in project Ed-Fi` warning (CORE-1). MetaEd
 reports those warnings only once the build has no errors, so when it fails, also look for core names
 redeclared without `EdFi.` by reading the files. If the build can't run (no Node.js, no access to the package
-feed), say so under "Not checked" and review by reading.
+feed, no shell), say so under "Not checked" and review by reading. Then look for the errors the build would
+report: every property that references an entity, common or descriptor must name one declared in the extension
+or a core one with `EdFi.`; list each name that isn't declared anywhere as a BUILD-1 finding.
 
 ## 3. Check each rule
 
