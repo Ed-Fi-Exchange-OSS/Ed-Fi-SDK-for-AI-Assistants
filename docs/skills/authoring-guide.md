@@ -40,6 +40,14 @@ Each reference file covers one topic (authentication, push, pull, errors…), so
 the task needs and each topic can be updated independently when the standard changes (PRD NFR-MNT-1). If a
 file grows past roughly 100 lines, consider splitting it.
 
+### Copy files that two skills share
+
+Each skill is installed on its own, so a skill can't link to another skill's files. When two skills need the
+same reference file (the extension builder and review skills share `rules.md` and `build.md`), keep an
+identical copy in each, edit one and copy it over the other, and list the pair in
+`eng/check-shared-files.mjs`. The pull request workflow runs that check (`npm run check:shared`). Write shared
+files so that they link only to files both skills have.
+
 ### Never include real credentials
 
 Skills, examples and test prompts **must not contain real keys, secrets, tokens, or personal data** (PRD
